@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tableLayout1"
+    android:layout_width="260dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:shrinkColumns="*"
+    android:stretchColumns="*" >
+    
+<View
+  android:layout_width="1dp"
+  android:layout_height="30dp">
+</View>
+
+<TableRow
+    android:id="@+id/tableRow1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/grey"
+    android:padding="5dp" >
+
+    <android.gesture.GestureOverlayView
+        android:id="@+id/signaturePad"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_span="6"
+        android:background="@color/white"
+        android:eventsInterceptionEnabled="true"
+        android:fadeEnabled="false"
+        android:fadeOffset="9999999999"
+        android:gestureColor="@color/black"
+        android:gestureStrokeLengthThreshold="0.1"
+        android:gestureStrokeType="multiple"
+        android:orientation="vertical" >
+
+    </android.gesture.GestureOverlayView>
+    
+</TableRow>
+
+<View
+  android:layout_width="1dp"
+  android:layout_height="20dp">
+</View>
+<TableRow
+    android:id="@+id/tableRow2"  
+        android:layout_height="wrap_content"  
+        android:layout_width="match_parent"
+        android:gravity="right"
+        >
+
+    <Button
+        android:id="@+id/btnConfirm"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="@string/confirm" />
+    
+    <Button
+        android:id="@+id/btnClear"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="@string/clear" />
+
+  </TableRow>
+
+
+
+</TableLayout>
