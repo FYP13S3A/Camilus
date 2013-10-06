@@ -1,0 +1,1 @@
+This folder contains the contents for the CAMILUS MAIL REGISTRATION SELF-SERVICE (CAMS).
