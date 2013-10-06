@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Camilus</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="banner">Banner</string>
+    <string name="user">User: </string>
+    <string name="password">Password: </string>
+    <string name="login">Log In</string>
+    <string name="title_activity_main">Welcome To Camilus</string>
+    <string name="title_activity_delivery">DeliveryActivity</string>
+    <string name="title_activity_collection">CollectionActivity</string>
+    <string name="parcelid">Parcel ID: </string>
+    <string name="sname">Sender Name: </string>
+    <string name="rname">Receiver Name: </string>
+    <string name="radd">Receiver Address: </string>
+    <string name="itemno">No. Of Item(s): </string>
+    <string name="itemdetail">Item Details: </string>
+    <string name="scan">Scan</string>
+    <string name="retrieve">Retrieve</string>
+    <string name="radio_received">Received</string>
+    <string name="radio_notAtHome">Not At Home</string>
+    <string name="next">Next</string>
+    <string name="title_activity_signature">SignatureActivity</string>
+	<string name="confirm">Confirm</string>
+	<string name="clear">Clear</string>
+</resources>
