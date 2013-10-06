@@ -1,0 +1,32 @@
+[17-Sep-2013 17:15:45] PHP Fatal error:  Call to undefined function mysql_connect_errno() in /home/camilus/public_html/conn.php on line 6
+[17-Sep-2013 17:15:57] PHP Fatal error:  Call to undefined function mysqli_connect() in /home/camilus/public_html/conn.php on line 3
+[17-Sep-2013 17:17:57] PHP Warning:  mysql_close(): supplied argument is not a valid MySQL-Link resource in /home/camilus/public_html/footer.php on line 5
+[17-Sep-2013 18:11:01] PHP Parse error:  syntax error, unexpected '}' in /home/camilus/public_html/validate_login.php on line 19
+[17-Sep-2013 18:11:12] PHP Parse error:  syntax error, unexpected '}' in /home/camilus/public_html/validate_login.php on line 19
+[17-Sep-2013 18:11:28] PHP Warning:  mysql_query(): supplied argument is not a valid MySQL-Link resource in /home/camilus/public_html/validate_login.php on line 12
+[17-Sep-2013 18:11:28] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/validate_login.php on line 14
+[17-Sep-2013 18:13:03] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/validate_login.php on line 13
+[17-Sep-2013 18:14:23] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/validate_login.php on line 14
+[17-Sep-2013 18:28:14] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 6
+[17-Sep-2013 18:28:14] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 6
+[17-Sep-2013 18:28:14] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 7
+[17-Sep-2013 18:28:14] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 7
+[17-Sep-2013 18:28:14] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 10
+[17-Sep-2013 18:28:14] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 10
+[17-Sep-2013 18:28:14] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/index.php on line 11
+[17-Sep-2013 18:28:44] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 6
+[17-Sep-2013 18:28:44] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 6
+[17-Sep-2013 18:28:44] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 7
+[17-Sep-2013 18:28:44] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 7
+[17-Sep-2013 18:28:44] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 10
+[17-Sep-2013 18:28:44] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 10
+[17-Sep-2013 18:28:44] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/index.php on line 11
+[17-Sep-2013 18:29:52] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 6
+[17-Sep-2013 18:29:52] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 6
+[17-Sep-2013 18:29:52] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 7
+[17-Sep-2013 18:29:52] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 7
+[17-Sep-2013 18:29:52] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 10
+[17-Sep-2013 18:29:52] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 10
+[17-Sep-2013 18:29:52] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/index.php on line 11
+[20-Sep-2013 17:29:24] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home/camilus/public_html/register_confirm.php on line 8
+[20-Sep-2013 17:29:39] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home/camilus/public_html/register_confirm.php on line 8
