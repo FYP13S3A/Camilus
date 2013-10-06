@@ -8,7 +8,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Untitled Document</title>
+<title>Camilus - Register a new mail</title>
 <link href="_css/boilerplate.css" rel="stylesheet" type="text/css">
 <link href="_css/layout.css" rel="stylesheet" type="text/css">
 <link href="_css/typography.css" rel="stylesheet" type="text/css" media="screen, projection">
@@ -39,6 +39,8 @@ Do the following if you're using your customized build of modernizr (http://www.
   <div class="wireframemenu">
 <ul>
 <li><a href="#">Home</a></li>
+<li><a href="register_info.php">Register Info</a></li>
+<li><a href="register_mail.php">Register Mail</a></li>
 <li><a href="#">Track Mail</a></li>
 <li><a href="#">FAQ</a></li>
 <li><a href="#">Contact Us</a></li>
@@ -49,127 +51,40 @@ Do the following if you're using your customized build of modernizr (http://www.
   <div id="mainContent">
   <div id="breadcumbsBox">
     <ul id="breadcrumbs-two">
-      <li><a href="">&nbsp;Step One: Sender & Recipient Details</a></li>
+      <b>&nbsp;Register Mail</b>
 </ul>
   </div>
-  <div>
-<label class="itemTittle"><br>
-  Sender Details:</label>
-<br>
+<hr>
+        <form name="form1" method="post" action="register_mail2.php">
+
+ <div>
+<label class="itemTittle">
+  <center><b>Registration Page</b></center></label>
+
+
+
 <table width="100%" >
   <tr>
     <th colspan="2" scope="col">&nbsp;</th>
     </tr>
   <tr>
-    <td width="24%"><label class="frmItemName">&nbsp;Full Name: </label></td>
+    <td align="right" width="24%"><label class="frmItemName">&nbsp;Serial No: </label></td>
     <td width="76%"><label for="textfield"></label>
-      <input type="text" name="textfield" id="textfield"></td>
+      <input type="text" name="s_Serial" id="s_Serial" size="40"></td>
     </tr>
-  <tr>
-    <td><label class="frmItemName">&nbsp;Contact No: </label></td>
-    <td><input type="text" name="textfield2" id="textfield2"></td>
-    </tr>
-  <tr>
-    <td><label class="frmItemName">&nbsp;Email Address:</label></td>
-    <td><input type="text" name="textfield3" id="textfield3"></td>
-    </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    </tr>
-    
- <tr>
-    <td><label class="frmItemName">&nbsp;Address Line 1:</label></td>
-    <td><input type="text" name="textfield3" id="textfield3"></td>
-    </tr>
-  <tr>
-   <tr>
-    <td><label class="frmItemName">&nbsp;Address Line 2:</label></td>
-    <td><input type="text" name="textfield3" id="textfield3"></td>
-    </tr>
-  <tr>
-   <tr>
-    <td><label class="frmItemName">&nbsp;Country:</label></td>
-    <td><select name="City">
-      <option value="SGP">SINGAPORE</option>
-    </select>
-
-    </tr>
-   <tr>
-    <td><label class="frmItemName">&nbsp;City:</label></td>
-    <td><select name="City">
-      <option value="SGP">SINGAPORE</option>
-    </select></td>
-    </tr>
- 
-   <tr>
-    <td><label class="frmItemName">&nbsp;Postal Code:</label></td>
-    <td><p>
-      <input type="text" name="textfield3" id="textfield3">
-    </p>
-      <p>&nbsp; </p></td>
-    </tr>
-  
+   
 </table>
   </div>
-    <div>
-   <label class="itemTittle">Recipient Details:</label>
-<br>
-<table width="100%" >
-  <tr>
-    <th colspan="2" scope="col">&nbsp;</th>
-    </tr>
-  <tr>
-    <td width="24%"><label class="frmItemName">&nbsp;Full Name: </label></td>
-    <td width="76%"><label for="textfield"></label>
-      <input type="text" name="textfield" id="textfield"></td>
-    </tr>
-  <tr>
-    <td><label class="frmItemName">&nbsp;Contact No: </label></td>
-    <td><input type="text" name="textfield2" id="textfield2"></td>
-    </tr>
-  <tr>
-    <td><label class="frmItemName">&nbsp;Email Address:</label></td>
-    <td><input type="text" name="textfield3" id="textfield3"></td>
-    </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    </tr>
-    
- <tr>
-   <td><label class="frmItemName">&nbsp;Address Line 1:</label></td>
-   <td><input type="text" name="textfield3" id="textfield3"></td>
- </tr>
-  <tr>
-    <td><label class="frmItemName">&nbsp;Address Line 2:</label></td>
-    <td><input type="text" name="textfield3" id="textfield3"></td>
-  </tr>
-  <tr>
-    <td><label class="frmItemName">&nbsp;Country:</label></td>
-    <td><select name="City">
-      <option value="SGP">SINGAPORE</option>
-    </select>
+<hr>
 
-    </tr>
-   <tr>
-    <td><label class="frmItemName">&nbsp;City:</label></td>
-    <td><select name="City">
-      <option value="SGP">SINGAPORE</option>
-    </select></td>
-    </tr>
- 
-   <tr>
-    <td><label class="frmItemName">&nbsp;Postal Code:</label></td>
-    <td><input type="text" name="textfield3" id="textfield3"></td>
-    </tr>
-   <tr>
-    <td colspan="2">&nbsp;</td>
-    </tr>
-</table>
+<br/>
+  <p align=center>&nbsp;<input name=""  id="btnSubmit" type="submit" value="Retrieve Data" /></p>
+  </div>   
+</form>
+</div>
 
-    </div>
-  </div>
+
+
   <div class="rightSidebar">
     <p>&nbsp;</p>
     <p>&nbsp;</p>
