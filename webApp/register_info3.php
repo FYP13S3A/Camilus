@@ -1,4 +1,9 @@
 <?php
+include 'conn.php';
+
+//customerDetail
+//sender_address
+//recipient_address
 
 $s_FullName = $_POST['s_FullName'];
 $s_Phone = $_POST['s_Phone'];
@@ -19,6 +24,28 @@ $r_Postal = $_POST['r_Postal'];
 $r_Country = $_POST['r_Country'];
 $r_City = $_POST['r_City'];
 
+
+$randomString = generateRandomString();
+
+
+
+/*
+$sql = 'INSERT INTO customerDetail '.
+       '(serialNo, senderID, receiverID) '.
+       'VALUES ("'.$randomString.'", 1, 1 )';
+
+
+$result=mysql_query($sql);
+
+
+if(!$result)
+{
+  die('Could not enter data: ' . mysql_error());
+}
+*/
+
+mysql_close();
+
 ?>
 
 <!doctype html>
@@ -29,6 +56,12 @@ $r_City = $_POST['r_City'];
 <html class="">
 <!--<![endif]-->
 <head>
+<script>
+function printpage()
+  {
+  window.print()
+  }
+</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Camilus - Register a new mail</title>
@@ -74,49 +107,28 @@ Do the following if you're using your customized build of modernizr (http://www.
   <div id="mainContent">
   <div id="breadcumbsBox">
     <ul id="breadcrumbs-two">
-      <b>&nbsp;Register Sender & Recipient Details</b>
+      <b>Success Register</b>
 </ul>
   </div>
 <hr>
-        <form name="form1" method="post" action="register_info3.php">
-
+       
   <div>
 <label class="itemTittle">
-  <center><b>Sender Details</b></center></label>
+<p align=right>
+<input type="button" value="Print this page" onclick="printpage()">
+</p>
+<center>
+<font size=4><b>Your Serial Number is : </b></font>
+<hr>
+<img src="./barcode.php?text=<?php echo $randomString;?>">
 
-<ul>
-<li>Sender Name: <?php echo $s_FullName;?></li>
-<li>Sender Phone: <?php echo $s_Phone;?></li>
-<li>Sender Email: <?php echo $s_Email;?></li>
-<li>Sender Address 1: <?php echo $s_Address;?></li>
-<li>Sender Address 2: <?php echo $s_Address2;?></li>
-<li>Sender Postal Code: <?php echo $s_Postal;?></li>
-<li>Sender Country : <?php echo $s_Country;?></li>
-<li>Sender City: <?php echo $s_City;?></li>
-</ul>
+</center>
+<hr>
 </div>
 <hr>
 
-  <div>
-<label class="itemTittle">
-  <center><b>Recipient Details</b></center></label>
+ 
 
-<ul>
-<li>Recipient Name: <?php echo $r_FullName;?></li>
-<li>Recipient Phone: <?php echo $r_Phone;?></li>
-<li>Recipient Email: <?php echo $r_Email;?></li>
-<li>Recipient Address 1: <?php echo $r_Address;?></li>
-<li>Recipient Address 2: <?php echo $r_Address2;?></li>
-<li>Recipient Postal Code: <?php echo $r_Postal;?></li>
-<li>Recipient Country : <?php echo $r_Country;?></li>
-<li>Recipient City: <?php echo $r_City;?></li>
-</ul>
-</div>
-<hr>
-<br/>
-  <p align=center>&nbsp;<input name=""  id="btnSubmit" type="submit" value="Submit" /></p>
-  </div>   
-</form>
 </div>
 
 
@@ -129,6 +141,21 @@ Do the following if you're using your customized build of modernizr (http://www.
   <?php include("footer.php"); ?>
 </div><!---end#contentBox--->
 </div>
+
+<?php
+
+
+function generateRandomString($length = 10) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, strlen($characters) - 1)];
+    }
+    return $randomString;
+}
+
+
+?>
 
 </body>
 </html>

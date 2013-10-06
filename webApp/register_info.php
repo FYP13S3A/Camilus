@@ -85,7 +85,7 @@ Do the following if you're using your customized build of modernizr (http://www.
     </tr>
      <tr>
     <td align="right"><label class="frmItemName">&nbsp;Address Line 2:</label></td>
-    <td><textarea id="s_Address" name="s_Address2" rows="3" cols="40"></textarea></td>
+    <td><textarea id="s_Address2" name="s_Address2" rows="3" cols="40"></textarea></td>
     </tr>
    <tr>
     <td align="right"><label class="frmItemName">&nbsp;Postal Code:</label></td>
@@ -137,7 +137,7 @@ Do the following if you're using your customized build of modernizr (http://www.
     </tr>
      <tr>
     <td align="right"><label class="frmItemName">&nbsp;Address Line 2:</label></td>
-    <td><textarea id="r_Address" name="r_Address2" rows="3" cols="40">Rec Address 2</textarea></td>
+    <td><textarea id="r_Address2" name="r_Address2" rows="3" cols="40">Rec Address 2</textarea></td>
     </tr>
    <tr>
     <td align="right"><label class="frmItemName">&nbsp;Postal Code:</label></td>
