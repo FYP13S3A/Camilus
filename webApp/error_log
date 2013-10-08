@@ -54,3 +54,10 @@ Stack trace:
 #1 {main}
   thrown in /home/camilus/public_html/class/BCGFontFile.php on line 34
 [30-Sep-2013 16:16:08] PHP Parse error:  syntax error, unexpected '<' in /home/camilus/public_html/register_info3.php on line 115
+[01-Oct-2013 18:10:05] PHP Fatal error:  Cannot use string offset as an array in /home/camilus/public_html/getAddr.php on line 19
+[01-Oct-2013 18:15:54] PHP Fatal error:  Cannot use string offset as an array in /home/camilus/public_html/getAddr.php on line 22
+[06-Oct-2013 11:25:59] PHP Parse error:  syntax error, unexpected T_VARIABLE, expecting ',' or ';' in /home/camilus/public_html/register_step1.php on line 117
+[06-Oct-2013 11:34:38] PHP Parse error:  syntax error, unexpected T_AS in /home/camilus/public_html/register_step1.php on line 119
+[06-Oct-2013 11:34:44] PHP Parse error:  syntax error, unexpected T_AS in /home/camilus/public_html/register_step1.php on line 119
+[06-Oct-2013 17:38:49] PHP Parse error:  syntax error, unexpected T_STRING, expecting ',' or ';' in /home/camilus/public_html/register_info.php on line 93
+[06-Oct-2013 20:05:00] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/register_info3.php on line 113

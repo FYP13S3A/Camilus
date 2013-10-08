@@ -1,23 +1,29 @@
 <?php
+include 'conn.php';
 
-$s_FullName = $_POST['s_FullName'];
-$s_Phone = $_POST['s_Phone'];
-$s_Email = $_POST['s_Email'];
-$s_Address = $_POST['s_Address'];
-$s_Address2 = $_POST['s_Address2'];
-$s_Postal = $_POST['s_Postal'];
-$s_Country = $_POST['s_Country'];
+//POPULATE DROPDOWN LIST
+$sql="SELECT ServiceType_Id,Name,Service_Information from servicetype";
+
+$result=mysql_query($sql);
+
+while ($row = mysql_fetch_assoc($result)) {
+   $result_array[] = $row;
+}
+
+
 $s_City = $_POST['s_City'];
+$s_Country = $_POST['s_Country'];
+$s_Postal = $_POST['s_Postal'];
 
-
-$r_FullName = $_POST['r_FullName'];
-$r_Phone = $_POST['r_Phone'];
-$r_Email = $_POST['r_Email'];
-$r_Address = $_POST['r_Address'];
-$r_Address2 = $_POST['r_Address2'];
-$r_Postal = $_POST['r_Postal'];
-$r_Country = $_POST['r_Country'];
 $r_City = $_POST['r_City'];
+$r_Country = $_POST['r_Country'];
+$r_Postal = $_POST['r_Postal'];
+
+$d_Weight = $_POST['d_Weight'];
+$d_Length = $_POST['d_Length'];
+$d_Width = $_POST['d_Width'];
+$d_Height = $_POST['d_Height'];
+$d_Content = $_POST['d_Content'];
 
 ?>
 
@@ -31,10 +37,12 @@ $r_City = $_POST['r_City'];
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Camilus - Register a new mail</title>
+<title>Camilus - Register a New Mail</title>
+
 <link href="_css/boilerplate.css" rel="stylesheet" type="text/css">
 <link href="_css/layout.css" rel="stylesheet" type="text/css">
 <link href="_css/typography.css" rel="stylesheet" type="text/css" media="screen, projection">
+
 <link href="SpryAssets/SpryValidationTextarea.css" rel="stylesheet" type="text/css">
 <!-- 
 To learn more about the conditional comments around the html tags at the top of the file:
@@ -78,43 +86,60 @@ Do the following if you're using your customized build of modernizr (http://www.
 </ul>
   </div>
 <hr>
-        <form name="form1" method="post" action="register_info3.php">
-
-  <div>
+ <div>
 <label class="itemTittle">
-  <center><b>Sender Details</b></center></label>
-
-<ul>
-<li>Sender Name: <?php echo $s_FullName;?></li>
-<li>Sender Phone: <?php echo $s_Phone;?></li>
-<li>Sender Email: <?php echo $s_Email;?></li>
-<li>Sender Address 1: <?php echo $s_Address;?></li>
-<li>Sender Address 2: <?php echo $s_Address2;?></li>
-<li>Sender Postal Code: <?php echo $s_Postal;?></li>
-<li>Sender Country : <?php echo $s_Country;?></li>
-<li>Sender City: <?php echo $s_City;?></li>
-</ul>
-</div>
+  <center><b>Shipment Details</b></center></label>
 <hr>
+<p>
+<font size=2 color=black><b>
+<table>
+<tr>
+<td>Physical Weight : <?php echo $d_Weight;?></td>
+</tr>
+<tr><td>Length: <?php echo $d_Length;?></td></tr>
+<tr><td>Width: <?php echo $d_Width;?></td></tr>
+<tr><td>Height: <?php echo $d_Height;?></td></tr>
+<tr>
+<td>Mail Content : <?php echo $d_Content;?></td>
+</tr>
+</table>
+</b></font>
+</p>
 
-  <div>
+</div>
+
+<hr>
+<div>
 <label class="itemTittle">
-  <center><b>Recipient Details</b></center></label>
-
-<ul>
-<li>Recipient Name: <?php echo $r_FullName;?></li>
-<li>Recipient Phone: <?php echo $r_Phone;?></li>
-<li>Recipient Email: <?php echo $r_Email;?></li>
-<li>Recipient Address 1: <?php echo $r_Address;?></li>
-<li>Recipient Address 2: <?php echo $r_Address2;?></li>
-<li>Recipient Postal Code: <?php echo $r_Postal;?></li>
-<li>Recipient Country : <?php echo $r_Country;?></li>
-<li>Recipient City: <?php echo $r_City;?></li>
-</ul>
-</div>
+  <center><b>Services</b></center></label>
 <hr>
+<p>
+<b>Select your service type:</b><br/>
+<table border="1">
+<tr>
+<th>Select</th>
+<th>Service</th>
+<th>Service Information</th>
+</tr>
+
+<form name="form1" method="post" action="register_info3.php">
+<?php
+foreach($result_array AS $row)
+{
+echo "<tr>";
+echo "<td><input type=\"radio\" name=\"s_Service\" value=\"".$row[ServiceType_Id]."\"></td>";
+echo "<td>".$row[Name]."</td>";
+echo "<td>".$row[Service_Information]."</td>";
+echo "</tr>";
+}  
+?>
+</table>
+
+</p></div>
+
+
 <br/>
-  <p align=center>&nbsp;<input name=""  id="btnSubmit" type="submit" value="Submit" /></p>
+  <p align=center><INPUT Type="button" VALUE="Back" onClick="history.go(-1);return true;">&nbsp;<input name=""  id="btnSubmit" type="submit" value="Next Step - Update Details" /></p>
   </div>   
 </form>
 </div>

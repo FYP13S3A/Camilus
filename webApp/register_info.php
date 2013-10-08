@@ -1,3 +1,17 @@
+<?php
+include 'conn.php';
+
+//POPULATE DROPDOWN LIST
+$sql="SELECT NAME,CODE from country";
+$result=mysql_query($sql);
+
+while ($row = mysql_fetch_assoc($result)) {
+   $result_array[] = $row;
+}
+
+
+?>
+
 <!doctype html>
 <!--[if lt IE 7]> <html class="ie6 oldie"> <![endif]-->
 <!--[if IE 7]>    <html class="ie7 oldie"> <![endif]-->
@@ -8,10 +22,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Camilus - Register a new mail</title>
+<title>Camilus - Register a New Mail</title>
+
 <link href="_css/boilerplate.css" rel="stylesheet" type="text/css">
 <link href="_css/layout.css" rel="stylesheet" type="text/css">
 <link href="_css/typography.css" rel="stylesheet" type="text/css" media="screen, projection">
+
 <link href="SpryAssets/SpryValidationTextarea.css" rel="stylesheet" type="text/css">
 <!-- 
 To learn more about the conditional comments around the html tags at the top of the file:
@@ -65,50 +81,36 @@ Do the following if you're using your customized build of modernizr (http://www.
   <tr>
     <th colspan="2" scope="col">&nbsp;</th>
     </tr>
-  <tr>
-    <td align="right" width="24%"><label class="frmItemName">&nbsp;Full Name: </label></td>
-    <td width="76%"><label for="textfield"></label>
-      <input type="text" name="s_FullName" id="s_FullName" size="40" value="Tan Ah Ming"></td>
-    </tr>
-   <tr>
-    <td align="right"><label class="frmItemName">&nbsp;Phone Number:</label></td>
-    <td><input type="text" name="s_Phone" id="s_Phone" size="40" value="61111111"></td>
-    </tr>
-  <tr>
-    <td align="right"><label class="frmItemName">&nbsp;Email Address:</label></td>
-    <td><input type="text" name="s_Email" id="s_Email" size="40" value="1acct@1.com"></td>
-    </tr>
-    
-   <tr>
-    <td align="right"><label class="frmItemName">&nbsp;Address :</label></td>
-    <td><textarea id="s_Address" name="s_Address" rows="3" cols="40">Sender Address 1</textarea></td>
-    </tr>
-     <tr>
-    <td align="right"><label class="frmItemName">&nbsp;Address Line 2:</label></td>
-    <td><textarea id="s_Address2" name="s_Address2" rows="3" cols="40"></textarea></td>
-    </tr>
-   <tr>
-    <td align="right"><label class="frmItemName">&nbsp;Postal Code:</label></td>
-    <td><input type="text" name="s_Postal" id="s_Postal" size="40" value="500192"></td>
-    </tr>   ​
-  <tr>
-   <tr>
+ 
+    <tr>
     <td align="right"><label class="frmItemName">&nbsp;Country:</label></td>
     <td><select name="s_Country">
-      <option value="SGP">SINGAPORE</option>
-    </select>
-
+<?php
+foreach($result_array AS $row)
+{
+if($row[NAME]=="Singapore")
+{
+   echo "<option selected=\"selected\" value=\"" . $row[CODE] . "\">" . $row[NAME] . "</option>";
+}//end if
+else
+{
+   echo "<option value=\"" . $row[CODE] . "\">" . $row[NAME] . "</option>";
+}//end else
+}//end foreach
+?>
+ </select>
     </tr>
-   <tr>
     <td align="right"><label class="frmItemName">&nbsp;City:</label></td>
-    <td><select name="s_City">
-      <option value="SGP">SINGAPORE</option>
-    </select></td>
-    </tr>
-</table>
-  </div>
-<hr>
+    <td><input type="text" name="s_City" id="s_City" size="30" value="">
+    </tr>   
 
+    <td align="right"><label class="frmItemName">&nbsp;Postal Code:</label></td>
+    <td><input type="text" name="s_Postal" id="s_Postal" size="30" value="">
+    </tr>   
+
+</table>
+<hr>
+</div>
   <div>
 <label class="itemTittle">
   <center><b>Recipient Details</b></center></label>
@@ -117,50 +119,58 @@ Do the following if you're using your customized build of modernizr (http://www.
   <tr>
     <th colspan="2" scope="col">&nbsp;</th>
     </tr>
-  <tr>
-    <td align="right" width="24%"><label class="frmItemName">&nbsp;Full Name: </label></td>
-    <td width="76%"><label for="textfield"></label>
-      <input type="text" name="r_FullName" id="r_FullName" size="40" value="Tan Ah Kao"></td>
-    </tr>
-   <tr>
-    <td align="right"><label class="frmItemName">&nbsp;Phone Number:</label></td>
-    <td><input type="text" name="r_Phone" id="r_Phone" size="40" value="6222222"></td>
-    </tr>
-  <tr>
-    <td align="right"><label class="frmItemName">&nbsp;Email Address:</label></td>
-    <td><input type="text" name="r_Email" id="r_Email" size="40" value="2acct@2.com"></td>
-    </tr>
-    
-   <tr>
-    <td align="right"><label class="frmItemName">&nbsp;Address :</label></td>
-    <td><textarea id="r_Address" name="r_Address" rows="3" cols="40">Rec Address 1</textarea></td>
-    </tr>
-     <tr>
-    <td align="right"><label class="frmItemName">&nbsp;Address Line 2:</label></td>
-    <td><textarea id="r_Address2" name="r_Address2" rows="3" cols="40">Rec Address 2</textarea></td>
-    </tr>
-   <tr>
-    <td align="right"><label class="frmItemName">&nbsp;Postal Code:</label></td>
-    <td><input type="text" name="r_Postal" id="r_Postal" size="40" value="550222"></td>
-    </tr>   ​
-  <tr>
-   <tr>
+ 
+    <tr>
     <td align="right"><label class="frmItemName">&nbsp;Country:</label></td>
     <td><select name="r_Country">
-      <option value="SGP">SINGAPORE</option>
+<?php
+foreach($result_array AS $row)
+{
+if($row[NAME]=="Singapore")
+{
+   echo "<option selected=\"selected\" value=\"" . $row[CODE] . "\">" . $row[NAME] . "</option>";
+}//end if
+else
+{
+   echo "<option value=\"" . $row[CODE] . "\">" . $row[NAME] . "</option>";
+}//end else
+}//end foreach
+?>
     </select>
-
     </tr>
-   <tr>
     <td align="right"><label class="frmItemName">&nbsp;City:</label></td>
-    <td><select name="r_City">
-      <option value="SGP">SINGAPORE</option>
-    </select></td>
+    <td><input type="text" name="r_City" id="r_City" size="30" value="">
+    </tr>   
+
+    <td align="right"><label class="frmItemName">&nbsp;Postal Code:</label></td>
+    <td><input type="text" name="r_Postal" id="r_Postal" size="30" value="">
     </tr>
 </table>
 <hr>
+</div>
+ <div>
+<label class="itemTittle">
+  <center><b>Shipment Details</b></center></label>
+<p>
+<table width="100%" >
+<tr>
+  <th>Weight(kg)</th>
+  <th>Length(cm)</th>
+  <th>Width(cm)</th>
+  <th>Height(cm)</th>
+  <th>Mail Contents</th>
+</tr>
+<tr>
+<td><input type="text" name="d_Weight" id="d_Weight" size="5" value=""></td>
+<td><input type="text" name="d_Length" id="d_Length" size="5" value=""></td>
+<td><input type="text" name="d_Width" id="d_Width" size="5" value=""></td>
+<td><input type="text" name="d_Height" id="d_Height" size="5" value=""></td>
+<td><input type="text" name="d_Content" id="d_Content" size="20" value=""></td>
+</tr>
+</table>
+</p>
 <br/>
-  <p align=center>&nbsp;<input name=""  id="btnSubmit" type="submit" value="Preview Submission" /></p>
+  <p align=center>&nbsp;<input name=""  id="btnSubmit" type="submit" value="Next Step - Select Service" /></p>
   </div>   
 </form>
 </div>
