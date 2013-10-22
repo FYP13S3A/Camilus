@@ -1,21 +1,13 @@
 <?php
 include 'conn.php';
 
-$s_Service = $_POST['s_Service'];
+//POPULATE DROPDOWN LIST
+$sql="SELECT NAME,CODE from country";
+$result=mysql_query($sql);
 
-$s_City = $_POST['s_City'];
-$s_Country = $_POST['s_Country'];
-$s_Postal = $_POST['s_Postal'];
-
-$r_City = $_POST['r_City'];
-$r_Country = $_POST['r_Country'];
-$r_Postal = $_POST['r_Postal'];
-
-$d_Weight = $_POST['d_Weight'];
-$d_Length = $_POST['d_Length'];
-$d_Width = $_POST['d_Width'];
-$d_Height = $_POST['d_Height'];
-$d_Content = $_POST['d_Content'];
+while ($row = mysql_fetch_assoc($result)) {
+   $result_array[] = $row;
+}
 
 
 ?>
@@ -79,27 +71,73 @@ Do the following if you're using your customized build of modernizr (http://www.
 </ul>
   </div>
 <hr>
-        <form name="form1" method="post" action="register_info4.php">
+        <form name="form1" method="post" action="register_step2.php">
 
- <div>
+  <div>
 <label class="itemTittle">
   <center><b>Sender Details</b></center></label>
-<hr>
-<p>
-<table>
+
+<table width="100%" >
+  <tr>
+    <th colspan="2" scope="col">&nbsp;</th>
+    </tr>
+ 
+    <tr>
+    <td align="right"><label class="frmItemName">&nbsp;Country:</label></td>
+    <td><select name="s_Country">
+<?php
+foreach($result_array AS $row)
+{
+   echo "<option value=\"" . $row[CODE] . "\">" . $row[NAME] . "</option>";
+}  
+?>
+ </select>
+    </tr>
+    <td align="right"><label class="frmItemName">&nbsp;City:</label></td>
+    <td><input type="text" name="s_City" id="s_City" size="30" value="">
+    </tr>   
+
+    <td align="right"><label class="frmItemName">&nbsp;Postal Code:</label></td>
+    <td><input type="text" name="s_Postal" id="s_Postal" size="30" value="">
+    </tr>   
 
 </table>
-</p>
-
+<hr>
 </div>
+  <div>
+<label class="itemTittle">
+  <center><b>Recipient Details</b></center></label>
 
+<table width="100%" >
+  <tr>
+    <th colspan="2" scope="col">&nbsp;</th>
+    </tr>
+ 
+    <tr>
+    <td align="right"><label class="frmItemName">&nbsp;Country:</label></td>
+    <td><select name="r_Country">
+<?php
+foreach($result_array AS $row)
+{
+   echo "<option value=\"" . $row[CODE] . "\">" . $row[NAME] . "</option>";
+}  
+?>
+    </select>
+    </tr>
+    <td align="right"><label class="frmItemName">&nbsp;City:</label></td>
+    <td><input type="text" name="r_City" id="r_City" size="30" value="">
+    </tr>   
+
+    <td align="right"><label class="frmItemName">&nbsp;Postal Code:</label></td>
+    <td><input type="text" name="r_Postal" id="r_Postal" size="30" value="">
+    </tr>   
+
+</table>
 <hr>
 
 <br/>
-  
-<br/>
-  <p align=center><INPUT Type="button" VALUE="Back" onClick="history.go(-1);return true;">&nbsp;
-<input name=""  id="btnSubmit" type="submit" value="Next Step - Complete" /></p>  </div>   
+  <p align=center>&nbsp;<input name=""  id="btnSubmit" type="submit" value="Next Step - Select Service" /></p>
+  </div>   
 </form>
 </div>
 

@@ -1,0 +1,418 @@
+@charset "utf-8";
+/* Simple fluid media
+   Note: Fluid media requires that you remove the media's height and width attributes from the HTML
+   http://www.alistapart.com/articles/fluid-images/ 
+*/
+img, object, embed, video {
+	max-width: 100%;
+}
+/* IE 6 does not support max-width so default to width 100% */
+.ie6 img {
+	width:100%;
+}
+
+/*
+	Dreamweaver Fluid Grid Properties
+	----------------------------------
+	dw-num-cols-mobile:		5;
+	dw-num-cols-tablet:		8;
+	dw-num-cols-desktop:	12;
+	dw-gutter-percentage:	15;
+	
+	Inspiration from "Responsive Web Design" by Ethan Marcotte 
+	http://www.alistapart.com/articles/responsive-web-design
+	
+	and Golden Grid System by Joni Korpi
+	http://goldengridsystem.com/
+*/
+
+/* Mobile Layout: 480px and below. */
+
+.gridContainer {
+	margin-left: auto;
+	margin-right: auto;
+	width: 88.626%;
+	padding-left: 1.1869%;
+	padding-right: 1.1869%;
+}
+#mainContainer {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+#loginHeader {
+	clear: both;
+	float: left;
+	margin-left: 0;
+}
+
+#LoginBox {
+	clear: both;
+	float: left;
+	margin-top:20px;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+
+#boxTitle {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+
+#sysMsgContainer {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+
+#sectionBox {
+	clear: none;
+	float: left;
+	margin-left: 2.6785%;
+	width: 100%;
+	display: block;
+}
+
+#loginDesc {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+
+#trackHeader {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+
+#contentBox {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+
+#trackBox{
+	margin-top: 15px;
+	margin-left: 10px;
+	margin-bottom: 15px;
+}
+#detailBox{
+	margin-top: 15px;
+	margin-left: 15px;
+	margin-right: 15px;
+	margin-bottom: 15px;
+}
+
+#mainContent {
+	clear: none;
+	float: right;
+	width: 250px;
+	display: block;
+	position: relative;
+}
+
+#loginFooter, #trackFooter {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	height:37px;
+	display: block;
+}
+.leftSidebar{
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 170px;
+	height: 100%;
+	display: block;
+	margin-top: 0px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	border-right-width: 2px;
+	border-right-style: solid;
+	border-right-color: #CCC;
+}
+.rightSidebar{
+display:none;
+}
+/* Tablet Layout: 481px to 768px. Inherits styles from: Mobile Layout. */
+
+@media only screen and (min-width: 481px) {
+.gridContainer {
+	width: 91.4836%;
+	padding-left: 0.7581%;
+	padding-right: 0.7581%;
+}
+#mainContainer {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+	height: 410px;
+}
+#loginHeader, #trackHeader {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	height: 57px;
+	width: 100%;
+}
+
+#LoginBox {
+	clear: both;
+	float: left;
+	margin-top:5%;
+	margin-left: 12.7071%;
+	width: 74.5856%;
+	display: block;
+}
+
+#boxTitle {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+
+#sysMsgContainer {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+
+#sectionBox {
+	clear: none;
+	float: left;
+	margin-left: 1.6574%;
+	width: 59%;
+	display: block;
+}
+
+#loginDesc {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 36.464%;
+	display: block;
+}
+
+#contentBox {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+.leftSidebar{
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 175px;
+	height: 100%;
+	display: block;
+	margin-top: 0px;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	border-right-width: 2px;
+	border-right-style: solid;
+	border-right-color: #CCC;
+}
+.rightSidebar{
+	display:none;
+}
+#mainContent {
+	
+	clear: none;
+	float: left;
+	margin-left: 1.0989%;
+	width: 65%;
+	display: block;
+	margin-top: 50px;
+	
+}
+#trackBox{
+	margin-top: 15px;
+	margin-left: 10px;
+	margin-bottom: 15px;
+}
+#detailBox{
+	margin-top: 15px;
+	margin-left: 15px;
+	margin-right: 15px;
+	margin-bottom: 15px;
+}
+
+#trackFooter, #loginFooter {
+	clear: both;
+	float: left;
+	height: 56px;
+	width: 100%;
+	margin-top: 10px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+}
+}
+
+/* Desktop Layout: 769px to a max of 1232px.  Inherits styles from: Mobile Layout and Tablet Layout. */
+
+@media only screen and (min-width: 769px) {
+.gridContainer {
+	width: 89.0217%;
+	max-width: 1232px;
+	padding-left: 0.4891%;
+	padding-right: 0.4891%;
+	margin: auto;
+}
+#mainContainer {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+	height: 100%;
+}
+#loginHeader, #trackHeader {
+	clear: both;
+	float: left;
+	margin-left: 0;
+				height: 57px;
+	width: 100%;
+}
+
+#LoginBox  {
+	clear: none;
+	float: left;
+	margin-left: 25%;
+	margin-top: 2%;
+	width: 49%;
+	display: block;
+
+}
+
+#boxTitle {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+
+}
+
+#sysMsgContainer {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+
+#sectionBox {
+	clear: none;
+	float: left;
+	margin-left: 2%;
+	width: 50%;
+	display: block;
+
+}
+
+#loginDesc {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 45%;
+	display: block;
+	/*border: thick dashed #000;*/
+}
+
+
+
+#contentBox {
+	clear: both;                           
+	float: left;                           
+	margin-left: 0;                           
+	width: 100%;                         
+	display: block;
+	                              
+}
+.leftSidebar{
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 175px;
+	height: 100%;
+	display: block;
+	margin-top: 0px;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	border-right-width: 2px;
+	border-right-style: solid;
+	border-right-color: #CCC;
+	
+}
+.rightSidebar{
+	float: right;
+	width: 180px;
+	padding-bottom: 10px;
+	border-left-width: 2px;
+	border-left-style: solid;
+	border-left-color: #CCC;
+	margin-top: 0px;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	padding-right: 10px;
+	display:block;
+}
+#trackBox{
+	margin-top: 15px;
+	margin-left: 10px;
+	margin-bottom: 15px;
+}
+#detailBox{
+	margin-top: 15px;
+	margin-left: 15px;
+	margin-right: 15px;
+	margin-bottom: 15px;
+}
+
+#mainContent {
+	clear: none;
+	float: left;
+	margin-left: 1.0989%;
+	width: 500px;
+	display: block;
+	margin-top: 30px;
+	                              
+}
+
+#trackFooter, #loginFooter{
+	clear: both;
+	float: left;
+	height: 56px;
+	width: 100%;
+	margin-top: 10px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+}
+
+}
