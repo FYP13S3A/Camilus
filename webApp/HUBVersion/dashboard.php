@@ -5,7 +5,12 @@ session_start();
 //dashboard codes
 $session_user = $_SESSION['username'];
 
-$sql = "select FullName,Work_Location_Id from account where UserId='" . $session_user."'";
+if(trim($session_user)=="")
+{
+header('Location: http://www.efxmarket.com/HUBVersion/index.php');
+}
+
+$sql = "select Id,FullName,Work_Location_Id from account where UserId='" . $session_user."'";
 
 $result= mysql_query($sql);
 
@@ -14,6 +19,7 @@ while ($row = mysql_fetch_assoc($result)) {
 }
 
 //counter staff info
+$u_UserId = $result_out[0][Id];
 $u_FullName = $result_out[0][FullName];
 $u_WorkLocation = $result_out[0][Work_Location_Id];
 
@@ -33,6 +39,8 @@ $u_Postal = $result_out2[0][Postal_Code];
 $_SESSION['username'] = $session_user;
 $_SESSION['workLocation'] = $u_WorkLocation;
 $_SESSION['uPostalCode'] = $u_Postal;
+$_SESSION['uUserId'] = $u_UserId;
+
 ?>
 
 <!doctype html>

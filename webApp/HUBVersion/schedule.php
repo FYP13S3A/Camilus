@@ -2,6 +2,10 @@
 
 include 'conn.php';
 
+//optional
+$startzip = $_GET['start'];
+
+
 // this is for collection.
 // for the counter staff - start location = post office , follow by nearest pdc to post office,  then recipient pdc, recipient house
 
@@ -42,6 +46,14 @@ while ($row = mysql_fetch_assoc($result)) {
 $r_Postal = $result_recipient[0][Postal_Code];
 
 //first 2 digit of sender and recipient
+
+//if start zip got value
+
+if(trim($startzip)!="")
+{
+$s_Postal = $startzip;
+}
+
 
 //get zone id from district
 

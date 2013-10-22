@@ -7,6 +7,7 @@ session_start();
 $session_user = $_SESSION['username'];
 $u_workLocation = $_SESSION['workLocation'];
 $u_PostalCode = $_SESSION['uPostalCode'];
+$u_UserId = $_SESSION['uUserId'];
 
 //Service Detail
 
@@ -83,7 +84,7 @@ if($result == false)
 
 
 //############ UPDATE MAIl TABLE ###############//
-$sql_update3 = "UPDATE mail SET Sender_FullName='".$s_Name."',Sender_Contact_No='".$s_Phone."',Sender_Email='".$s_Email."',Recipient_FullName='".$r_Name."',Recipient_Contact_No='".$r_Phone."',Recipient_Email='".$r_Email."',Mail_Size='".$mailSize."',Mail_Weight='".$d_Weight."',Mail_Contents='".$d_Content."',Service_Type_Id='".$s_Service."',Approve_Status='1' where Mail_Reference_No='".$trackingID."'";
+$sql_update3 = "UPDATE mail SET Sender_FullName='".$s_Name."',Sender_Contact_No='".$s_Phone."',Sender_Email='".$s_Email."',Recipient_FullName='".$r_Name."',Recipient_Contact_No='".$r_Phone."',Recipient_Email='".$r_Email."',Mail_Size='".$mailSize."',Mail_Weight='".$d_Weight."',Mail_Contents='".$d_Content."',Service_Type_Id='".$s_Service."',Approved_By_Id='".$u_UserId."',Approve_Status='1' where Mail_Reference_No='".$trackingID."'";
 
 $result=mysql_query($sql_update3);
 if($result == false)

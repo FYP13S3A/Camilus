@@ -2,7 +2,12 @@
 
 session_start();
 
+$session_user = $_SESSION['username'];
 
+if(trim($session_user)=="")
+{
+header('Location: http://www.efxmarket.com/HUBVersion/index.php');
+}
 
 ?>
 

@@ -2,7 +2,7 @@
 $zipCode = $_GET['zip'];
 $cityId = "SGP";
 
-$url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$zipCode.",+".$cityId."&sensor=false";
+$url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$zipCode."&sensor=false";
 
 //  Initiate curl
 $ch = curl_init();
