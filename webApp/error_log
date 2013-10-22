@@ -1,0 +1,56 @@
+[17-Sep-2013 17:15:45] PHP Fatal error:  Call to undefined function mysql_connect_errno() in /home/camilus/public_html/conn.php on line 6
+[17-Sep-2013 17:15:57] PHP Fatal error:  Call to undefined function mysqli_connect() in /home/camilus/public_html/conn.php on line 3
+[17-Sep-2013 17:17:57] PHP Warning:  mysql_close(): supplied argument is not a valid MySQL-Link resource in /home/camilus/public_html/footer.php on line 5
+[17-Sep-2013 18:11:01] PHP Parse error:  syntax error, unexpected '}' in /home/camilus/public_html/validate_login.php on line 19
+[17-Sep-2013 18:11:12] PHP Parse error:  syntax error, unexpected '}' in /home/camilus/public_html/validate_login.php on line 19
+[17-Sep-2013 18:11:28] PHP Warning:  mysql_query(): supplied argument is not a valid MySQL-Link resource in /home/camilus/public_html/validate_login.php on line 12
+[17-Sep-2013 18:11:28] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/validate_login.php on line 14
+[17-Sep-2013 18:13:03] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/validate_login.php on line 13
+[17-Sep-2013 18:14:23] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/validate_login.php on line 14
+[17-Sep-2013 18:28:14] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 6
+[17-Sep-2013 18:28:14] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 6
+[17-Sep-2013 18:28:14] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 7
+[17-Sep-2013 18:28:14] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 7
+[17-Sep-2013 18:28:14] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 10
+[17-Sep-2013 18:28:14] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 10
+[17-Sep-2013 18:28:14] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/index.php on line 11
+[17-Sep-2013 18:28:44] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 6
+[17-Sep-2013 18:28:44] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 6
+[17-Sep-2013 18:28:44] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 7
+[17-Sep-2013 18:28:44] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 7
+[17-Sep-2013 18:28:44] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 10
+[17-Sep-2013 18:28:44] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 10
+[17-Sep-2013 18:28:44] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/index.php on line 11
+[17-Sep-2013 18:29:52] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 6
+[17-Sep-2013 18:29:52] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 6
+[17-Sep-2013 18:29:52] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 7
+[17-Sep-2013 18:29:52] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 7
+[17-Sep-2013 18:29:52] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 10
+[17-Sep-2013 18:29:52] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 10
+[17-Sep-2013 18:29:52] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/index.php on line 11
+[20-Sep-2013 17:29:24] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home/camilus/public_html/register_confirm.php on line 8
+[20-Sep-2013 17:29:39] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home/camilus/public_html/register_confirm.php on line 8
+[30-Sep-2013 11:59:39] PHP Warning:  mysql_close(): supplied argument is not a valid MySQL-Link resource in /home/camilus/public_html/try_insert.php on line 25
+[30-Sep-2013 15:19:48] PHP Warning:  require_once(../class/BCGFontFile.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory in /home/camilus/public_html/register_info3.php on line 3
+[30-Sep-2013 15:19:48] PHP Fatal error:  require_once() [<a href='function.require'>function.require</a>]: Failed opening required '../class/BCGFontFile.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/camilus/public_html/register_info3.php on line 3
+[30-Sep-2013 15:20:12] PHP Warning:  require_once(./class/.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory in /home/camilus/public_html/register_info3.php on line 6
+[30-Sep-2013 15:20:12] PHP Fatal error:  require_once() [<a href='function.require'>function.require</a>]: Failed opening required './class/.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/camilus/public_html/register_info3.php on line 6
+[30-Sep-2013 15:22:41] PHP Fatal error:  Uncaught exception 'BCGArgumentException' with message 'The font path is incorrect.' in /home/camilus/public_html/class/BCGFontFile.php:34
+Stack trace:
+#0 /home/camilus/public_html/barcode.php(13): BCGFontFile->__construct('./class/font/Ar...', 18)
+#1 {main}
+  thrown in /home/camilus/public_html/class/BCGFontFile.php on line 34
+[30-Sep-2013 15:23:07] PHP Fatal error:  Call to undefined function imagecreate() in /home/camilus/public_html/class/BCGFontFile.php on line 167
+[30-Sep-2013 15:35:25] PHP Fatal error:  Call to undefined function imagettftext() in /home/camilus/public_html/class/BCGFontFile.php on line 168
+[30-Sep-2013 15:45:05] PHP Fatal error:  Class 'BCGcode39' not found in /home/camilus/public_html/barcode.php on line 15
+[30-Sep-2013 16:04:45] PHP Fatal error:  Class 'BCGcode39' not found in /home/camilus/public_html/barcode.php on line 15
+[30-Sep-2013 16:05:32] PHP Warning:  require_once(./class/.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory in /home/camilus/public_html/barcode.php on line 7
+[30-Sep-2013 16:05:32] PHP Fatal error:  require_once() [<a href='function.require'>function.require</a>]: Failed opening required './class/.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/camilus/public_html/barcode.php on line 7
+[30-Sep-2013 16:07:42] PHP Catchable fatal error:  Argument 2 passed to BCGDrawing::__construct() must be an instance of BCGColor, null given, called in /home/camilus/public_html/barcode.php on line 24 and defined in /home/camilus/public_html/class/BCGDrawing.php on line 38
+[30-Sep-2013 16:10:44] PHP Catchable fatal error:  Argument 2 passed to BCGDrawing::__construct() must be an instance of BCGColor, null given, called in /home/camilus/public_html/barcode.php on line 24 and defined in /home/camilus/public_html/class/BCGDrawing.php on line 38
+[30-Sep-2013 16:13:17] PHP Fatal error:  Uncaught exception 'BCGArgumentException' with message 'The font path is incorrect.' in /home/camilus/public_html/class/BCGFontFile.php:34
+Stack trace:
+#0 /home/camilus/public_html/barcode.php(12): BCGFontFile->__construct('./font/Arial.tt...', 18)
+#1 {main}
+  thrown in /home/camilus/public_html/class/BCGFontFile.php on line 34
+[30-Sep-2013 16:16:08] PHP Parse error:  syntax error, unexpected '<' in /home/camilus/public_html/register_info3.php on line 115
