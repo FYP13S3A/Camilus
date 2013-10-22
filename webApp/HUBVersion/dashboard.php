@@ -32,7 +32,7 @@ $u_Postal = $result_out2[0][Postal_Code];
 
 $_SESSION['username'] = $session_user;
 $_SESSION['workLocation'] = $u_WorkLocation;
-$_SESSION['startPostalCode'] = $u_Postal;
+$_SESSION['uPostalCode'] = $u_Postal;
 ?>
 
 <!doctype html>

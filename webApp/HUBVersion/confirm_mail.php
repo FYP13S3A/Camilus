@@ -48,7 +48,7 @@ Do the following if you're using your customized build of modernizr (http://www.
   <div  id="navigationBox">
   <div class="wireframemenu">
 <ul>
-<li><a href="">Home</a></li>
+<li><a href="dashboard.php">Home</a></li>
 <li><a href="confirm_mail.php">Confirm Mail</a></li>
 <li><a href="logout.php">Logout</a></li>
 </ul>

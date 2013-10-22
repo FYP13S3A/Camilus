@@ -2,10 +2,6 @@
 
 session_start();
 
-$session_user = $_SESSION['username'];
-$u_workLocation = $_SESSION['workLocation'];
-
-
 $trackingID = $_POST['b_trackID'];
 
 include 'conn.php';
@@ -135,7 +131,7 @@ Do the following if you're using your customized build of modernizr (http://www.
   <div  id="navigationBox">
   <div class="wireframemenu">
 <ul>
-<li><a href="">Home</a></li>
+<li><a href="dashboard.php">Home</a></li>
 <li><a href="confirm_mail.php">Confirm Mail</a></li>
 <li><a href="logout.php">Logout</a></li>
 </ul>
@@ -346,6 +342,13 @@ echo "</tr>";
   </tr>
 
   </table>
+
+<?php
+
+echo "<input type=\"hidden\" name=\"s_TrackingID\" value=\"". $trackingID ."\">\n";
+
+?>
+
 </form>
 </div>
 <?php include("footer.php"); ?>
