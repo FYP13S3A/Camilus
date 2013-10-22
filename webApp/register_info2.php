@@ -25,6 +25,7 @@ $d_Width = $_POST['d_Width'];
 $d_Height = $_POST['d_Height'];
 $d_Content = $_POST['d_Content'];
 
+
 ?>
 
 <!doctype html>
@@ -137,10 +138,47 @@ echo "</tr>";
 
 </p></div>
 
+<?php
+//echo hidden field
+
+$s_City = $_POST['s_City'];
+$s_Country = $_POST['s_Country'];
+$s_Postal = $_POST['s_Postal'];
+
+$r_City = $_POST['r_City'];
+$r_Country = $_POST['r_Country'];
+$r_Postal = $_POST['r_Postal'];
+
+$d_Weight = $_POST['d_Weight'];
+$d_Length = $_POST['d_Length'];
+$d_Width = $_POST['d_Width'];
+$d_Height = $_POST['d_Height'];
+$d_Content = $_POST['d_Content'];
+
+//sender details
+echo "<input type=\"hidden\" name=\"s_City\" value=\"".$s_City."\">\n";
+echo "<input type=\"hidden\" name=\"s_Country\" value=\"".$s_Country."\">\n";
+echo "<input type=\"hidden\" name=\"s_Postal\" value=\"".$s_Postal."\">\n";
+
+//recipient details
+echo "<input type=\"hidden\" name=\"r_City\" value=\"".$r_City."\">\n";
+echo "<input type=\"hidden\" name=\"r_Country\" value=\"".$r_Country."\">\n";
+echo "<input type=\"hidden\" name=\"r_Postal\" value=\"".$r_Postal."\">\n";
+
+//shipment details
+echo "<input type=\"hidden\" name=\"d_Weight\" value=\"".$d_Weight."\">\n";
+echo "<input type=\"hidden\" name=\"d_Length\" value=\"".$d_Length."\">\n";
+echo "<input type=\"hidden\" name=\"d_Width\" value=\"".$d_Width."\">\n";
+echo "<input type=\"hidden\" name=\"d_Height\" value=\"".$d_Height."\">\n";
+echo "<input type=\"hidden\" name=\"d_Content\" value=\"".$d_Content."\">\n";
+
+?>
+
 
 <br/>
   <p align=center><INPUT Type="button" VALUE="Back" onClick="history.go(-1);return true;">&nbsp;<input name=""  id="btnSubmit" type="submit" value="Next Step - Update Details" /></p>
-  </div>   
+  </div>
+
 </form>
 </div>
 

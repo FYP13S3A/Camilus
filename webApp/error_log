@@ -61,3 +61,5 @@ Stack trace:
 [06-Oct-2013 11:34:44] PHP Parse error:  syntax error, unexpected T_AS in /home/camilus/public_html/register_step1.php on line 119
 [06-Oct-2013 17:38:49] PHP Parse error:  syntax error, unexpected T_STRING, expecting ',' or ';' in /home/camilus/public_html/register_info.php on line 93
 [06-Oct-2013 20:05:00] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/register_info3.php on line 113
+[06-Oct-2013 20:42:34] PHP Warning:  file_get_contents(/home/camilus/public_html/getAddr.php?zip=520267) [<a href='function.file-get-contents'>function.file-get-contents</a>]: failed to open stream: No such file or directory in /home/camilus/public_html/register_info3.php on line 21
+[06-Oct-2013 20:42:34] PHP Warning:  file_get_contents(/home/camilus/public_html/getAddr.php?zip=520266) [<a href='function.file-get-contents'>function.file-get-contents</a>]: failed to open stream: No such file or directory in /home/camilus/public_html/register_info3.php on line 22
