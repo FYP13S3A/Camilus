@@ -118,23 +118,31 @@ $r_Postal_Temp = $r_Postal;
 $s_Postal = substr($s_Postal,0,2);
 $r_Postal = substr($r_Postal,0,2);
 
-$sql = "SELECT * FROM district where Postal_Sector='" . $s_Postal . "'";
+//Get P&DC for Local P&DC
+
+$sql = "select * from building where district_id IN
+(SELECT District_Id FROM district where Postal_Sector='$s_Postal' AND building_type_id='4')";
+
 $result= mysql_query($sql);
 
 while ($row = mysql_fetch_assoc($result)) {
    $result_zone[] = $row;
 }
 
-$s_Zone = $result_zone[0][Zone_Id];
+$s_Building = $result_zone[0][Building_Code];
 
-$sql = "SELECT * FROM district where Postal_Sector='" . $r_Postal . "'";
+
+//Get P&DC for Foreign P&DC
+$sql = "select * from building where district_id IN
+(SELECT District_Id FROM district where Postal_Sector='$r_Postal' AND building_type_id='4')";
+
 $result= mysql_query($sql);
 
 while ($row = mysql_fetch_assoc($result)) {
    $result_zone2[] = $row;
 }
 
-$r_Zone = $result_zone2[0][Zone_Id];
+$r_Building = $result_zone2[0][Building_Code];
 
 //now get zone name from zone id
 
@@ -181,8 +189,8 @@ Leg 2 = Local PDC > receipent house
 
 //$leg1 = $s_Postal_temp;
 $leg1 = "b_" . $u_Postal;
-$leg2 = "pdc_" . $s_Zone;
-$leg3 = "pdc_" . $r_Zone;
+$leg2 = "b_" . $s_Building;
+$leg3 = "b_" . $r_Building;
 $leg4 = $r_Postal_Temp;
 
 $leg_status = "pending";
@@ -294,14 +302,16 @@ $sql2 = "INSERT INTO deliveryleg ".
        "VALUES ".
        "('$Delivery_Id','$leg_counter','$leg2','$leg3','$leg_status')";
 
-}
-
 $retval = mysql_query($sql2);
 
 if(! $retval )
 {
   die('System Error, please contact our counter regarding this issue.');
 }
+
+
+}
+
 
 
 
