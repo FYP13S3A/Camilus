@@ -3,14 +3,6 @@ include 'conn.php';
 
 //Plan Delivery Leg and record to database
 //Delivery leg have the following
-/*
-Oversea Leg plan:
-Leg1: Postoffice > PDC
-Leg2: PDC>AIR HUB
-
-Leg1:AIRHUB > PDC
-Leg2:PDC>HOUSE
-*/
 
 /* 
 [ Database ]
@@ -30,8 +22,9 @@ Leg_Status - pending/complete
 //plan the route for shipment
 
 //only run from d_delivery
-$trackingID = $argv[1];
 
+$trackingID = $argv[1];
+//$trackingID = $_GET['id'];
 
 $sql = "select * from mail where Mail_Reference_No='" . $trackingID ."'";
 $result= mysql_query($sql);
@@ -59,11 +52,20 @@ while ($row = mysql_fetch_assoc($result)) {
 
 $durationTake = $result_service_check[0][Expected_Local_Duration];
 
+$overseaDuration = $result_service_check[0][Expected_Overseas_Duration];
+
 $priority_mail="false";
+$air_mail = "false";
 
 if($durationTake<=1)
 {
 $priority_mail="true";
+}
+
+if($overseaDuration>1)
+{
+$air_mail="true";
+$priority_mail="false";
 }
 
 
@@ -186,20 +188,8 @@ Outgoing:
 Leg 1  = Post office > Local PDC
 Leg 2 = Local PDC >AIRPORT
 
-Incoming
-Leg 1  = Airport > Local PDC
-Leg 2 = Local PDC > receipent house
 */
 
-
-//Local Side
-//as of now we use the postal code of staff working location
-
-//$leg1 = $s_Postal_temp;
-$leg1 = "b_" . $u_Postal;
-$leg2 = "b_" . $s_Building;
-$leg3 = "b_" . $r_Building;
-$leg4 = $r_Postal_Temp;
 
 $leg_status = "pending";
 $manifest_id = $trackingID;
@@ -223,12 +213,29 @@ $Delivery_Id = $result_deliver[0][Delivery_Id];
 
 //#############################################################
 
-//3 sql for local , 2 for Oversea
 
-if($priority_mail=="false")
+
+
+if($air_mail=="true")
 {
 
-// LEG 1
+//outgoing air mail
+/*
+Oversea Leg plan (Outgoing):
+Leg1: Postoffice > PDC
+Leg2: PDC>AIR HUB
+*/
+
+//air building 
+$a_Building = "49300";
+
+//as of now we use the postal code of staff working location
+//$leg1 = $s_Postal_temp;
+$leg1 = "b_" . $u_Postal;
+$leg2 = "b_" . $s_Building;
+$leg3 = "b_" . $a_Building;
+
+
 $sql1 = "INSERT INTO deliveryleg ".
        "(Delivery_Id, Leg_No, Departure, Destination, Leg_Status) ".
        "VALUES ".
@@ -261,6 +268,63 @@ if(! $retval )
 }
 
 
+
+
+}//end air mail - oversea - outgoing
+
+
+//Local Side
+//as of now we use the postal code of staff working location
+
+//$leg1 = $s_Postal_temp;
+$leg1 = "b_" . $u_Postal;
+$leg2 = "b_" . $s_Building;
+$leg3 = "b_" . $r_Building;
+$leg4 = $r_Postal_Temp;
+
+
+//3 sql for local , 2 for Oversea
+
+
+
+if($priority_mail=="false" && $air_mail=="false")
+{
+
+// LEG 1
+$sql1 = "INSERT INTO deliveryleg ".
+       "(Delivery_Id, Leg_No, Departure, Destination, Leg_Status) ".
+       "VALUES ".
+       "('$Delivery_Id','$leg_counter','$leg1','$leg2','$leg_status')";
+
+$leg_counter++;
+
+$retval = mysql_query($sql1);
+
+if(! $retval )
+{
+  die('System Error, please contact our counter regarding this issue.');
+}
+
+
+
+
+// LEG 2
+$sql2 = "INSERT INTO deliveryleg ".
+       "(Delivery_Id, Leg_No, Departure, Destination, Leg_Status) ".
+       "VALUES ".
+       "('$Delivery_Id','$leg_counter','$leg2','$leg3','$leg_status')";
+
+$leg_counter++;
+
+$retval = mysql_query($sql2);
+
+if(! $retval )
+{
+  die('System Error, please contact our counter regarding this issue.');
+}
+
+
+
 // LEG 3
 $sql3 = "INSERT INTO deliveryleg ".
        "(Delivery_Id, Leg_No, Departure, Destination, Leg_Status) ".
@@ -275,10 +339,15 @@ if(! $retval )
   die('System Error, please contact our counter regarding this issue.');
 }
 
+
+
+
 }//end priority mail as false
 
 
-if($priority_mail=="true")
+
+
+if($priority_mail=="true" && $air_mail=="false")
 {
 //Priority Processing Distribuition Center
 $building_for_ppdc = "19299";
@@ -302,6 +371,7 @@ if(! $retval )
 }
 
 
+
 $leg_counter++;
 
 // LEG 2
@@ -316,7 +386,6 @@ if(! $retval )
 {
   die('System Error, please contact our counter regarding this issue.');
 }
-
 
 }
 

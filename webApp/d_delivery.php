@@ -105,6 +105,22 @@ $db_expect_end = $setDate . " " . $s_Last_Delivery_Time;
 
 }
 
+if($s_Expected_Overseas_Duration>1)
+{
+//means its a oversea package
+
+$db_expect_start = $tommorow . " " . $s_start_Delivery_Time;
+
+$addDays = $s_Expected_Overseas_Duration;
+
+$setDate = $tommorow;
+$setDate = strtotime($setDate);
+$setDate = strtotime("+$addDays days", $setDate);
+$setDate = date('Y-m-d', $setDate);
+
+$db_expect_end = $setDate . " " . $s_Last_Delivery_Time;
+
+}
 
 //echo "Expect Start Date > " . $db_expect_start;
 //echo "<br/>";
