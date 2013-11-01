@@ -2,7 +2,7 @@
 include 'conn.php';
 
 //POPULATE DROPDOWN LIST
-$sql="SELECT ServiceType_Id,Name,Service_Information from servicetype";
+$sql="SELECT Service_Type_Id,Name,Service_Information from servicetype";
 
 $result=mysql_query($sql);
 
@@ -28,6 +28,7 @@ $d_Content = $_POST['d_Content'];
 
 ?>
 
+
 <!doctype html>
 <!--[if lt IE 7]> <html class="ie6 oldie"> <![endif]-->
 <!--[if IE 7]>    <html class="ie7 oldie"> <![endif]-->
@@ -42,9 +43,9 @@ $d_Content = $_POST['d_Content'];
 
 <link href="_css/boilerplate.css" rel="stylesheet" type="text/css">
 <link href="_css/layout.css" rel="stylesheet" type="text/css">
-<link href="_css/typography.css" rel="stylesheet" type="text/css" media="screen, projection">
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css" />
+<link rel="stylesheet" href="_css/typography.css" />
 
-<link href="SpryAssets/SpryValidationTextarea.css" rel="stylesheet" type="text/css">
 <!-- 
 To learn more about the conditional comments around the html tags at the top of the file:
 paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
@@ -59,7 +60,9 @@ Do the following if you're using your customized build of modernizr (http://www.
 <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 <script src="_script/respond.min.js"></script>
-<script src="SpryAssets/SpryValidationTextarea.js" type="text/javascript"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.1.15/jquery.form-validator.min.js"></script>
+<script src="jquery.form-validator.js"></script>
 </head>
 
 <body>
@@ -81,54 +84,61 @@ Do the following if you're using your customized build of modernizr (http://www.
   </div>
   </div>
   <div id="mainContent">
-  <div id="breadcumbsBox">
-    <ul id="breadcrumbs-two">
-      <b>&nbsp;Register Sender & Recipient Details</b>
-</ul>
-  </div>
-<hr>
- <div>
-<label class="itemTittle">
-  <center><b>Shipment Details</b></center></label>
-<hr>
-<p>
-<font size=2 color=black><b>
-<table>
-<tr>
-<td>Physical Weight : <?php echo $d_Weight;?></td>
-</tr>
-<tr><td>Length: <?php echo $d_Length;?></td></tr>
-<tr><td>Width: <?php echo $d_Width;?></td></tr>
-<tr><td>Height: <?php echo $d_Height;?></td></tr>
-<tr>
-<td>Mail Content : <?php echo $d_Content;?></td>
-</tr>
-</table>
-</b></font>
-</p>
-
-</div>
-
-<hr>
-<div>
-<label class="itemTittle">
-  <center><b>Services</b></center></label>
-<hr>
-<p>
-<b>Select your service type:</b><br/>
-<table border="1">
-<tr>
-<th>Select</th>
-<th>Service</th>
-<th>Service Information</th>
-</tr>
-
 <form name="form1" method="post" action="register_info3.php">
+  <table width="100%" border="0">
+    <tr>
+      <td class="sectionTitle"><label class="itemTittle">
+Shipment Details</label></td>
+    </tr>
+    <tr>
+      <td><table class="registerMail_P1">
+<tr>
+  <td colspan="2"></td>
+  </tr>
+<tr>
+<td width="14%">&nbsp;Physical Weight: </td>
+<td width="86%"><?php echo $d_Weight;?></td>
+</tr>
+<tr>
+  <td>&nbsp;Length: </td>
+  <td><?php echo $d_Length;?></td>
+</tr>
+<tr><td>&nbsp;Width: </td>
+  <td><?php echo $d_Width;?></td>
+</tr>
+<tr><td>&nbsp;Height: </td>
+  <td><?php echo $d_Height;?></td>
+</tr>
+<tr>
+<td>&nbsp;Mail Content: </td>
+<td><?php echo $d_Content;?></td>
+</tr>
+</table></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><label class="sectionTitle">
+        Services</label></td>
+    </tr>
+    <tr>
+      <td><strong>Select your service type:</strong></td>
+    </tr>
+    <tr>
+      <td><table  class="registerMail_P1">
+<tr>
+<th align="left">Select</th>
+<th align="left">Service</th>
+<th align="left">Service Information</th>
+</tr>
+
+
 <?php
 foreach($result_array AS $row)
 {
 echo "<tr>";
-echo "<td><input type=\"radio\" name=\"s_Service\" value=\"".$row[ServiceType_Id]."\"></td>";
+echo "<td><input type=\"radio\" name=\"s_Service\" value=\"".$row[Service_Type_Id]."\"></td>";
 echo "<td>".$row[Name]."</td>";
 echo "<td>".$row[Service_Information]."</td>";
 echo "</tr>";
@@ -136,7 +146,7 @@ echo "</tr>";
 ?>
 </table>
 
-</p></div>
+</p>
 
 <?php
 //echo hidden field
@@ -172,26 +182,49 @@ echo "<input type=\"hidden\" name=\"d_Width\" value=\"".$d_Width."\">\n";
 echo "<input type=\"hidden\" name=\"d_Height\" value=\"".$d_Height."\">\n";
 echo "<input type=\"hidden\" name=\"d_Content\" value=\"".$d_Content."\">\n";
 
-?>
-
-
-<br/>
-  <p align=center><INPUT Type="button" VALUE="Back" onClick="history.go(-1);return true;">&nbsp;<input name=""  id="btnSubmit" type="submit" value="Next Step - Update Details" /></p>
-  </div>
-
+?></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="right" class="registerMail_P1"><INPUT Type="button" VALUE="&lt; Back" onClick="history.go(-1);return true;">
+        &nbsp;
+        <input  id="btnSubmit" type="submit" value="Next &gt;" /></td>
+      </tr>
+  </table>
 </form>
 </div>
-
-
-
-  <div class="rightSidebar">
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-  </div>
-  <?php include("footer.php"); ?>
+<?php include("footer.php"); ?>
 </div><!---end#contentBox--->
 </div>
+<script>
+(function($) {
 
+    var dev = window.location.hash.indexOf('dev') > -1 ? '.dev' : '';
+
+    $.validate({
+        language : {
+            requiredFields: 'Please select the service you would like to use!'
+        },
+        errorMessagePosition : 'top',
+        scrollToTopOnError : true,
+          decimalSeparator : '.',
+        onValidate : function() {
+            var $callbackInput = $('#callback');
+            if( $callbackInput.val() == 1 ) {
+                return {
+                    element : $callbackInput,
+                    message : 'This validation was made in a callback'
+                };
+            }
+        }
+      
+    });
+
+ 
+
+})(jQuery);
+</script>
 </body>
 </html>

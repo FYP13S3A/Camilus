@@ -1,65 +1,312 @@
-[17-Sep-2013 17:15:45] PHP Fatal error:  Call to undefined function mysql_connect_errno() in /home/camilus/public_html/conn.php on line 6
-[17-Sep-2013 17:15:57] PHP Fatal error:  Call to undefined function mysqli_connect() in /home/camilus/public_html/conn.php on line 3
-[17-Sep-2013 17:17:57] PHP Warning:  mysql_close(): supplied argument is not a valid MySQL-Link resource in /home/camilus/public_html/footer.php on line 5
-[17-Sep-2013 18:11:01] PHP Parse error:  syntax error, unexpected '}' in /home/camilus/public_html/validate_login.php on line 19
-[17-Sep-2013 18:11:12] PHP Parse error:  syntax error, unexpected '}' in /home/camilus/public_html/validate_login.php on line 19
-[17-Sep-2013 18:11:28] PHP Warning:  mysql_query(): supplied argument is not a valid MySQL-Link resource in /home/camilus/public_html/validate_login.php on line 12
-[17-Sep-2013 18:11:28] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/validate_login.php on line 14
-[17-Sep-2013 18:13:03] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/validate_login.php on line 13
-[17-Sep-2013 18:14:23] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/validate_login.php on line 14
-[17-Sep-2013 18:28:14] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 6
-[17-Sep-2013 18:28:14] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 6
-[17-Sep-2013 18:28:14] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 7
-[17-Sep-2013 18:28:14] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 7
-[17-Sep-2013 18:28:14] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 10
-[17-Sep-2013 18:28:14] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 10
-[17-Sep-2013 18:28:14] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/index.php on line 11
-[17-Sep-2013 18:28:44] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 6
-[17-Sep-2013 18:28:44] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 6
-[17-Sep-2013 18:28:44] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 7
-[17-Sep-2013 18:28:44] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 7
-[17-Sep-2013 18:28:44] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 10
-[17-Sep-2013 18:28:44] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 10
-[17-Sep-2013 18:28:44] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/index.php on line 11
-[17-Sep-2013 18:29:52] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 6
-[17-Sep-2013 18:29:52] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 6
-[17-Sep-2013 18:29:52] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 7
-[17-Sep-2013 18:29:52] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 7
-[17-Sep-2013 18:29:52] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 10
-[17-Sep-2013 18:29:52] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 10
-[17-Sep-2013 18:29:52] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/index.php on line 11
-[20-Sep-2013 17:29:24] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home/camilus/public_html/register_confirm.php on line 8
-[20-Sep-2013 17:29:39] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home/camilus/public_html/register_confirm.php on line 8
-[30-Sep-2013 11:59:39] PHP Warning:  mysql_close(): supplied argument is not a valid MySQL-Link resource in /home/camilus/public_html/try_insert.php on line 25
-[30-Sep-2013 15:19:48] PHP Warning:  require_once(../class/BCGFontFile.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory in /home/camilus/public_html/register_info3.php on line 3
-[30-Sep-2013 15:19:48] PHP Fatal error:  require_once() [<a href='function.require'>function.require</a>]: Failed opening required '../class/BCGFontFile.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/camilus/public_html/register_info3.php on line 3
-[30-Sep-2013 15:20:12] PHP Warning:  require_once(./class/.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory in /home/camilus/public_html/register_info3.php on line 6
-[30-Sep-2013 15:20:12] PHP Fatal error:  require_once() [<a href='function.require'>function.require</a>]: Failed opening required './class/.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/camilus/public_html/register_info3.php on line 6
-[30-Sep-2013 15:22:41] PHP Fatal error:  Uncaught exception 'BCGArgumentException' with message 'The font path is incorrect.' in /home/camilus/public_html/class/BCGFontFile.php:34
-Stack trace:
-#0 /home/camilus/public_html/barcode.php(13): BCGFontFile->__construct('./class/font/Ar...', 18)
-#1 {main}
-  thrown in /home/camilus/public_html/class/BCGFontFile.php on line 34
-[30-Sep-2013 15:23:07] PHP Fatal error:  Call to undefined function imagecreate() in /home/camilus/public_html/class/BCGFontFile.php on line 167
-[30-Sep-2013 15:35:25] PHP Fatal error:  Call to undefined function imagettftext() in /home/camilus/public_html/class/BCGFontFile.php on line 168
-[30-Sep-2013 15:45:05] PHP Fatal error:  Class 'BCGcode39' not found in /home/camilus/public_html/barcode.php on line 15
-[30-Sep-2013 16:04:45] PHP Fatal error:  Class 'BCGcode39' not found in /home/camilus/public_html/barcode.php on line 15
-[30-Sep-2013 16:05:32] PHP Warning:  require_once(./class/.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory in /home/camilus/public_html/barcode.php on line 7
-[30-Sep-2013 16:05:32] PHP Fatal error:  require_once() [<a href='function.require'>function.require</a>]: Failed opening required './class/.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/camilus/public_html/barcode.php on line 7
-[30-Sep-2013 16:07:42] PHP Catchable fatal error:  Argument 2 passed to BCGDrawing::__construct() must be an instance of BCGColor, null given, called in /home/camilus/public_html/barcode.php on line 24 and defined in /home/camilus/public_html/class/BCGDrawing.php on line 38
-[30-Sep-2013 16:10:44] PHP Catchable fatal error:  Argument 2 passed to BCGDrawing::__construct() must be an instance of BCGColor, null given, called in /home/camilus/public_html/barcode.php on line 24 and defined in /home/camilus/public_html/class/BCGDrawing.php on line 38
-[30-Sep-2013 16:13:17] PHP Fatal error:  Uncaught exception 'BCGArgumentException' with message 'The font path is incorrect.' in /home/camilus/public_html/class/BCGFontFile.php:34
-Stack trace:
-#0 /home/camilus/public_html/barcode.php(12): BCGFontFile->__construct('./font/Arial.tt...', 18)
-#1 {main}
-  thrown in /home/camilus/public_html/class/BCGFontFile.php on line 34
-[30-Sep-2013 16:16:08] PHP Parse error:  syntax error, unexpected '<' in /home/camilus/public_html/register_info3.php on line 115
-[01-Oct-2013 18:10:05] PHP Fatal error:  Cannot use string offset as an array in /home/camilus/public_html/getAddr.php on line 19
-[01-Oct-2013 18:15:54] PHP Fatal error:  Cannot use string offset as an array in /home/camilus/public_html/getAddr.php on line 22
-[06-Oct-2013 11:25:59] PHP Parse error:  syntax error, unexpected T_VARIABLE, expecting ',' or ';' in /home/camilus/public_html/register_step1.php on line 117
-[06-Oct-2013 11:34:38] PHP Parse error:  syntax error, unexpected T_AS in /home/camilus/public_html/register_step1.php on line 119
-[06-Oct-2013 11:34:44] PHP Parse error:  syntax error, unexpected T_AS in /home/camilus/public_html/register_step1.php on line 119
-[06-Oct-2013 17:38:49] PHP Parse error:  syntax error, unexpected T_STRING, expecting ',' or ';' in /home/camilus/public_html/register_info.php on line 93
-[06-Oct-2013 20:05:00] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/register_info3.php on line 113
-[06-Oct-2013 20:42:34] PHP Warning:  file_get_contents(/home/camilus/public_html/getAddr.php?zip=520267) [<a href='function.file-get-contents'>function.file-get-contents</a>]: failed to open stream: No such file or directory in /home/camilus/public_html/register_info3.php on line 21
-[06-Oct-2013 20:42:34] PHP Warning:  file_get_contents(/home/camilus/public_html/getAddr.php?zip=520266) [<a href='function.file-get-contents'>function.file-get-contents</a>]: failed to open stream: No such file or directory in /home/camilus/public_html/register_info3.php on line 22
+[17-Sep-2013 17:15:45] PHP Fatal error:  Call to undefined function mysql_connect_errno() in /home/camilus/public_html/conn.php on line 6
+[17-Sep-2013 17:15:57] PHP Fatal error:  Call to undefined function mysqli_connect() in /home/camilus/public_html/conn.php on line 3
+[17-Sep-2013 17:17:57] PHP Warning:  mysql_close(): supplied argument is not a valid MySQL-Link resource in /home/camilus/public_html/footer.php on line 5
+[17-Sep-2013 18:11:01] PHP Parse error:  syntax error, unexpected '}' in /home/camilus/public_html/validate_login.php on line 19
+[17-Sep-2013 18:11:12] PHP Parse error:  syntax error, unexpected '}' in /home/camilus/public_html/validate_login.php on line 19
+[17-Sep-2013 18:11:28] PHP Warning:  mysql_query(): supplied argument is not a valid MySQL-Link resource in /home/camilus/public_html/validate_login.php on line 12
+[17-Sep-2013 18:11:28] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/validate_login.php on line 14
+[17-Sep-2013 18:13:03] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/validate_login.php on line 13
+[17-Sep-2013 18:14:23] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/validate_login.php on line 14
+[17-Sep-2013 18:28:14] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 6
+[17-Sep-2013 18:28:14] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 6
+[17-Sep-2013 18:28:14] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 7
+[17-Sep-2013 18:28:14] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 7
+[17-Sep-2013 18:28:14] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 10
+[17-Sep-2013 18:28:14] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 10
+[17-Sep-2013 18:28:14] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/index.php on line 11
+[17-Sep-2013 18:28:44] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 6
+[17-Sep-2013 18:28:44] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 6
+[17-Sep-2013 18:28:44] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 7
+[17-Sep-2013 18:28:44] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 7
+[17-Sep-2013 18:28:44] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 10
+[17-Sep-2013 18:28:44] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 10
+[17-Sep-2013 18:28:44] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/index.php on line 11
+[17-Sep-2013 18:29:52] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 6
+[17-Sep-2013 18:29:52] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 6
+[17-Sep-2013 18:29:52] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 7
+[17-Sep-2013 18:29:52] PHP Warning:  mysql_real_escape_string() [<a href='function.mysql-real-escape-string'>function.mysql-real-escape-string</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 7
+[17-Sep-2013 18:29:52] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/index.php on line 10
+[17-Sep-2013 18:29:52] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/index.php on line 10
+[17-Sep-2013 18:29:52] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/index.php on line 11
+[20-Sep-2013 17:29:24] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home/camilus/public_html/register_confirm.php on line 8
+[20-Sep-2013 17:29:39] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home/camilus/public_html/register_confirm.php on line 8
+[30-Sep-2013 11:59:39] PHP Warning:  mysql_close(): supplied argument is not a valid MySQL-Link resource in /home/camilus/public_html/try_insert.php on line 25
+[30-Sep-2013 15:19:48] PHP Warning:  require_once(../class/BCGFontFile.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory in /home/camilus/public_html/register_info3.php on line 3
+[30-Sep-2013 15:19:48] PHP Fatal error:  require_once() [<a href='function.require'>function.require</a>]: Failed opening required '../class/BCGFontFile.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/camilus/public_html/register_info3.php on line 3
+[30-Sep-2013 15:20:12] PHP Warning:  require_once(./class/.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory in /home/camilus/public_html/register_info3.php on line 6
+[30-Sep-2013 15:20:12] PHP Fatal error:  require_once() [<a href='function.require'>function.require</a>]: Failed opening required './class/.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/camilus/public_html/register_info3.php on line 6
+[30-Sep-2013 15:22:41] PHP Fatal error:  Uncaught exception 'BCGArgumentException' with message 'The font path is incorrect.' in /home/camilus/public_html/class/BCGFontFile.php:34
+Stack trace:
+#0 /home/camilus/public_html/barcode.php(13): BCGFontFile->__construct('./class/font/Ar...', 18)
+#1 {main}
+  thrown in /home/camilus/public_html/class/BCGFontFile.php on line 34
+[30-Sep-2013 15:23:07] PHP Fatal error:  Call to undefined function imagecreate() in /home/camilus/public_html/class/BCGFontFile.php on line 167
+[30-Sep-2013 15:35:25] PHP Fatal error:  Call to undefined function imagettftext() in /home/camilus/public_html/class/BCGFontFile.php on line 168
+[30-Sep-2013 15:45:05] PHP Fatal error:  Class 'BCGcode39' not found in /home/camilus/public_html/barcode.php on line 15
+[30-Sep-2013 16:04:45] PHP Fatal error:  Class 'BCGcode39' not found in /home/camilus/public_html/barcode.php on line 15
+[30-Sep-2013 16:05:32] PHP Warning:  require_once(./class/.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory in /home/camilus/public_html/barcode.php on line 7
+[30-Sep-2013 16:05:32] PHP Fatal error:  require_once() [<a href='function.require'>function.require</a>]: Failed opening required './class/.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/camilus/public_html/barcode.php on line 7
+[30-Sep-2013 16:07:42] PHP Catchable fatal error:  Argument 2 passed to BCGDrawing::__construct() must be an instance of BCGColor, null given, called in /home/camilus/public_html/barcode.php on line 24 and defined in /home/camilus/public_html/class/BCGDrawing.php on line 38
+[30-Sep-2013 16:10:44] PHP Catchable fatal error:  Argument 2 passed to BCGDrawing::__construct() must be an instance of BCGColor, null given, called in /home/camilus/public_html/barcode.php on line 24 and defined in /home/camilus/public_html/class/BCGDrawing.php on line 38
+[30-Sep-2013 16:13:17] PHP Fatal error:  Uncaught exception 'BCGArgumentException' with message 'The font path is incorrect.' in /home/camilus/public_html/class/BCGFontFile.php:34
+Stack trace:
+#0 /home/camilus/public_html/barcode.php(12): BCGFontFile->__construct('./font/Arial.tt...', 18)
+#1 {main}
+  thrown in /home/camilus/public_html/class/BCGFontFile.php on line 34
+[30-Sep-2013 16:16:08] PHP Parse error:  syntax error, unexpected '<' in /home/camilus/public_html/register_info3.php on line 115
+[01-Oct-2013 18:10:05] PHP Fatal error:  Cannot use string offset as an array in /home/camilus/public_html/getAddr.php on line 19
+[01-Oct-2013 18:15:54] PHP Fatal error:  Cannot use string offset as an array in /home/camilus/public_html/getAddr.php on line 22
+[06-Oct-2013 11:25:59] PHP Parse error:  syntax error, unexpected T_VARIABLE, expecting ',' or ';' in /home/camilus/public_html/register_step1.php on line 117
+[06-Oct-2013 11:34:38] PHP Parse error:  syntax error, unexpected T_AS in /home/camilus/public_html/register_step1.php on line 119
+[06-Oct-2013 11:34:44] PHP Parse error:  syntax error, unexpected T_AS in /home/camilus/public_html/register_step1.php on line 119
+[06-Oct-2013 17:38:49] PHP Parse error:  syntax error, unexpected T_STRING, expecting ',' or ';' in /home/camilus/public_html/register_info.php on line 93
+[06-Oct-2013 20:05:00] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/register_info3.php on line 113
+[06-Oct-2013 20:42:34] PHP Warning:  file_get_contents(/home/camilus/public_html/getAddr.php?zip=520267) [<a href='function.file-get-contents'>function.file-get-contents</a>]: failed to open stream: No such file or directory in /home/camilus/public_html/register_info3.php on line 21
+[06-Oct-2013 20:42:34] PHP Warning:  file_get_contents(/home/camilus/public_html/getAddr.php?zip=520266) [<a href='function.file-get-contents'>function.file-get-contents</a>]: failed to open stream: No such file or directory in /home/camilus/public_html/register_info3.php on line 22
+[12-Oct-2013 19:48:51] PHP Parse error:  syntax error, unexpected T_ECHO in /home/camilus/public_html/HUBVersion/register_info4.php on line 101
+[12-Oct-2013 21:52:54] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/register_info.php on line 122
+[12-Oct-2013 21:53:55] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/register_info.php on line 122
+[14-Oct-2013 10:46:42] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/schedule.php on line 6
+[14-Oct-2013 10:46:42] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/schedule.php on line 6
+[14-Oct-2013 10:46:42] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/schedule.php on line 8
+[14-Oct-2013 10:46:42] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/schedule.php on line 18
+[14-Oct-2013 10:46:42] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/schedule.php on line 18
+[14-Oct-2013 10:46:42] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/schedule.php on line 20
+[14-Oct-2013 10:46:42] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/schedule.php on line 29
+[14-Oct-2013 10:46:42] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/schedule.php on line 29
+[14-Oct-2013 10:46:42] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/schedule.php on line 31
+[19-Oct-2013 04:48:29] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/register_info.php on line 8
+[19-Oct-2013 04:48:29] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/register_info.php on line 87
+[19-Oct-2013 04:48:29] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/register_info.php on line 122
+[20-Oct-2013 09:40:05] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/confirm_mail.php on line 12
+[20-Oct-2013 09:44:16] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/register_info2.php on line 9
+[20-Oct-2013 09:44:16] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/register_info2.php on line 136
+[20-Oct-2013 10:08:54] PHP Warning:  session_destroy() [<a href='function.session-destroy'>function.session-destroy</a>]: Trying to destroy uninitialized session in /home/camilus/public_html/HUBVersion/logout.php on line 7
+[20-Oct-2013 10:22:31] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/dashboard.php on line 8
+[20-Oct-2013 10:22:31] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/dashboard.php on line 8
+[20-Oct-2013 10:22:31] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/dashboard.php on line 10
+[20-Oct-2013 10:22:47] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/dashboard.php on line 11
+[20-Oct-2013 10:23:03] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/dashboard.php on line 12
+[20-Oct-2013 10:23:23] PHP Warning:  Cannot use a scalar value as an array in /home/camilus/public_html/HUBVersion/dashboard.php on line 13
+[20-Oct-2013 10:24:14] PHP Warning:  Cannot use a scalar value as an array in /home/camilus/public_html/HUBVersion/dashboard.php on line 13
+[20-Oct-2013 11:39:18] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/confirm_mail3.php on line 48
+[20-Oct-2013 11:39:18] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/confirm_mail3.php on line 48
+[20-Oct-2013 11:39:18] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/confirm_mail3.php on line 50
+[20-Oct-2013 18:25:54] PHP Parse error:  syntax error, unexpected ']' in /home/camilus/public_html/HUBVersion/dashboard.php on line 33
+[20-Oct-2013 18:32:20] PHP Warning:  session_destroy() [<a href='function.session-destroy'>function.session-destroy</a>]: Trying to destroy uninitialized session in /home/camilus/public_html/HUBVersion/logout.php on line 7
+[20-Oct-2013 18:55:28] PHP Warning:  session_destroy() [<a href='function.session-destroy'>function.session-destroy</a>]: Trying to destroy uninitialized session in /home/camilus/public_html/HUBVersion/logout.php on line 7
+[20-Oct-2013 18:55:35] PHP Warning:  session_destroy() [<a href='function.session-destroy'>function.session-destroy</a>]: Trying to destroy uninitialized session in /home/camilus/public_html/HUBVersion/logout.php on line 7
+[20-Oct-2013 18:55:52] PHP Warning:  session_destroy() [<a href='function.session-destroy'>function.session-destroy</a>]: Trying to destroy uninitialized session in /home/camilus/public_html/HUBVersion/logout.php on line 7
+[20-Oct-2013 18:58:41] PHP Warning:  session_destroy() [<a href='function.session-destroy'>function.session-destroy</a>]: Trying to destroy uninitialized session in /home/camilus/public_html/HUBVersion/logout.php on line 7
+[20-Oct-2013 18:58:49] PHP Warning:  session_destroy() [<a href='function.session-destroy'>function.session-destroy</a>]: Trying to destroy uninitialized session in /home/camilus/public_html/HUBVersion/logout.php on line 7
+[20-Oct-2013 18:58:59] PHP Warning:  session_destroy() [<a href='function.session-destroy'>function.session-destroy</a>]: Trying to destroy uninitialized session in /home/camilus/public_html/HUBVersion/logout.php on line 7
+[20-Oct-2013 19:04:17] PHP Warning:  session_destroy() [<a href='function.session-destroy'>function.session-destroy</a>]: Trying to destroy uninitialized session in /home/camilus/public_html/HUBVersion/logout.php on line 7
+[20-Oct-2013 20:05:50] PHP Warning:  session_destroy() [<a href='function.session-destroy'>function.session-destroy</a>]: Trying to destroy uninitialized session in /home/camilus/public_html/HUBVersion/logout.php on line 9
+[20-Oct-2013 20:05:55] PHP Warning:  session_destroy() [<a href='function.session-destroy'>function.session-destroy</a>]: Trying to destroy uninitialized session in /home/camilus/public_html/HUBVersion/logout.php on line 9
+[20-Oct-2013 20:11:16] PHP Parse error:  syntax error, unexpected T_IS_NOT_EQUAL in /home/camilus/public_html/HUBVersion/schedule.php on line 52
+[20-Oct-2013 21:26:36] PHP Parse error:  syntax error, unexpected '<' in /home/camilus/public_html/HUBVersion/manage_region.php on line 85
+[20-Oct-2013 21:27:00] PHP Parse error:  syntax error, unexpected '<' in /home/camilus/public_html/HUBVersion/manage_region.php on line 85
+[20-Oct-2013 21:27:03] PHP Parse error:  syntax error, unexpected '<' in /home/camilus/public_html/HUBVersion/manage_region.php on line 85
+[20-Oct-2013 21:27:04] PHP Parse error:  syntax error, unexpected '<' in /home/camilus/public_html/HUBVersion/manage_region.php on line 85
+[22-Oct-2013 11:17:19] PHP Parse error:  syntax error, unexpected ']', expecting T_STRING or T_VARIABLE or T_NUM_STRING in /home/camilus/public_html/HUBVersion/delivery.php on line 14
+[22-Oct-2013 11:17:33] PHP Parse error:  syntax error, unexpected ']', expecting T_STRING or T_VARIABLE or T_NUM_STRING in /home/camilus/public_html/HUBVersion/delivery.php on line 28
+[22-Oct-2013 11:18:06] PHP Parse error:  syntax error, unexpected ']', expecting T_STRING or T_VARIABLE or T_NUM_STRING in /home/camilus/public_html/HUBVersion/delivery.php on line 28
+[22-Oct-2013 20:34:00] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/delivery.php on line 27
+[23-Oct-2013 10:14:41] PHP Parse error:  syntax error, unexpected T_VARIABLE, expecting ',' or ';' in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 29
+[23-Oct-2013 10:15:50] PHP Parse error:  syntax error, unexpected '<' in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 27
+[23-Oct-2013 10:39:28] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 27
+[23-Oct-2013 10:39:28] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 27
+[23-Oct-2013 10:39:28] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 29
+[23-Oct-2013 10:39:28] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 39
+[23-Oct-2013 10:39:28] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 39
+[23-Oct-2013 10:39:28] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 41
+[23-Oct-2013 10:39:28] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 50
+[23-Oct-2013 10:39:28] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 50
+[23-Oct-2013 10:39:28] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 52
+[23-Oct-2013 10:39:28] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 74
+[23-Oct-2013 10:39:28] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 74
+[23-Oct-2013 10:39:28] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 76
+[23-Oct-2013 10:39:28] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 83
+[23-Oct-2013 10:39:28] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 83
+[23-Oct-2013 10:39:28] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 85
+[23-Oct-2013 10:39:28] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 94
+[23-Oct-2013 10:39:28] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 94
+[23-Oct-2013 10:39:28] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 96
+[23-Oct-2013 10:39:28] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 103
+[23-Oct-2013 10:39:28] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 103
+[23-Oct-2013 10:39:28] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 105
+[23-Oct-2013 10:39:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 27
+[23-Oct-2013 10:39:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 27
+[23-Oct-2013 10:39:40] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 29
+[23-Oct-2013 10:39:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 39
+[23-Oct-2013 10:39:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 39
+[23-Oct-2013 10:39:40] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 41
+[23-Oct-2013 10:39:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 50
+[23-Oct-2013 10:39:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 50
+[23-Oct-2013 10:39:40] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 52
+[23-Oct-2013 10:39:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 74
+[23-Oct-2013 10:39:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 74
+[23-Oct-2013 10:39:40] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 76
+[23-Oct-2013 10:39:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 83
+[23-Oct-2013 10:39:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 83
+[23-Oct-2013 10:39:40] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 85
+[23-Oct-2013 10:39:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 94
+[23-Oct-2013 10:39:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 94
+[23-Oct-2013 10:39:40] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 96
+[23-Oct-2013 10:39:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 103
+[23-Oct-2013 10:39:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 103
+[23-Oct-2013 10:39:40] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_deliveryleg.php on line 105
+[23-Oct-2013 11:50:22] PHP Fatal error:  Call to undefined function date_create_from_format() in /home/camilus/public_html/HUBVersion/aTest.php on line 5
+[24-Oct-2013 17:18:58] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 41
+[24-Oct-2013 17:18:58] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 41
+[24-Oct-2013 17:18:58] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 41
+[24-Oct-2013 17:18:58] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 41
+[24-Oct-2013 17:18:58] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 41
+[24-Oct-2013 17:18:58] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 41
+[24-Oct-2013 17:19:46] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 41
+[24-Oct-2013 17:19:46] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 41
+[24-Oct-2013 17:19:46] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 41
+[24-Oct-2013 17:19:46] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 41
+[24-Oct-2013 17:19:46] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 41
+[24-Oct-2013 17:19:46] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 41
+[24-Oct-2013 17:19:50] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 41
+[24-Oct-2013 17:19:50] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 41
+[24-Oct-2013 17:19:50] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 41
+[24-Oct-2013 17:19:50] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 41
+[24-Oct-2013 17:19:50] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 41
+[24-Oct-2013 17:19:50] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 41
+[24-Oct-2013 18:18:53] PHP Parse error:  syntax error, unexpected ']', expecting T_STRING or T_VARIABLE or T_NUM_STRING in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 81
+[24-Oct-2013 18:22:39] PHP Parse error:  syntax error, unexpected ']', expecting T_STRING or T_VARIABLE or T_NUM_STRING in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 82
+[24-Oct-2013 18:22:51] PHP Parse error:  syntax error, unexpected ']', expecting T_STRING or T_VARIABLE or T_NUM_STRING in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 82
+[24-Oct-2013 20:16:37] PHP Parse error:  syntax error, unexpected $end in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 127
+[25-Oct-2013 02:17:54] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 95
+[25-Oct-2013 02:17:54] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 95
+[25-Oct-2013 02:17:54] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 95
+[25-Oct-2013 02:17:54] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 95
+[25-Oct-2013 02:19:44] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 87
+[25-Oct-2013 02:19:44] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 95
+[25-Oct-2013 02:19:44] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 87
+[25-Oct-2013 02:19:44] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 95
+[25-Oct-2013 02:19:44] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 87
+[25-Oct-2013 02:19:44] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 95
+[25-Oct-2013 02:19:44] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 87
+[25-Oct-2013 02:19:44] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 95
+[25-Oct-2013 02:19:44] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 87
+[25-Oct-2013 02:19:44] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 95
+[25-Oct-2013 02:20:11] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 94
+[25-Oct-2013 02:20:11] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 94
+[25-Oct-2013 02:20:11] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 94
+[25-Oct-2013 02:20:11] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 94
+[25-Oct-2013 02:21:27] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 94
+[25-Oct-2013 02:21:27] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 94
+[25-Oct-2013 02:21:27] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 94
+[25-Oct-2013 02:21:27] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 94
+[25-Oct-2013 02:21:28] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 94
+[25-Oct-2013 02:21:28] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 94
+[25-Oct-2013 02:21:28] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 94
+[25-Oct-2013 02:21:28] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 94
+[25-Oct-2013 02:24:14] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 96
+[25-Oct-2013 02:24:14] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 96
+[25-Oct-2013 02:24:14] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 96
+[25-Oct-2013 02:24:14] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 96
+[25-Oct-2013 02:24:14] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 96
+[25-Oct-2013 02:24:45] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 96
+[25-Oct-2013 02:24:45] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 96
+[25-Oct-2013 02:24:45] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 96
+[25-Oct-2013 02:24:45] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 96
+[25-Oct-2013 02:25:22] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 94
+[25-Oct-2013 02:25:22] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 94
+[25-Oct-2013 02:25:22] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 94
+[25-Oct-2013 02:25:22] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 94
+[25-Oct-2013 02:46:23] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 95
+[25-Oct-2013 03:00:09] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 103
+[25-Oct-2013 03:00:09] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 103
+[25-Oct-2013 03:00:09] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 103
+[25-Oct-2013 03:00:09] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 103
+[25-Oct-2013 03:00:44] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 103
+[25-Oct-2013 03:00:44] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 103
+[25-Oct-2013 03:00:44] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 103
+[25-Oct-2013 03:00:44] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 103
+[25-Oct-2013 03:00:44] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 103
+[25-Oct-2013 03:00:44] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 103
+[25-Oct-2013 03:00:44] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 103
+[25-Oct-2013 03:00:44] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 103
+[25-Oct-2013 03:00:44] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 103
+[25-Oct-2013 03:00:44] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 103
+[25-Oct-2013 03:00:44] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 103
+[25-Oct-2013 03:00:44] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 103
+[25-Oct-2013 03:05:51] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 104
+[25-Oct-2013 03:05:51] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 104
+[25-Oct-2013 03:05:51] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 104
+[25-Oct-2013 03:05:51] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 104
+[25-Oct-2013 03:05:51] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 104
+[25-Oct-2013 03:05:51] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 104
+[25-Oct-2013 03:05:51] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 104
+[25-Oct-2013 03:05:51] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 104
+[25-Oct-2013 03:05:51] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 104
+[25-Oct-2013 03:05:51] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 104
+[25-Oct-2013 03:05:51] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 104
+[25-Oct-2013 03:05:51] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 104
+[25-Oct-2013 03:38:19] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 97
+[25-Oct-2013 03:38:22] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 97
+[25-Oct-2013 03:39:37] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 97
+[25-Oct-2013 03:40:11] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 97
+[25-Oct-2013 04:09:42] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 102
+[25-Oct-2013 04:09:42] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 110
+[25-Oct-2013 04:09:51] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 102
+[25-Oct-2013 04:09:51] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 110
+[25-Oct-2013 04:10:13] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 104
+[25-Oct-2013 04:10:13] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 112
+[25-Oct-2013 15:35:00] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 111
+[25-Oct-2013 15:36:04] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 111
+[25-Oct-2013 11:21:06] PHP Parse error:  syntax error, unexpected T_STRING in /home/camilus/public_html/HUBVersion/checkjob.php on line 90
+[25-Oct-2013 11:21:40] PHP Parse error:  syntax error, unexpected '.' in /home/camilus/public_html/HUBVersion/checkjob.php on line 99
+[25-Oct-2013 11:21:52] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/checkjob.php on line 9
+[25-Oct-2013 11:21:52] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/checkjob.php on line 9
+[25-Oct-2013 11:21:52] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/checkjob.php on line 11
+[25-Oct-2013 11:21:52] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 15
+[25-Oct-2013 11:34:33] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/checkjob.php on line 41
+[25-Oct-2013 11:35:04] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/checkjob.php on line 41
+[25-Oct-2013 11:40:58] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 18
+[25-Oct-2013 11:41:06] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 18
+[25-Oct-2013 11:41:09] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 18
+[25-Oct-2013 11:41:53] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 18
+[25-Oct-2013 11:41:53] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/checkjob.php on line 103
+[25-Oct-2013 11:41:56] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 18
+[25-Oct-2013 11:42:03] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 18
+[25-Oct-2013 11:44:17] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/checkjob.php on line 103
+[25-Oct-2013 18:00:59] PHP Parse error:  syntax error, unexpected ',' in /home/camilus/public_html/HUBVersion/checkjob.php on line 210
+[25-Oct-2013 18:02:15] PHP Fatal error:  Call to undefined function substsr() in /home/camilus/public_html/HUBVersion/checkjob.php on line 209
+[25-Oct-2013 18:02:16] PHP Fatal error:  Call to undefined function substsr() in /home/camilus/public_html/HUBVersion/checkjob.php on line 209
+[25-Oct-2013 18:02:18] PHP Fatal error:  Call to undefined function substsr() in /home/camilus/public_html/HUBVersion/checkjob.php on line 209
+[25-Oct-2013 18:11:46] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 50
+[25-Oct-2013 18:11:57] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 51
+[25-Oct-2013 18:12:00] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 51
+[25-Oct-2013 18:12:50] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/checkjob.php on line 16
+[25-Oct-2013 18:12:50] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 51
+[25-Oct-2013 18:13:25] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/checkjob.php on line 16
+[25-Oct-2013 18:13:25] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 51
+[25-Oct-2013 18:14:09] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 50
+[25-Oct-2013 18:14:09] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 50
+[25-Oct-2013 18:14:11] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 50
+[25-Oct-2013 18:14:11] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 50
+[25-Oct-2013 18:14:25] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 51
+[25-Oct-2013 18:14:39] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 51
+[25-Oct-2013 18:14:39] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 51
+[25-Oct-2013 18:14:41] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 51
+[25-Oct-2013 18:14:41] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 51
+[25-Oct-2013 18:15:02] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 53
+[25-Oct-2013 18:15:20] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 54
+[25-Oct-2013 18:15:29] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 52
+[25-Oct-2013 18:15:35] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 52
+[25-Oct-2013 18:15:45] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 52
+[25-Oct-2013 18:16:16] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 54
+[25-Oct-2013 18:16:40] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 54
+[26-Oct-2013 10:46:44] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 53
+[26-Oct-2013 10:51:05] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 53
+[26-Oct-2013 12:17:29] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/managezone.php on line 179
+[26-Oct-2013 12:17:37] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/managezone.php on line 179
+[26-Oct-2013 12:17:39] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/managezone.php on line 179
+[26-Oct-2013 12:17:42] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/managezone.php on line 179
+[26-Oct-2013 12:18:47] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/managezone.php on line 179
+[26-Oct-2013 12:18:51] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/managezone.php on line 179

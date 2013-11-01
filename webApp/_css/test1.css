@@ -1,0 +1,18 @@
+@charset "utf-8";
+.has-error .input-group-addon{
+	color: #FF0000;
+	background-color: #FF1A1A;
+	border-top-color: #000000;
+	border-right-color: #000000;
+	border-bottom-color: #000000;
+	border-left-color: #000000;
+}
+.panel-warning>.panel-heading{color:#c09853;background-color:#fcf8e3;border-color:#fbeed5}
+.alert-danger{
+	color: #CA0000;
+	background-color: #FFE1E1;
+	border-top-color: #FFA4A4;
+	border-right-color: #FFA4A4;
+	border-bottom-color: #FFA4A4;
+	border-left-color: #FFA4A4;
+}

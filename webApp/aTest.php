@@ -1,13 +1,10 @@
 <?php
 
-include 'conn.php';
 
-//POPULATE DROPDOWN LIST
-$sql="SELECT NAME,CODE from country";
-$result=mysql_query($sql);
+$s = '2013/10/23 14:00';
+$date = strtotime($s);
+$date = date('Y/m/d H:i', $date);
 
-while ($row = mysql_fetch_assoc($result)) {
-   echo $row[NAME] . " " . $row[CODE] . "<hr>";
-}
+echo $date;
 
 ?>

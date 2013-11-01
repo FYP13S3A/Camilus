@@ -1,7 +1,6 @@
 <?php
 include 'conn.php';
 
-session_start();
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
 // username and password sent from Form
@@ -16,6 +15,8 @@ $status = "";
 // If result matched $username and $password, table row must be 1 row
 if($count==1)
 {
+session_start();
+$_SESSION['username'] = $username;
 header("location: dashboard.php");
 }
 else 

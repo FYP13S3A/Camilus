@@ -25,11 +25,14 @@ $d_Width = $_POST['d_Width'];
 $d_Height = $_POST['d_Height'];
 $d_Content = $_POST['d_Content'];
 
+
+
 //get sender address by its input postal code
 $s_Address = file_get_contents("http://www.efxmarket.com/getAddr.php?zip=" . $s_Postal);
 $r_Address = file_get_contents("http://www.efxmarket.com/getAddr.php?zip=" . $r_Postal);
 
 ?>
+
 
 <!doctype html>
 <!--[if lt IE 7]> <html class="ie6 oldie"> <![endif]-->
@@ -45,9 +48,10 @@ $r_Address = file_get_contents("http://www.efxmarket.com/getAddr.php?zip=" . $r_
 
 <link href="_css/boilerplate.css" rel="stylesheet" type="text/css">
 <link href="_css/layout.css" rel="stylesheet" type="text/css">
-<link href="_css/typography.css" rel="stylesheet" type="text/css" media="screen, projection">
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css" />
+<link rel="stylesheet" href="_css/typography.css" />
 
-<link href="SpryAssets/SpryValidationTextarea.css" rel="stylesheet" type="text/css">
+
 <!-- 
 To learn more about the conditional comments around the html tags at the top of the file:
 paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
@@ -62,7 +66,10 @@ Do the following if you're using your customized build of modernizr (http://www.
 <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 <script src="_script/respond.min.js"></script>
-<script src="SpryAssets/SpryValidationTextarea.js" type="text/javascript"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.1.15/jquery.form-validator.min.js"></script>
+<script src="jquery.form-validator.js"></script>
+
 </head>
 
 <body>
@@ -84,35 +91,32 @@ Do the following if you're using your customized build of modernizr (http://www.
   </div>
   </div>
   <div id="mainContent">
-  <div id="breadcumbsBox">
-    <ul id="breadcrumbs-two">
-      <b>&nbsp;Register Sender & Recipient Details</b>
-</ul>
-  </div>
-<hr>
-        <form name="form1" method="post" action="register_info4.php">
-
- <div>
-<label class="itemTittle">
-  <center><b>Sender Details</b></center></label>
-<hr>
-<p>
-<table>
+  <form name="form1" method="post" action="register_info4.php">
+  <table width="100%" border="0">
+  <tr>
+    <td><label class="sectionTitle">
+    <b>&nbsp;Sender Details</b></label></td>
+    <td>&nbsp;</td>
+    <td><label class="sectionTitle">
+    <b>&nbsp;Recipient Details</b></label></td>
+  </tr>
+  <tr>
+    <td><table class="registerMail_P1">
 <tr>
-<td>Name: </td><td><input type="text" name="s_Name" id="s_Name" size="40" value=""></td>
+<td><label class="frmItemName">Name :</label></td><td><input type="text" name="s_Name" id="s_Name" size="40" value="" data-validation="required"></td>
 </tr>
 
 <tr>
 <td><label class="frmItemName">Address :</label>
 <br/><font color=red>Please ensure Your address <br/>Contains Unit No</font>
 </td>
-<td><textarea id="s_Address" name="s_Address" rows="3" cols="40"><?php echo $s_Address;?></textarea>
+<td><textarea id="s_Address" name="s_Address" rows="3" cols="40" data-validation="required"><?php echo $s_Address;?></textarea>
 </td>
 </tr>
 
 <tr>
-<td><label class="frmItemName">Country:</label></td>
-<td><select name="s_Country">
+<td><label class="frmItemName" >Country:</label></td>
+<td><select name="s_Country" data-validation="required">
 <?php
 foreach($result_array AS $row)
 {
@@ -130,55 +134,38 @@ else
 </tr>
 
 <tr>
-<td>Postal Code: </td><td><input type="text" name="s_Postal" id="s_Postal" size="40" value="<?php echo $s_Postal;?>"></td>
+<td>Postal Code: </td><td><input type="text" name="s_Postal" id="s_Postal" size="40" data-validation="number length"data-validation-length="min5"  data-validation-error-msg="The postal code has to be a minimun of 5 numbers long" value="<?php echo $s_Postal;?>"></td>
 </tr>
 <tr>
-<td>City: </td><td><input type="text" name="s_City" id="s_City" size="40" value="<?php echo $s_City;?>"></td>
-</tr>
-
-</table>
-
-<hr>
-
-<table>
-<tr>
-<td>Contact Person: </td><td><input type="text" name="s_Contact" id="s_Contact" size="50" value=""></td>
+  <td>City: </td>
+  <td><input type="text" name="s_City" id="s_City" size="40" data-validation="custom" data-validation-regexp="^([a-zA-Z]+)$" data-validation-error-msg="Please enter the sender's city!" value="<?php echo $s_City;?>"></td>
 </tr>
 <tr>
-<td>Email Address: </td><td><input type="text" name="s_Email" id="s_Email" size="50" value=""></td>
+  <td>Email Address: </td>
+  <td><input type="text" name="s_Email" id="s_Email" size="50" value="" data-validation="email"></td>
 </tr>
 <tr>
-<td>Phone : </td><td><input type="text" name="s_Phone" id="s_Phone" size="20" value=""></td>
+<td>Phone : </td><td><input type="text" name="s_Phone" id="s_Phone" size="20" value="" data-validation="number"></td>
 </tr>
 
-</table>
-</p>
-
-</div>
-
-<hr>
-
-<div>
-<label class="itemTittle">
-  <center><b>Recipient Details</b></center></label>
-<hr>
-<p>
-<table>
+</table></td>
+    <td>&nbsp;</td>
+    <td><table class="registerMail_P1">
 <tr>
-<td>Name: </td><td><input type="text" name="r_Name" id="s_Name" size="40" value=""></td>
+<td>Name: </td><td><input type="text" name="r_Name" id="s_Name" size="40" value="" data-validation="required"></td>
 </tr>
 
 <tr>
 <td><label class="frmItemName">Address :</label>
 <br/><font color=red>Please ensure Your address <br/>Contains Unit No</font>
 </td>
-<td><textarea id="r_Address" name="r_Address" rows="3" cols="40"><?php echo $r_Address;?></textarea>
+<td><textarea id="r_Address" name="r_Address" rows="3" cols="40" data-validation="required"><?php echo $r_Address;?></textarea>
 </td>
 </tr>
 
 <tr>
-<td><label class="frmItemName">Country:</label></td>
-<td><select name="r_Country">
+<td><label class="frmItemName" >Country:</label></td>
+<td><select name="r_Country" data-validation="required">
 <?php
 foreach($result_array AS $row)
 {
@@ -196,35 +183,24 @@ else
 </tr>
 
 <tr>
-<td>Postal Code: </td><td><input type="text" name="r_Postal" id="r_Postal" size="40" value="<?php echo $r_Postal;?>"></td>
+<td>Postal Code: </td><td><input type="text" name="r_Postal" id="r_Postal" size="40" data-validation="number length"data-validation-length="min5"  data-validation-error-msg="The postal code has to be a minimun of 5 numbers long" value="<?php echo $r_Postal;?>"></td>
 </tr>
 <tr>
-<td>City: </td><td><input type="text" name="r_City" id="r_City" size="40" value="<?php echo $r_City;?>"></td>
-</tr>
-
-</table>
-
-<hr>
-
-<table>
-<tr>
-<td>Contact Person: </td><td><input type="text" name="r_Contact" id="r_Contact" size="50" value=""></td>
+  <td>City: </td>
+  <td><input type="text" name="r_City" id="r_City" size="40" data-validation="custom" data-validation-regexp="^([a-zA-Z]+)$" data-validation-error-msg="Please enter the sender's city!" value="<?php echo $r_City;?>"></td>
 </tr>
 <tr>
-<td>Email Address: </td><td><input type="text" name="r_Email" id="r_Email" size="50" value=""></td>
+  <td>Email Address: </td>
+  <td><input type="text" name="r_Email" id="r_Email" size="50" value="" data-validation="email"></td>
 </tr>
 <tr>
-<td>Phone : </td><td><input type="text" name="r_Phone" id="r_Phone" size="20" value=""></td>
+<td>Phone : </td><td><input type="text" name="r_Phone" id="r_Phone" size="20" value="" data-validation="number"></td>
 </tr>
 
-</table>
-</p>
-
-</div>
-
-<br/>
-  
-<?php
+</table></td>
+  </tr>
+  <tr>
+    <td colspan="3"><?php
 
 //service detail
 
@@ -237,21 +213,52 @@ echo "<input type=\"hidden\" name=\"d_Width\" value=\"".$d_Width."\">\n";
 echo "<input type=\"hidden\" name=\"d_Height\" value=\"".$d_Height."\">\n";
 echo "<input type=\"hidden\" name=\"d_Content\" value=\"".$d_Content."\">\n";
 ?>
-  <p align=center><INPUT Type="button" VALUE="Back" onClick="history.go(-1);return true;">&nbsp;
-<input name=""  id="btnSubmit" type="submit" value="Next Step - Complete" /></p>  </div>   
-</form>
+   
+</td>
+  </tr>
+  <tr>
+    <td colspan="3">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="3" align="right" class="registerMail_P1"><INPUT Type="button" VALUE="Back" onClick="history.go(-1);return true;">&nbsp;
+<input  id="btnSubmit" type="submit" value="Next&gt;" />  </td>
+  </tr>
+</table>
+  
+  
+  </form>
+        
 </div>
-
-
-
-  <div class="rightSidebar">
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-  </div>
-  <?php include("footer.php"); ?>
+<?php include("footer.php"); ?>
 </div><!---end#contentBox--->
 </div>
+<script>
+(function($) {
 
+    var dev = window.location.hash.indexOf('dev') > -1 ? '.dev' : '';
+
+    $.validate({
+        language : {
+            requiredFields: 'All these fields are required!'
+        },
+        errorMessagePosition : 'top',
+        scrollToTopOnError : true,
+          decimalSeparator : '.',
+        onValidate : function() {
+            var $callbackInput = $('#callback');
+            if( $callbackInput.val() == 1 ) {
+                return {
+                    element : $callbackInput,
+                    message : 'This validation was made in a callback'
+                };
+            }
+        }
+      
+    });
+
+ 
+
+})(jQuery);
+</script>
 </body>
 </html>

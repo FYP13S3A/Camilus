@@ -26,9 +26,9 @@ while ($row = mysql_fetch_assoc($result)) {
 
 <link href="_css/boilerplate.css" rel="stylesheet" type="text/css">
 <link href="_css/layout.css" rel="stylesheet" type="text/css">
-<link href="_css/typography.css" rel="stylesheet" type="text/css" media="screen, projection">
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css" />
+<link rel="stylesheet" href="_css/typography.css" />
 
-<link href="SpryAssets/SpryValidationTextarea.css" rel="stylesheet" type="text/css">
 <!-- 
 To learn more about the conditional comments around the html tags at the top of the file:
 paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
@@ -42,8 +42,11 @@ Do the following if you're using your customized build of modernizr (http://www.
 <!--[if lt IE 9]>
 <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
+ 
 <script src="_script/respond.min.js"></script>
-<script src="SpryAssets/SpryValidationTextarea.js" type="text/javascript"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.1.15/jquery.form-validator.min.js"></script>
+<script src="jquery.form-validator.js"></script>
 </head>
 
 <body>
@@ -65,26 +68,26 @@ Do the following if you're using your customized build of modernizr (http://www.
   </div>
   </div>
   <div id="mainContent">
-  <div id="breadcumbsBox">
-    <ul id="breadcrumbs-two">
-      <b>&nbsp;Register Sender & Recipient Details</b>
-</ul>
-  </div>
-<hr>
-        <form name="form1" method="post" action="register_info2.php">
-
-  <div>
-<label class="itemTittle">
-  <center><b>Sender Details</b></center></label>
-
-<table width="100%" >
+  <form id="form1" method="post" action="register_info2.php" novalidate>
+<table width="100%" border="0">
   <tr>
-    <th colspan="2" scope="col">&nbsp;</th>
-    </tr>
- 
-    <tr>
-    <td align="right"><label class="frmItemName">&nbsp;Country:</label></td>
-    <td><select name="s_Country">
+    <td><label class="sectionTitle">
+    <b>&nbsp;Sender Details</b></label></td>
+    <td>&nbsp;</td>
+    <td><label class="sectionTitle">
+    <b>&nbsp;Recipient Details</b></label></td>
+  </tr>
+  <tr>
+    <td><table class="registerMail_P1">
+
+  <tr>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td width="48%"><label class="frmItemName">&nbsp;Country:</label></td>
+    <td width="52%"><select name="s_Country" >
+
 <?php
 foreach($result_array AS $row)
 {
@@ -98,31 +101,28 @@ else
 }//end else
 }//end foreach
 ?>
- </select>
-    </tr>
-    <td align="right"><label class="frmItemName">&nbsp;City:</label></td>
-    <td><input type="text" name="s_City" id="s_City" size="30" value="">
-    </tr>   
 
-    <td align="right"><label class="frmItemName">&nbsp;Postal Code:</label></td>
-    <td><input type="text" name="s_Postal" id="s_Postal" size="30" value="">
-    </tr>   
-
-</table>
-<hr>
-</div>
-  <div>
-<label class="itemTittle">
-  <center><b>Recipient Details</b></center></label>
-
-<table width="100%" >
+    </select></td>
+  </tr>
   <tr>
-    <th colspan="2" scope="col">&nbsp;</th>
-    </tr>
- 
-    <tr>
-    <td align="right"><label class="frmItemName">&nbsp;Country:</label></td>
-    <td><select name="r_Country">
+    <td><label class="frmItemName">&nbsp;City:</label></td>
+    <td ><input type="text" name="s_City" id="s_City" size="30" value=""  data-validation="custom" data-validation-regexp="^([a-zA-Z]+)$" data-validation-error-msg="Please enter the sender's city!"/></td>
+  </tr>
+  <tr>
+    <td><label class="frmItemName">&nbsp;Postal Code:</label></td>
+    <td><input type="text" name="s_Postal" id="s_Postal" size="30" value=""  data-validation="number length"data-validation-length="min5"  data-validation-error-msg="The postal code has to be a minimun of 5 numbers long"/></td>
+  </tr>
+  </table></td>
+    <td>&nbsp;</td>
+    <td><table class="registerMail_P1">
+
+  <tr>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td width="49%"><label class="frmItemName">&nbsp;Country:</label></td>
+    <td width="51%"><select name="r_Country">
 <?php
 foreach($result_array AS $row)
 {
@@ -136,55 +136,88 @@ else
 }//end else
 }//end foreach
 ?>
-    </select>
-    </tr>
-    <td align="right"><label class="frmItemName">&nbsp;City:</label></td>
-    <td><input type="text" name="r_City" id="r_City" size="30" value="">
-    </tr>   
-
-    <td align="right"><label class="frmItemName">&nbsp;Postal Code:</label></td>
-    <td><input type="text" name="r_Postal" id="r_Postal" size="30" value="">
-    </tr>
-</table>
-<hr>
-</div>
- <div>
-<label class="itemTittle">
-  <center><b>Shipment Details</b></center></label>
-<p>
-<table width="100%" >
+    </select></td>
+  </tr>
+  <tr>
+    <td><label class="frmItemName">&nbsp;City:</label></td>
+    <td><input type="text" name="r_City" id="r_City" size="30" value="" data-validation="custom" data-validation-regexp="^([a-zA-Z]+)$" data-validation-error-msg="Please enter the recipient's city!" /></td>
+  </tr>
+  <tr>
+    <td><label class="frmItemName">&nbsp;Postal Code:</label></td>
+    <td><input type="text" name="r_Postal" id="r_Postal" size="30" value="" data-validation="number length"data-validation-length="min5"  data-validation-error-msg="The postal code has to be a minimun of 5 numbers long"></td>
+  </tr>
+  </table></td>
+  </tr>
+  <tr>
+    <td colspan="3">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="3" class="sectionTitle" id="sectionTitle">&nbsp;Shipment Details</td>
+  </tr>
+  <tr>
+    <td colspan="3"><table width="100%" class="registerMail_P1" >
 <tr>
-  <th>Weight(kg)</th>
-  <th>Length(cm)</th>
-  <th>Width(cm)</th>
-  <th>Height(cm)</th>
-  <th>Mail Contents</th>
+  <th colspan="5" align="left"></th>
+  </tr>
+<tr>
+  <td align="left"><label class="frmItemName">&nbsp;Weight(kg)</label></td>
+  <td align="left"><label class="frmItemName">&nbsp;Length(cm)</label></td>
+  <td align="left"><label class="frmItemName">&nbsp;Width(cm)</label></td>
+  <td align="left"><label class="frmItemName">&nbsp;Height(cm)</label></td>
+  <td align="left"><label class="frmItemName">&nbsp;Mail Contents</label></td>
 </tr>
 <tr>
-<td><input type="text" name="d_Weight" id="d_Weight" size="5" value=""></td>
-<td><input type="text" name="d_Length" id="d_Length" size="5" value=""></td>
-<td><input type="text" name="d_Width" id="d_Width" size="5" value=""></td>
-<td><input type="text" name="d_Height" id="d_Height" size="5" value=""></td>
-<td><input type="text" name="d_Content" id="d_Content" size="20" value=""></td>
+<td>&nbsp;<input type="text" name="d_Weight" id="d_Weight" size="5" value="" data-validation="number" data-validation-allowing="float" data-validation-error-msg="Please enter a numerical value!"></td>
+<td>&nbsp;<input type="text" name="d_Length" id="d_Length" size="5" value=""data-validation="number" data-validation-allowing="float"data-validation-error-msg="Please enter a numerical value!"></td>
+<td>&nbsp;<input type="text" name="d_Width" id="d_Width" size="5" value=""data-validation="number" data-validation-allowing="float" data-validation-error-msg="Please enter a numerical value!"></td>
+<td>&nbsp;<input type="text" name="d_Height" id="d_Height" size="5" value=""data-validation="number" data-validation-allowing="float" data-validation-error-msg="Please enter a numerical value!"></td>
+<td>&nbsp;<input type="text" name="d_Content" id="d_Content" size="20" value=""data-validation="length" data-validation-length="4-50" data-validation-error-msg="Please enter the contents of the mail!"></td>
 </tr>
+</table></td>
+  </tr>
+  <tr>
+    <td colspan="3">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="3" align="right" class="registerMail_P1"><input name="btnSubmit"  id="btnSubmit" type="submit" value="Next Step &gt;" /></td>
+  </tr>
 </table>
-</p>
-<br/>
-  <p align=center>&nbsp;<input name=""  id="btnSubmit" type="submit" value="Next Step - Select Service" /></p>
-  </div>   
-</form>
-</div>
 
 
-
-  <div class="rightSidebar">
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
+  </form>
+  
+  
   </div>
   <?php include("footer.php"); ?>
 </div><!---end#contentBox--->
 </div>
+<script>
+(function($) {
 
+    var dev = window.location.hash.indexOf('dev') > -1 ? '.dev' : '';
+
+    $.validate({
+        language : {
+            requiredFields: 'All these fields are required!!'
+        },
+        errorMessagePosition : 'top',
+        scrollToTopOnError : true,
+          decimalSeparator : '.',
+        onValidate : function() {
+            var $callbackInput = $('#callback');
+            if( $callbackInput.val() == 1 ) {
+                return {
+                    element : $callbackInput,
+                    message : 'This validation was made in a callback'
+                };
+            }
+        }
+      
+    });
+
+ 
+
+})(jQuery);
+</script>
 </body>
 </html>

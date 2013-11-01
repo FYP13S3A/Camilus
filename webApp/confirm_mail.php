@@ -1,61 +1,13 @@
 <?php
-include 'conn.php';
+
 session_start();
 
-//dashboard codes
 $session_user = $_SESSION['username'];
-
-//check user is Region Manager or Counter Staff
-$role = "";
-
-if( (substr($session_user, 0, 2)) == "CS")
-{
-$role = "counter_staff";
-}
-
-if( (substr($session_user, 0, 2)) == "RM")
-{
-$role = "region_manager";
-}
-
-
 
 if(trim($session_user)=="")
 {
 header('Location: http://www.efxmarket.com/HUBVersion/index.php');
 }
-
-$sql = "select Id,FullName,Work_Location_Id from account where UserId='" . $session_user."'";
-
-$result= mysql_query($sql);
-
-while ($row = mysql_fetch_assoc($result)) {
-   $result_out[] = $row;
-}
-
-//counter staff info
-$u_UserId = $result_out[0][Id];
-$u_FullName = $result_out[0][FullName];
-$u_WorkLocation = $result_out[0][Work_Location_Id];
-
-//get work location postal code
-
-
-$sql = "select Postal_Code from building where Building_Code='" . $u_WorkLocation."'";
-
-$result= mysql_query($sql);
-
-while ($row = mysql_fetch_assoc($result)) {
-   $result_out2[] = $row;
-}
-
-$u_Postal = $result_out2[0][Postal_Code];
-
-$_SESSION['role'] = $role;
-$_SESSION['username'] = $session_user;
-$_SESSION['workLocation'] = $u_WorkLocation;
-$_SESSION['uPostalCode'] = $u_Postal;
-$_SESSION['uUserId'] = $u_UserId;
 
 ?>
 
@@ -101,36 +53,38 @@ Do the following if you're using your customized build of modernizr (http://www.
   <div  id="navigationBox">
   <div class="wireframemenu">
 <ul>
-<li><a href="">Home</a></li>
-
-<?php 
-//########### ROLE Links START #############
-if($role=="counter_staff")
-{
-echo '<li><a href="confirm_mail.php">Confirm Mail</a></li>';
-}
-
-if($role=="region_manager")
-{
-echo '<li><a href="./admin/managezone/">Manage Region</a></li>';
-echo '<li><a href="./admin/managedistrict/">Manage District</a></li>';
-}
-
-//########### ROLE Links END #############
-?>
-
+<li><a href="dashboard.php">Home</a></li>
+<li><a href="confirm_mail.php">Confirm Mail</a></li>
 <li><a href="logout.php">Logout</a></li>
 </ul>
 </div>
   </div>
   </div>
   <div id="mainContent">
+<form name="form1" method="post" action="confirm_mail2.php">
+<table width="100%" border="0">
+  <tr>
+    <td><label class="sectionTitle">
+    <b>&nbsp;Reterive Information</b></label></td></td>
+  </tr>
+  <tr>
+    <td></td>
+  </tr>
+  <tr>
+    <td><table width="100%" border="0" class="registerMail_P1">
+      <tr>
+        <td width="10%" >Tracking ID:</td>
+        <td width="90%"><input style="font-size:20px" type="text" name="b_trackID" id="b_trackID" size="30" value="" placeholder="Enter Tracking ID..."></td>
+      </tr>
+      <tr>
+        <td colspan="2" ><input  id="btnSubmit" type="submit" value="Reterive Information &gt;" /></td>
+        </tr>
 
-<?php
+    </table></td>
+    </tr>
+</table>
 
-echo "<font color=black size=2>Welcome <b>$u_FullName</b></font>";
-?>
-
+      </form>
 </div>
 <?php include("footer.php"); ?>
 </div><!---end#contentBox--->
