@@ -69,7 +69,7 @@ $result=mysql_query($sql_update1);
 
 if($result == false)
 { 
-    die("Didn't Update"); 
+    die("Didn't Update at sql1"); 
 }
 
 //############ UPDATE ADDRESS TABLE (RECIPIENT)###############//
@@ -79,7 +79,7 @@ $result=mysql_query($sql_update2);
 
 if($result == false)
 { 
-    die("Didn't Update"); 
+    die("Didn't Update at sql2"); 
 }
 
 
@@ -89,8 +89,13 @@ $sql_update3 = "UPDATE mail SET Sender_FullName='".$s_Name."',Sender_Contact_No=
 $result=mysql_query($sql_update3);
 if($result == false)
 { 
-    die("Didn't Update"); 
+    die("Didn't Update at sql3"); 
 }
+
+
+
+$shell_cmd = "php d_delivery.php ". $trackingID;
+shell_exec($shell_cmd);
 
 
 $status = "success";

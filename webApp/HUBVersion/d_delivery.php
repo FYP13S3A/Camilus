@@ -3,7 +3,7 @@
 
 include 'conn.php';
 
-$trackingID = $_GET['id'];
+$trackingID = $argv[1];
 
 //Check if delivery is already assigned to the Manifest id
 

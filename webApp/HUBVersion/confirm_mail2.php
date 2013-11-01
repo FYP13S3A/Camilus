@@ -159,7 +159,7 @@ Do the following if you're using your customized build of modernizr (http://www.
 <td><label class="frmItemName">Address :</label>
 <br/><font color=red>Please ensure Your address <br/>Contains Unit No</font>
 </td>
-<td><textarea id="s_Address" name="s_Address" rows="3" cols="40"><?php echo $s_Address;?></textarea>
+<td><textarea name="s_Address" cols="40" rows="3" id="s_Address"><?php echo $s_Address;?></textarea>
 </td>
 </tr>
 
@@ -232,7 +232,7 @@ else
 </tr>
 
 <tr>
-<td>Postal Code: </td><td><input type="text" name="r_Postal" id="r_Postal" size="40" value="<?php echo $r_Postal;?>"></td>
+<td>Postal Code: </td><td><input type="text" name="r_Postal" id="r_Postal" size="40" value="<?php echo $r_Postal;?>" ></td>
 </tr>
 <tr>
   <td>City: </td>
@@ -337,7 +337,9 @@ echo "</tr>";
     <td colspan="3">&nbsp;</td>
   </tr>
   <tr>
-    <td colspan="3" align="right" class="registerMail_P1"><INPUT Type="button" VALUE="Back" onClick="history.go(-1);return true;">&nbsp;
+    <td colspan="3" align="right" class="registerMail_P1"><input type="checkbox" name="chkChange" id="chkChange" onchange=chgtx();>
+      <label for="chkChange">Make Changes</label>
+      <INPUT Type="button" VALUE="Back" onClick="history.go(-1);return true;">&nbsp;
 <input  id="btnSubmit" type="submit" value="Approve Mail" />  </td>
   </tr>
 
@@ -354,6 +356,39 @@ echo "<input type=\"hidden\" name=\"s_TrackingID\" value=\"". $trackingID ."\">\
 <?php include("footer.php"); ?>
 </div><!---end#contentBox--->
 </div>
+<script>
+function start() {
+var inputFields = form1.getElementsByTagName("input"),
+    inputFieldLength = inputFields.length;
 
+for(var i = 0; i < inputFieldLength; i++) {
+           inputFields[i].readOnly = true;
+}
+var textArea = form1.getElementsByTagName("textarea"),
+    textAreaLength = textArea.length;
+	for(var j = 0; j < textAreaLength; j++) {
+           textArea[j].readOnly = true;
+}
+
+}
+onload = start;
+function chgtx() {
+	
+var inputFields = form1.getElementsByTagName("input"),
+    inputFieldLength = inputFields.length;
+
+for(var i = 0; i < inputFieldLength; i++) {
+           inputFields[i].readOnly = !form1.chkChange.checked;
+}
+var textArea = form1.getElementsByTagName("textarea"),
+    textAreaLength = textArea.length;
+	for(var j = 0; j < textAreaLength; j++) {
+           textArea[j].readOnly = !form1.chkChange.checked;
+}
+    
+
+}
+
+</script>
 </body>
 </html>
