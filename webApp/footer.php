@@ -1,2 +1,2 @@
-<div id="loginFooter"></div>
+<div class="footer"></div>
 

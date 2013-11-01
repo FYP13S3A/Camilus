@@ -15,39 +15,69 @@ header('Location: http://www.efxmarket.com/HUBVersion/index.php');
  <?php
  //IF THE FLAG HASN'T BEEN SET YET, SET THE DEFAULT
 if(!isset($_GET['order'])) {
-     $_GET['order'] = 'district';
-	  $order='district';
+     $_GET['order'] = 'vehicle_asc';
+	  $order='vehicle_asc';
+	  $orderBy = 'vehicle.Vehicle_Id ASC';
 }
  
 //FIGURE OUT HOW TO SORT THE TABLE
 switch($_GET['order']) {
-     case 'zone_asc':
-	 $orderBy = "Zone_Id ASC";
-	 $order='zone_asc';
+	
+	 case 'regno_asc':
+	 $orderBy = "vehicle.Registration_Number ASC";
+	 $order='regno_asc';
 	 break;
-	 case 'zone_desc':
-	 $orderBy = "Zone_Id DESC";
-	 $order='zone_desc';
+	 case 'regno_desc':
+	 $orderBy = "vehicle.Registration_Number DESC";
+	 $order='regno_desc';
 	 break;
-	 case 'code_asc':
-     $orderBy = "Postal_Sector ASC";
-	  $order='code_asc';
+	 
+     case 'vehicletype_asc':
+	 $orderBy = "vehicletype.Name ASC";
+	 $order='vehicletype_asc';
+	 break;
+	 case 'vehicletype_desc':
+	 $orderBy = "vehicletype.Name DESC";
+	 $order='vehicletype_desc';
+	 break;
+	  
+	 case 'driver_asc':
+     $orderBy = "account.FullName ASC";
+	 $order='driver_asc';
      break;
-	 case 'code_desc':
-     $orderBy = "Postal_Sector DESC";
-	 $order='code_desc';
+	 case 'driver_desc':
+     $orderBy = "account.FullName DESC";
+	 $order='driver_desc';
      break;
-	 case 'district_desc':
-     $orderBy = "District_Id DESC";
-	 $order='district_desc';
+	 
+	 case 'building_asc':
+     $orderBy = "building.Name ASC";
+	  $order='building_asc';
      break;
+	 case 'builing_desc':
+     $orderBy = "building.Name DESC";
+	 $order='building_desc';
+     break;
+	 
+	 case 'vehicle_desc':
+     $orderBy = "vehicle.Vehicle_Id DESC";
+	 $order='vehicle_desc';
+     break;
+	 
      default:
-     $_GET['order'] = 'district_asc';
-     $orderBy = 'District_Id ASC';
-	  $order='district_asc';
+     $_GET['order'] = 'vehicle_asc';
+     $orderBy = 'vehicle.Vehicle_Id ASC';
+	  $order='vehicle_asc';
 }
 
-$sql = "SELECT * FROM  `district` ORDER BY  $orderBy";
+$sql = 'SELECT vehicle.Vehicle_Id, vehicle.Registration_Number, vehicletype.Name as vehiclename, account.FullName, building.Name
+FROM vehicle, vehicletype, account, building
+WHERE vehicletype.Vehicle_Type_Id IS NOT NULL 
+AND vehicle.Vehicle_Type_Id = vehicletype.Vehicle_Type_Id
+AND vehicle.User_Id = account.Id
+AND vehicle.Building_Id = building.Building_Code
+ORDER BY '.$orderBy;
+
 $result= mysql_query($sql);
 $rowcount = mysql_num_rows($result);
 
@@ -90,7 +120,13 @@ if ($pg == 1) {
 }
 
 $limit = 'LIMIT ' .($pg - 1) * $recordsPerPage .',' .$recordsPerPage; //Setting the limit value in the SQL statement
-$sql2 = "SELECT * FROM  `district` ORDER BY  $orderBy $limit";
+$sql2 = 'SELECT vehicle.Vehicle_Id, vehicle.Registration_Number, vehicletype.Name as vehiclename, account.FullName, building.Name
+FROM vehicle, vehicletype, account, building
+WHERE vehicletype.Vehicle_Type_Id IS NOT NULL 
+AND vehicle.Vehicle_Type_Id = vehicletype.Vehicle_Type_Id
+AND vehicle.User_Id = account.Id
+AND vehicle.Building_Id = building.Building_Code
+ORDER BY '.$orderBy.' '.$limit;
 $result2 = mysql_query($sql2); 
 
 $paginationDisplay = ""; // Storing of the html and page number tags.
@@ -208,27 +244,50 @@ echo "<table width='100%' id='dbDataGrid'>";
 
 echo "<tr bgcolor='#CCCCCC' border>";
 
-if($_GET['order'] == 'district_asc')          { echo "<th scope=\"col\"><a href=\"index.php?order=district_desc&pg=$pg\"><label class=\"frmItemName\">&nbsp;District Id</label><img src=\"../_images/icon-arrowUp.png\" alt=\"Ascending\" /></a>"; }
-
-elseif($_GET['order'] == 'district_desc') { echo "<th scope=\"col\"><a href=\"index.php?order=district_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;District Id</label><img src=\"../_images/icon-arrowDown.png\" alt=\"Descending Order\" /></a>"; }
-
-else                                          { echo "<th scope=\"col\"><a href=\"index.php?order=district_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;District Id</label></a>";  }
+if($_GET['order'] == 'vehicle_asc')
+{ echo "<th scope=\"col\" width=\"10%\"><a href=\"index.php?order=vehicle_desc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Vehicle Id</label><img src=\"../_images/icon-arrowUp.png\" alt=\"Ascending\" /></a>"; }
+elseif($_GET['order'] == 'vehicle_desc')
+{ echo "<th scope=\"col\" width=\"10%\"><a href=\"index.php?order=vehicle_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Vehicle Id</label><img src=\"../_images/icon-arrowDown.png\" alt=\"Descending Order\" /></a>"; }
+else
+{ echo "<th scope=\"col\" width=\"10%\"><a href=\"index.php?order=vehicle_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Vehicle Id</label></a>";  }
 echo "</th>";
 
 
-if($_GET['order'] == 'zone_asc')          { echo "<th scope=\"col\"><a href=\"index.php?order=zone_desc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Zone Id</label><img src=\"../_images/icon-arrowUp.png\" alt=\"Ascending\" /></a>"; }
-
-elseif($_GET['order'] == 'zone_desc') { echo "<th scope=\"col\"><a href=\"index.php?order=zone_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Zone Id</label><img src=\"../_images/icon-arrowDown.png\" alt=\"Descending Order\" /></a>"; }
-
-else                                          { echo "<th scope=\"col\"><a href=\"index.php?order=zone_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Zone Id</label></a>";  }
+if($_GET['order'] == 'regno_asc')
+{ echo "<th scope=\"col\" width=\"14%\"><a href=\"index.php?order=regno_desc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Registration No</label><img src=\"../_images/icon-arrowUp.png\" alt=\"Ascending\" /></a>"; }
+elseif($_GET['order'] == 'regno_desc')
+{ echo "<th scope=\"col\" width=\"14%\"><a href=\"index.php?order=regno_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Registration No</label><img src=\"../_images/icon-arrowDown.png\" alt=\"Descending Order\" /></a>"; }
+else
+{ echo "<th scope=\"col\" width=\"14%\"><a href=\"index.php?order=regno_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Registration No</label></a>";  }
 echo "</th>";
 
-if($_GET['order'] == 'code_asc')          { echo "<th scope=\"col\"><a href=\"index.php?order=code_desc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Postal Sector</label><img src=\"../_images/icon-arrowUp.png\" alt=\"Ascending\" /></a>"; }
 
-elseif($_GET['order'] == 'code_desc') { echo "<th scope=\"col\"><a href=\"index.php?order=code_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Postal Sector</label><img src=\"../_images/icon-arrowDown.png\" alt=\"Descending Order\" /></a>"; }
-
-else                                          { echo "<th scope=\"col\"><a href=\"index.php?order=code_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Postal Sector</label></a>";  }
+if($_GET['order'] == 'vehicletype_asc')
+{ echo "<th scope=\"col\" width=\"15%\"><a href=\"index.php?order=vehicletype_desc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Vehicle Type</label><img src=\"../_images/icon-arrowUp.png\" alt=\"Ascending\" /></a>"; }
+elseif($_GET['order'] == 'vehicletype_desc')
+{ echo "<th scope=\"col\" width=\"15%\"><a href=\"index.php?order=vehicletype_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Vehicle Type</label><img src=\"../_images/icon-arrowDown.png\" alt=\"Descending Order\" /></a>"; }
+else
+{ echo "<th scope=\"col\" width=\"15%\"><a href=\"index.php?order=vehicletype_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Vehicle Type</label></a>";  }
 echo "</th>";
+
+
+if($_GET['order'] == 'driver_asc')
+{ echo "<th scope=\"col\" width=\"17%\"><a href=\"index.php?order=driver_desc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Driver</label><img src=\"../_images/icon-arrowUp.png\" alt=\"Ascending\" /></a>"; }
+elseif($_GET['order'] == 'driver_desc')
+{ echo "<th scope=\"col\" width=\"17%\"><a href=\"index.php?order=driver_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Driver</label><img src=\"../_images/icon-arrowDown.png\" alt=\"Descending Order\" /></a>"; }
+else
+{ echo "<th scope=\"col\" width=\"17%\"><a href=\"index.php?order=driver_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Driver</label></a>";  }
+echo "</th>";
+
+
+if($_GET['order'] == 'building_asc')
+{ echo "<th scope=\"col\" width=\"28%\"><a href=\"index.php?order=building_desc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Building Name</label><img src=\"../_images/icon-arrowUp.png\" alt=\"Ascending\" /></a>"; }
+elseif($_GET['order'] == 'building_desc')
+{ echo "<th scope=\"col\" width=\"28%\"><a href=\"index.php?order=building_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Building Name</label><img src=\"../_images/icon-arrowDown.png\" alt=\"Descending Order\" /></a>"; }
+else
+{ echo "<th scope=\"col\" width=\"28%\"><a href=\"index.php?order=building_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Building Name</label></a>";  }
+echo "</th>";
+
 echo "<th scope=\"col\"><label class=\"frmItemName\">&nbsp;Update</label></th>";
 echo "</tr>";
 echo "<tr><td colspan=\"4\">&nbsp;</td></tr>";
@@ -237,10 +296,13 @@ while($res=mysql_fetch_array($result2)){
 	$row_color = ($row_count % 2) ? $color1 : $color2;
 
 	echo "<tr bgcolor=\"$row_color\">";
-	echo "<td>".$res['District_Id']."</td>";
-	echo "<td>".$res['Zone_Id']."</td>";
-	echo "<td>".$res['Postal_Sector']."</td>";	
-	echo "<td><a href=\"manage.php?id=$res[District_Id]\"><img src=\"../../_images/icon-edit.png \"></img>Edit</a> | <a href=\"handler.php?id=$res[District_Id]\"><img src=\"../../_images/icon-delete.png \"></img>Delete</a></td>";
+	echo "<td>".$res['Vehicle_Id']."</td>";
+	echo "<td>".$res['Registration_Number']."</td>";
+	echo "<td>".$res['vehiclename']."</td>";	
+	echo "<td>".$res['FullName']."</td>";	
+	echo "<td>".$res['Name']."</td>";	
+	echo "<td><a href=\"manage.php?id=".$res['Vehicle_Id']."\"><img src=\"../../_images/icon-edit.png\"></img>Edit</a> | <a href=\"handler.php?id=".$res['Vehicle_Id']."\"><img src=\"../../_images/icon-delete.png\"></img>Delete</a></td>";
+	
 	$row_count++;
 	
 }

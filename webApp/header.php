@@ -1,1 +1,1 @@
-<div id="loginHeader"><img  class="title" src="../../_assests/sysName2.jpg" width="256" height="51" alt="CAMILUS" longdesc="index.html" /> </div>
+<div class="header"><img  class="title" src="../../_assests/sysName2.jpg" width="256" height="51" alt="CAMILUS"/> </div>

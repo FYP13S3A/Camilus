@@ -13,7 +13,39 @@ header('Location: http://www.efxmarket.com/HUBVersion/index.php');
 
 ?>
  <?php
-$sql = "SELECT * FROM  `zone` ORDER BY  `Zone_Id` ASC ";
+ //IF THE FLAG HASN'T BEEN SET YET, SET THE DEFAULT
+if(!isset($_GET['order'])) {
+     $_GET['order'] = 'vehicletype_asc';
+	  $order='vehicletype_asc';
+	  $orderBy = 'Vehicle_Type_Id ASC';
+}
+ 
+//FIGURE OUT HOW TO SORT THE TABLE
+switch($_GET['order']) {
+		 
+	 case 'name_asc':
+	 $orderBy = "Name ASC";
+	 $order='name_asc';
+	 break;
+	 
+	 case 'name_desc':
+	 $orderBy = "Name DESC";
+	 $order='name_desc';
+	 break;
+	 
+	 case 'vehicletype_desc':
+     $orderBy = "Vehicle_Type_Id DESC";
+	 $order='vehicletype_desc';
+     break;
+	 
+     default:
+     $_GET['order'] = 'vehicletype_asc';
+     $orderBy = 'Vehicle_Type_Id ASC';
+	  $order='vehicletype_asc';
+}
+
+$sql = 'SELECT * FROM vehicletype ORDER BY '.$orderBy;
+
 $result= mysql_query($sql);
 $rowcount = mysql_num_rows($result);
 
@@ -39,29 +71,25 @@ $add2 = $pg + 2;
 
 if ($pg == 1) {
     $centerValues .= '&nbsp; <span class="pageActive">' . $pg . '</span> &nbsp;';
-    $centerValues .= '&nbsp; <a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?pg=' . $add1 . '">' . $add1 . '</a> &nbsp;';
+    $centerValues .= '&nbsp; <a href="' . $_SERVER['PHP_SELF'] . '?order='.$order.'&pg=' . $add1 . '">' . $add1 . '</a> &nbsp;';
 } else if ($pg == $lastPage) {
-    $centerValues .= '&nbsp; <a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?pg=' . $sub1 . '">' . $sub1 . '</a> &nbsp;';
+    $centerValues .= '&nbsp; <a href="' . $_SERVER['PHP_SELF'] . '?order='.$order.'&pg=' . $sub1 . '">' . $sub1 . '</a> &nbsp;';
     $centerValues .= '&nbsp; <span class="pageActive">' . $pg . '</span> &nbsp;';
 } else if ($pg > 2 && $pg < ($lastPage - 1)) {
-    $centerValues .= '&nbsp; <a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?pg=' . $sub2 . '">' . $sub2 . '</a> &nbsp;';
-    $centerValues .= '&nbsp; <a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?pg=' . $sub1 . '">' . $sub1 . '</a> &nbsp;';
+    $centerValues .= '&nbsp; <a href="' . $_SERVER['PHP_SELF'] . '?order='.$order.'&pg=' . $sub2 . '">' . $sub2 . '</a> &nbsp;';
+    $centerValues .= '&nbsp; <a href="' . $_SERVER['PHP_SELF'] . '?order='.$order.'&pg=' . $sub1 . '">' . $sub1 . '</a> &nbsp;';
     $centerValues .= '&nbsp; <span class="pageActive">' . $pg . '</span> &nbsp;';
-    $centerValues .= '&nbsp; <a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?pg=' . $add1 . '">' . $add1 . '</a> &nbsp;';
-    $centerValues .= '&nbsp; <a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?pg=' . $add2 . '">' . $add2 . '</a> &nbsp;';
+    $centerValues .= '&nbsp; <a href="' . $_SERVER['PHP_SELF'] . '?order='.$order.'&pg=' . $add1 . '">' . $add1 . '</a> &nbsp;';
+    $centerValues .= '&nbsp; <a href="' . $_SERVER['PHP_SELF'] . '?order='.$order.'&pg=' . $add2 . '">' . $add2 . '</a> &nbsp;';
 } else if ($pg > 1 && $pg < $lastPage) {
-    $centerValues .= '&nbsp; <a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?pg=' . $sub1 . '">' . $sub1 . '</a> &nbsp;';
+    $centerValues .= '&nbsp; <a href="' . $_SERVER['PHP_SELF'] . '?order='.$order.'&pg=' . $sub1 . '">' . $sub1 . '</a> &nbsp;';
     $centerValues .= '&nbsp; <span class="pageActive">' . $pg . '</span> &nbsp;';
-    $centerValues .= '&nbsp; <a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?pg=' . $add1 . '">' . $add1 . '</a> &nbsp;';
+    $centerValues .= '&nbsp; <a href="' . $_SERVER['PHP_SELF'] . '?order='.$order.'&pg=' . $add1 . '">' . $add1 . '</a> &nbsp;';
 }
 
-
 $limit = 'LIMIT ' .($pg - 1) * $recordsPerPage .',' .$recordsPerPage; //Setting the limit value in the SQL statement
-$sql2 = "SELECT * FROM  `zone` ORDER BY  `Zone_Id` ASC $limit";
+$sql2 = 'SELECT * FROM vehicletype ORDER BY '.$orderBy.' '.$limit;
 $result2 = mysql_query($sql2); 
-
-
-
 
 $paginationDisplay = ""; // Storing of the html and page number tags.
 if ($lastPage != "1"){
@@ -70,17 +98,16 @@ if ($lastPage != "1"){
     // Putting the back link if we are not page 1
     if ($pg != 1) {
         $previous = $pg - 1;
-        $paginationDisplay .=  '&nbsp;  <a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?pg=' . $previous . '"> Back</a> ';
+        $paginationDisplay .=  '&nbsp;  <a href="' . $_SERVER['PHP_SELF'] . '?order='.$order.'&pg=' . $previous . '"> Back</a> ';
     } 
     // Putting the numbers inbetween back and next links
     $paginationDisplay .= '<span class="pageNumbers">' . $centerValues . '</span>';
     // Putting the next link if we are not on the last page.
     if ($pg != $lastPage) {
         $nextPage = $pg + 1;
-        $paginationDisplay .=  '&nbsp;  <a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?pg=' . $nextPage . '"> Next</a> ';
+        $paginationDisplay .=  '&nbsp;  <a href="' . $_SERVER['PHP_SELF'] . '?order='.$order.'&pg=' . $nextPage . '"> Next</a> ';
     } 
 }
-
 
 ?>
 
@@ -95,7 +122,7 @@ if ($lastPage != "1"){
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Camilus - Zone Management</title>
+<title>Camilus - District Management</title>
 
 <link href="../../_css/boilerplate.css" rel="stylesheet" type="text/css">
 <link href="../../_css/layout.css" rel="stylesheet" type="text/css">
@@ -126,7 +153,7 @@ Do the following if you're using your customized build of modernizr (http://www.
    <?php include("../../header.php"); ?>
   <div class="leftSidebar">
   <div  id="navigationBox">
- <div id="ddmenu">
+  <div id="ddmenu">
 <ul>
 <li class="active"><a href="">Home</a></li>
 
@@ -165,7 +192,7 @@ echo '<li class=\"last\"><a href="../managevehtype/manage.php">Add Vehicle Types
 <div>
 <table width="100%" border="0">
   <tr>
-    <td><label class="sectionTitle" id="frmItem">Zone Management - View All Records</label></td>
+    <td><label class="sectionTitle" id="frmItem">District Management</label></td>
     </tr>
   <tr>
     <td></td>
@@ -178,10 +205,31 @@ $color2 = "#F4F9FF";
 echo "<table width='100%' id='dbDataGrid'>";
 
 echo "<tr bgcolor='#CCCCCC' border>";
-echo "<td><label class=\"frmItemName\">&nbsp;Zone Id  </label></td>";
-echo "<td><label class=\"frmItemName\">&nbsp;Name</label></td>";
-echo "<td><label class=\"frmItemName\">&nbsp;Locations</label></td>";
-echo "<td><label class=\"frmItemName\">&nbsp;Update </label></td>";
+
+if($_GET['order'] == 'vehicletype_asc')
+{ echo "<th scope=\"col\" width=\"10%\"><a href=\"index.php?order=vehicletype_desc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Type Id&nbsp;</label><img src=\"../../_images/icon-arrowUp.png\" alt=\"Ascending\" width=\"16\" height=\"19\" /></a>"; }
+elseif($_GET['order'] == 'vehicletype_desc')
+{ echo "<th scope=\"col\" width=\"10%\"><a href=\"index.php?order=vehicletype_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Type Id&nbsp;</label><img src=\"../../_images/icon-arrowDown.png\" alt=\"Descending Order\" width=\"16\" height=\"19\"/></a>"; }
+else
+{ echo "<th scope=\"col\" width=\"10%\"><a href=\"index.php?order=vehicletype_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Type Id</label></a>";  }
+echo "</th>";
+
+
+if($_GET['order'] == 'name_asc')
+{ echo "<th scope=\"col\" width=\"14%\"><a href=\"index.php?order=name_desc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Name&nbsp;</label><img src=\"../../_images/icon-arrowUp.png\" alt=\"Ascending\" width=\"16\" height=\"19\" /></a>"; }
+elseif($_GET['order'] == 'name_desc')
+{ echo "<th scope=\"col\" width=\"14%\"><a href=\"index.php?order=name_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Name&nbsp;</label><img src=\"../../_images/icon-arrowDown.png\" alt=\"Descending Order\"  width=\"16\" height=\"19\"/></a>"; }
+else
+{ echo "<th scope=\"col\" width=\"14%\"><a href=\"index.php?order=name_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Name</label></a>";  }
+echo "</th>";
+
+echo "<th scope=\"col\" width=\"45%\"><label class=\"frmItemName\">&nbsp;Description</label>"; 
+echo "</th>";
+
+echo "<th scope=\"col\"><label class=\"frmItemName\">Mail Threshold</label>";  
+echo "</th>";
+
+echo "<th scope=\"col\"><label class=\"frmItemName\">&nbsp;Update</label></th>";
 echo "</tr>";
 echo "<tr><td colspan=\"4\">&nbsp;</td></tr>";
 $row_count=0;
@@ -189,10 +237,12 @@ while($res=mysql_fetch_array($result2)){
 	$row_color = ($row_count % 2) ? $color1 : $color2;
 
 	echo "<tr bgcolor=\"$row_color\">";
-	echo "<td>".$res['Zone_Id']."</td>";
+	echo "<td>".$res['Vehicle_Type_Id']."</td>";
 	echo "<td>".$res['Name']."</td>";
-	echo "<td>".$res['Locations']."</td>";	
-	echo "<td><a href=\"manage.php?id=$res[Zone_Id]\"><img src=\"../../_images/icon-edit.png \"></img>Edit</a> | <a href=\"handler.php?id=$res[Zone_Id]\"><img src=\"../../_images/icon-delete.png \"></img>Delete</a></td>";
+	echo "<td>".$res['Description']."</td>";	
+	echo "<td>".$res['Mail_Threshold']."</td>";	
+	echo "<td><a href=\"manage.php?id=".$res['Vehicle_Type_Id']."\"><img src=\"../../_images/icon-edit.png\"></img>Edit</a> | <a href=\"handler.php?id=".$res['Vehicle_Type_Id']."\"><img src=\"../../_images/icon-delete.png\"></img>Delete</a></td>";
+	
 	$row_count++;
 	
 }

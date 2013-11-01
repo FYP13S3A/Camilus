@@ -5,6 +5,36 @@ include 'conn.php';
 
 $trackingID = $argv[1];
 
+//check if its oversea or not oversea
+
+$sql = "select * from mail where Mail_Reference_No='" . $trackingID ."'";
+$result= mysql_query($sql);
+
+
+while ($row = mysql_fetch_assoc($result)) {
+   $result_mail[] = $row;
+}
+
+//get the address ID of and recipient
+$r_AddressID = $result_mail[0][Recipient_Address_Id];
+
+$sql_country = "select * from address where Address_Id='$r_AddressID'";
+$result = mysql_query($sql_country);
+
+while ($row = mysql_fetch_assoc($result)) {
+   $result_country[] = $row;
+}
+
+//get the address ID of both sender and recipient
+$countrySelected = $result_country[0][Country_Code];
+
+
+
+unset($result_mail);
+unset($result_country);
+
+
+
 //Check if delivery is already assigned to the Manifest id
 
 $sql= "SELECT * FROM delivery WHERE Manifest_Id='$trackingID '";
@@ -64,7 +94,8 @@ $tommorow = date("Y-m-d", strtotime("tomorrow"));
 //if its local
 $totalDuration = $s_Expected_Local_Duration;
 
-
+if($countrySelected=='SGP')
+{
 if($totalDuration==0)
 {
 // For Priority Express
@@ -104,8 +135,9 @@ $setDate = date('Y-m-d', $setDate);
 $db_expect_end = $setDate . " " . $s_Last_Delivery_Time;
 
 }
+}//if country selected is SGP
 
-if($s_Expected_Overseas_Duration>1)
+if($countrySelected!='SGP')
 {
 //means its a oversea package
 

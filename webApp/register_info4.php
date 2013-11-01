@@ -159,8 +159,7 @@ Do the following if you're using your customized build of modernizr (http://www.
 <ul>
 <li><a href="">Home</a></li>
 <li><a href="register_info.php">Register Info</a></li>
-<li><a href="register_mail.php">Register Mail</a></li>
-<li><a href="#">Track Mail</a></li>
+<li><a href="tracking.php">Track Mail</a></li>
 <li><a href="#">FAQ</a></li>
 <li><a href="#">Contact Us</a></li>
 </ul>

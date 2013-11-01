@@ -89,7 +89,7 @@ img, object, embed, video {
 	display: block;
 }
 
-#trackHeader {
+.header {
 	clear: both;
 	float: left;
 	margin-left: 0;
@@ -127,7 +127,7 @@ img, object, embed, video {
 	
 }
 
-#loginFooter, #trackFooter {
+.footer {
 	clear: both;
 	float: left;
 	margin-left: 0;
@@ -140,15 +140,12 @@ img, object, embed, video {
 	float: left;
 	margin-left: 0;
 	width: 170px;
-	height: 100%;
+	height: 800px
 	display: block;
-	margin-top: 30px;
 	padding-top: 15px;
 	padding-bottom: 20px;
 }
-.rightSidebar{
-display:none;
-}
+
 /* Tablet Layout: 481px to 767px. Inherits styles from: Mobile Layout. */
 
 @media only screen and (min-width: 481px) {
@@ -165,7 +162,7 @@ display:none;
 	display: block;
 	height: 410px;
 }
-#loginHeader, #trackHeader {
+.header {
 	clear: both;
 	float: left;
 	margin-left: 0;
@@ -229,13 +226,11 @@ display:none;
 	height: 100%;
 	display: block;
 	margin-top: 30px;
-padding-top:15px;
+	padding-top:15px;
 	padding-bottom: 50px;
 
 }
-.rightSidebar{
-	display:none;
-}
+
 #mainContent {
 	clear: none;
 	float: left;
@@ -259,7 +254,7 @@ padding-top:15px;
 	margin-bottom: 15px;
 }
 
-#trackFooter, #loginFooter {
+.footer {
 	clear: both;
 	float: left;
 	height: 56px;
@@ -289,7 +284,7 @@ padding-top:15px;
 	display: block;
 	height: 100%;
 }
-#loginHeader, #trackHeader {
+.header {
 	clear: both;
 	float: left;
 	margin-left: 0;
@@ -304,7 +299,6 @@ padding-top:15px;
 	margin-top: 2%;
 	width: 49%;
 	display: block;
-
 }
 
 #boxTitle {
@@ -313,7 +307,6 @@ padding-top:15px;
 	margin-left: 0;
 	width: 100%;
 	display: block;
-
 }
 
 #sysMsgContainer {
@@ -330,7 +323,6 @@ padding-top:15px;
 	margin-left: 2%;
 	width: 50%;
 	display: block;
-
 }
 
 #loginDesc {
@@ -356,27 +348,13 @@ padding-top:15px;
 	clear: both;
 	float: left;
 	margin-left: 0;
-	width: 175px;
-	height: 100%;
+	width: 170px;
+	height: 800px
 	display: block;
-	margin-top: 30px;
-padding-top:15px;
-	padding-bottom: 50px;
-	
+	padding-top: 15px;
+	padding-bottom: 20px;
 }
-.rightSidebar{
-	float: right;
-	width: 180px;
-	padding-bottom: 10px;
-	border-left-width: 2px;
-	border-left-style: solid;
-	border-left-color: #CCC;
-	margin-top: 0px;
-	padding-top: 50px;
-	padding-bottom: 50px;
-	padding-right: 10px;
-	display:block;
-}
+
 #trackBox{
 	margin-top: 15px;
 	margin-left: 10px;
@@ -401,7 +379,7 @@ padding-top:15px;
 	                              
 }
 
-#trackFooter, #loginFooter{
+.footer{
 	clear: both;
 	float: left;
 	height: 56px;
@@ -410,10 +388,6 @@ padding-top:15px;
 	margin-right: 0px;
 	margin-bottom: 0px;
 	margin-left: 0px;
-}
-.senderDetails{
-	text-align: left;	
-	align:left;
 }
 
 .registerMail_P1{

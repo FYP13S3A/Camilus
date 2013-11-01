@@ -51,7 +51,6 @@ while ($row = mysql_fetch_assoc($result)) {
 }
 
 $durationTake = $result_service_check[0][Expected_Local_Duration];
-
 $overseaDuration = $result_service_check[0][Expected_Overseas_Duration];
 
 $priority_mail="false";
@@ -62,12 +61,24 @@ if($durationTake<=1)
 $priority_mail="true";
 }
 
-if($overseaDuration>1)
+
+$sql_country = "select * from address where Address_Id='$r_AddressID'";
+$result = mysql_query($sql_country);
+
+while ($row = mysql_fetch_assoc($result)) {
+   $result_country[] = $row;
+}
+
+//get the address ID of both sender and recipient
+$countrySelected = $result_country[0][Country_Code];
+
+
+//check if recipient country is not Singapore
+if($countrySelected!='SGP')
 {
 $air_mail="true";
 $priority_mail="false";
 }
-
 
 
 
@@ -285,8 +296,6 @@ $leg4 = $r_Postal_Temp;
 
 //3 sql for local , 2 for Oversea
 
-
-
 if($priority_mail=="false" && $air_mail=="false")
 {
 
@@ -305,9 +314,8 @@ if(! $retval )
   die('System Error, please contact our counter regarding this issue.');
 }
 
-
-
-
+if($leg2!=$leg3)
+{
 // LEG 2
 $sql2 = "INSERT INTO deliveryleg ".
        "(Delivery_Id, Leg_No, Departure, Destination, Leg_Status) ".
@@ -322,7 +330,7 @@ if(! $retval )
 {
   die('System Error, please contact our counter regarding this issue.');
 }
-
+}//if leg 2 is not equal leg 3
 
 
 // LEG 3

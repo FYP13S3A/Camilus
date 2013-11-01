@@ -310,3 +310,46 @@ Stack trace:
 [26-Oct-2013 12:17:42] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/managezone.php on line 179
 [26-Oct-2013 12:18:47] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/managezone.php on line 179
 [26-Oct-2013 12:18:51] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/managezone.php on line 179
+[27-Oct-2013 20:29:48] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/d_mailbag.php on line 30
+[27-Oct-2013 20:29:48] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/d_mailbag.php on line 30
+[27-Oct-2013 20:29:48] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_mailbag.php on line 32
+[27-Oct-2013 20:29:48] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_mailbag.php on line 38
+[28-Oct-2013 13:16:56] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 53
+[28-Oct-2013 13:16:56] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/camilus/public_html/HUBVersion/checkjob.php:53) in /home/camilus/public_html/HUBVersion/checkjob.php on line 228
+[28-Oct-2013 13:16:56] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/camilus/public_html/HUBVersion/checkjob.php:53) in /home/camilus/public_html/HUBVersion/checkjob.php on line 229
+[28-Oct-2013 13:17:18] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 53
+[28-Oct-2013 13:17:18] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/camilus/public_html/HUBVersion/checkjob.php:53) in /home/camilus/public_html/HUBVersion/checkjob.php on line 228
+[28-Oct-2013 13:17:18] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/camilus/public_html/HUBVersion/checkjob.php:53) in /home/camilus/public_html/HUBVersion/checkjob.php on line 229
+[28-Oct-2013 13:18:03] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 53
+[28-Oct-2013 13:18:03] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/camilus/public_html/HUBVersion/checkjob.php:53) in /home/camilus/public_html/HUBVersion/checkjob.php on line 228
+[28-Oct-2013 13:18:03] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/camilus/public_html/HUBVersion/checkjob.php:53) in /home/camilus/public_html/HUBVersion/checkjob.php on line 229
+[28-Oct-2013 18:06:56] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home/camilus/public_html/HUBVersion/d_mailbag.php on line 51
+[29-Oct-2013 18:29:15] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_mailbag.php on line 187
+[29-Oct-2013 18:29:15] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_mailbag.php on line 187
+[29-Oct-2013 18:29:15] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_mailbag.php on line 187
+[29-Oct-2013 22:13:37] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_mailbag.php on line 187
+[29-Oct-2013 22:13:37] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_mailbag.php on line 187
+[29-Oct-2013 22:13:37] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_mailbag.php on line 187
+[29-Oct-2013 22:26:55] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_mailbag.php on line 187
+[29-Oct-2013 22:26:55] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_mailbag.php on line 187
+[29-Oct-2013 22:26:55] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_mailbag.php on line 187
+[29-Oct-2013 22:26:58] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_mailbag.php on line 187
+[29-Oct-2013 22:26:58] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_mailbag.php on line 187
+[29-Oct-2013 22:26:58] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_mailbag.php on line 187
+[29-Oct-2013 22:31:17] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_mailbag.php on line 189
+[29-Oct-2013 22:31:17] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_mailbag.php on line 189
+[29-Oct-2013 22:31:17] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_mailbag.php on line 189
+[29-Oct-2013 22:37:37] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_mailbag.php on line 187
+[29-Oct-2013 22:37:38] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_mailbag.php on line 187
+[29-Oct-2013 22:37:38] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_mailbag.php on line 187
+[29-Oct-2013 22:42:31] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_mailbag.php on line 189
+[29-Oct-2013 22:42:31] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_mailbag.php on line 189
+[29-Oct-2013 22:42:31] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_mailbag.php on line 189
+[30-Oct-2013 02:09:51] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_mailbag.php on line 201
+[30-Oct-2013 02:09:52] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_mailbag.php on line 201
+[29-Oct-2013 19:27:57] PHP Parse error:  syntax error, unexpected T_ELSE in /home/camilus/public_html/HUBVersion/d_mailbag.php on line 176
+[29-Oct-2013 20:27:36] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/tracking2.php on line 4
+[29-Oct-2013 20:27:36] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/tracking2.php on line 4
+[29-Oct-2013 20:27:36] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/tracking2.php on line 5
+[29-Oct-2013 20:38:53] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/tracking2.php on line 96
+[29-Oct-2013 20:39:10] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/tracking2.php on line 97
