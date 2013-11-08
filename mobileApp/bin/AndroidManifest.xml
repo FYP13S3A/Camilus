@@ -28,35 +28,43 @@
         </activity>
         <activity
             android:name="ss133a.mobile.camilus.Main"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="ss133a.mobile.camilus.Summary"
-            android:label="@string/title_activity_summary" >
+            android:label="@string/title_activity_summary"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="ss133a.mobile.camilus.Jobs"
-            android:label="@string/title_activity_jobs" >
+            android:label="@string/title_activity_jobs"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="ss133a.mobile.camilus.Scan"
-            android:label="@string/title_activity_scan" >
+            android:label="@string/title_activity_scan"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="ss133a.mobile.camilus.Transfer"
-            android:label="@string/title_activity_transfer" >
+            android:label="@string/title_activity_transfer"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="ss133a.mobile.camilus.Delivery"
-            android:label="@string/title_activity_delivery" >
+            android:label="@string/title_activity_delivery"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="ss133a.mobile.camilus.Signature"
-            android:label="@string/title_activity_signature" >
+            android:label="@string/title_activity_signature"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="ss133a.mobile.camilus.Appointment"
-            android:label="@string/title_activity_appointment" >
+            android:label="@string/title_activity_appointment"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

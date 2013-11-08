@@ -12,27 +12,13 @@ public class Main extends FragmentActivity  {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		System.out.println("sq: "+"11. inside main.oncreate");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-
-		System.out.println("sq: "+"11. inside main.oncreate.A");
-		//retrieve JobsManager from login intent
+		/*retrieve JobsManager from Login.class*/
 		jm = Login.jobsmanager;
-		System.out.println("sq: "+"11. inside main.oncreate.B");
 		
-		//read job file and sort jobs
-		String filedata = jm.readFile();
-		System.out.println("sqsqsqsqsqsqsq:"+filedata+", length:"+filedata.length());
-		if(filedata.trim().equals("404")){
-			jm.removeFile();
-		}else{
-			jm.sortJobs(filedata);
-		}
-		System.out.println("sq: "+"11. inside main.oncreate.C");
-		
-		//initialize tabhost and add tabs
+		/*initialize TabHost and add tabs*/
 		mTabHost = (FragmentTabHost)findViewById(android.R.id.tabhost);
 		mTabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
 		
@@ -51,6 +37,7 @@ public class Main extends FragmentActivity  {
 		return true;
 	}
 	
+	/*Function to catch onActivityResult from Scan fragment's Scan activity and push it to Scan fragment*/
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 	   super.onActivityResult(requestCode, resultCode, data);

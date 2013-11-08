@@ -23,8 +23,10 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -35,9 +37,10 @@ public class JobsManager{
 	HashMap<String, String> hashmapJobsContainer;
 	List<String> listJobHeader, listJobHeader2;
 	List<List<String>> listJobChilds;
-	boolean prepareContainer;
 	Login login;
+	Summary summary;
 	String driver;
+	Context context;
 	
 	public JobsManager(String driver){
 		hashmapExpandableListContainer = new HashMap<String, List<String>>();
@@ -45,18 +48,7 @@ public class JobsManager{
 		listJobHeader = new ArrayList<String>(); //listjobheader is to create the 3 headers for storing of all the children
 		listJobHeader2 = new ArrayList<String>(); //listjobheader2 is to create necessary header inside expandable list
 		listJobChilds = new ArrayList<List<String>>();
-		prepareContainer= false;
 		this.driver = driver;
-	}
-	
-	public JobsManager(HashMap<String, List<String>> hashmapExpandableListContainer, HashMap<String, String> hashmapJobsContainer,List<String> listJobHeader,
-			List<String> listJobHeader2, List<List<String>> listJobChilds, boolean prepareContainer){
-		this.hashmapExpandableListContainer = hashmapExpandableListContainer;
-		this.hashmapJobsContainer = hashmapJobsContainer;
-		this.listJobHeader = listJobHeader;
-		this.listJobHeader2 = listJobHeader2;
-		this.listJobChilds = listJobChilds;
-		this.prepareContainer = prepareContainer;
 	}
 	
 	public HashMap<String, List<String>> getHashmapExpandableListContainer(){
@@ -99,14 +91,6 @@ public class JobsManager{
 		this.listJobChilds = listJobChilds;
 	}
 	
-	public boolean getPrepareContainer(){
-		return prepareContainer;
-	}
-	
-	public void setPoolContainer(boolean boolContainer){
-		this.prepareContainer = boolContainer;
-	}
-	
 	public String getDriver(){
 		return driver;
 	}
@@ -115,6 +99,7 @@ public class JobsManager{
 		this.driver = driver;
 	}
 	
+	/*Function to add header nodes and create new ArrayList for store children nodes for expandable list*/
 	public void addHeaderChildren(){
 		listJobHeader.add("delivery"); //delivery header
 		listJobHeader.add("appointment"); //appointment header
@@ -124,30 +109,52 @@ public class JobsManager{
 		listJobChilds.add(new ArrayList<String>()); //store transfer children
 	}
 	
+	public int[] getHeadChildPos(String jobType, String childData){
+		int[] pos = new int[2];
+		for(int i=0;i<listJobHeader2.size();i++){
+			if(listJobHeader2.get(i).equals(jobType)){
+				pos[0] = i;
+				break;
+			}
+		}
+		List<String> child = getHashmapExpandableListContainer().get(listJobHeader2.get(pos[0]));
+		for(int j=0;j<child.size();j++){
+			if(child.get(j).contains(childData)){
+				pos[1] = j;
+			}
+		}
+		return pos;
+	}
+	
+	/*Function to check if job file for deliveryman exist in phone.*/
 	public boolean checkFileExist(){
 		String filePath = File.separator+"storage"+File.separator+"sdcard0"+File.separator+driver+".txt";
 		File file = new File(filePath);
 		return file.exists();
 	}
 	
+	/*Function to call AsynTask to retrieve job file from server.*/
 	public void downloadFile(Login l){
-		System.out.println("sq: "+"5. executing jm.downloadfile, "+driver);
 		login = l;
-		new RetrieveJobAsyncTask().execute(driver);
+		new RetrieveJobAsyncTask().execute(driver,"login");
 	}
 	
+	public void downloadFileForSummary(Summary s, Context c){
+		summary = s;
+		context = c;
+		new RetrieveJobAsyncTask().execute(driver,"summary");
+	}
+	
+	/*Function to read contents inside job file and return a String value.*/
 	public String readFile(){
-		System.out.println("sq: "+"12. read file");
 		String filedata = "";
 		String filePath = File.separator+"storage"+File.separator+"sdcard0"+File.separator+driver+".txt";
 		File file = new File(filePath);
 		
 		StringBuilder text = new StringBuilder();
-		
 		try {
 		    BufferedReader br = new BufferedReader(new FileReader(file));
 		    String line;
-
 		    while ((line = br.readLine()) != null) {
 		        text.append(line);
 		        text.append('\n');
@@ -156,13 +163,11 @@ public class JobsManager{
 		catch (IOException e) {
 		   
 		}
-		
 		filedata = text.toString();
-
-		System.out.println("sq: "+"12. read file finish");
 		return filedata;
 	}
 	
+	/*Function to remove job file from phone.*/
 	public void removeFile(){
 		String filePath = File.separator+"storage"+File.separator+"sdcard0"+File.separator+driver+".txt";
 		//delete file
@@ -184,8 +189,9 @@ public class JobsManager{
 		}
 	}
 	
+	/*Function to sort jobs to respective children node container based on input variable 'file'
+	 *Also call addJob function to add all jobs from input variable 'file' into hashmapJobsContainer*/
 	public void sortJobs(String file){
-		System.out.println("sq: "+"13. sort file");
 		String[] jobs = file.split("\\*\\*");
 		for(int i=0;i<jobs.length;i++){
 			addJob(jobs[i]);
@@ -206,21 +212,22 @@ public class JobsManager{
 				}
 			}
 		}
-		System.out.println("sq: "+"13. sort file finish");
 	}
 	
+	/*Function to prepare hashmapExpandableListContainer for data population inside Jobs.class
+	 *Adds headers with children nodes to hashmapExpandableListContainer
+	 *Adds only headers that have children nodes to listJobHeader2
+	 *Uses boolean variable 'prepareContainer' as a switch to prevent function from being called unnecessary during revisit of Activities*/
 	public void prepareJobContainer(){
-		if(prepareContainer==false){
-			for(int i=0;i<listJobHeader.size();i++){
-				if(listJobChilds.get(i).size()>0){
-					hashmapExpandableListContainer.put(listJobHeader.get(i),listJobChilds.get(i));
-					listJobHeader2.add(listJobHeader.get(i));
-				}
+		for(int i=0;i<listJobHeader.size();i++){
+			if(listJobChilds.get(i).size()>0){
+				hashmapExpandableListContainer.put(listJobHeader.get(i),listJobChilds.get(i));
+				listJobHeader2.add(listJobHeader.get(i));
 			}
-			prepareContainer=true;
 		}
 	}
 	
+	/*Function to call various sub-functions to remove job from application as well as job file*/
 	public void removeJob(int groupPos, int childPos, String manifestId){
 		removeJobFromExpandableList(groupPos, childPos);
 		removeJobFromJobContainer(manifestId);
@@ -234,7 +241,9 @@ public class JobsManager{
 		if(child.size()==0){
 			getListJobHeader2().remove(groupPos);
 		}
-		jobAdapt.notifyDataSetChanged();
+		if(jobAdapt!=null){
+			jobAdapt.notifyDataSetChanged();
+		}
 	}
 	
 	public void removeJobFromJobContainer(String manifestId){
@@ -285,25 +294,35 @@ public class JobsManager{
 	     delivery,appointment,transfer; 
 	 }
 	
+	/*class to handle asynchronous download of job file from server
+	 *Takes in 1 variable: driverId
+	 *send request to: http://www.efxmarket.com/HUBVersion/checkjob.php
+	 *request method used: HTTPGET
+	 **/
 	public class RetrieveJobAsyncTask extends AsyncTask<String, Integer, Double>{
 		HttpEntity jobEntity;
 		ProgressDialog pdialog;
 		String username = "";
+		String downloadClass = "";
 		
 		@Override
 		protected Double doInBackground(String... params) {
 			// TODO Auto-generated method stub
-			System.out.println("sq: "+"6. executing jm.retrievejob.postdata");
 			postData(params[0]);
 			username = params[0];
+			downloadClass = params[1];
 			return 0.0;
 		}
  
-		//function to execute after server's authentication response
+		/*Function to execute after server's authentication response
+		 *1) Grabs response from server and saves file to phone.
+		 *2) Read content of file
+		 *	 - if content = 404, remove file
+		 *   - if content contains job data, sort data to respective containers*/
 		protected void onPostExecute(Double result){
-			System.out.println("sq: "+"7. executing jm.retrievejob.postexecute");
 			if (jobEntity != null) {
 				try {
+					/*Grab response from server and save file to phone.*/
 					BufferedInputStream bis = new BufferedInputStream(jobEntity.getContent());
 					String filePath = File.separator+"storage"+File.separator+"sdcard0"+File.separator+username+".txt";
 					BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(new File(filePath)));
@@ -311,7 +330,6 @@ public class JobsManager{
 					while((inByte = bis.read()) != -1) bos.write(inByte);
 					bis.close();
 					bos.close();
-					//pdialog.dismiss();
 				} catch (IllegalStateException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -319,37 +337,58 @@ public class JobsManager{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}else{
 			}
-			System.out.println("sq: "+"8. finish jm.retrievejob.postexecute");
-			login.pbLogin.setVisibility(View.GONE);
-			System.out.println("sq: "+"9. going to main page");
-			login.login();
+			String filedata = readFile().trim();
+			if(filedata.trim().equals("404")){ /*404 means no job found for deliveryman*/
+				removeFile();
+			}else{
+				/*sort data to respective containers*/
+				sortJobs(filedata);
+				prepareJobContainer();
+			}
+			/*Calls login function to proceed to Main.class*/
+			if(downloadClass.equals("login")){
+				login.pdLoading.dismiss();
+				login.login();
+			}else if(downloadClass.equals("summary")){
+				summary.txtJobsLeft.setText(getHashmapJobsContainer().size()+"");
+				int del = (getHashmapExpandableListContainer().get("delivery")==null?0:getHashmapExpandableListContainer().get("delivery").size());
+				summary.txtDel.setText(del+"");
+				int appt = (getHashmapExpandableListContainer().get("appointment")==null?0:getHashmapExpandableListContainer().get("appointment").size());
+		        summary.txtAppt.setText(appt+"");
+		        int trans = (getHashmapExpandableListContainer().get("transfer")==null?0:getHashmapExpandableListContainer().get("transfer").size());
+		        summary.txtTrans.setText(trans+"");
+				summary.pdLoading.dismiss();
+				if(getHashmapJobsContainer().size()==0){
+					AlertDialog.Builder builder = new AlertDialog.Builder(context);
+    				builder.setTitle("Job Retrieval Notice");
+    				builder.setMessage("You do not have any new jobs at the moment.")
+    				       .setCancelable(false)
+    				       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+    				           public void onClick(DialogInterface dialog, int id) {
+    				        	   dialog.cancel();
+    				           }
+    				       });
+    				AlertDialog alert = builder.create();
+    				alert.show();
+				}
+			}
 		}
-		
-		/*protected void onProgressUpdate(Integer... progress){
-			//pbLogin.setProgress(progress[0]);
-		}*/
  
-		//function to handle data post to server
+
 		protected void postData(String user) {
-			System.out.println("sq: "+"6. executing jm.retrievejob.postdata.A, "+user);
 			HttpClient httpclient = new DefaultHttpClient();
-			System.out.println("sq: "+"6. executing jm.retrievejob.postdata.B");
 			HttpGet httpget = new HttpGet("http://www.efxmarket.com/HUBVersion/checkjob.php?id="+user);
 			try {	 
-				//execute httpget request and retrieve server's response
+				/*Executes HTTPGET request and retrieve server's response*/
 				HttpResponse jobResponse = httpclient.execute(httpget);
-				System.out.println("sq: "+"6. executing jm.retrievejob.postdata.C");
 				jobEntity = jobResponse.getEntity();
-				System.out.println("sq: "+"6. executing jm.retrievejob.postdata.D");
 				
 			} catch (ClientProtocolException e) {
 				// TODO Auto-generated catch block
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 			}
-			System.out.println("sq: "+"6. executing jm.retrievejob.postdata.E");
 		}
  
 	}

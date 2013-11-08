@@ -60,14 +60,6 @@
         android:layout_toRightOf="@+id/txtSManifestId"
         android:text="@string/login" />
 
-    <ProgressBar
-        android:id="@+id/pbLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/txtPassword"
-        android:layout_alignTop="@+id/btnLogin"
-        android:layout_marginRight="18dp" />
-
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"

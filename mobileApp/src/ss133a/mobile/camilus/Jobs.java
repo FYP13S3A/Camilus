@@ -3,7 +3,6 @@ package ss133a.mobile.camilus;
 import java.util.HashMap;
 import java.util.List;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,9 +15,6 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 import android.widget.ExpandableListView.OnChildClickListener;
-import android.widget.ExpandableListView.OnGroupClickListener;
-import android.widget.ExpandableListView.OnGroupCollapseListener;
-import android.widget.ExpandableListView.OnGroupExpandListener;
 
 public class Jobs extends Fragment {
 	public final static String JOB_DATA = "ss133a.mobile.camilus.JOB_DATA";
@@ -42,38 +38,11 @@ public class Jobs extends Fragment {
         final View V = inflater.inflate(R.layout.activity_jobs, container, false);
         
         expListView = (ExpandableListView) V.findViewById(R.id.joblist);
-        
-        //retrieve jobsmanager residing on Main.class
         jmanager = Main.jm;
-        
-        //prepare job container for expandable list population
-        jmanager.prepareJobContainer();
         listJobContainer = jmanager.getHashmapExpandableListContainer();
         listDataHeader = jmanager.getListJobHeader2();
         jobAdapter = new JobsExpandableAdapter(V.getContext(), listDataHeader, listJobContainer);
         expListView.setAdapter(jobAdapter);
-        
-        expListView.setOnGroupClickListener(new OnGroupClickListener() {
-            @Override
-            public boolean onGroupClick(ExpandableListView parent, View v,
-                    int groupPosition, long id) {
-                return false;
-            }
-        });
-        
-        expListView.setOnGroupExpandListener(new OnGroupExpandListener() {
-        	 
-            @Override
-            public void onGroupExpand(int groupPosition) {
-            }
-        });
-        
-        expListView.setOnGroupCollapseListener(new OnGroupCollapseListener() {
-        	 
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-            }
-        });
         
         expListView.setOnChildClickListener(new OnChildClickListener() {
         	 
@@ -85,14 +54,13 @@ public class Jobs extends Fragment {
             	childPos = childPosition;
             	jobManifest = listJobContainer.get(listDataHeader.get(groupPosition)).get(childPosition).split(" ")[0];
             	jobType = listDataHeader.get(groupPosition);
-                /*Toast.makeText(V.getContext(),
-                		listDataHeader.get(groupPosition)+ " : "+ listJobContainer.get(listDataHeader.get(groupPosition)).get(childPosition),
-                		Toast.LENGTH_SHORT).show();*/
+            	
                 AlertDialog.Builder ab=new AlertDialog.Builder(V.getContext());
                 String items[] = {"View Job","Get Direction"};
                 ab.setTitle("Choose an option");
                 ab.setItems(items, new DialogInterface.OnClickListener() {
                 	public void onClick(DialogInterface d, int choice) {
+                		/*Handles View Job Choice*/
 	                	if(choice == 0) {
 	                		Class c = null;
 	                		if(jobType.equals("transfer")){
@@ -104,7 +72,6 @@ public class Jobs extends Fragment {
 	                		}
 	                		Intent jobIntent = new Intent(V.getContext(),c);
 	                		String jobdata = jmanager.getHashmapJobsContainer().get(jobManifest);
-	                		//Toast.makeText(V.getContext(),jobdata,Toast.LENGTH_LONG).show();
 	                		jobIntent.putExtra(JOB_DATA, jobdata);
 	                		jobIntent.putExtra(JOB_MANIFESTID, jobManifest);
 	                		jobIntent.putExtra(JOB_GROUP_POSN, groupPos);
@@ -112,6 +79,7 @@ public class Jobs extends Fragment {
 	                		startActivity(jobIntent);
 	                	}
 	                	else if(choice == 1) {
+	                		/*Handles Get Direction Choice*/
 	                		Toast.makeText(V.getContext(),"you have choosen Get Direction",Toast.LENGTH_SHORT).show();
 	                	}
                 	}
@@ -123,15 +91,5 @@ public class Jobs extends Fragment {
         
         return V;
 	}
-	
-	/*public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-		if(requestCode == SIGNATURE_REQUEST){
-			//capture signature
-			if(resultCode==Activity.RESULT_OK){
-				//clearFields();
-				Toast.makeText(c, "test result ok", Toast.LENGTH_SHORT).show();
-			}
-		}
-	}*/
 
 }

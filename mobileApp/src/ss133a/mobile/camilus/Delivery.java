@@ -30,7 +30,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class Delivery extends Activity {
 	private ProgressDialog pdLoading;
@@ -60,6 +59,7 @@ public class Delivery extends Activity {
 		rdgDeliveryStatus = (RadioGroup)findViewById(R.id.rdgDeliveryStatus);
 		jm = Main.jm;
 		
+		/*Receive data from caller's intent*/
 		intent = getIntent();
 		String job = intent.getStringExtra(Jobs.JOB_DATA);
 		manifestid = intent.getStringExtra(Jobs.JOB_MANIFESTID);
@@ -76,6 +76,7 @@ public class Delivery extends Activity {
 		
 		btnDUpdate.setOnClickListener(new OnClickListener(){
         	public void onClick(View v){
+        		/*To check if user selects a delivery status option*/
         		if(rdgDeliveryStatus.getCheckedRadioButtonId()==-1){
     				AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
     				builder.setTitle("Delivery Confirmation Error");
@@ -83,8 +84,6 @@ public class Delivery extends Activity {
     				       .setCancelable(false)
     				       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
     				           public void onClick(DialogInterface dialog, int id) {
-    				                //do things
-    				        	   dialog.cancel();
     				           }
     				       });
     				AlertDialog alert = builder.create();
@@ -92,12 +91,14 @@ public class Delivery extends Activity {
     			}else{
     				int option = rdgDeliveryStatus.getCheckedRadioButtonId();
     				if(option==R.id.rdACollected){
+    					/*Prepare data to send to Signature.class*/
     	        		Intent sigIntent = new Intent(v.getContext(),Signature.class);
     	        		sigIntent.putExtra(DELIVERY_JOBID, jobId);
     	        		sigIntent.putExtra(DELIVERY_MANIFESTID, manifestid);
     	        		sigIntent.putExtra(DELIVERY_DRIVERID, driverId);
     	        		startActivityForResult(sigIntent, SIGNATURE_REQUEST);
     				}else{
+    					/*Confirm status option with user*/
     					AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(v.getContext());
     					alertDialogBuilder.setTitle("Delivery Confirmation");
     					alertDialogBuilder
@@ -105,18 +106,15 @@ public class Delivery extends Activity {
     						.setCancelable(false)
     						.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
     							public void onClick(DialogInterface dialog,int id) {
-    								sendConfirmation(jobId, driverId,"on-hold", DateFormat.format("yyyy-MM-dd  kk:mm:ss", System.currentTimeMillis()).toString());
+    								sendConfirmation("delivery", jobId, driverId,"onhold", DateFormat.format("yyyy-MM-dd  kk:mm:ss", System.currentTimeMillis()).toString());
     							}
     						  })
     						.setNegativeButton("No",new DialogInterface.OnClickListener() {
     							public void onClick(DialogInterface dialog,int id) {
-    								dialog.cancel();
+    								
     							}
     						});
-						// create alert dialog
 						AlertDialog alertDialog = alertDialogBuilder.create();
-		 
-						// show it
 						alertDialog.show();
     				}
     			}
@@ -137,21 +135,29 @@ public class Delivery extends Activity {
 			//capture signature
 			if(resultCode==RESULT_OK){
 	        	   jm.removeJob(groupPos, childPos, manifestid);
+	        	   setResult(RESULT_OK,intent);
 	        	   finish();
 			}
 		}
 	}
 	
-	public void sendConfirmation(String jobId, String driverId, String status, String time){
+	/*Function to call Delivery AsyncTask*/
+	public void sendConfirmation(String jobType, String jobId, String driverId, String status, String time){
 		pdLoading = ProgressDialog.show(this, "", "Confirming Delivery...");
-		new DeliveryAsyncTask().execute(jobId, driverId, status, time);
+		new DeliveryAsyncTask().execute(jobType, jobId, driverId, status, time);
 	}
+	
+	/*class to handle asynchronous update of delivery job status to userver
+	 *Takes in 5 variable: jobType, jobId, driverId, status, time
+	 *send request to: http://www.efxmarket.com/mobile/update_job.php
+	 *request method used: HTTPPOST
+	 **/
 	private class DeliveryAsyncTask extends AsyncTask<String, Integer, Double>{
 		String response = "";
 		@Override
 		protected Double doInBackground(String... params) {
 			// TODO Auto-generated method stub
-			postData(params[0],params[1],params[2],params[3]);
+			postData(params[0],params[1],params[2],params[3],params[4]);
 			return null;
 		}
  
@@ -164,8 +170,9 @@ public class Delivery extends Activity {
 				       .setCancelable(false)
 				       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
-				                //do things
+				                /*Call removeJob to remove job data from application and file*/
 				        	   jm.removeJob(groupPos, childPos, manifestid);
+				        	   setResult(RESULT_OK,intent);
 				        	   finish();
 				           }
 				       });
@@ -179,8 +186,7 @@ public class Delivery extends Activity {
 				       .setCancelable(false)
 				       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
-				                //do things
-				        	   dialog.cancel();
+				        	   
 				           }
 				       });
 				AlertDialog alert = builder.create();
@@ -190,21 +196,21 @@ public class Delivery extends Activity {
 		protected void onProgressUpdate(Integer... progress){
 		}
  
-		public void postData(String jobId, String driverId, String status, String time) {
-			// Create a new HttpClient and Post Header
+		public void postData(String jobType, String jobId, String driverId, String status, String time) {
 			HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost("http://www.efxmarket.com/mobile/update_job.php");
             
 			try {
-				// Add your data
+				// Add data
 				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+				nameValuePairs.add(new BasicNameValuePair("type",jobType));
 				nameValuePairs.add(new BasicNameValuePair("jobId",jobId));
 				nameValuePairs.add(new BasicNameValuePair("driverId",driverId));
 				nameValuePairs.add(new BasicNameValuePair("status",status));
 				nameValuePairs.add(new BasicNameValuePair("time",time));
 				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
  
-				// Execute HTTP Post Request
+				// Execute HTTPPost Request
 				ResponseHandler<String> responseHandler = new BasicResponseHandler();
 				response = httpclient.execute(httppost, responseHandler);
 				

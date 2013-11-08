@@ -2,7 +2,6 @@ package ss133a.mobile.camilus;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -29,7 +28,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class Transfer extends Activity {
 	private TextView txtTRManifestId, txtTRDestination;
@@ -65,31 +63,23 @@ public class Transfer extends Activity {
 		
 		btnTRUpdate.setOnClickListener(new OnClickListener(){
         	public void onClick(View v){
-        		//Toast.makeText(v.getContext(), "button testing", Toast.LENGTH_LONG).show();
-        		
         		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
     			
-    			// set title
     			alertDialogBuilder.setTitle("Transfer Confirmation");
-    			// set dialog message
     			alertDialogBuilder
     				.setMessage("Proceed to confirm transfer?")
     				.setCancelable(false)
     				.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
     					public void onClick(DialogInterface dialog,int id) {
-    						sendConfirmation(jobId, driverId,"complete", DateFormat.format("yyyy-MM-dd  kk:mm:ss", System.currentTimeMillis()).toString());
+    						sendConfirmation("transfer",jobId, driverId,"complete", DateFormat.format("yyyy-MM-dd  kk:mm:ss", System.currentTimeMillis()).toString());
     					}
     				  })
     				.setNegativeButton("No",new DialogInterface.OnClickListener() {
     					public void onClick(DialogInterface dialog,int id) {
-    						dialog.cancel();
+    						
     					}
     				});
-     
-				// create alert dialog
 				AlertDialog alertDialog = alertDialogBuilder.create();
- 
-				// show it
 				alertDialog.show();
         		
         	}
@@ -108,7 +98,7 @@ public class Transfer extends Activity {
 		@Override
 		protected Double doInBackground(String... params) {
 			// TODO Auto-generated method stub
-			postData(params[0],params[1],params[2],params[3]);
+			postData(params[0],params[1],params[2],params[3],params[4]);
 			return null;
 		}
  
@@ -121,8 +111,8 @@ public class Transfer extends Activity {
 				       .setCancelable(false)
 				       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
-				                //do things
 				        	   jm.removeJob(groupPos, childPos, manifestid);
+				        	   setResult(RESULT_OK,intent);
 				        	   finish();
 				           }
 				       });
@@ -136,8 +126,7 @@ public class Transfer extends Activity {
 				       .setCancelable(false)
 				       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
-				                //do things
-				        	   dialog.cancel();
+				                
 				           }
 				       });
 				AlertDialog alert = builder.create();
@@ -147,21 +136,21 @@ public class Transfer extends Activity {
 		protected void onProgressUpdate(Integer... progress){
 		}
  
-		public void postData(String jobId, String driverId, String status, String time) {
-			// Create a new HttpClient and Post Header
+		public void postData(String jobType, String jobId, String driverId, String status, String time) {
 			HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost("http://www.efxmarket.com/mobile/update_job.php");
             
 			try {
-				// Add your data
+				// Add data
 				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+				nameValuePairs.add(new BasicNameValuePair("type",jobType));
 				nameValuePairs.add(new BasicNameValuePair("jobId",jobId));
 				nameValuePairs.add(new BasicNameValuePair("driverId",driverId));
 				nameValuePairs.add(new BasicNameValuePair("status",status));
 				nameValuePairs.add(new BasicNameValuePair("time",time));
 				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
  
-				// Execute HTTP Post Request
+				// Execute HTTPPost Request
 				ResponseHandler<String> responseHandler = new BasicResponseHandler();
 				response = httpclient.execute(httppost, responseHandler);
 				
@@ -174,9 +163,9 @@ public class Transfer extends Activity {
  
 	}
 	
-	public void sendConfirmation(String jobId, String driverId, String status, String time){
+	public void sendConfirmation(String jobType, String jobId, String driverId, String status, String time){
 		pdLoading = ProgressDialog.show(this, "", "Confirming Transfer...");
-		new TransferAsyncTask().execute(jobId, driverId, status, time);
+		new TransferAsyncTask().execute(jobType,jobId, driverId, status, time);
 	}
 
 }

@@ -90,18 +90,15 @@ public class Appointment extends Activity {
     						.setCancelable(false)
     						.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
     							public void onClick(DialogInterface dialog,int id) {
-    								sendConfirmation(jobId, driverId,"complete", DateFormat.format("yyyy-MM-dd  kk:mm:ss", System.currentTimeMillis()).toString());
+    								sendConfirmation("appointment", jobId, driverId,"complete", DateFormat.format("yyyy-MM-dd  kk:mm:ss", System.currentTimeMillis()).toString());
     							}
     						  })
     						.setNegativeButton("No",new DialogInterface.OnClickListener() {
     							public void onClick(DialogInterface dialog,int id) {
-    								dialog.cancel();
+    								
     							}
     						});
-						// create alert dialog
 						AlertDialog alertDialog = alertDialogBuilder.create();
-		 
-						// show it
 						alertDialog.show();
     				}else{
     					AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(v.getContext());
@@ -111,18 +108,15 @@ public class Appointment extends Activity {
     						.setCancelable(false)
     						.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
     							public void onClick(DialogInterface dialog,int id) {
-    								sendConfirmation(jobId, driverId,"on-hold", DateFormat.format("yyyy-MM-dd  kk:mm:ss", System.currentTimeMillis()).toString());
+    								sendConfirmation("appointment", jobId, driverId,"onhold", DateFormat.format("yyyy-MM-dd  kk:mm:ss", System.currentTimeMillis()).toString());
     							}
     						  })
     						.setNegativeButton("No",new DialogInterface.OnClickListener() {
     							public void onClick(DialogInterface dialog,int id) {
-    								dialog.cancel();
+    								
     							}
     						});
-						// create alert dialog
 						AlertDialog alertDialog = alertDialogBuilder.create();
-		 
-						// show it
 						alertDialog.show();
     				}
     			}
@@ -139,9 +133,9 @@ public class Appointment extends Activity {
 		return true;
 	}
 	
-	public void sendConfirmation(String jobId, String driverId, String status, String time){
+	public void sendConfirmation(String jobType, String jobId, String driverId, String status, String time){
 		pdLoading = ProgressDialog.show(this, "", "Confirming Appointment...");
-		new AppointmentAsyncTask().execute(jobId, driverId, status, time);
+		new AppointmentAsyncTask().execute(jobType, jobId, driverId, status, time);
 	}
 	
 	private class AppointmentAsyncTask extends AsyncTask<String, Integer, Double>{
@@ -149,12 +143,13 @@ public class Appointment extends Activity {
 		@Override
 		protected Double doInBackground(String... params) {
 			// TODO Auto-generated method stub
-			postData(params[0],params[1],params[2],params[3]);
+			postData(params[0],params[1],params[2],params[3],params[4]);
 			return null;
 		}
  
 		protected void onPostExecute(Double result){
 			pdLoading.dismiss();
+			System.out.println("sqsqsq: "+response);
 			if(response.equals("1")){
 				AlertDialog.Builder builder = new AlertDialog.Builder(context);
 				builder.setTitle("Transfer Confirmation.");
@@ -162,8 +157,8 @@ public class Appointment extends Activity {
 				       .setCancelable(false)
 				       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
-				                //do things
 				        	   jm.removeJob(groupPos, childPos, manifestid);
+				        	   setResult(RESULT_OK,intent);
 				        	   finish();
 				           }
 				       });
@@ -177,8 +172,7 @@ public class Appointment extends Activity {
 				       .setCancelable(false)
 				       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
-				                //do things
-				        	   dialog.cancel();
+				         
 				           }
 				       });
 				AlertDialog alert = builder.create();
@@ -188,14 +182,14 @@ public class Appointment extends Activity {
 		protected void onProgressUpdate(Integer... progress){
 		}
  
-		public void postData(String jobId, String driverId, String status, String time) {
-			// Create a new HttpClient and Post Header
+		public void postData(String jobType, String jobId, String driverId, String status, String time) {
 			HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost("http://www.efxmarket.com/mobile/update_job.php");
             
 			try {
-				// Add your data
+				// Add data
 				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+				nameValuePairs.add(new BasicNameValuePair("type",jobType));
 				nameValuePairs.add(new BasicNameValuePair("jobId",jobId));
 				nameValuePairs.add(new BasicNameValuePair("driverId",driverId));
 				nameValuePairs.add(new BasicNameValuePair("status",status));

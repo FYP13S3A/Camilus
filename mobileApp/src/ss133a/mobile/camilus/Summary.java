@@ -1,5 +1,8 @@
 package ss133a.mobile.camilus;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,39 +16,54 @@ import android.widget.Toast;
 public class Summary extends Fragment {
 	private TextView txtUser;
 	private Button btnRetrieveJobs;
-	private TextView txtColl, txtCPE, txtCP, txtCPP, txtCR, txtCRP;
-	private TextView txtDel, txtDPE, txtDP, txtDPP, txtDR, txtDRP;
-	private TextView txtTrans,txtComplete;
+	TextView txtAppt,txtDel,txtTrans,txtJobsLeft;
+	private int del,appt, trans;
 	JobsManager jm;
+	ProgressDialog pdLoading;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View V = inflater.inflate(R.layout.activity_summary, container, false);
         jm = Main.jm;
+        del = 0;
+        appt = 0;
+        trans = 0;
         txtUser = (TextView) V.findViewById(R.id.txtUsername);
-        txtUser.setText(jm.getDriver());
-        
-        txtColl = (TextView) V.findViewById(R.id.txtCollection);
-        txtCPE = (TextView) V.findViewById(R.id.txtCPEMail);
-        txtCP = (TextView) V.findViewById(R.id.txtCPMail);
-        txtCPP = (TextView) V.findViewById(R.id.txtCPPack);
-        txtCR = (TextView) V.findViewById(R.id.txtCRMail);
-        txtCRP = (TextView) V.findViewById(R.id.txtCRPack);
-        
+        txtAppt = (TextView) V.findViewById(R.id.txtAppointment);
         txtDel = (TextView) V.findViewById(R.id.txtDeliveries);
-        txtDPE = (TextView) V.findViewById(R.id.txtDPEMail);
-        txtDP = (TextView) V.findViewById(R.id.txtDPMail);
-        txtDPP = (TextView) V.findViewById(R.id.txtDPPack);
-        txtDR = (TextView) V.findViewById(R.id.txtDRMail);
-        txtDRP = (TextView) V.findViewById(R.id.txtDRPack);
-        
         txtTrans = (TextView) V.findViewById(R.id.txtTransfer);
-        txtComplete = (TextView) V.findViewById(R.id.txtCompletion);
-        
+        txtJobsLeft = (TextView) V.findViewById(R.id.txtJobsLeft);
         btnRetrieveJobs = (Button) V.findViewById(R.id.btnRetrieveJob);
+        
+        /*populate data in summary*/
+        txtUser.setText(jm.getDriver());
+        txtJobsLeft.setText(jm.getHashmapJobsContainer().size()+"");
+        del = (jm.getHashmapExpandableListContainer().get("delivery")==null?0:jm.getHashmapExpandableListContainer().get("delivery").size());
+        txtDel.setText(del+"");
+        appt = (jm.getHashmapExpandableListContainer().get("appointment")==null?0:jm.getHashmapExpandableListContainer().get("appointment").size());
+        txtAppt.setText(appt+"");
+        trans = (jm.getHashmapExpandableListContainer().get("transfer")==null?0:jm.getHashmapExpandableListContainer().get("transfer").size());
+        txtTrans.setText(trans+"");
+        
+        
         btnRetrieveJobs.setOnClickListener(new OnClickListener(){
         	public void onClick(View v){
-        		Toast.makeText(v.getContext(), "button testing", Toast.LENGTH_LONG).show();
+        		if(jm.checkFileExist()==false){
+    				pdLoading = ProgressDialog.show(v.getContext(), "Please Wait...", "Retrieving latest job...");
+        			jm.downloadFileForSummary(Summary.this, v.getContext());
+				}else{
+					AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+    				builder.setTitle("Retrieve Job Error");
+    				builder.setMessage("You can only retrieve latest jobs after you complete your current jobs.")
+    				       .setCancelable(false)
+    				       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+    				           public void onClick(DialogInterface dialog, int id) {
+    				        	   dialog.cancel();
+    				           }
+    				       });
+    				AlertDialog alert = builder.create();
+    				alert.show();
+				}
         	}
         });
         	

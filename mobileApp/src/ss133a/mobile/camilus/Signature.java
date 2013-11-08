@@ -31,7 +31,6 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class Signature extends Activity {
 	private GestureOverlayView govSignaturePad;
@@ -67,31 +66,22 @@ public class Signature extends Activity {
         	public void onClick(View v){
         		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
     			
-    			// set title
     			alertDialogBuilder.setTitle("Delivery Confirmation");
-    			// set dialog message
     			alertDialogBuilder
     				.setMessage("Proceed to confirm delivery?")
     				.setCancelable(false)
     				.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
     					public void onClick(DialogInterface dialog,int id) {
-    						//Toast.makeText(context, "send confirmation testing", Toast.LENGTH_LONG).show();
     						String image = getImageBase64();
-    						sendConfirmation(jobid, driverid,manifestid, image, "complete", DateFormat.format("yyyy-MM-dd  kk:mm:ss", System.currentTimeMillis()).toString());
+    						sendConfirmation("delivery", jobid, driverid,manifestid, image, "complete", DateFormat.format("yyyy-MM-dd  kk:mm:ss", System.currentTimeMillis()).toString());
     					}
     				  })
     				.setNegativeButton("No",new DialogInterface.OnClickListener() {
     					public void onClick(DialogInterface dialog,int id) {
-    						// if this button is clicked, just close
-    						// the dialog box and do nothing
-    						dialog.cancel();
+    						
     					}
     				});
-     
-				// create alert dialog
 				AlertDialog alertDialog = alertDialogBuilder.create();
- 
-				// show it
 				alertDialog.show();
         	}
         });
@@ -104,11 +94,12 @@ public class Signature extends Activity {
 		return true;
 	}
 	
-	public void sendConfirmation(String jobId, String driverId, String manifestId, String imageString, String status, String time){
+	public void sendConfirmation(String jobType, String jobId, String driverId, String manifestId, String imageString, String status, String time){
 		pdLoading = ProgressDialog.show(this, "", "Confirming Delivery...");
-		new DeliveryAsyncTask().execute(jobId, driverId, manifestId, imageString, status, time);
+		new DeliveryAsyncTask().execute(jobType, jobId, driverId, manifestId, imageString, status, time);
 	}
 	
+	/*Function to grab signature from signature pad and saves to a Base64 String*/
 	public String getImageBase64(){
 		govSignaturePad.setDrawingCacheEnabled(true);
 		Bitmap bm = Bitmap.createBitmap(govSignaturePad.getDrawingCache());
@@ -124,7 +115,7 @@ public class Signature extends Activity {
 		@Override
 		protected Double doInBackground(String... params) {
 			// TODO Auto-generated method stub
-			postData(params[0],params[1],params[2],params[3],params[4],params[5]);
+			postData(params[0],params[1],params[2],params[3],params[4],params[5],params[6]);
 			return null;
 		}
  
@@ -137,8 +128,6 @@ public class Signature extends Activity {
 				       .setCancelable(false)
 				       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
-				                //do things
-				        	   //jm.removeJob(groupPos, childPos);
 				        	   setResult(RESULT_OK,intent);
 				        	   finish();
 				           }
@@ -153,8 +142,7 @@ public class Signature extends Activity {
 				       .setCancelable(false)
 				       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
-				                //do things
-				        	   dialog.cancel();
+				                
 				           }
 				       });
 				AlertDialog alert = builder.create();
@@ -164,14 +152,14 @@ public class Signature extends Activity {
 		protected void onProgressUpdate(Integer... progress){
 		}
  
-		public void postData(String jobId, String driverId, String manifestId, String imageString, String status, String time) {
-			// Create a new HttpClient and Post Header
+		public void postData(String jobType, String jobId, String driverId, String manifestId, String imageString, String status, String time) {
 			HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost("http://www.efxmarket.com/mobile/update_job.php");
             
 			try {
-				// Add your data
+				// Add data
 				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+				nameValuePairs.add(new BasicNameValuePair("type",jobType));
 				nameValuePairs.add(new BasicNameValuePair("jobId",jobId));
 				nameValuePairs.add(new BasicNameValuePair("driverId",driverId));
 				nameValuePairs.add(new BasicNameValuePair("image64",imageString));
@@ -180,7 +168,7 @@ public class Signature extends Activity {
 				nameValuePairs.add(new BasicNameValuePair("time",time));
 				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
  
-				// Execute HTTP Post Request
+				// Execute HTTPPost Request
 				ResponseHandler<String> responseHandler = new BasicResponseHandler();
 				response = httpclient.execute(httppost, responseHandler);
 				

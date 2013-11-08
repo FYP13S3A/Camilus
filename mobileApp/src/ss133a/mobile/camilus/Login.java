@@ -16,9 +16,9 @@ import org.apache.http.message.BasicNameValuePair;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,13 +28,12 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class Login extends Activity  implements OnClickListener{
-	private View loginView;
 	private Button btnLogin;
 	private EditText txtUser, txtPassword;
-	ProgressBar pbLogin;
-	String response = "000";
+	ProgressDialog pdLoading;
 	public static JobsManager jobsmanager;
 	Context c;
+	String response = "000";
 	
 	public Login(){
 		
@@ -47,14 +46,9 @@ public class Login extends Activity  implements OnClickListener{
 		btnLogin = (Button)findViewById(R.id.btnLogin);
 		txtUser = (EditText)findViewById(R.id.txtUser);
 		txtPassword = (EditText)findViewById(R.id.txtPassword);
-		pbLogin=(ProgressBar)findViewById(R.id.pbLogin);
-		pbLogin.setVisibility(View.GONE);
-		loginView = this.findViewById(android.R.id.content);
 		btnLogin.setOnClickListener(this);
 		
 		c = getApplicationContext();
-		
-		Toast.makeText(c, DateFormat.format("yyyy-MM-dd  kk:mm:ss", System.currentTimeMillis()).toString(), Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
@@ -67,31 +61,38 @@ public class Login extends Activity  implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		//check if onclick is login button
+		
+		/*Handles login button*/
 		if(v.getId()==R.id.btnLogin){
-			//validation for empty user or password field
+			/*validation for empty user or password field*/
 			if(txtUser.getText().toString().equals("")){
 				Toast.makeText(getApplicationContext(), "Please enter username", Toast.LENGTH_SHORT).show();
 				}else if(txtPassword.getText().toString().equals("")){
 				Toast.makeText(getApplicationContext(), "Please enter password", Toast.LENGTH_SHORT).show();
 			}else{
-				//proceed to authenticate user with server
-				pbLogin.setVisibility(View.VISIBLE);
-				System.out.println("sq: "+"1. executing loginasynctask");
+				/*proceed to authenticate user with server*/
+				pdLoading = ProgressDialog.show(this, "Please Wait...", "Connecting to server...");
 				new LoginAsyncTask().execute(txtUser.getText().toString(),txtPassword.getText().toString());
 			}
 		}
 	}
 	
-	//function to handle successful login
+	
+	/*function to handle successful login.
+	 *forward user to Main.class.
+	 **/
 	public void login() {
-		System.out.println("sq: "+"10. inside login()");
 		Intent loginIntent = new Intent(this, Main.class);
 		startActivity(loginIntent);
 		finish(); //to prevent user from going back to login activity
 	}
 
-	//class to perform async login authentication with server
+	
+	/*class to handle asynchronous login authentication with server
+	 *Takes in 2 variables: username and password
+	 *send request to: http://www.efxmarket.com/mobile/auth.php
+	 *request method used: HTTPPOST
+	 **/
 	private class LoginAsyncTask extends AsyncTask<String, Integer, Double>{
 		String username = "";
 		@Override
@@ -102,47 +103,54 @@ public class Login extends Activity  implements OnClickListener{
 			return null;
 		}
  
-		//function to execute after server's authentication response
 		protected void onPostExecute(Double result){
-			//handle successful authentication
+			/*Handles successful authentication
+			 *Creates a new object JobsManager to handle jobs for deliveryman.
+			 *Check if job file for deliveryman exist.
+			 * - True:call login function
+			 * - False: Download job file*/
 			if(response.equals("302")){
-				System.out.println("sq: "+"2. login authenticataion success!");
 				jobsmanager = new JobsManager(username);
 				jobsmanager.addHeaderChildren();
-				System.out.println("sq: "+"3. checking job file");
 				if(jobsmanager.checkFileExist()==false){
-					System.out.println("sq: "+"4. download file");
 					jobsmanager.downloadFile(Login.this);
 				}
 				else{
-					pbLogin.setVisibility(View.GONE);
+					String filedata = jobsmanager.readFile().trim();
+					if(filedata.trim().equals("404")){ /*404 means no job found for deliveryman*/
+						jobsmanager.removeFile();
+					}else{
+						/*sort data to respective containers*/
+						jobsmanager.sortJobs(filedata);
+						jobsmanager.prepareJobContainer();
+					}
+					pdLoading.dismiss();
 					login();
 				}
 			}else{
-				//handle fail authentication
-				pbLogin.setVisibility(View.GONE);
+				/*handles fail authentication*/
+				pdLoading.dismiss();
 				Toast.makeText(getApplicationContext(), "Login fail!. Error code: "+response, Toast.LENGTH_LONG).show();
 			}
 			
 		}
 		
 		protected void onProgressUpdate(Integer... progress){
-			pbLogin.setProgress(progress[0]);
+			//pbLogin.setProgress(progress[0]);
 		}
  
-		//function to handle data post to server
 		protected void postData(String user, String password) {
 			HttpClient httpclient = new DefaultHttpClient();
 			HttpPost httppost = new HttpPost("http://www.efxmarket.com/mobile/auth.php");
  
 			try {
-				//add login data
+				/*adds login data*/
 				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 				nameValuePairs.add(new BasicNameValuePair("mUser", user));
 				nameValuePairs.add(new BasicNameValuePair("mPass", password));
 				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
  
-				//execute httppost request and retrieve server's response
+				/*executes HTTPPOST request and retrieve server's response*/
 				ResponseHandler<String> responseHandler = new BasicResponseHandler();
 				response = httpclient.execute(httppost, responseHandler);
 				

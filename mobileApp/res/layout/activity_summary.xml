@@ -10,235 +10,6 @@
     tools:context=".SummaryActivity" >
 
     <TextView
-        android:id="@+id/txtTRJobId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/txtSManifestId"
-        android:layout_below="@+id/txtSManifestId"
-        android:text="Priority Express Mail:" />
-
-    <TextView
-        android:id="@+id/txtTRDestination"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/txtTRJobId"
-        android:layout_below="@+id/txtTRJobId"
-        android:text="Priority Mail:" />
-
-    <TextView
-        android:id="@+id/txtDRName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/txtTRDestination"
-        android:layout_below="@+id/txtTRDestination"
-        android:text="Priority Package:" />
-
-    <TextView
-        android:id="@+id/txtSAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/txtDRName"
-        android:layout_below="@+id/txtDRName"
-        android:text="Registered Mail:" />
-
-    <TextView
-        android:id="@+id/txtDAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/txtSAddress"
-        android:layout_below="@+id/txtSAddress"
-        android:text="Registered Package:" />
-
-    <TextView
-        android:id="@+id/txtDContent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:text="Priority Express Mail:" />
-
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/txtDContent"
-        android:layout_below="@+id/txtDContent"
-        android:text="Priority Mail:" />
-
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView10"
-        android:layout_below="@+id/textView10"
-        android:text="Priority Package:" />
-
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView11"
-        android:layout_below="@+id/textView11"
-        android:text="Registered Mail:" />
-
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView12"
-        android:layout_below="@+id/textView12"
-        android:text="Registered Package:" />
-
-    <TextView
-        android:id="@+id/txtSManifestId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView13"
-        android:layout_below="@+id/textView13"
-        android:layout_marginTop="26dp"
-        android:text="Deliveries:"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/txtCollection"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/txtDContent"
-        android:layout_marginLeft="14dp"
-        android:layout_toRightOf="@+id/textView1"
-        android:text="-"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/txtCPEMail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtCollection"
-        android:layout_below="@+id/txtCollection"
-        android:text="-" />
-
-    <TextView
-        android:id="@+id/txtCPMail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtCPEMail"
-        android:layout_below="@+id/txtCPEMail"
-        android:text="-" />
-
-    <TextView
-        android:id="@+id/txtCPPack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtCPMail"
-        android:layout_below="@+id/txtCPMail"
-        android:text="-" />
-
-    <TextView
-        android:id="@+id/txtCRMail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtCPPack"
-        android:layout_below="@+id/txtCPPack"
-        android:text="-" />
-
-    <TextView
-        android:id="@+id/txtCRPack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtCRMail"
-        android:layout_below="@+id/txtCRMail"
-        android:text="-" />
-
-    <TextView
-        android:id="@+id/txtDeliveries"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/txtSManifestId"
-        android:layout_alignLeft="@+id/txtCRPack"
-        android:text="-"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/txtDPEMail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtDeliveries"
-        android:layout_below="@+id/txtDeliveries"
-        android:text="-" />
-
-    <TextView
-        android:id="@+id/txtDPMail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtDPEMail"
-        android:layout_below="@+id/txtDPEMail"
-        android:text="-" />
-
-    <TextView
-        android:id="@+id/txtDPPack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtDPMail"
-        android:layout_below="@+id/txtDPMail"
-        android:text="-" />
-
-    <TextView
-        android:id="@+id/txtDRMail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtDPPack"
-        android:layout_below="@+id/txtDPPack"
-        android:text="-" />
-
-    <TextView
-        android:id="@+id/txtDRPack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtDRMail"
-        android:layout_below="@+id/txtDRMail"
-        android:text="-" />
-
-    <TextView
-        android:id="@+id/txtCompletion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView8"
-        android:layout_alignBottom="@+id/textView8"
-        android:layout_alignLeft="@+id/txtDRPack"
-        android:text="-"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="59dp"
-        android:layout_toLeftOf="@+id/txtCollection"
-        android:text="Job Completion:"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/txtTransfer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView14"
-        android:layout_alignBottom="@+id/textView14"
-        android:layout_alignLeft="@+id/txtCompletion"
-        android:text="-"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textView8"
-        android:layout_alignRight="@+id/textView8"
-        android:layout_marginBottom="14dp"
-        android:text="Transfers:"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
         android:id="@+id/txtUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -257,14 +28,85 @@
         android:text="@string/retrieve_job" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnRetrieveJob"
-        android:layout_marginLeft="21dp"
-        android:layout_marginTop="19dp"
-        android:layout_toRightOf="@+id/txtUsername"
-        android:text="Collections:"
+        android:layout_marginRight="26dp"
+        android:layout_marginTop="28dp"
+        android:layout_toLeftOf="@+id/btnRetrieveJob"
+        android:text="Total Jobs Left:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/txtJobsLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView8"
+        android:layout_alignBottom="@+id/textView8"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/textView1"
+        android:text="-"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/textView8"
+        android:layout_below="@+id/textView8"
+        android:layout_marginTop="40dp"
+        android:text="Appointments:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/txtDeliveries"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/txtSManifestId"
+        android:layout_alignBottom="@+id/txtSManifestId"
+        android:layout_alignLeft="@+id/txtAppointment"
+        android:text="-"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/txtAppointment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView1"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignLeft="@+id/txtJobsLeft"
+        android:text="-"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/txtSManifestId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="40dp"
+        android:layout_toLeftOf="@+id/txtJobsLeft"
+        android:text="Deliveries:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtSManifestId"
+        android:layout_marginTop="40dp"
+        android:layout_toLeftOf="@+id/txtJobsLeft"
+        android:text="Transfers:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/txtTransfer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView14"
+        android:layout_alignBottom="@+id/textView14"
+        android:layout_alignLeft="@+id/txtDeliveries"
+        android:text="-"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>
