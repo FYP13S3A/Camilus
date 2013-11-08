@@ -50,6 +50,10 @@
             android:name="ss133a.mobile.camilus.Delivery"
             android:label="@string/title_activity_delivery" >
         </activity>
+        <activity
+            android:name="ss133a.mobile.camilus.Signature"
+            android:label="@string/title_activity_signature" >
+        </activity>
     </application>
 
 </manifest>

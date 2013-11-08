@@ -35,14 +35,16 @@ public class JobsManager{
 	List<List<String>> listJobChilds;
 	boolean prepareContainer;
 	Login login;
+	String driver;
 	
-	public JobsManager(){
+	public JobsManager(String driver){
 		hashmapExpandableListContainer = new HashMap<String, List<String>>();
 		hashmapJobsContainer = new HashMap<String, String>();
 		listJobHeader = new ArrayList<String>();
 		listJobHeader2 = new ArrayList<String>();
 		listJobChilds = new ArrayList<List<String>>();
 		prepareContainer= false;
+		this.driver = driver;
 	}
 	
 	public JobsManager(HashMap<String, List<String>> hashmapExpandableListContainer, HashMap<String, String> hashmapJobsContainer,List<String> listJobHeader,
@@ -103,6 +105,14 @@ public class JobsManager{
 		this.prepareContainer = boolContainer;
 	}
 	
+	public String getDriver(){
+		return driver;
+	}
+	
+	public void setDriver(String driver){
+		this.driver = driver;
+	}
+	
 	public void addHeaderChildren(){
 		listJobHeader.add("delivery"); //delivery header
 		listJobHeader.add("collection"); //collection header
@@ -157,8 +167,8 @@ public class JobsManager{
 			//key = manifest id, value = jobid|building|postalcode
 			hashmapJobsContainer.put(jobData[2], jobData[1]+"|"+jobData[3]+"|"+jobData[4]);
 		}else if(jobData[0].equals("delivery")){
-			//key = manifest id, value = jobid|ToAddress|ToPostalCode|SenderName|RecipientName
-			hashmapJobsContainer.put(jobData[2], jobData[1]+"|"+jobData[3]+"|"+jobData[4]+"|"+jobData[5]+"|"+jobData[6]);
+			//key = manifest id, value = jobid|ToAddress|ToPostalCode|SenderName|RecipientName|mailContents
+			hashmapJobsContainer.put(jobData[2], jobData[1]+"|"+jobData[3]+"|"+jobData[4]+"|"+jobData[5]+"|"+jobData[6]+"|"+jobData[7]);
 		}
 	}
 	

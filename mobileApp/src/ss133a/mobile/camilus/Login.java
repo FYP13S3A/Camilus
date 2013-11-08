@@ -27,8 +27,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class Login extends Activity  implements OnClickListener{
-	public final static String LOGIN_USER = "ss133a.mobile.camilus.LOGIN_USER";
-	public final static String JOBS_MANAGER = "ss133a.mobile.camilus.JOBS_MANAGER";
 	private View loginView;
 	private Button btnLogin;
 	private EditText txtUser, txtPassword;
@@ -86,8 +84,6 @@ public class Login extends Activity  implements OnClickListener{
 	public void login() {
 		System.out.println("sq: "+"10. inside login()");
 		Intent loginIntent = new Intent(this, Main.class);
-		String logindetails = txtUser.getText().toString();
-		loginIntent.putExtra(LOGIN_USER, logindetails);
 		startActivity(loginIntent);
 		finish(); //to prevent user from going back to login activity
 	}
@@ -108,7 +104,7 @@ public class Login extends Activity  implements OnClickListener{
 			//handle successful authentication
 			if(response.equals("302")){
 				System.out.println("sq: "+"2. login authenticataion success!");
-				jobsmanager = new JobsManager();
+				jobsmanager = new JobsManager(username);
 				jobsmanager.addHeaderChildren();
 				System.out.println("sq: "+"3. checking job file");
 				if(jobsmanager.checkFileExist(username)==false){

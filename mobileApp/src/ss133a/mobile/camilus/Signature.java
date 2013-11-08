@@ -1,8 +1,8 @@
 package ss133a.mobile.camilus;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -23,61 +23,61 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.gesture.GestureOverlayView;
+import android.graphics.Bitmap;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
-public class Transfer extends Activity {
-	private TextView txtTRManifestId, txtTRDestination;
-	private Button btnTRUpdate;
-	private Context context = this;
+public class Signature extends Activity {
+	private GestureOverlayView govSignaturePad;
+	private Button btnConfirm, btnClear;
 	private ProgressDialog pdLoading;
+	private Context context = this;
+	String manifestid, jobid, driverid;
 	Intent intent;
-	String manifestid,jobId,driverId;
-	int groupPos,childPos;
-	JobsManager jm;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_transfer);
+		setContentView(R.layout.activity_signature);
 		
-		txtTRManifestId = (TextView)findViewById(R.id.txtTRJobId);
-		txtTRDestination = (TextView)findViewById(R.id.txtTRDestination);
-		btnTRUpdate = (Button)findViewById(R.id.btnTRUpdate);
-		jm = Main.jm;
-		
+		govSignaturePad = (GestureOverlayView) findViewById(R.id.signaturePad);
+		btnConfirm = (Button)findViewById(R.id.btnConfirm);
+		btnClear = (Button)findViewById(R.id.btnClear);
 		intent = getIntent();
-		String job = intent.getStringExtra(Jobs.JOB_DATA);
-		manifestid = intent.getStringExtra(Jobs.JOB_MANIFESTID);
-		groupPos = intent.getIntExtra(Jobs.JOB_GROUP_POSN, 0);
-		childPos = intent.getIntExtra(Jobs.JOB_CHILD_POSN, 0);
-		String[] jobdata = job.split("\\|");
-		jobId = jobdata[0];
-		driverId = jm.getDriver();
-		setTitle(manifestid);
-		txtTRManifestId.setText(jobId);
-		txtTRDestination.setText(jobdata[1]);
 		
-		btnTRUpdate.setOnClickListener(new OnClickListener(){
+		jobid = intent.getStringExtra(Delivery.DELIVERY_JOBID);
+		manifestid = intent.getStringExtra(Delivery.DELIVERY_MANIFESTID);
+		driverid = intent.getStringExtra(Delivery.DELIVERY_DRIVERID);
+		
+		//Toast.makeText(getApplicationContext(), "driverid: "+driverid+", jobid: "+jobid+", manifestid: "+manifestid, Toast.LENGTH_SHORT).show();
+		
+		btnClear.setOnClickListener(new OnClickListener(){
         	public void onClick(View v){
-        		//Toast.makeText(v.getContext(), "button testing", Toast.LENGTH_LONG).show();
-        		
+    			govSignaturePad.cancelClearAnimation();
+    			govSignaturePad.clear(true);
+        	}
+        });
+		
+		btnConfirm.setOnClickListener(new OnClickListener(){
+        	public void onClick(View v){
         		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
     			
     			// set title
-    			alertDialogBuilder.setTitle("Transfer Confirmation");
+    			alertDialogBuilder.setTitle("Delivery Confirmation");
     			// set dialog message
     			alertDialogBuilder
-    				.setMessage("Proceed to confirm transfer?")
+    				.setMessage("Proceed to confirm delivery?")
     				.setCancelable(false)
     				.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
     					public void onClick(DialogInterface dialog,int id) {
     						//Toast.makeText(context, "send confirmation testing", Toast.LENGTH_LONG).show();
-    						sendConfirmation(jobId, driverId);
+    						String image = getImageBase64();
+    						sendConfirmation(jobid, driverid,manifestid, image);
     					}
     				  })
     				.setNegativeButton("No",new DialogInterface.OnClickListener() {
@@ -93,7 +93,6 @@ public class Transfer extends Activity {
  
 				// show it
 				alertDialog.show();
-        		
         	}
         });
 	}
@@ -101,16 +100,31 @@ public class Transfer extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.transfer, menu);
+		getMenuInflater().inflate(R.menu.signature, menu);
 		return true;
 	}
 	
-	private class TransferAsyncTask extends AsyncTask<String, Integer, Double>{
+	public void sendConfirmation(String jobId, String driverId, String manifestId, String imageString){
+		pdLoading = ProgressDialog.show(this, "", "Confirming Delivery...");
+		new DeliveryAsyncTask().execute(jobId, driverId, manifestId, imageString);
+	}
+	
+	public String getImageBase64(){
+		govSignaturePad.setDrawingCacheEnabled(true);
+		Bitmap bm = Bitmap.createBitmap(govSignaturePad.getDrawingCache());
+		ByteArrayOutputStream imageStream = new ByteArrayOutputStream();
+		bm.compress(Bitmap.CompressFormat.PNG, 90, imageStream);
+		byte [] imageByte = imageStream.toByteArray();
+        String imageString = Base64.encodeToString(imageByte,Base64.DEFAULT);
+		return imageString;
+	}
+	
+	private class DeliveryAsyncTask extends AsyncTask<String, Integer, Double>{
 		String response = "";
 		@Override
 		protected Double doInBackground(String... params) {
 			// TODO Auto-generated method stub
-			postData(params[0],params[1]);
+			postData(params[0],params[1],params[2],params[3]);
 			return null;
 		}
  
@@ -118,13 +132,14 @@ public class Transfer extends Activity {
 			pdLoading.dismiss();
 			if(response.equals("1")){
 				AlertDialog.Builder builder = new AlertDialog.Builder(context);
-				builder.setTitle("Transfer Confirmation.");
-				builder.setMessage("Transfer confirmation successful!")
+				builder.setTitle("Delivery Confirmation.");
+				builder.setMessage("Delivery confirmation successful!")
 				       .setCancelable(false)
 				       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
 				                //do things
-				        	   jm.removeJob(groupPos, childPos);
+				        	   //jm.removeJob(groupPos, childPos);
+				        	   setResult(RESULT_OK,intent);
 				        	   finish();
 				           }
 				       });
@@ -133,8 +148,8 @@ public class Transfer extends Activity {
 			}
 			else{
 				AlertDialog.Builder builder = new AlertDialog.Builder(context);
-				builder.setTitle("Trasnfer Confirmation.");
-				builder.setMessage("Transfer confirmation fail! please try again.")
+				builder.setTitle("Delivery Confirmation.");
+				builder.setMessage("Delivery confirmation fail! please try again.")
 				       .setCancelable(false)
 				       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
@@ -149,7 +164,7 @@ public class Transfer extends Activity {
 		protected void onProgressUpdate(Integer... progress){
 		}
  
-		public void postData(String jobId, String driverId) {
+		public void postData(String jobId, String driverId, String manifestId, String imageString) {
 			// Create a new HttpClient and Post Header
 			HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost("http://www.efxmarket.com/mobile/update_job.php");
@@ -159,6 +174,8 @@ public class Transfer extends Activity {
 				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 				nameValuePairs.add(new BasicNameValuePair("jobId",jobId));
 				nameValuePairs.add(new BasicNameValuePair("driverId",driverId));
+				nameValuePairs.add(new BasicNameValuePair("image64",imageString));
+				nameValuePairs.add(new BasicNameValuePair("imageName",manifestId));
 				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
  
 				// Execute HTTP Post Request
@@ -172,11 +189,6 @@ public class Transfer extends Activity {
 			}
 		}
  
-	}
-	
-	public void sendConfirmation(String jobId, String driverId){
-		pdLoading = ProgressDialog.show(this, "", "Confirming Transfer...");
-		new TransferAsyncTask().execute(jobId, driverId);
 	}
 
 }

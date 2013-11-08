@@ -16,14 +16,14 @@ public class Summary extends Fragment {
 	private TextView txtColl, txtCPE, txtCP, txtCPP, txtCR, txtCRP;
 	private TextView txtDel, txtDPE, txtDP, txtDPP, txtDR, txtDRP;
 	private TextView txtTrans,txtComplete;
+	JobsManager jm;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View V = inflater.inflate(R.layout.activity_summary, container, false);
-        Bundle argument = getArguments();
-        String username = argument.getString("username", "N/A");
+        jm = Main.jm;
         txtUser = (TextView) V.findViewById(R.id.txtUsername);
-        txtUser.setText(username);
+        txtUser.setText(jm.getDriver());
         
         txtColl = (TextView) V.findViewById(R.id.txtCollection);
         txtCPE = (TextView) V.findViewById(R.id.txtCPEMail);

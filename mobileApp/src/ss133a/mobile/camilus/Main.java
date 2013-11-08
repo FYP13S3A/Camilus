@@ -16,9 +16,6 @@ public class Main extends FragmentActivity  {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		//get intent from login activity
-		Intent intent = getIntent();
-		String username = intent.getStringExtra(Login.LOGIN_USER);
 
 		System.out.println("sq: "+"11. inside main.oncreate.A");
 		//retrieve JobsManager from login intent
@@ -26,19 +23,15 @@ public class Main extends FragmentActivity  {
 		System.out.println("sq: "+"11. inside main.oncreate.B");
 		
 		//read job file and sort jobs
-		jm.sortJobs(jm.readFile(username));
+		jm.sortJobs(jm.readFile(jm.getDriver()));
 		System.out.println("sq: "+"11. inside main.oncreate.C");
-		
-		//create bundle to store username for summary fragment
-		Bundle arguments = new Bundle();
-		arguments.putString("username", username);
 		
 		//initialize tabhost and add tabs
 		mTabHost = (FragmentTabHost)findViewById(android.R.id.tabhost);
 		mTabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
 		
 		mTabHost.addTab(mTabHost.newTabSpec("Summary").setIndicator("Summary"),
-                Summary.class, arguments);
+                Summary.class, null);
 		mTabHost.addTab(mTabHost.newTabSpec("Jobs").setIndicator("Jobs"),
                 Jobs.class, null);
 		mTabHost.addTab(mTabHost.newTabSpec("Scan").setIndicator("Scan"),
