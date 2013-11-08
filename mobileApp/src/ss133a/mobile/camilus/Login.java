@@ -1,7 +1,9 @@
 package ss133a.mobile.camilus;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -9,15 +11,25 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -68,9 +80,24 @@ public class Login extends Activity  implements OnClickListener{
 				}else if(txtPassword.getText().toString().equals("")){
 				Toast.makeText(getApplicationContext(), "Please enter password", Toast.LENGTH_SHORT).show();
 			}else{
-				/*proceed to authenticate user with server*/
-				pdLoading = ProgressDialog.show(this, "Please Wait...", "Connecting to server...");
-				new LoginAsyncTask().execute(txtUser.getText().toString(),txtPassword.getText().toString());
+				if(isConnectingToInternet(getApplicationContext())){
+					/*proceed to authenticate user with server*/
+					pdLoading = ProgressDialog.show(this, "Please Wait...", "Connecting to server...");
+					new LoginAsyncTask().execute(txtUser.getText().toString(),txtPassword.getText().toString());
+				}else{
+					AlertDialog.Builder builder = new AlertDialog.Builder(c);
+					builder.setTitle("Connection Error");
+					builder.setMessage("Unable to connect to Internet.")
+					       .setCancelable(false)
+					       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					           public void onClick(DialogInterface dialog, int id) {
+					        	   
+					           }
+					       });
+					AlertDialog alert = builder.create();
+					alert.show();
+				}
+				
 			}
 		}
 	}
@@ -84,6 +111,23 @@ public class Login extends Activity  implements OnClickListener{
 		startActivity(loginIntent);
 		finish(); //to prevent user from going back to login activity
 	}
+	
+	/*function to check phone's connectivity.*/
+	public boolean isConnectingToInternet(Context context){
+        ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+          if (connectivity != null) 
+          {
+              NetworkInfo[] info = connectivity.getAllNetworkInfo();
+              if (info != null) 
+                  for (int i = 0; i < info.length; i++) 
+                      if (info[i].getState() == NetworkInfo.State.CONNECTED)
+                      {
+                          return true;
+                      }
+ 
+          }
+          return false;
+    }
 
 	
 	/*class to handle asynchronous login authentication with server
@@ -133,12 +177,28 @@ public class Login extends Activity  implements OnClickListener{
 			
 		}
 		
-		protected void onProgressUpdate(Integer... progress){
-			//pbLogin.setProgress(progress[0]);
+		protected void onCancelled (){
+			pdLoading.dismiss();
+			AlertDialog.Builder builder = new AlertDialog.Builder(c);
+			builder.setTitle("Login Error");
+			builder.setMessage("Server is currently busy. Please try again later.")
+			       .setCancelable(false)
+			       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			           public void onClick(DialogInterface dialog, int id) {
+			        	   
+			           }
+			       });
+			AlertDialog alert = builder.create();
+			alert.show();
 		}
  
 		protected void postData(String user, String password) {
-			HttpClient httpclient = new DefaultHttpClient();
+			/*set timeout*/
+			HttpParams httpParams = new BasicHttpParams();
+			HttpConnectionParams.setConnectionTimeout(httpParams, 5000);
+			HttpConnectionParams.setSoTimeout(httpParams, 5000);
+			
+			HttpClient httpclient = new DefaultHttpClient(httpParams);
 			HttpPost httppost = new HttpPost("http://www.efxmarket.com/mobile/auth.php");
  
 			try {
@@ -152,9 +212,13 @@ public class Login extends Activity  implements OnClickListener{
 				ResponseHandler<String> responseHandler = new BasicResponseHandler();
 				response = httpclient.execute(httppost, responseHandler);
 				
+			} catch (ConnectTimeoutException e){
+                cancel(true);
+			} catch (SocketTimeoutException e){
+                cancel(true);
 			} catch (ClientProtocolException e) {
 				// TODO Auto-generated catch block
-			} catch (IOException e) {
+			}  catch (IOException e) {
 				// TODO Auto-generated catch block
 			}
 		}

@@ -11,7 +11,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class Summary extends Fragment {
 	private TextView txtUser;
@@ -49,8 +48,22 @@ public class Summary extends Fragment {
         btnRetrieveJobs.setOnClickListener(new OnClickListener(){
         	public void onClick(View v){
         		if(jm.checkFileExist(v.getContext())==false){
-    				pdLoading = ProgressDialog.show(v.getContext(), "Please Wait...", "Retrieving latest job...");
-        			jm.downloadFileForSummary(Summary.this, v.getContext());
+        			if(jm.isConnectingToInternet(v.getContext())){
+        				pdLoading = ProgressDialog.show(v.getContext(), "Please Wait...", "Retrieving latest job...");
+            			jm.downloadFileForSummary(Summary.this, v.getContext());
+        			}else{
+        				AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+    					builder.setTitle("Connection Error");
+    					builder.setMessage("Unable to connect to Internet.")
+    					       .setCancelable(false)
+    					       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+    					           public void onClick(DialogInterface dialog, int id) {
+    					        	   
+    					           }
+    					       });
+    					AlertDialog alert = builder.create();
+    					alert.show();
+        			}
 				}else{
 					AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
     				builder.setTitle("Retrieve Job Error");

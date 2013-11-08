@@ -43,7 +43,7 @@ public final class R {
         public static final int btnConfirm=0x7f090023;
         public static final int btnDUpdate=0x7f090013;
         public static final int btnDirection=0x7f09001e;
-        public static final int btnLogin=0x7f090018;
+        public static final int btnLogin=0x7f090017;
         public static final int btnRetrieveJob=0x7f090027;
         public static final int btnScan=0x7f09001b;
         public static final int btnTRUpdate=0x7f09002f;
@@ -79,7 +79,7 @@ public final class R {
         public static final int txtDSName=0x7f09000c;
         public static final int txtDeliveries=0x7f090029;
         public static final int txtJobsLeft=0x7f090028;
-        public static final int txtPassword=0x7f090017;
+        public static final int txtPassword=0x7f090018;
         public static final int txtSAddress=0x7f09000e;
         public static final int txtSJobType=0x7f09001c;
         public static final int txtSManifestId=0x7f09000b;

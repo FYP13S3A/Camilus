@@ -9,8 +9,11 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Serializable;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,12 +24,21 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -296,6 +308,72 @@ public class JobsManager{
 	     delivery,appointment,transfer; 
 	 }
 	
+	public boolean isConnectingToInternet(Context context){
+        ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+          if (connectivity != null) 
+          {
+              NetworkInfo[] info = connectivity.getAllNetworkInfo();
+              if (info != null) 
+                  for (int i = 0; i < info.length; i++) 
+                      if (info[i].getState() == NetworkInfo.State.CONNECTED)
+                      {
+                          return true;
+                      }
+ 
+          }
+          return false;
+    }
+	
+	public void setupJobUpdateAlarm(int seconds, Context context) {
+		String data = readJobFromTempFile(context);
+		data = data.substring(0, data.length()-2);
+		AlarmManager alarmManager = (AlarmManager) context.getSystemService(android.content.Context.ALARM_SERVICE);
+		Intent intent = new Intent(context, OnAlarmReceive.class);
+		intent.putExtra("data", data);
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(
+		   context, 0, intent,
+		   PendingIntent.FLAG_UPDATE_CURRENT);
+		 
+		 
+		// Getting current time and add the seconds in it
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.SECOND, seconds);
+		 
+		alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
+	}
+	
+	public void addJobToTempFile(String data, Context c){
+		//String filePath = c.getFilesDir()+File.separator+driver+"_temp.txt";
+		String filePath = File.separator+"storage"+File.separator+"sdcard0"+File.separator+driver+"_temp.txt";
+		try {
+		    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(filePath, true)));
+		    out.print(data+"**");
+		    out.close();
+		} catch (IOException e) {
+		}
+	}
+	
+	public String readJobFromTempFile(Context c){
+		String filedata = "";
+		String filePath = File.separator+"storage"+File.separator+"sdcard0"+File.separator+driver+"_temp.txt";
+		File file = new File(filePath);
+		
+		StringBuilder text = new StringBuilder();
+		try {
+		    BufferedReader br = new BufferedReader(new FileReader(file));
+		    String line;
+		    while ((line = br.readLine()) != null) {
+		        text.append(line);
+		        text.append('\n');
+		    }
+		}
+		catch (IOException e) {
+		   
+		}
+		filedata = text.toString();
+		return filedata;
+	}
+	
 	/*class to handle asynchronous download of job file from server
 	 *Takes in 1 variable: driverId
 	 *send request to: http://www.efxmarket.com/HUBVersion/checkjob.php
@@ -348,11 +426,13 @@ public class JobsManager{
 				sortJobs(filedata);
 				prepareJobContainer();
 			}
-			/*Calls login function to proceed to Main.class*/
+			
 			if(downloadClass.equals("login")){
+				/*Calls login function to proceed to Main.class*/
 				login.pdLoading.dismiss();
 				login.login();
 			}else if(downloadClass.equals("summary")){
+				/*populate Summary fragment*/
 				summary.txtJobsLeft.setText(getHashmapJobsContainer().size()+"");
 				int del = (getHashmapExpandableListContainer().get("delivery")==null?0:getHashmapExpandableListContainer().get("delivery").size());
 				summary.txtDel.setText(del+"");
@@ -378,15 +458,43 @@ public class JobsManager{
 		}
  
 
+		protected void onCancelled (){
+			AlertDialog.Builder builder = new AlertDialog.Builder(context);
+			if(downloadClass.equals("login")){
+				login.pdLoading.dismiss();
+				builder.setTitle("Login Error");
+			}else if(downloadClass.equals("summary")){
+				summary.pdLoading.dismiss();
+				builder.setTitle("Job Retrieval Error");
+			}
+			builder.setMessage("Server is currently busy. Please try again later.")
+			       .setCancelable(false)
+			       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			           public void onClick(DialogInterface dialog, int id) {
+			        	   
+			           }
+			       });
+			AlertDialog alert = builder.create();
+			alert.show();
+		}
+		
 		protected void postData(String user) {
-			HttpClient httpclient = new DefaultHttpClient();
+			HttpParams httpParams = new BasicHttpParams();
+			HttpConnectionParams.setConnectionTimeout(httpParams, 5000);
+			HttpConnectionParams.setSoTimeout(httpParams, 5000);
+			
+			HttpClient httpclient = new DefaultHttpClient(httpParams);
 			HttpGet httpget = new HttpGet("http://www.efxmarket.com/HUBVersion/checkjob.php?id="+user);
 			try {	 
 				/*Executes HTTPGET request and retrieve server's response*/
 				HttpResponse jobResponse = httpclient.execute(httpget);
 				jobEntity = jobResponse.getEntity();
 				
-			} catch (ClientProtocolException e) {
+			} catch (ConnectTimeoutException e){
+                cancel(true);
+			} catch (SocketTimeoutException e){
+                cancel(true);
+			}catch (ClientProtocolException e) {
 				// TODO Auto-generated catch block
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
