@@ -19,7 +19,7 @@
         android:src="@drawable/ic_banner_big" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txtSManifestId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -46,7 +46,7 @@
         android:id="@+id/txtPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignBottom="@+id/txtSManifestId"
         android:layout_alignLeft="@+id/txtUser"
         android:ems="10"
         android:inputType="textPassword" />
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtPassword"
         android:layout_marginTop="30dp"
-        android:layout_toRightOf="@+id/textView2"
+        android:layout_toRightOf="@+id/txtSManifestId"
         android:text="@string/login" />
 
     <ProgressBar

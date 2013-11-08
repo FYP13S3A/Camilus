@@ -3,9 +3,11 @@ package ss133a.mobile.camilus;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -40,8 +42,8 @@ public class JobsManager{
 	public JobsManager(String driver){
 		hashmapExpandableListContainer = new HashMap<String, List<String>>();
 		hashmapJobsContainer = new HashMap<String, String>();
-		listJobHeader = new ArrayList<String>();
-		listJobHeader2 = new ArrayList<String>();
+		listJobHeader = new ArrayList<String>(); //listjobheader is to create the 3 headers for storing of all the children
+		listJobHeader2 = new ArrayList<String>(); //listjobheader2 is to create necessary header inside expandable list
 		listJobChilds = new ArrayList<List<String>>();
 		prepareContainer= false;
 		this.driver = driver;
@@ -115,29 +117,29 @@ public class JobsManager{
 	
 	public void addHeaderChildren(){
 		listJobHeader.add("delivery"); //delivery header
-		listJobHeader.add("collection"); //collection header
+		listJobHeader.add("appointment"); //appointment header
 		listJobHeader.add("transfer"); //transfer header
 		listJobChilds.add(new ArrayList<String>()); //store delivery children
 		listJobChilds.add(new ArrayList<String>()); //store collection children
 		listJobChilds.add(new ArrayList<String>()); //store transfer children
 	}
 	
-	public boolean checkFileExist(String username){
-		String filePath = File.separator+"storage"+File.separator+"sdcard0"+File.separator+username+".txt";
+	public boolean checkFileExist(){
+		String filePath = File.separator+"storage"+File.separator+"sdcard0"+File.separator+driver+".txt";
 		File file = new File(filePath);
 		return file.exists();
 	}
 	
-	public void downloadFile(String username, Login l){
-		System.out.println("sq: "+"5. executing jm.downloadfile, "+username);
+	public void downloadFile(Login l){
+		System.out.println("sq: "+"5. executing jm.downloadfile, "+driver);
 		login = l;
-		new RetrieveJobAsyncTask().execute(username);
+		new RetrieveJobAsyncTask().execute(driver);
 	}
 	
-	public String readFile(String username){
+	public String readFile(){
 		System.out.println("sq: "+"12. read file");
 		String filedata = "";
-		String filePath = File.separator+"storage"+File.separator+"sdcard0"+File.separator+username+".txt";
+		String filePath = File.separator+"storage"+File.separator+"sdcard0"+File.separator+driver+".txt";
 		File file = new File(filePath);
 		
 		StringBuilder text = new StringBuilder();
@@ -161,14 +163,24 @@ public class JobsManager{
 		return filedata;
 	}
 	
+	public void removeFile(){
+		String filePath = File.separator+"storage"+File.separator+"sdcard0"+File.separator+driver+".txt";
+		//delete file
+		File file = new File(filePath);
+		file.delete();
+	}
+	
 	public void addJob(String job){
 		String[] jobData = job.split("\\|");
 		if(jobData[0].equals("transfer")){
-			//key = manifest id, value = jobid|building|postalcode
-			hashmapJobsContainer.put(jobData[2], jobData[1]+"|"+jobData[3]+"|"+jobData[4]);
+			//key = manifest id, value = jobid|building|postalcode|jobType
+			hashmapJobsContainer.put(jobData[2], jobData[1]+"|"+jobData[3]+"|"+jobData[4]+"|"+jobData[0]);
 		}else if(jobData[0].equals("delivery")){
-			//key = manifest id, value = jobid|ToAddress|ToPostalCode|SenderName|RecipientName|mailContents
-			hashmapJobsContainer.put(jobData[2], jobData[1]+"|"+jobData[3]+"|"+jobData[4]+"|"+jobData[5]+"|"+jobData[6]+"|"+jobData[7]);
+			//key = manifest id, value = jobid|ToAddress|ToPostalCode|SenderName|RecipientName|mailContents|jobType
+			hashmapJobsContainer.put(jobData[2], jobData[1]+"|"+jobData[3]+"|"+jobData[4]+"|"+jobData[5]+"|"+jobData[6]+"|"+jobData[7]+"|"+jobData[0]);
+		}else if(jobData[0].equals("appointment")){
+			//key = manifest id, value = jobid|ApptAddress|ApptPostalCode|ApptName|mailContents|jobType
+			hashmapJobsContainer.put(jobData[2], jobData[1]+"|"+jobData[3]+"|"+jobData[4]+"|"+jobData[5]+"|"+jobData[6]+"|"+jobData[0]);
 		}
 	}
 	
@@ -183,7 +195,7 @@ public class JobsManager{
 					case delivery:
 						listJobChilds.get(0).add(jobdetails[2]+" "+jobdetails[3]);
 						break;
-					case collection:
+					case appointment:
 						listJobChilds.get(1).add(jobdetails[2]+" "+jobdetails[3]);
 						break;
 					case transfer:
@@ -209,7 +221,13 @@ public class JobsManager{
 		}
 	}
 	
-	public void removeJob(int groupPos, int childPos){
+	public void removeJob(int groupPos, int childPos, String manifestId){
+		removeJobFromExpandableList(groupPos, childPos);
+		removeJobFromJobContainer(manifestId);
+		removeJobFromFile();
+	}
+	
+	public void removeJobFromExpandableList(int groupPos, int childPos){
 		JobsExpandableAdapter jobAdapt = Jobs.jobAdapter;
 		List<String> child = getHashmapExpandableListContainer().get(getListJobHeader2().get(groupPos));
 		child.remove(childPos);
@@ -219,8 +237,52 @@ public class JobsManager{
 		jobAdapt.notifyDataSetChanged();
 	}
 	
+	public void removeJobFromJobContainer(String manifestId){
+		hashmapJobsContainer.remove(manifestId);
+	}
+	
+	public void removeJobFromFile(){
+		String filePath = File.separator+"storage"+File.separator+"sdcard0"+File.separator+driver+".txt";
+		if(hashmapJobsContainer.size()==0){
+			//delete file
+			File file = new File(filePath);
+			file.delete();
+		}
+		else{
+			String filedata = "";
+			for (String key: hashmapJobsContainer.keySet()) {
+				String job = hashmapJobsContainer.get(key);
+				String[] jobdata = job.split("\\|");
+				
+				switch (jobType.valueOf(jobdata[jobdata.length-1])){
+				case delivery:
+					filedata+=jobdata[6]+"|"+jobdata[0]+"|"+key+"|"+jobdata[1]+"|"+jobdata[2]+"|"+jobdata[3]+"|"+jobdata[4]+"|"+jobdata[5]+"**";
+					break;
+				case appointment:
+					filedata+=jobdata[5]+"|"+jobdata[0]+"|"+key+"|"+jobdata[1]+"|"+jobdata[2]+"|"+jobdata[3]+"|"+jobdata[4]+"**";
+					break;
+				case transfer:
+					filedata+=jobdata[3]+"|"+jobdata[0]+"|"+key+"|"+jobdata[1]+"|"+jobdata[2]+"**";
+					break;
+				default:
+					break;
+				}
+			}
+			filedata= filedata.substring(0, filedata.length()-2);
+			try {
+				FileWriter fstream = new FileWriter(filePath,false);
+				BufferedWriter out = new BufferedWriter(fstream);
+			    out.write(filedata);
+			    out.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	public enum jobType{
-	     delivery,collection,transfer; 
+	     delivery,appointment,transfer; 
 	 }
 	
 	public class RetrieveJobAsyncTask extends AsyncTask<String, Integer, Double>{

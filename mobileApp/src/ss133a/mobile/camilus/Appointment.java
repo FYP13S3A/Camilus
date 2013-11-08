@@ -2,7 +2,6 @@ package ss133a.mobile.camilus;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -28,27 +27,29 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class Transfer extends Activity {
-	private TextView txtTRManifestId, txtTRDestination;
-	private Button btnTRUpdate;
-	private Context context = this;
+public class Appointment extends Activity {
+	private TextView txtAName,txtAAddress,txtAContent;
+	private Button btnAUpdate;
+	private RadioGroup rdgAppointmentStatus;
 	private ProgressDialog pdLoading;
+	private Context context = this;
 	Intent intent;
 	String manifestid,jobId,driverId;
 	int groupPos,childPos;
 	JobsManager jm;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_transfer);
-		
-		txtTRManifestId = (TextView)findViewById(R.id.txtTRJobId);
-		txtTRDestination = (TextView)findViewById(R.id.txtTRDestination);
-		btnTRUpdate = (Button)findViewById(R.id.btnTRUpdate);
+		setContentView(R.layout.activity_appointment);
+		txtAName = (TextView)findViewById(R.id.txtAName);
+		txtAAddress = (TextView)findViewById(R.id.txtAAddress);
+		txtAContent = (TextView)findViewById(R.id.txtAContent);
+		btnAUpdate = (Button)findViewById(R.id.btnAUpdate);
+		rdgAppointmentStatus = (RadioGroup)findViewById(R.id.rdgAppointmentStatus);
 		jm = Main.jm;
 		
 		intent = getIntent();
@@ -60,50 +61,90 @@ public class Transfer extends Activity {
 		jobId = jobdata[0];
 		driverId = jm.getDriver();
 		setTitle(manifestid);
-		txtTRManifestId.setText(jobId);
-		txtTRDestination.setText(jobdata[1]);
 		
-		btnTRUpdate.setOnClickListener(new OnClickListener(){
+		txtAName.setText(jobdata[3]);
+		txtAAddress.setText(jobdata[1]);
+		txtAContent.setText(jobdata[4]);
+		
+		btnAUpdate.setOnClickListener(new OnClickListener(){
         	public void onClick(View v){
-        		//Toast.makeText(v.getContext(), "button testing", Toast.LENGTH_LONG).show();
-        		
-        		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-    			
-    			// set title
-    			alertDialogBuilder.setTitle("Transfer Confirmation");
-    			// set dialog message
-    			alertDialogBuilder
-    				.setMessage("Proceed to confirm transfer?")
-    				.setCancelable(false)
-    				.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
-    					public void onClick(DialogInterface dialog,int id) {
-    						sendConfirmation(jobId, driverId,"complete", DateFormat.format("yyyy-MM-dd  kk:mm:ss", System.currentTimeMillis()).toString());
-    					}
-    				  })
-    				.setNegativeButton("No",new DialogInterface.OnClickListener() {
-    					public void onClick(DialogInterface dialog,int id) {
-    						dialog.cancel();
-    					}
-    				});
-     
-				// create alert dialog
-				AlertDialog alertDialog = alertDialogBuilder.create();
- 
-				// show it
-				alertDialog.show();
+        		if(rdgAppointmentStatus.getCheckedRadioButtonId()==-1){
+    				AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+    				builder.setTitle("Appointment Confirmation Error");
+    				builder.setMessage("Please select an appointment status.")
+    				       .setCancelable(false)
+    				       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+    				           public void onClick(DialogInterface dialog, int id) {
+    				        	   dialog.cancel();
+    				           }
+    				       });
+    				AlertDialog alert = builder.create();
+    				alert.show();
+    			}else{
+    				int option = rdgAppointmentStatus.getCheckedRadioButtonId();
+    				if(option==R.id.rdACollected){
+    					AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(v.getContext());
+    					alertDialogBuilder.setTitle("Appointment Confirmation");
+    					alertDialogBuilder
+    						.setMessage("You have selected 'Collected'. Proceed to confirm appointment status?")
+    						.setCancelable(false)
+    						.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+    							public void onClick(DialogInterface dialog,int id) {
+    								sendConfirmation(jobId, driverId,"complete", DateFormat.format("yyyy-MM-dd  kk:mm:ss", System.currentTimeMillis()).toString());
+    							}
+    						  })
+    						.setNegativeButton("No",new DialogInterface.OnClickListener() {
+    							public void onClick(DialogInterface dialog,int id) {
+    								dialog.cancel();
+    							}
+    						});
+						// create alert dialog
+						AlertDialog alertDialog = alertDialogBuilder.create();
+		 
+						// show it
+						alertDialog.show();
+    				}else{
+    					AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(v.getContext());
+    					alertDialogBuilder.setTitle("Appointment Confirmation");
+    					alertDialogBuilder
+    						.setMessage("You have selected 'Not At Home'. Proceed to confirm appointment status?")
+    						.setCancelable(false)
+    						.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+    							public void onClick(DialogInterface dialog,int id) {
+    								sendConfirmation(jobId, driverId,"on-hold", DateFormat.format("yyyy-MM-dd  kk:mm:ss", System.currentTimeMillis()).toString());
+    							}
+    						  })
+    						.setNegativeButton("No",new DialogInterface.OnClickListener() {
+    							public void onClick(DialogInterface dialog,int id) {
+    								dialog.cancel();
+    							}
+    						});
+						// create alert dialog
+						AlertDialog alertDialog = alertDialogBuilder.create();
+		 
+						// show it
+						alertDialog.show();
+    				}
+    			}
         		
         	}
         });
+		
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.transfer, menu);
+		getMenuInflater().inflate(R.menu.appointment, menu);
 		return true;
 	}
 	
-	private class TransferAsyncTask extends AsyncTask<String, Integer, Double>{
+	public void sendConfirmation(String jobId, String driverId, String status, String time){
+		pdLoading = ProgressDialog.show(this, "", "Confirming Appointment...");
+		new AppointmentAsyncTask().execute(jobId, driverId, status, time);
+	}
+	
+	private class AppointmentAsyncTask extends AsyncTask<String, Integer, Double>{
 		String response = "";
 		@Override
 		protected Double doInBackground(String... params) {
@@ -172,11 +213,6 @@ public class Transfer extends Activity {
 			}
 		}
  
-	}
-	
-	public void sendConfirmation(String jobId, String driverId, String status, String time){
-		pdLoading = ProgressDialog.show(this, "", "Confirming Transfer...");
-		new TransferAsyncTask().execute(jobId, driverId, status, time);
 	}
 
 }

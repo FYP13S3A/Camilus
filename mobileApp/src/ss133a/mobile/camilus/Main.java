@@ -23,7 +23,13 @@ public class Main extends FragmentActivity  {
 		System.out.println("sq: "+"11. inside main.oncreate.B");
 		
 		//read job file and sort jobs
-		jm.sortJobs(jm.readFile(jm.getDriver()));
+		String filedata = jm.readFile();
+		System.out.println("sqsqsqsqsqsqsq:"+filedata+", length:"+filedata.length());
+		if(filedata.trim().equals("404")){
+			jm.removeFile();
+		}else{
+			jm.sortJobs(filedata);
+		}
 		System.out.println("sq: "+"11. inside main.oncreate.C");
 		
 		//initialize tabhost and add tabs
@@ -43,6 +49,11 @@ public class Main extends FragmentActivity  {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+	   super.onActivityResult(requestCode, resultCode, data);
 	}
 
 }

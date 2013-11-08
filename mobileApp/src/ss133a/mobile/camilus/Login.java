@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -52,6 +53,8 @@ public class Login extends Activity  implements OnClickListener{
 		btnLogin.setOnClickListener(this);
 		
 		c = getApplicationContext();
+		
+		Toast.makeText(c, DateFormat.format("yyyy-MM-dd  kk:mm:ss", System.currentTimeMillis()).toString(), Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
@@ -107,9 +110,9 @@ public class Login extends Activity  implements OnClickListener{
 				jobsmanager = new JobsManager(username);
 				jobsmanager.addHeaderChildren();
 				System.out.println("sq: "+"3. checking job file");
-				if(jobsmanager.checkFileExist(username)==false){
+				if(jobsmanager.checkFileExist()==false){
 					System.out.println("sq: "+"4. download file");
-					jobsmanager.downloadFile(username, Login.this);
+					jobsmanager.downloadFile(Login.this);
 				}
 				else{
 					pbLogin.setVisibility(View.GONE);

@@ -13,8 +13,8 @@
         android:id="@+id/txtTRJobId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_below="@+id/textView2"
+        android:layout_alignRight="@+id/txtSManifestId"
+        android:layout_below="@+id/txtSManifestId"
         android:text="Priority Express Mail:" />
 
     <TextView
@@ -34,7 +34,7 @@
         android:text="Priority Package:" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/txtSAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/txtDRName"
@@ -45,8 +45,8 @@
         android:id="@+id/txtDAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView6"
-        android:layout_below="@+id/textView6"
+        android:layout_alignRight="@+id/txtSAddress"
+        android:layout_below="@+id/txtSAddress"
         android:text="Registered Package:" />
 
     <TextView
@@ -90,7 +90,7 @@
         android:text="Registered Package:" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txtSManifestId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/textView13"
@@ -153,7 +153,7 @@
         android:id="@+id/txtDeliveries"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignBottom="@+id/txtSManifestId"
         android:layout_alignLeft="@+id/txtCRPack"
         android:text="-"
         android:textAppearance="?android:attr/textAppearanceMedium" />

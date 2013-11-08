@@ -17,12 +17,19 @@
     <string name="title_activity_delivery">Delivery</string>
     <string name="transfer">Transfer</string>
     <string name="delivery">Delivery</string>
+    <string name="appointment">Appointment</string>
     <string name="confirm_transfer">Confirm Transfer</string>
     <string name="confirm_delivery">Confirm Delivery</string>
-    <string name="received">Received</string>
+    <string name="confirm_collection">Confirm Collection</string>
+    <string name="delivered">Delivered</string>
+    <string name="collected">Collected</string>
     <string name="not_at_home">Not At Home</string>
     <string name="title_activity_signature">Signature</string>
     <string name="clear">Clear</string>
     <string name="confirm">Confirm</string>
+    <string name="scan">Scan</string>
+    <string name="view_details">View Details</string>
+    <string name="get_directions">Get Directions</string>
+    <string name="title_activity_appointment">Appointment</string>
 
 </resources>

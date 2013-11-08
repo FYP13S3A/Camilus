@@ -25,6 +25,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.gesture.GestureOverlayView;
 import android.graphics.Bitmap;
+import android.text.format.DateFormat;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.View;
@@ -54,7 +55,6 @@ public class Signature extends Activity {
 		manifestid = intent.getStringExtra(Delivery.DELIVERY_MANIFESTID);
 		driverid = intent.getStringExtra(Delivery.DELIVERY_DRIVERID);
 		
-		//Toast.makeText(getApplicationContext(), "driverid: "+driverid+", jobid: "+jobid+", manifestid: "+manifestid, Toast.LENGTH_SHORT).show();
 		
 		btnClear.setOnClickListener(new OnClickListener(){
         	public void onClick(View v){
@@ -77,7 +77,7 @@ public class Signature extends Activity {
     					public void onClick(DialogInterface dialog,int id) {
     						//Toast.makeText(context, "send confirmation testing", Toast.LENGTH_LONG).show();
     						String image = getImageBase64();
-    						sendConfirmation(jobid, driverid,manifestid, image);
+    						sendConfirmation(jobid, driverid,manifestid, image, "complete", DateFormat.format("yyyy-MM-dd  kk:mm:ss", System.currentTimeMillis()).toString());
     					}
     				  })
     				.setNegativeButton("No",new DialogInterface.OnClickListener() {
@@ -104,9 +104,9 @@ public class Signature extends Activity {
 		return true;
 	}
 	
-	public void sendConfirmation(String jobId, String driverId, String manifestId, String imageString){
+	public void sendConfirmation(String jobId, String driverId, String manifestId, String imageString, String status, String time){
 		pdLoading = ProgressDialog.show(this, "", "Confirming Delivery...");
-		new DeliveryAsyncTask().execute(jobId, driverId, manifestId, imageString);
+		new DeliveryAsyncTask().execute(jobId, driverId, manifestId, imageString, status, time);
 	}
 	
 	public String getImageBase64(){
@@ -124,7 +124,7 @@ public class Signature extends Activity {
 		@Override
 		protected Double doInBackground(String... params) {
 			// TODO Auto-generated method stub
-			postData(params[0],params[1],params[2],params[3]);
+			postData(params[0],params[1],params[2],params[3],params[4],params[5]);
 			return null;
 		}
  
@@ -164,7 +164,7 @@ public class Signature extends Activity {
 		protected void onProgressUpdate(Integer... progress){
 		}
  
-		public void postData(String jobId, String driverId, String manifestId, String imageString) {
+		public void postData(String jobId, String driverId, String manifestId, String imageString, String status, String time) {
 			// Create a new HttpClient and Post Header
 			HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost("http://www.efxmarket.com/mobile/update_job.php");
@@ -176,6 +176,8 @@ public class Signature extends Activity {
 				nameValuePairs.add(new BasicNameValuePair("driverId",driverId));
 				nameValuePairs.add(new BasicNameValuePair("image64",imageString));
 				nameValuePairs.add(new BasicNameValuePair("imageName",manifestId));
+				nameValuePairs.add(new BasicNameValuePair("status",status));
+				nameValuePairs.add(new BasicNameValuePair("time",time));
 				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
  
 				// Execute HTTP Post Request

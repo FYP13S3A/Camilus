@@ -46,7 +46,7 @@ public class Jobs extends Fragment {
         //retrieve jobsmanager residing on Main.class
         jmanager = Main.jm;
         
-        //prepare job container for espandable list population
+        //prepare job container for expandable list population
         jmanager.prepareJobContainer();
         listJobContainer = jmanager.getHashmapExpandableListContainer();
         listDataHeader = jmanager.getListJobHeader2();
@@ -99,6 +99,8 @@ public class Jobs extends Fragment {
 	                			c = Transfer.class;
 	                		}else if(jobType.equals("delivery")){
 	                			c = Delivery.class;
+	                		}else if(jobType.equals("appointment")){
+	                			c = Appointment.class;
 	                		}
 	                		Intent jobIntent = new Intent(V.getContext(),c);
 	                		String jobdata = jmanager.getHashmapJobsContainer().get(jobManifest);

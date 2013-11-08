@@ -21,18 +21,18 @@
         android:id="@+id/txtTRJobId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView2"
-        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignBaseline="@+id/txtSManifestId"
+        android:layout_alignBottom="@+id/txtSManifestId"
         android:layout_marginLeft="14dp"
-        android:layout_toRightOf="@+id/textView2"
+        android:layout_toRightOf="@+id/txtSManifestId"
         android:text="IDIDID"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/txtAName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
+        android:layout_below="@+id/txtSManifestId"
         android:layout_marginTop="32dp"
         android:layout_toLeftOf="@+id/txtTRJobId"
         android:text="Destination:"
@@ -42,8 +42,8 @@
         android:id="@+id/txtTRDestination"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView3"
-        android:layout_alignBottom="@+id/textView3"
+        android:layout_alignBaseline="@+id/txtAName"
+        android:layout_alignBottom="@+id/txtAName"
         android:layout_alignLeft="@+id/txtTRJobId"
         android:text="testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttest"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -58,7 +58,7 @@
         android:text="@string/confirm_transfer" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txtSManifestId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"
