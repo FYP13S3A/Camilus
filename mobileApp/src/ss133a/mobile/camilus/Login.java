@@ -1,21 +1,13 @@
 package ss133a.mobile.camilus;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -24,6 +16,7 @@ import org.apache.http.message.BasicNameValuePair;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -34,12 +27,20 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class Login extends Activity  implements OnClickListener{
-	public final static String LOGIN_MESSAGE = "ss133a.mobile.camilus.MESSAGE";
+	public final static String LOGIN_USER = "ss133a.mobile.camilus.LOGIN_USER";
+	public final static String JOBS_MANAGER = "ss133a.mobile.camilus.JOBS_MANAGER";
 	private View loginView;
 	private Button btnLogin;
 	private EditText txtUser, txtPassword;
-	private ProgressBar pbLogin;
+	ProgressBar pbLogin;
 	String response = "000";
+	public static JobsManager jobsmanager;
+	Context c;
+	
+	public Login(){
+		
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,6 +52,8 @@ public class Login extends Activity  implements OnClickListener{
 		pbLogin.setVisibility(View.GONE);
 		loginView = this.findViewById(android.R.id.content);
 		btnLogin.setOnClickListener(this);
+		
+		c = getApplicationContext();
 	}
 
 	@Override
@@ -73,16 +76,18 @@ public class Login extends Activity  implements OnClickListener{
 			}else{
 				//proceed to authenticate user with server
 				pbLogin.setVisibility(View.VISIBLE);
+				System.out.println("sq: "+"1. executing loginasynctask");
 				new LoginAsyncTask().execute(txtUser.getText().toString(),txtPassword.getText().toString());
 			}
 		}
 	}
 	
 	//function to handle successful login
-	public void login(View view) {
+	public void login() {
+		System.out.println("sq: "+"10. inside login()");
 		Intent loginIntent = new Intent(this, Main.class);
 		String logindetails = txtUser.getText().toString();
-		loginIntent.putExtra(LOGIN_MESSAGE, logindetails);
+		loginIntent.putExtra(LOGIN_USER, logindetails);
 		startActivity(loginIntent);
 		finish(); //to prevent user from going back to login activity
 	}
@@ -102,9 +107,18 @@ public class Login extends Activity  implements OnClickListener{
 		protected void onPostExecute(Double result){
 			//handle successful authentication
 			if(response.equals("302")){
-				//pbLogin.setVisibility(View.GONE);
-				//login(loginView);
-				new RetrieveJobAsyncTask().execute(username);
+				System.out.println("sq: "+"2. login authenticataion success!");
+				jobsmanager = new JobsManager();
+				jobsmanager.addHeaderChildren();
+				System.out.println("sq: "+"3. checking job file");
+				if(jobsmanager.checkFileExist(username)==false){
+					System.out.println("sq: "+"4. download file");
+					jobsmanager.downloadFile(username, Login.this);
+				}
+				else{
+					pbLogin.setVisibility(View.GONE);
+					login();
+				}
 			}else{
 				//handle fail authentication
 				pbLogin.setVisibility(View.GONE);
@@ -141,66 +155,4 @@ public class Login extends Activity  implements OnClickListener{
 		}
  
 	}
-	
-	//class to retrieve job list from server
-		private class RetrieveJobAsyncTask extends AsyncTask<String, Integer, Double>{
-			HttpEntity jobEntity;
-			@Override
-			protected Double doInBackground(String... params) {
-				// TODO Auto-generated method stub
-				postData(params[0]);
-				return null;
-			}
-	 
-			//function to execute after server's authentication response
-			protected void onPostExecute(Double result){
-				pbLogin.setVisibility(View.GONE);
-				if (jobEntity != null) {
-					try {
-						BufferedInputStream bis = new BufferedInputStream(jobEntity.getContent());
-						//String filePath = getFilesDir()+File.separator+"jobs.txt";
-						String filePath = File.separator+"storage"+File.separator+"sdcard0"+File.separator+"job.txt";
-						Toast.makeText(getApplicationContext(), filePath, Toast.LENGTH_LONG).show();
-						BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(new File(filePath)));
-						int inByte;
-						while((inByte = bis.read()) != -1) bos.write(inByte);
-						bis.close();
-						bos.close();
-						pbLogin.setVisibility(View.GONE);
-						login(loginView);
-					} catch (IllegalStateException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}else{
-					Toast.makeText(getApplicationContext(), "unable to retrieve file", Toast.LENGTH_LONG).show();
-				}
-				
-			}
-			
-			protected void onProgressUpdate(Integer... progress){
-				pbLogin.setProgress(progress[0]);
-			}
-	 
-			//function to handle data post to server
-			protected void postData(String user) {
-				HttpClient httpclient = new DefaultHttpClient();
-				//HttpPost httppost = new HttpPost("http://www.efxmarket.com/mobile/checkjob.php");
-				HttpGet httpget = new HttpGet("http://www.efxmarket.com/HUBVersion/checkjob.php?id="+user);
-				try {	 
-					//execute httpget request and retrieve server's response
-					HttpResponse jobResponse = httpclient.execute(httpget);
-					jobEntity = jobResponse.getEntity();
-					
-				} catch (ClientProtocolException e) {
-					// TODO Auto-generated catch block
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-				}
-			}
-	 
-		}
 }

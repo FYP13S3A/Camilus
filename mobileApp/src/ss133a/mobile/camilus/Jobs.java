@@ -1,6 +1,5 @@
 package ss133a.mobile.camilus;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class Jobs extends Fragment {
 	JobsExpandableAdapter jobAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
-    HashMap<String, List<String>> listDataChild;
+    HashMap<String, List<String>> listJobContainer;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -29,13 +28,15 @@ public class Jobs extends Fragment {
         final View V = inflater.inflate(R.layout.activity_jobs, container, false);
         
         expListView = (ExpandableListView) V.findViewById(R.id.joblist);
+        
+        //retrieve jobsmanager residing on Main.class
         JobsManager jmanager = Main.jm;
+        
+        //prepare job container for espandable list population
         jmanager.prepareJobContainer();
-        listDataChild = jmanager.getDataContainer();
-        listDataHeader = jmanager.getJobHeader();
-        //jobAdapter = new JobsExpandableAdapter(V.getContext(), jmanager.getJobHeader(), jmanager.getDataContainer());
-        //prepareListData();
-        jobAdapter = new JobsExpandableAdapter(V.getContext(), listDataHeader, listDataChild);
+        listJobContainer = jmanager.getHashmapDataContainer();
+        listDataHeader = jmanager.getListJobHeader2();
+        jobAdapter = new JobsExpandableAdapter(V.getContext(), listDataHeader, listJobContainer);
         expListView.setAdapter(jobAdapter);
         
         expListView.setOnGroupClickListener(new OnGroupClickListener() {
@@ -70,7 +71,7 @@ public class Jobs extends Fragment {
                         V.getContext(),
                         listDataHeader.get(groupPosition)
                                 + " : "
-                                + listDataChild.get(
+                                + listJobContainer.get(
                                         listDataHeader.get(groupPosition)).get(
                                         childPosition), Toast.LENGTH_SHORT)
                         .show();
@@ -80,80 +81,5 @@ public class Jobs extends Fragment {
         
         return V;
 	}
-	
-	private void prepareListData() {
-        listDataHeader = new ArrayList<String>();
-        listDataChild = new HashMap<String, List<String>>();
- 
-        // Adding child data
-        listDataHeader.add("Collection - Priority Express Mail");
-        listDataHeader.add("Collection - Priority Mail");
-        listDataHeader.add("Collection - Priority Package");
-        listDataHeader.add("Collection - Registered Mail");
-        listDataHeader.add("Collection - Registered Package");
-        
-        listDataHeader.add("Delivery - Priority Express Mail");
-        listDataHeader.add("Delivery - Priority Mail");
-        listDataHeader.add("Delivery - Priority Package");
-        listDataHeader.add("Delivery - Registered Mail");
-        listDataHeader.add("Delivery - Registered Package");
- 
-        // Adding child data
-        List<String> collectionsPEM = new ArrayList<String>();
-        collectionsPEM.add("Address 1");
-        collectionsPEM.add("Address 2");
-        
-        List<String> collectionsPM = new ArrayList<String>();
-        collectionsPM.add("Address 3");
-        collectionsPM.add("Address 4");
-        collectionsPM.add("Address 5");
-        
-        List<String> collectionsPP = new ArrayList<String>();
-        collectionsPP.add("Address 6");
-        collectionsPP.add("Address 7");
-        
-        List<String> collectionsRM = new ArrayList<String>();
-        collectionsRM.add("Address 8");
-        collectionsRM.add("Address 9");
-        
-        List<String> collectionsRP = new ArrayList<String>();
-        collectionsRP.add("237 Tampines Street 21");
-        collectionsRP.add("519 Bedok North Ave 2");
-        
-        List<String> deliveriesPEM = new ArrayList<String>();
-        deliveriesPEM.add("Address 1");
-        deliveriesPEM.add("Address 2");
-        
-        List<String> deliveriesPM = new ArrayList<String>();
-        deliveriesPM.add("Address 3");
-        deliveriesPM.add("Address 4");
-        deliveriesPM.add("Address 5");
-        
-        List<String> deliveriesPP = new ArrayList<String>();
-        deliveriesPP.add("Address 6");
-        deliveriesPP.add("Address 7");
-        
-        List<String> deliveriesRM = new ArrayList<String>();
-        deliveriesRM.add("Address 8");
-        deliveriesRM.add("Address 9");
-        
-        List<String> deliveriesRP = new ArrayList<String>();
-        deliveriesRP.add("111 Tampines Street 11");
-        deliveriesRP.add("749 Tampines Street 79");
-        deliveriesRP.add("201A Tampines Street 21");
- 
-        listDataChild.put(listDataHeader.get(0), collectionsPEM); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), collectionsPM);
-        listDataChild.put(listDataHeader.get(2), collectionsPP);
-        listDataChild.put(listDataHeader.get(3), collectionsRM);
-        listDataChild.put(listDataHeader.get(4), collectionsRP);
-        listDataChild.put(listDataHeader.get(5), deliveriesPEM);
-        listDataChild.put(listDataHeader.get(6), deliveriesPM);
-        listDataChild.put(listDataHeader.get(7), deliveriesPP);
-        listDataChild.put(listDataHeader.get(8), deliveriesRM);
-        listDataChild.put(listDataHeader.get(9), deliveriesRP);
-
-       // Toast.makeText(V.getContext(), "jobs added", Toast.LENGTH_LONG).show();
-    }
 
 }
