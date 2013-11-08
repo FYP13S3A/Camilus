@@ -24,13 +24,10 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 
 import android.app.AlarmManager;
-import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.ConnectivityManager;
@@ -197,7 +194,7 @@ public class OnAlarmReceive extends BroadcastReceiver {
 			HttpConnectionParams.setSoTimeout(httpParams, 10000);
 			
 			HttpClient httpclient = new DefaultHttpClient(httpParams);
-            HttpPost httppost = new HttpPost("http://www.efxmarket.com/mobile/update_job.php");
+            HttpPost httppost = new HttpPost("http://www.camilus.org/mobile/update_job.php");
             
 			try {
 				// Add data

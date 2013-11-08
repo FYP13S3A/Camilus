@@ -171,7 +171,7 @@ public class Delivery extends Activity {
 	
 	/*class to handle asynchronous update of delivery job status to userver
 	 *Takes in 5 variable: jobType, jobId, driverId, status, time
-	 *send request to: http://www.efxmarket.com/mobile/update_job.php
+	 *send request to: http://www.camilus.org/mobile/update_job.php
 	 *request method used: HTTPPOST
 	 **/
 	private class DeliveryAsyncTask extends AsyncTask<String, Integer, Double>{
@@ -196,7 +196,7 @@ public class Delivery extends Activity {
 				           public void onClick(DialogInterface dialog, int id) {
 				                /*Call removeJob to remove job data from application and file*/
 				        	   jm.removeJob(groupPos, childPos, manifestid, context);
-				        	   //setResult(RESULT_OK,intent);
+				        	   setResult(RESULT_OK,intent); //For Scan fragment's onActivityResult
 				        	   finish();
 				           }
 				       });
@@ -243,7 +243,7 @@ public class Delivery extends Activity {
 			HttpConnectionParams.setSoTimeout(httpParams, 5000);
 			
 			HttpClient httpclient = new DefaultHttpClient(httpParams);
-            HttpPost httppost = new HttpPost("http://www.efxmarket.com/mobile/update_job.php");
+            HttpPost httppost = new HttpPost("http://www.camilus.org/mobile/update_job.php");
             
 			try {
 				// Add data

@@ -88,6 +88,7 @@ public class Transfer extends Activity {
 		    					        	   jm.addJobToTempFile("transfer"+"|"+jobId+"|"+driverId+"|"+"complete"+"|"+DateFormat.format("yyyy-MM-dd  kk:mm:ss", System.currentTimeMillis()).toString(), context);
 		    					        	   jm.setupJobUpdateAlarm(5, context);
 		    					        	   jm.removeJob(groupPos, childPos, manifestid, context);
+		    					        	   setResult(RESULT_OK,intent); //For Scan fragment's onActivityResult
 		    					        	   finish();
 		    					           }
 		    					       });
@@ -182,7 +183,7 @@ public class Transfer extends Activity {
 			HttpConnectionParams.setSoTimeout(httpParams, 5000);
 			
 			HttpClient httpclient = new DefaultHttpClient(httpParams);
-            HttpPost httppost = new HttpPost("http://www.efxmarket.com/mobile/update_job.php");
+            HttpPost httppost = new HttpPost("http://www.camilus.org/mobile/update_job.php");
             
 			try {
 				// Add data

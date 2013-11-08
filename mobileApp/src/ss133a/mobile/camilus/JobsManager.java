@@ -10,14 +10,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Serializable;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -40,10 +37,6 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.view.View;
-import android.widget.Toast;
 
 public class JobsManager{
 	HashMap<String, List<String>> hashmapExpandableListContainer;
@@ -355,7 +348,7 @@ public class JobsManager{
 	
 	/*class to handle asynchronous download of job file from server
 	 *Takes in 1 variable: driverId
-	 *send request to: http://www.efxmarket.com/HUBVersion/checkjob.php
+	 *send request to: http://www.camilus.org/HUBVersion/checkjob.php
 	 *request method used: HTTPGET
 	 **/
 	public class RetrieveJobAsyncTask extends AsyncTask<String, Integer, Double>{
@@ -463,7 +456,7 @@ public class JobsManager{
 			HttpConnectionParams.setSoTimeout(httpParams, 5000);
 			
 			HttpClient httpclient = new DefaultHttpClient(httpParams);
-			HttpGet httpget = new HttpGet("http://www.efxmarket.com/HUBVersion/checkjob.php?id="+user);
+			HttpGet httpget = new HttpGet("http://www.camilus.org/HUBVersion/checkjob.php?id="+user);
 			try {	 
 				/*Executes HTTPGET request and retrieve server's response*/
 				HttpResponse jobResponse = httpclient.execute(httpget);

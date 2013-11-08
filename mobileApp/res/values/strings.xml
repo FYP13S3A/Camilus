@@ -31,5 +31,6 @@
     <string name="view_details">View Details</string>
     <string name="get_directions">Get Directions</string>
     <string name="title_activity_appointment">Appointment</string>
+    <string name="title_activity_gmap">GMap</string>
 
 </resources>

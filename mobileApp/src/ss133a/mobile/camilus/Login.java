@@ -3,7 +3,6 @@ package ss133a.mobile.camilus;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -24,9 +23,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
-import android.app.AlarmManager;
 import android.app.AlertDialog;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -36,7 +33,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class Login extends Activity  implements OnClickListener{
@@ -132,7 +128,7 @@ public class Login extends Activity  implements OnClickListener{
 	
 	/*class to handle asynchronous login authentication with server
 	 *Takes in 2 variables: username and password
-	 *send request to: http://www.efxmarket.com/mobile/auth.php
+	 *send request to: http://www.camilus.org/mobile/auth.php
 	 *request method used: HTTPPOST
 	 **/
 	private class LoginAsyncTask extends AsyncTask<String, Integer, Double>{
@@ -199,7 +195,7 @@ public class Login extends Activity  implements OnClickListener{
 			HttpConnectionParams.setSoTimeout(httpParams, 5000);
 			
 			HttpClient httpclient = new DefaultHttpClient(httpParams);
-			HttpPost httppost = new HttpPost("http://www.efxmarket.com/mobile/auth.php");
+			HttpPost httppost = new HttpPost("http://www.camilus.org/mobile/auth.php");
  
 			try {
 				/*adds login data*/

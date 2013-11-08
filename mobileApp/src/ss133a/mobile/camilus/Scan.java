@@ -6,6 +6,7 @@ import ss133a.mobile.camilus.JobsManager.jobType;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -83,6 +84,18 @@ public class Scan extends Fragment {
             		startActivityForResult(jobIntent,VIEW_REQUEST);
 	        	}
 	        });
+	        
+	        btnDirection.setOnClickListener(new OnClickListener(){
+	        	public void onClick(View v){
+	        		String jobdata = jm.getHashmapJobsContainer().get(txtSManifestId.getText().toString());
+            		String postalcode = jobdata.split("\\|")[2];
+            		String address = jobdata.split("\\|")[1];
+            		Intent mapIntent = new Intent(V.getContext(),GMap.class);
+            		mapIntent.putExtra("postalcode", postalcode);
+            		mapIntent.putExtra("address", address);
+            		startActivity(mapIntent);
+	        	}
+	        });
 	        return V;
 	}
 	
@@ -120,7 +133,7 @@ public class Scan extends Fragment {
 			}else{
 				Toast.makeText(V.getContext(),"No scan data received!", Toast.LENGTH_SHORT).show();
 			}
-		}else if(requestCode==VIEW_REQUEST){
+		}else if(requestCode==VIEW_REQUEST && resultCode==Activity.RESULT_OK){
 			/*To clear fields and disable buttons after user return from View Jobs*/
 			txtSManifestId.setText("");
 			txtSJobType.setText("");

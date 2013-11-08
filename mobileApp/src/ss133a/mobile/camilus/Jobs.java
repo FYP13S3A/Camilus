@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
-import android.widget.Toast;
 import android.widget.ExpandableListView.OnChildClickListener;
 
 public class Jobs extends Fragment {
@@ -79,8 +78,13 @@ public class Jobs extends Fragment {
 	                		startActivity(jobIntent);
 	                	}
 	                	else if(choice == 1) {
-	                		/*Handles Get Direction Choice*/
-	                		Toast.makeText(V.getContext(),"you have choosen Get Direction",Toast.LENGTH_SHORT).show();
+	                		String jobdata = jmanager.getHashmapJobsContainer().get(jobManifest);
+	                		String postalcode = jobdata.split("\\|")[2];
+	                		String address = jobdata.split("\\|")[1];
+	                		Intent mapIntent = new Intent(V.getContext(),GMap.class);
+	                		mapIntent.putExtra("postalcode", postalcode);
+	                		mapIntent.putExtra("address", address);
+	                		startActivity(mapIntent);
 	                	}
                 	}
                 });

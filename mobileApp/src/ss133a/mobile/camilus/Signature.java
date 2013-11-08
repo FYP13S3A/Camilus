@@ -201,7 +201,7 @@ public class Signature extends Activity {
 			HttpConnectionParams.setSoTimeout(httpParams, 5000);
 			
 			HttpClient httpclient = new DefaultHttpClient(httpParams);
-            HttpPost httppost = new HttpPost("http://www.efxmarket.com/mobile/update_job.php");
+            HttpPost httppost = new HttpPost("http://www.camilus.org/mobile/update_job.php");
             
 			try {
 				// Add data

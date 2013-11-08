@@ -198,7 +198,7 @@ public class Appointment extends Activity {
 				       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
 				        	   jm.removeJob(groupPos, childPos, manifestid, context);
-				        	   //setResult(RESULT_OK,intent);
+				        	   setResult(RESULT_OK,intent); //For Scan fragment's onActivityResult
 				        	   finish();
 				           }
 				       });
@@ -245,7 +245,7 @@ public class Appointment extends Activity {
 			HttpConnectionParams.setSoTimeout(httpParams, 5000);
 			
 			HttpClient httpclient = new DefaultHttpClient(httpParams);
-            HttpPost httppost = new HttpPost("http://www.efxmarket.com/mobile/update_job.php");
+            HttpPost httppost = new HttpPost("http://www.camilus.org/mobile/update_job.php");
             
 			try {
 				// Add data
