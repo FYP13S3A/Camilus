@@ -16,24 +16,29 @@ header('Location: http://www.efxmarket.com/HUBVersion/index.php');
  
  	 if (isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > 0){
 		 $id = $_GET['id'];
- 		 $result = mysql_query("SELECT * FROM vehicletype WHERE `Vehicle_Type_Id` = $id")
+ 		 $result = mysql_query("SELECT Name, Service_Information, Expected_Local_Duration, Expected_Overseas_Duration, Expected_Start_Time, Last_Collection_Time, Last_Delivery_Time, mailbag_usage FROM servicetype WHERE Service_Type_Id=$id")
  		 or die(mysql_error()); 
 		 $rowcount = mysql_num_rows($result);
 		$row = mysql_fetch_array($result);
 		$mode ="update";
-		$btnvalue="Update Vehicle Type";
+		$btnvalue="Update Service Type";
 	
 		 if($rowcount>0){
 			$name = $row['Name'];
-			$description = $row['Description'];  
-			$threshold = $row['Mail_Threshold']; 
+			$serviceInfo = $row['Service_Information'];  
+			$localdura = $row['Expected_Local_Duration']; 
+			$overseasdura = $row['Expected_Overseas_Duration']; 
+			$starttime = $row['Expected_Start_Time']; 
+			$coltime = $row['Last_Collection_Time']; 
+			$deltime = $row['Last_Delivery_Time']; 
+			$mailbag = $row['mailbag_usage'];
 		 }else{
 			 echo "No results!"; 
 		 }
 	 }//GET CHECK END
 	 else{
 		 $mode = "new";
-		 $btnvalue="Add Vehicle Type";
+		 $btnvalue="Add Service Type";
 	 }
  
  ?>
@@ -48,7 +53,7 @@ header('Location: http://www.efxmarket.com/HUBVersion/index.php');
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Camilus - Vehicle Type Management</title>
+<title>Camilus - Service Type Management</title>
 
 <link href="../../_css/boilerplate.css" rel="stylesheet" type="text/css">
 <link href="../../_css/layout.css" rel="stylesheet" type="text/css">
@@ -69,7 +74,10 @@ Do the following if you're using your customized build of modernizr (http://www.
 <!--[if lt IE 9]>
 <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
-<script src="../zones/_script/respond.min.js"></script>
+<script src="../../_script/respond.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.1.15/jquery.form-validator.min.js"></script>
+<script src="../../_script/jquery.form-validator.js"></script>
 </head>
 
 <body onLoad="updateSubCats()">
@@ -117,29 +125,70 @@ echo '<li class=\"last\"><a href="../managevehtype/manage.php">Add Vehicle Types
 <div>
 <table width="100%" border="0">
   <tr>
-    <td><label class="sectionTitle" id="frmItem">Add District</label></td>
+    <td><label class="sectionTitle" id="frmItem"><?php 
+	if($mode=="new"){
+		echo "Add Service Type";
+	}else if ($mode=="update"){
+		echo "Update Service Type";
+	}
+	?>
+	</label></td>
     </tr>
   <tr>
     <td></td>
     </tr>
   <tr>
-    <td><form action="../managevehtype - Copy/handler.php" method="post" name="frmAddZone" id="frmAddZone">
+    <td><form action="handler.php" method="post" name="frmAddZone" id="frmAddZone">
     <input type="hidden" name="mode" value="<?php echo $mode; ?>"/>
     <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-      <table width="48%" border="0">
+      <table width="56%" height="343" border="0">
         <tr>
-          <td width="35%"><label class="frmItemName">Name :</label></td>
-          <td width="65%"><input type="text" name="name" id="name" size="40" value="<?php echo $name;?>"></td>
+          <td width="52%"><label class="frmItemName">Service Type Name :</label></td>
+          <td width="48%"><input type="text" name="name"  size="40" value="<?php echo $name;?>"  data-validation="custom length" data-validation-length="max30" data-validation-regexp="^([a-zA-Z]+)$" data-validation-error-msg="Please enter service type name."/></td>
         </tr>
         <tr>
-          <td><label class="frmItemName">Description :</label></td>
-          <td colspan="2"><label for="description"></label>
-            <textarea name="description" cols="38" rows="5" id="description" ><?php echo $description;?></textarea>          
+          <td><label class="frmItemName">Service Information :</label></td>
+          <td>
+            <textarea name="serviceInfo" cols="42" rows="5"  data-validation="custom length" data-validation-length="max100" data-validation-regexp="^([a-zA-Z]+)$" data-validation-error-msg="Please enter the service information."><?php echo $serviceInfo;?> </textarea>          
             </tr>
         <tr>
-          <td><label class="frmItemName">Mail Threshold :</label></td>
-          <td colspan="2"><label for="threshold"></label>
-            <input type="text" name="threshold" id="threshold" value="<?php echo $threshold;?>"></tr>
+          <td><label class="frmItemName">Expected Local Duration :</label></td>
+          <td >
+            <input name="localdura" type="text"  value="<?php echo $localdura;?>" size="10" data-validation="number length" data-validation-length="1-2" data-validation-error-msg="Please enter the expected local duration."></tr>
+        <tr>
+          <td><label class="frmItemName">Expected Overseas Duration :</label></td>
+          <td><input name="overseasdura" type="text"  value="<?php echo $overseasdura;?>" size="10" data-validation="number length" data-validation-length="1-2" data-validation-error-msg="Please enter the expected oversea duration." /></td>
+        </tr>
+        <tr>
+          <td><label class="frmItemName">Expected Start Time : (HH:MM:SS)</label></td>
+          <td><input name="starttime" type="text"  value="<?php echo $starttime;?>" size="10" data-validation="required" data-validation-error-msg="Please enter in the following format HH:MM:SS."></td>
+        </tr>
+        <tr>
+          <td><label class="frmItemName">Last Collection Time : (HH:MM:SS)</label></td>
+          <td><input name="coltime" type="text"  value="<?php echo $coltime;?>" size="10" data-validation="required" data-validation-error-msg="Please enter in the following format HH:MM:SS."></td>
+        </tr>
+             <tr>
+          <td><label class="frmItemName">Last Delivery Time : (HH:MM:SS)</label></td>
+          <td><input name="deltime" type="text"  value="<?php echo $deltime;?>" size="10" data-validation="required" data-validation-error-msg="Please enter in the following format HH:MM:SS."></td>
+        </tr>
+                <tr>
+          <td><label class="frmItemName">Mail Bag Needed :</label></td>
+          <td><select name="mailbag">
+            <?php
+				
+					if($mailbag==1){
+   						echo "<option selected=\"selected\" value=\"" . '1' . "\">" . 'Yes' . "</option>";
+						echo "<option value=\"" . '0' . "\">" . 'No'. "</option>";
+					}//end if
+				else if ($mailbag==0){
+					echo "<option selected=\"selected\" value=\"" . '0' . "\">" . 'No' . "</option>";
+   						echo "<option value=\"" . '1' . "\">" . 'Yes'. "</option>";
+					}//end else
+				
+			?>
+          </select></td>
+        </tr>
+        <tr>
         <tr>
           <td>&nbsp;</td>
           <td>&nbsp;</td>
@@ -163,6 +212,35 @@ echo '<li class=\"last\"><a href="../managevehtype/manage.php">Add Vehicle Types
 <?php include("../../footer.php"); ?>
 </div><!---end#contentBox--->
 </div>
+<script>
+(function($) {
 
+    var dev = window.location.hash.indexOf('dev') > -1 ? '.dev' : '';
+	
+
+
+    $.validate({
+        language : {
+            requiredFields: 'All these fields are required.'
+        },
+        errorMessagePosition : 'top',
+        scrollToTopOnError : true,
+          decimalSeparator : '.',
+        onValidate : function() {
+            var $callbackInput = $('#callback');
+            if( $callbackInput.val() == 1 ) {
+                return {
+                    element : $callbackInput,
+                    message : 'This validation was made in a callback'
+                };
+            }
+        }
+      
+    });
+
+ 
+
+})(jQuery);
+</script>
 </body>
 </html>

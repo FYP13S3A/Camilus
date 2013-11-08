@@ -1,0 +1,12 @@
+[31-Oct-2013 13:17:58] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/admin/managebuilding/index.php on line 300
+[31-Oct-2013 13:18:08] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/admin/managebuilding/index.php on line 300
+[31-Oct-2013 13:40:27] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/admin/managebuilding/index.php on line 122
+[31-Oct-2013 13:40:27] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/admin/managebuilding/index.php on line 363
+[31-Oct-2013 13:41:44] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/admin/managebuilding/index.php on line 122
+[31-Oct-2013 13:41:44] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/admin/managebuilding/index.php on line 363
+[31-Oct-2013 13:43:32] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/admin/managebuilding/index.php on line 120
+[31-Oct-2013 13:43:32] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/admin/managebuilding/index.php on line 359
+[31-Oct-2013 13:49:32] PHP Warning:  Unexpected character in input:  ''' (ASCII=39) state=1 in /home/camilus/public_html/HUBVersion/admin/managebuilding/index.php on line 248
+[31-Oct-2013 13:49:32] PHP Parse error:  syntax error, unexpected '<' in /home/camilus/public_html/HUBVersion/admin/managebuilding/index.php on line 248
+[31-Oct-2013 14:45:37] PHP Fatal error:  [] operator not supported for strings in /home/camilus/public_html/HUBVersion/admin/managebuilding/manage.php on line 51
+[31-Oct-2013 15:39:23] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/admin/managebuilding/handler.php on line 45

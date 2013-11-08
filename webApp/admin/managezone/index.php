@@ -13,7 +13,42 @@ header('Location: http://www.efxmarket.com/HUBVersion/index.php');
 
 ?>
  <?php
-$sql = "SELECT * FROM  `zone` ORDER BY  `Zone_Id` ASC ";
+ //IF THE FLAG HASN'T BEEN SET YET, SET THE DEFAULT
+if(!isset($_GET['order'])) {
+     $_GET['order'] = 'zone_asc';
+	  $order='zone_asc';
+	  $orderBy = 'Zone_Id ASC';
+}
+ 
+//FIGURE OUT HOW TO SORT THE TABLE
+switch($_GET['order']) {
+		 
+	 case 'name_asc':
+	 $orderBy = "Name ASC";
+	 $order='name_asc';
+	 break;
+	 
+	 case 'name_desc':
+	 $orderBy = "Name DESC";
+	 $order='name_desc';
+	 break;
+	 
+	
+	 case 'zone_desc':
+     $orderBy = "Zone_Id DESC";
+	 $order='zone_desc';
+     break;
+	 
+     default:
+     $_GET['order'] = 'zone_asc';
+     $orderBy = 'Zone_Id ASC';
+	  $order='zone_asc';
+}
+ 
+ 
+ 
+ 
+$sql = "SELECT * FROM  `zone` ORDER BY ". $orderBy ;
 $result= mysql_query($sql);
 $rowcount = mysql_num_rows($result);
 
@@ -39,25 +74,25 @@ $add2 = $pg + 2;
 
 if ($pg == 1) {
     $centerValues .= '&nbsp; <span class="pageActive">' . $pg . '</span> &nbsp;';
-    $centerValues .= '&nbsp; <a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?pg=' . $add1 . '">' . $add1 . '</a> &nbsp;';
+    $centerValues .= '&nbsp; <a href="' . htmlspecialchars($_SERVER['PHP_SELF']). '?order='.$order.'&pg=' .  $add1 . '">' . $add1 . '</a> &nbsp;';
 } else if ($pg == $lastPage) {
-    $centerValues .= '&nbsp; <a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?pg=' . $sub1 . '">' . $sub1 . '</a> &nbsp;';
+    $centerValues .= '&nbsp; <a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?order='.$order.'&pg=' .  $sub1 . '</a> &nbsp;';
     $centerValues .= '&nbsp; <span class="pageActive">' . $pg . '</span> &nbsp;';
 } else if ($pg > 2 && $pg < ($lastPage - 1)) {
-    $centerValues .= '&nbsp; <a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?pg=' . $sub2 . '">' . $sub2 . '</a> &nbsp;';
-    $centerValues .= '&nbsp; <a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?pg=' . $sub1 . '">' . $sub1 . '</a> &nbsp;';
+    $centerValues .= '&nbsp; <a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?order='.$order.'&pg=' .  $sub2 . '</a> &nbsp;';
+    $centerValues .= '&nbsp; <a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?order='.$order.'&pg=' .  $sub1 . '</a> &nbsp;';
     $centerValues .= '&nbsp; <span class="pageActive">' . $pg . '</span> &nbsp;';
-    $centerValues .= '&nbsp; <a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?pg=' . $add1 . '">' . $add1 . '</a> &nbsp;';
-    $centerValues .= '&nbsp; <a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?pg=' . $add2 . '">' . $add2 . '</a> &nbsp;';
+    $centerValues .= '&nbsp; <a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?order='.$order.'&pg=' .  $add1 . '</a> &nbsp;';
+    $centerValues .= '&nbsp; <a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?order='.$order.'&pg=' .  $add2 . '</a> &nbsp;';
 } else if ($pg > 1 && $pg < $lastPage) {
-    $centerValues .= '&nbsp; <a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?pg=' . $sub1 . '">' . $sub1 . '</a> &nbsp;';
+    $centerValues .= '&nbsp; <a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?order='.$order.'&pg=' .  $sub1 . '</a> &nbsp;';
     $centerValues .= '&nbsp; <span class="pageActive">' . $pg . '</span> &nbsp;';
-    $centerValues .= '&nbsp; <a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?pg=' . $add1 . '">' . $add1 . '</a> &nbsp;';
+    $centerValues .= '&nbsp; <a href="' . htmlspecialchars($_SERVER['PHP_SELF']). '?order='.$order.'&pg=' .  $add1 . '</a> &nbsp;';
 }
 
 
 $limit = 'LIMIT ' .($pg - 1) * $recordsPerPage .',' .$recordsPerPage; //Setting the limit value in the SQL statement
-$sql2 = "SELECT * FROM  `zone` ORDER BY  `Zone_Id` ASC $limit";
+$sql2 = "SELECT * FROM  `zone` ORDER BY ". $orderBy.' '.$limit;
 $result2 = mysql_query($sql2); 
 
 
@@ -70,14 +105,14 @@ if ($lastPage != "1"){
     // Putting the back link if we are not page 1
     if ($pg != 1) {
         $previous = $pg - 1;
-        $paginationDisplay .=  '&nbsp;  <a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?pg=' . $previous . '"> Back</a> ';
+        $paginationDisplay .=  '&nbsp;  <a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?order='.$order.'&pg=' .  $previous . '"> Back</a> ';
     } 
     // Putting the numbers inbetween back and next links
     $paginationDisplay .= '<span class="pageNumbers">' . $centerValues . '</span>';
     // Putting the next link if we are not on the last page.
     if ($pg != $lastPage) {
         $nextPage = $pg + 1;
-        $paginationDisplay .=  '&nbsp;  <a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?pg=' . $nextPage . '"> Next</a> ';
+        $paginationDisplay .=  '&nbsp;  <a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?order='.$order.'&pg=' .  $nextPage . '"> Next</a> ';
     } 
 }
 
@@ -178,8 +213,23 @@ $color2 = "#F4F9FF";
 echo "<table width='100%' id='dbDataGrid'>";
 
 echo "<tr bgcolor='#CCCCCC' border>";
-echo "<td><label class=\"frmItemName\">&nbsp;Zone Id  </label></td>";
-echo "<td><label class=\"frmItemName\">&nbsp;Name</label></td>";
+
+if($_GET['order'] == 'zone_asc')
+{ echo "<th scope=\"col\"><a href=\"index.php?order=zone_desc&pg=$pg\"><label class=\"frmItemName\">Zone Id</label><img src=\"../../_images/icon-arrowUp.png\" alt=\"Ascending\" width=\"16\" height=\"19\" /></a>"; }
+elseif($_GET['order'] == 'zone_desc')
+{ echo "<th scope=\"col\" ><a href=\"index.php?order=zone_asc&pg=$pg\"><label class=\"frmItemName\">Zone Id</label><img src=\"../../_images/icon-arrowDown.png\" alt=\"Descending Order\" width=\"16\" height=\"19\"/></a>"; }
+else
+{ echo "<th scope=\"col\"><a href=\"index.php?order=zone_asc&pg=$pg\"><label class=\"frmItemName\">Zone Id</label></a>";  }
+echo "</th>";
+
+if($_GET['order'] == 'name_asc')
+{ echo "<th scope=\"col\" ><a href=\"index.php?order=name_desc&pg=$pg\"><label class=\"frmItemName\">Name</label><img src=\"../../_images/icon-arrowUp.png\" alt=\"Ascending\" width=\"16\" height=\"19\" /></a>"; }
+elseif($_GET['order'] == 'name_desc')
+{ echo "<th scope=\"col\" ><a href=\"index.php?order=name_asc&pg=$pg\"><label class=\"frmItemName\">Name</label><img src=\"../../_images/icon-arrowDown.png\" alt=\"Descending Order\" width=\"16\" height=\"19\"/></a>"; }
+else
+{ echo "<th scope=\"col\" ><a href=\"index.php?order=name_asc&pg=$pg\"><label class=\"frmItemName\">Name</label></a>";  }
+echo "</th>";
+
 echo "<td><label class=\"frmItemName\">&nbsp;Locations</label></td>";
 echo "<td><label class=\"frmItemName\">&nbsp;Update </label></td>";
 echo "</tr>";

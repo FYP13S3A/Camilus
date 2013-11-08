@@ -16,74 +16,25 @@ header('Location: http://www.efxmarket.com/HUBVersion/index.php');
  
  	 if (isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > 0){
 		 $id = $_GET['id'];
- 		 $result = mysql_query("SELECT * FROM vehicle WHERE Vehicle_Id = $id")
+ 		 $result = mysql_query("SELECT * FROM buildingtype WHERE Building_Type_Id=$id")
  		 or die(mysql_error()); 
 		 $rowcount = mysql_num_rows($result);
 		$row = mysql_fetch_array($result);
 		$mode ="update";
-		$btnvalue="Update District";
+		$btnvalue="Update Building Type";
 	
 		 if($rowcount>0){
-			$regno = $row['Registration_Number'];
-			$vehicletype = $row['Vehicle_Type_Id'];  
-			$locationId = $row['Building_Id']; 
-			$driver = $row['User_Id'];
-			
+			$name = $row['Name'];
 		 }else{
 			 echo "No results!"; 
 		 }
 	 }//GET CHECK END
 	 else{
 		 $mode = "new";
-		 $btnvalue="Add District";
+		 $btnvalue="Add Building Type";
 	 }
  
  ?>
- <?php
- //POPULATE VEHICLE DROPDOWN LIST
-	$sql = "SELECT Vehicle_Type_Id, Name FROM vehicletype ORDER BY Vehicle_Type_Id ASC";
-	$result=mysql_query($sql);
-
-	while ($row = mysql_fetch_assoc($result)) {
-   			$vehicleType[] = $row;
-	}
-	 //POPULATE BUILDING DROPDOWN LIST
-	$sql = "SELECT Building_Code, Name FROM building ORDER BY Building_Code ASC";
-	$result=mysql_query($sql);
-
-	while ($row = mysql_fetch_assoc($result)) {
-		 $building[] =  $row;
-
-	}
-	
-		 //POPULATE DRIVERS DROPDOWN LIST
-		 if($mode=="update"){
-			 		$sql = "SELECT Id, FullName,Work_Location_Id as Building_Code FROM account WHERE Id=$driver AND Availability_Status=0";
-		$result=mysql_query($sql);
-		
-		
-		 if($rowcount<=0){
-			 $drivers[0][] = array("id" => 0, "val" => "No Drivers Available");
-		 }else{
-		
-		$drivers='';
-		$row = mysql_fetch_assoc($result);
-		$drivers[$row['Building_Code']][] = array("id" => $row['Id'], "val" => $row['FullName']);
-		 }
-
-		 }
-		 
-	$sql = "SELECT Id, FullName, Work_Location_Id as Building_Code FROM account WHERE Availability_Status=1 ORDER BY Work_Location_Id ";
-	$result=mysql_query($sql);
-	
-	while ($row = mysql_fetch_assoc($result)) {
-		 $drivers[$row['Building_Code']][] = array("id" => $row['Id'], "val" => $row['FullName']);
-	}
-	
-$jsondrivers = json_encode($drivers);
-
-?>
- 
 
 <!doctype html>
 <!--[if lt IE 7]> <html class="ie6 oldie"> <![endif]-->
@@ -95,7 +46,7 @@ $jsondrivers = json_encode($drivers);
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Camilus -Vehicle Management</title>
+<title>Camilus - Building Type Management</title>
 
 <link href="../../_css/boilerplate.css" rel="stylesheet" type="text/css">
 <link href="../../_css/layout.css" rel="stylesheet" type="text/css">
@@ -120,23 +71,6 @@ Do the following if you're using your customized build of modernizr (http://www.
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.1.15/jquery.form-validator.min.js"></script>
 <script src="../../_script/jquery.form-validator.js"></script>
-<script type='text/javascript'>
-
-<?php
-        
-        echo "var drivers = $jsondrivers; \n";
-      ?>
-      function updateSubCats(){
-        var catSelect = document.getElementById("buildingSelect");
-        var catid = catSelect.value;
-        var subcatSelect = document.getElementById("driverSelect");
-        subcatSelect.options.length = 0; //delete all options if any present
-        for(var i = 0; i < drivers[catid].length; i++){
-          subcatSelect.options[i] = new Option(drivers[catid][i].val,drivers[catid][i].id);
-        }
-      }
-    </script>
-
 </head>
 
 <body onLoad="updateSubCats()">
@@ -184,7 +118,14 @@ echo '<li class=\"last\"><a href="../managevehtype/manage.php">Add Vehicle Types
 <div>
 <table width="100%" border="0">
   <tr>
-    <td><label class="sectionTitle" id="frmItem"><?php echo $btnvalue;?> </label></td>
+    <td><label class="sectionTitle" id="frmItem"><?php 
+	if($mode=="new"){
+		echo $btnvalue;
+	}else if ($mode=="update"){
+		echo $btnvalue;
+	}
+	?>
+	</label></td>
     </tr>
   <tr>
     <td></td>
@@ -193,53 +134,15 @@ echo '<li class=\"last\"><a href="../managevehtype/manage.php">Add Vehicle Types
     <td><form action="handler.php" method="post" name="frmAddZone" id="frmAddZone">
     <input type="hidden" name="mode" value="<?php echo $mode; ?>"/>
     <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-     <input type="hidden" name="oldDriver" value="<?php echo $driver; ?>"/>
-      <table width="57%" border="0">
+      <table width="38%" height="90" border="0">
         <tr>
-          <td width="55%"><label class="frmItemName">Registration Number :</label></td>
-          <td width="45%"><input type="text" name="regno" id="regno" size="40" value="<?php echo $regno;?>" data-validation="alphanumeric length" data-validation-length="6-9" data-validation-error-msg="Please enter a valid vehicle registration number."/></td>
+          <td width="31%" height="33"><label class="frmItemName">Name :</label></td>
+          <td width="69%"><strong>
+            <input type="text" name="name"  size="40" value="<?php echo $name;?>" data-validation="custom length" data-validation-length="5-70" data-validation-regexp="^([a-zA-Z]+)$" data-validation-error-msg="Please enter  building type name!">
+          </strong></td>
         </tr>
         <tr>
-          <td><label class="frmItemName">&nbsp;Vehicle Type :</label></td>
-          <td colspan="2"><select name="vehicletype" data-validation="required">
-            <?php
-				foreach($vehicleType AS $row){
-					if($row['Vehicle_Type_Id']==$vehicletype){
-   						echo "<option selected=\"selected\" value=\"" . $row['Vehicle_Type_Id'] . "\">" . $row['Name'] . "</option>";
-					}//end if
-				else{
-   						echo "<option value=\"" . $row['Vehicle_Type_Id'] . "\">" . $row['Name'] . "</option>";
-					}//end else
-				}//end foreach
-			?>
-          </select>          </tr>
-        <tr>
-      <td><label class="frmItemName">&nbsp;Building :</label></td>
-          <td colspan="2"><select name="buildingSelect" id="buildingSelect" onChange="updateSubCats()" data-validation="required">
-               <?php
-				foreach($building AS $row){
-					if($row['Building_Code']==$locationId){
-   						echo "<option selected=\"selected\" value=\"" . $row['Building_Code'] . "\">" . $row['Name'] . "</option>";
-					}//end if
-				else{
-   						echo "<option value=\"" . $row['Building_Code'] . "\">" . $row['Name'] . "</option>";
-					}//end else
-				}//end foreach
-			?>
-          
-          </select>            </tr>
-        <tr>
-     <td><label class="frmItemName">&nbsp;Driver :</label></td>
-          <td colspan="2">
-         
-          <select name="driverSelect" id="driverSelect" data-validation="required" >
-            
-          
-          </select> 
-          </tr>
-        
-        <tr>
-          <td>&nbsp;</td>
+          <td height="24">&nbsp;</td>
           <td>&nbsp;</td>
         </tr>
         <tr>
@@ -270,7 +173,7 @@ echo '<li class=\"last\"><a href="../managevehtype/manage.php">Add Vehicle Types
 
     $.validate({
         language : {
-            requiredFields: 'All these fields are required.'
+            requiredFields: 'All these fields are required!!'
         },
         errorMessagePosition : 'top',
         scrollToTopOnError : true,

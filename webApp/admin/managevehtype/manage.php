@@ -69,7 +69,10 @@ Do the following if you're using your customized build of modernizr (http://www.
 <!--[if lt IE 9]>
 <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
-<script src="../zones/_script/respond.min.js"></script>
+<script src="../../_script/respond.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.1.15/jquery.form-validator.min.js"></script>
+<script src="../../_script/jquery.form-validator.js"></script>
 </head>
 
 <body onLoad="updateSubCats()">
@@ -117,29 +120,30 @@ echo '<li class=\"last\"><a href="../managevehtype/manage.php">Add Vehicle Types
 <div>
 <table width="100%" border="0">
   <tr>
-    <td><label class="sectionTitle" id="frmItem">Add District</label></td>
+    <td><label class="sectionTitle" id="frmItem"><?php echo $btnvalue;?></label></td>
     </tr>
   <tr>
     <td></td>
     </tr>
   <tr>
     <td><form action="handler.php" method="post" name="frmAddZone" id="frmAddZone">
-    <input type="hidden" name="mode" value="<?php echo $mode; ?>"/>
-    <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-      <table width="48%" border="0">
+      <p>
+        <input type="hidden" name="mode" value="<?php echo $mode; ?>"/>
+        <input type="hidden" name="id" value="<?php echo $id; ?>"/>
+      </p>
+      <table width="46%" border="0">
         <tr>
-          <td width="35%"><label class="frmItemName">Name :</label></td>
-          <td width="65%"><input type="text" name="name" id="name" size="40" value="<?php echo $name;?>"></td>
+          <td width="37%"><label class="frmItemName">Name :</label></td>
+          <td width="63%"><input type="text" name="name" id="name" size="40" value="<?php echo $name;?>" data-validation="custom length" data-validation-length="5-100" data-validation-regexp="^([a-zA-Z]+)$"  data-validation-error-msg="Please enter the vehicle type name." /></td>
         </tr>
         <tr>
           <td><label class="frmItemName">Description :</label></td>
-          <td colspan="2"><label for="description"></label>
-            <textarea name="description" cols="38" rows="5" id="description" ><?php echo $description;?></textarea>          
-            </tr>
+          <td><textarea name="description" cols="38" rows="5" id="description"  data-validation="custom length" data-validation-length="5-255" data-validation-regexp="^([a-zA-Z]+)$"  data-validation-error-msg="Please enter the vehicle description." ><?php echo $description;?></textarea></td>
+        </tr>
         <tr>
           <td><label class="frmItemName">Mail Threshold :</label></td>
-          <td colspan="2"><label for="threshold"></label>
-            <input type="text" name="threshold" id="threshold" value="<?php echo $threshold;?>"></tr>
+          <td><input type="text" name="threshold" id="threshold" value="<?php echo $threshold;?>" data-validation="number length" data-validation-length="1-3"  data-validation-error-msg="Please enter a valid number." /></td>
+        </tr>
         <tr>
           <td>&nbsp;</td>
           <td>&nbsp;</td>
@@ -148,7 +152,7 @@ echo '<li class=\"last\"><a href="../managevehtype/manage.php">Add Vehicle Types
           <td>&nbsp;</td>
           <td><input type="submit" name="btnAdd" id="btnAdd" value="<?php echo $btnvalue;?>"></td>
         </tr>
-      </table>
+    </table>
     </form></td>
   </tr>
   </table>
@@ -163,6 +167,35 @@ echo '<li class=\"last\"><a href="../managevehtype/manage.php">Add Vehicle Types
 <?php include("../../footer.php"); ?>
 </div><!---end#contentBox--->
 </div>
+<script>
+(function($) {
 
+    var dev = window.location.hash.indexOf('dev') > -1 ? '.dev' : '';
+	
+
+
+    $.validate({
+        language : {
+            requiredFields: 'All these fields are required.'
+        },
+        errorMessagePosition : 'top',
+        scrollToTopOnError : true,
+          decimalSeparator : '.',
+        onValidate : function() {
+            var $callbackInput = $('#callback');
+            if( $callbackInput.val() == 1 ) {
+                return {
+                    element : $callbackInput,
+                    message : 'This validation was made in a callback'
+                };
+            }
+        }
+      
+    });
+
+ 
+
+})(jQuery);
+</script>
 </body>
 </html>

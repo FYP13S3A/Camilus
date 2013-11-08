@@ -124,7 +124,8 @@ while ($row3 = mysql_fetch_assoc($result3))
 
 $destination_building_name = $result_array3[0][Name];
 $destination_building_code = $result_array3[0][Postal_Code];
-
+$destination_address = $result_array3[0][Address_Line1];
+$destination_address2 = $result_array3[0][Address_Line1];
 
 $destination_output = $destination_building_name . $field_Delimiter . $destination_building_code;
 }//end if departure is a building
@@ -154,9 +155,9 @@ while ($row4 = mysql_fetch_assoc($result4))
 
 
 $Recipient_Address_Id = $result_array4[0][Recipient_Address_Id];
+$mail_Contents = $result_array4[0][Mail_Contents];
 $senderName = $result_array4[0][Sender_FullName];
 $recipientName = $result_array4[0][Recipient_FullName];
-
 
 $sql5 = "SELECT * FROM address WHERE Address_Id='$Recipient_Address_Id'";
 $result5 = mysql_query($sql5);
@@ -168,6 +169,7 @@ while ($row5 = mysql_fetch_assoc($result5))
 }//while fetch address line base on address id
 
 $recipient_Address = $result_array5[0][Address_Line1];
+$recipient_Postal = $result_array5[0][Postal_Code];
 $destination_output =  $recipient_Address . " (" . $Recipient_Address_Id . ")";
 
 }//end if destination is recipient address.
@@ -189,7 +191,7 @@ if($type_of_job=="transfer")
 $writeLine .= "transfer". $field_Delimiter;
 $writeLine .= $leg_ID . $field_Delimiter;
 $writeLine .= $manifest_id . $field_Delimiter;
-$writeLine .= $departure_output . $field_Delimiter;
+//$writeLine .= $departure_output . $field_Delimiter;
 $writeLine .= $destination_output;
 }
 
@@ -199,10 +201,12 @@ if($type_of_job=="delivery")
 $writeLine .= "delivery". $field_Delimiter;
 $writeLine .= $leg_ID . $field_Delimiter;
 $writeLine .= $manifest_id . $field_Delimiter;
-$writeLine .= $serviceName . $field_Delimiter;
+$writeLine .= $recipient_Address . $field_Delimiter;
+$writeLine .= $recipient_Postal . $field_Delimiter;
 $writeLine .= $senderName . $field_Delimiter;
-$writeLine .= $recipientName . $field_Delimiter;
-$writeLine .= $recipient_Address;
+$writeLine .= $recipientName. $field_Delimiter;
+$writeLine .= $mail_Contents;
+
 }
 
 $writeLine .= $line_Delimiter;

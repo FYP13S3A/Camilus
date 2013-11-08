@@ -208,24 +208,24 @@ echo "<table width='100%' id='dbDataGrid'>";
 
 echo "<tr bgcolor='#CCCCCC' border>";
 
-if($_GET['order'] == 'district_asc')          { echo "<th scope=\"col\"><a href=\"index.php?order=district_desc&pg=$pg\"><label class=\"frmItemName\">&nbsp;District Id</label><img src=\"../_images/icon-arrowUp.png\" alt=\"Ascending\" /></a>"; }
+if($_GET['order'] == 'district_asc')          { echo "<th scope=\"col\"><a href=\"index.php?order=district_desc&pg=$pg\"><label class=\"frmItemName\">&nbsp;District Id</label><img src=\"../../_images/icon-arrowUp.png\" alt=\"Ascending\" width=\"16\" height=\"19\"/></a>"; }
 
-elseif($_GET['order'] == 'district_desc') { echo "<th scope=\"col\"><a href=\"index.php?order=district_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;District Id</label><img src=\"../_images/icon-arrowDown.png\" alt=\"Descending Order\" /></a>"; }
+elseif($_GET['order'] == 'district_desc') { echo "<th scope=\"col\"><a href=\"index.php?order=district_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;District Id</label><img src=\"../../_images/icon-arrowDown.png\" alt=\"Descending Order\" width=\"16\" height=\"19\"/></a>"; }
 
 else                                          { echo "<th scope=\"col\"><a href=\"index.php?order=district_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;District Id</label></a>";  }
 echo "</th>";
 
 
-if($_GET['order'] == 'zone_asc')          { echo "<th scope=\"col\"><a href=\"index.php?order=zone_desc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Zone Id</label><img src=\"../_images/icon-arrowUp.png\" alt=\"Ascending\" /></a>"; }
+if($_GET['order'] == 'zone_asc')          { echo "<th scope=\"col\"><a href=\"index.php?order=zone_desc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Zone Id</label><img src=\"../../_images/icon-arrowUp.png\" alt=\"Ascending\" width=\"16\" height=\"19\" /></a>"; }
 
-elseif($_GET['order'] == 'zone_desc') { echo "<th scope=\"col\"><a href=\"index.php?order=zone_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Zone Id</label><img src=\"../_images/icon-arrowDown.png\" alt=\"Descending Order\" /></a>"; }
+elseif($_GET['order'] == 'zone_desc') { echo "<th scope=\"col\"><a href=\"index.php?order=zone_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Zone Id</label><img src=\"../../_images/icon-arrowDown.png\" alt=\"Descending Order\" width=\"16\" height=\"19\" /></a>"; }
 
 else                                          { echo "<th scope=\"col\"><a href=\"index.php?order=zone_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Zone Id</label></a>";  }
 echo "</th>";
 
-if($_GET['order'] == 'code_asc')          { echo "<th scope=\"col\"><a href=\"index.php?order=code_desc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Postal Sector</label><img src=\"../_images/icon-arrowUp.png\" alt=\"Ascending\" /></a>"; }
+if($_GET['order'] == 'code_asc')          { echo "<th scope=\"col\"><a href=\"index.php?order=code_desc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Postal Sector</label><img src=\"../../_images/icon-arrowUp.png\" alt=\"Ascending\" width=\"16\" height=\"19\"/></a>"; }
 
-elseif($_GET['order'] == 'code_desc') { echo "<th scope=\"col\"><a href=\"index.php?order=code_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Postal Sector</label><img src=\"../_images/icon-arrowDown.png\" alt=\"Descending Order\" /></a>"; }
+elseif($_GET['order'] == 'code_desc') { echo "<th scope=\"col\"><a href=\"index.php?order=code_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Postal Sector</label><img src=\"../../_images/icon-arrowDown.png\" alt=\"Descending Order\" width=\"16\" height=\"19\" /></a>"; }
 
 else                                          { echo "<th scope=\"col\"><a href=\"index.php?order=code_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Postal Sector</label></a>";  }
 echo "</th>";

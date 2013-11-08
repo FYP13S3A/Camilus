@@ -245,45 +245,45 @@ echo "<table width='100%' id='dbDataGrid'>";
 echo "<tr bgcolor='#CCCCCC' border>";
 
 if($_GET['order'] == 'vehicle_asc')
-{ echo "<th scope=\"col\" width=\"10%\"><a href=\"index.php?order=vehicle_desc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Vehicle Id</label><img src=\"../_images/icon-arrowUp.png\" alt=\"Ascending\" /></a>"; }
+{ echo "<th scope=\"col\" width=\"10%\"><a href=\"index.php?order=vehicle_desc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Vehicle Id</label><img src=\"../../_images/icon-arrowUp.png\" alt=\"Ascending\" width=\"16\" height=\"19\"/></a>"; }
 elseif($_GET['order'] == 'vehicle_desc')
-{ echo "<th scope=\"col\" width=\"10%\"><a href=\"index.php?order=vehicle_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Vehicle Id</label><img src=\"../_images/icon-arrowDown.png\" alt=\"Descending Order\" /></a>"; }
+{ echo "<th scope=\"col\" width=\"10%\"><a href=\"index.php?order=vehicle_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Vehicle Id</label><img src=\"../../_images/icon-arrowDown.png\" alt=\"Descending Order\" width=\"16\" height=\"19\" /></a>"; }
 else
 { echo "<th scope=\"col\" width=\"10%\"><a href=\"index.php?order=vehicle_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Vehicle Id</label></a>";  }
 echo "</th>";
 
 
 if($_GET['order'] == 'regno_asc')
-{ echo "<th scope=\"col\" width=\"14%\"><a href=\"index.php?order=regno_desc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Registration No</label><img src=\"../_images/icon-arrowUp.png\" alt=\"Ascending\" /></a>"; }
+{ echo "<th scope=\"col\" width=\"14%\"><a href=\"index.php?order=regno_desc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Registration No</label><img src=\"../../_images/icon-arrowUp.png\" alt=\"Ascending\" width=\"16\" height=\"19\" /></a>"; }
 elseif($_GET['order'] == 'regno_desc')
-{ echo "<th scope=\"col\" width=\"14%\"><a href=\"index.php?order=regno_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Registration No</label><img src=\"../_images/icon-arrowDown.png\" alt=\"Descending Order\" /></a>"; }
+{ echo "<th scope=\"col\" width=\"14%\"><a href=\"index.php?order=regno_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Registration No</label><img src=\"../../_images/icon-arrowDown.png\" alt=\"Descending Order\"  width=\"16\" height=\"19\"/></a>"; }
 else
 { echo "<th scope=\"col\" width=\"14%\"><a href=\"index.php?order=regno_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Registration No</label></a>";  }
 echo "</th>";
 
 
 if($_GET['order'] == 'vehicletype_asc')
-{ echo "<th scope=\"col\" width=\"15%\"><a href=\"index.php?order=vehicletype_desc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Vehicle Type</label><img src=\"../_images/icon-arrowUp.png\" alt=\"Ascending\" /></a>"; }
+{ echo "<th scope=\"col\" width=\"15%\"><a href=\"index.php?order=vehicletype_desc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Vehicle Type</label><img src=\"../../_images/icon-arrowUp.png\" alt=\"Ascending\" width=\"16\" height=\"19\" /></a>"; }
 elseif($_GET['order'] == 'vehicletype_desc')
-{ echo "<th scope=\"col\" width=\"15%\"><a href=\"index.php?order=vehicletype_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Vehicle Type</label><img src=\"../_images/icon-arrowDown.png\" alt=\"Descending Order\" /></a>"; }
+{ echo "<th scope=\"col\" width=\"15%\"><a href=\"index.php?order=vehicletype_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Vehicle Type</label><img src=\"../../_images/icon-arrowDown.png\" alt=\"Descending Order\" width=\"16\" height=\"19\" /></a>"; }
 else
 { echo "<th scope=\"col\" width=\"15%\"><a href=\"index.php?order=vehicletype_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Vehicle Type</label></a>";  }
 echo "</th>";
 
 
 if($_GET['order'] == 'driver_asc')
-{ echo "<th scope=\"col\" width=\"17%\"><a href=\"index.php?order=driver_desc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Driver</label><img src=\"../_images/icon-arrowUp.png\" alt=\"Ascending\" /></a>"; }
+{ echo "<th scope=\"col\" width=\"17%\"><a href=\"index.php?order=driver_desc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Driver</label><img src=\"../../_images/icon-arrowUp.png\" alt=\"Ascending\" width=\"16\" height=\"19\" /></a>"; }
 elseif($_GET['order'] == 'driver_desc')
-{ echo "<th scope=\"col\" width=\"17%\"><a href=\"index.php?order=driver_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Driver</label><img src=\"../_images/icon-arrowDown.png\" alt=\"Descending Order\" /></a>"; }
+{ echo "<th scope=\"col\" width=\"17%\"><a href=\"index.php?order=driver_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Driver</label><img src=\"../../_images/icon-arrowDown.png\" alt=\"Descending Order\"  width=\"16\" height=\"19\"/></a>"; }
 else
 { echo "<th scope=\"col\" width=\"17%\"><a href=\"index.php?order=driver_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Driver</label></a>";  }
 echo "</th>";
 
 
 if($_GET['order'] == 'building_asc')
-{ echo "<th scope=\"col\" width=\"28%\"><a href=\"index.php?order=building_desc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Building Name</label><img src=\"../_images/icon-arrowUp.png\" alt=\"Ascending\" /></a>"; }
+{ echo "<th scope=\"col\" width=\"28%\"><a href=\"index.php?order=building_desc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Building Name</label><img src=\"../../_images/icon-arrowUp.png\" alt=\"Ascending\" width=\"16\" height=\"19\" /></a>"; }
 elseif($_GET['order'] == 'building_desc')
-{ echo "<th scope=\"col\" width=\"28%\"><a href=\"index.php?order=building_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Building Name</label><img src=\"../_images/icon-arrowDown.png\" alt=\"Descending Order\" /></a>"; }
+{ echo "<th scope=\"col\" width=\"28%\"><a href=\"index.php?order=building_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Building Name</label><img src=\"../../_images/icon-arrowDown.png\" alt=\"Descending Order\" width=\"16\" height=\"19\" /></a>"; }
 else
 { echo "<th scope=\"col\" width=\"28%\"><a href=\"index.php?order=building_asc&pg=$pg\"><label class=\"frmItemName\">&nbsp;Building Name</label></a>";  }
 echo "</th>";

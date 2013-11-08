@@ -29,3 +29,4 @@
 [28-Oct-2013 14:45:06] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/admin/managedistrict/index.php on line 52
 [28-Oct-2013 14:45:06] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/admin/managedistrict/index.php on line 229
 [28-Oct-2013 14:45:49] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/admin/managedistrict/index.php on line 229
+[31-Oct-2013 18:15:16] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/admin/managedistrict/handler.php on line 61

@@ -67,7 +67,10 @@ Do the following if you're using your customized build of modernizr (http://www.
 <!--[if lt IE 9]>
 <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
-<script src="../zones/_script/respond.min.js"></script>
+<script src="../../_script/respond.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.1.15/jquery.form-validator.min.js"></script>
+<script src="../../_script/jquery.form-validator.js"></script>
 </head>
 
 <body>
@@ -115,23 +118,23 @@ echo '<li class=\"last\"><a href="../managevehtype/manage.php">Add Vehicle Types
 <div>
 <table width="100%" border="0">
   <tr>
-    <td><label class="sectionTitle" id="frmItem">Zone Management - Add / Edit Redord</label></td>
+    <td><label class="sectionTitle" id="frmItem"><?php echo $btnvalue?></label></td>
     </tr>
   <tr>
     <td></td>
     </tr>
   <tr>
-    <td><form action="handler.php" method="post" name="frmAddZone" id="frmAddZone">
+    <td><form action="handler.php" method="post" name="frmAddZone" id="frmAddZone" novalidate>
     <input type="hidden" name="mode" value="<?php echo $mode; ?>"/>
 	<input type="hidden" name="id" id="id" size="40" value="<?php echo $id; ?>">
       <table width="48%" border="0">
         <tr>
           <td width="45%"><label class="frmItemName">&nbsp;Name :</label></td>
-          <td width="55%"><input type="text" name="Name" id="Name" size="40" value="<?php echo $name; ?>"></td>
+          <td width="55%"><input type="text" name="Name" id="Name" size="40" value="<?php echo $name; ?>" data-validation="custom" data-validation-regexp="^([a-zA-Z]+)$" data-validation-error-msg="Please enter the zone name." /></td>
         </tr>
         <tr>
           <td><label class="frmItemName">&nbsp;Possible Locations :</label></td>
-          <td><input type="text" name="Locations" id="Locations" size="40" value="<?php echo $locations; ?>"></td>
+          <td><input type="text" name="Locations" id="Locations" size="40" value="<?php echo $locations; ?>" data-validation="custom length" data-validation-length="max300" data-validation-regexp="^([a-zA-Z]+)$" data-validation-error-msg="Please enter the possible locations."></td>
         </tr>
         <tr>
           <td></td>
@@ -156,6 +159,33 @@ echo '<li class=\"last\"><a href="../managevehtype/manage.php">Add Vehicle Types
 <?php include("../../footer.php"); ?>
 </div><!---end#contentBox--->
 </div>
+<script>
+(function($) {
 
+    var dev = window.location.hash.indexOf('dev') > -1 ? '.dev' : '';
+
+    $.validate({
+        language : {
+            requiredFields: 'All these fields are required!!'
+        },
+        errorMessagePosition : 'top',
+        scrollToTopOnError : true,
+          decimalSeparator : '.',
+        onValidate : function() {
+            var $callbackInput = $('#callback');
+            if( $callbackInput.val() == 1 ) {
+                return {
+                    element : $callbackInput,
+                    message : 'This validation was made in a callback'
+                };
+            }
+        }
+      
+    });
+
+ 
+
+})(jQuery);
+</script>
 </body>
 </html>

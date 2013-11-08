@@ -55,7 +55,7 @@ $status="System: Incorrect username/password.";
   <div class="mainContainer" id="mainContainer">
     <?php include("header.php"); ?>
     <div id="LoginBox">
-      <div id="boxTitle">
+      <div id="boxTitle" style=" margin-left:0%">
         <h1>Camilus System Login</h1>
       </div>
       <div id="sysMsgContainer"></div>
@@ -69,14 +69,26 @@ $status="System: Incorrect username/password.";
       </div>
       <div id="sectionBox">
         <form name="form1" method="post" action="">
-        <br><br>
-        &nbsp;<label id="lblUsername">User Name:</label>
-        <input name="txtUsername" id="txtUsername" type="text" size="15"></input><br><br>
-        &nbsp;<label id="lblPassword">Password:&nbsp;&nbsp;</label>
-      <input name="txtPassword" id="txtPassword" type="password" size="15" /><br><br><br>
-      &nbsp;<input name=""  id="btnSubmit" type="submit" value="Submit" /><br><br>
+          <br>
+          <br>
+          &nbsp;
+          <label id="lblUsername">User Name:</label>
+          <input name="txtUsername" id="txtUsername" type="text" size="15">
+          </input>
+          <br>
+          <br>
+          &nbsp;
+          <label id="lblPassword">Password:&nbsp;&nbsp;</label>
+          <input name="txtPassword" id="txtPassword" type="password" size="15" />
+          <br>
+          <br>
+          <br>
+          &nbsp;
+          <input name="btnSubmit"  id="btnSubmit" type="submit" value="Submit" />
+          <br>
+          <br>
         </form>
-<?php
+        <?php
 if($status!="")
 {
 echo '<p><font color=red>'.$status.'</p>';

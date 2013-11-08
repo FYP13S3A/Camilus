@@ -161,6 +161,24 @@ if($status=="success")
 {
 echo "<font size=5 color=black>Successfully confirm the following mail id : <b>$trackingID</b></font>";
 }
+
+
+//send a email to sender
+if(strstr($s_Email,"@"))
+{
+$to      = $s_Email;
+$subject = 'Camilus - Mail Approve - ' .$trackingID;
+$message = "Hi, your mail is approved. Your tracking id is $trackingID . \n You can track the progress at http://www.efxmarket.com/HUBVersion/tracking.php \n\n Thanks for using Camilus.";
+
+$headers = 'From: support@camilus.com' . "\r\n" .
+    'Reply-To: support@camilus.com' . "\r\n" .
+    'X-Mailer: PHP/' . phpversion();
+
+
+
+mail($to, $subject, $message, $headers);
+}
+
 ?>
 
 </div>

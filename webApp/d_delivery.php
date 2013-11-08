@@ -175,7 +175,6 @@ $retval = mysql_query($sql);
 
 if(! $retval )
 {
-echo $sql;
   die('System Error, please contact our counter regarding this issue.');
 }
 

@@ -1,0 +1,15 @@
+[31-Oct-2013 17:41:23] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/admin/manageaccount/a_createAccount.php on line 120
+[31-Oct-2013 17:50:04] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/admin/manageaccount/a_createAccount.php on line 20
+[31-Oct-2013 17:50:04] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/admin/manageaccount/a_createAccount.php on line 126
+[31-Oct-2013 17:50:25] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/admin/manageaccount/a_createAccount.php on line 20
+[31-Oct-2013 17:50:25] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/admin/manageaccount/a_createAccount.php on line 126
+[31-Oct-2013 17:50:33] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/admin/manageaccount/a_createAccount.php on line 22
+[31-Oct-2013 17:50:33] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/admin/manageaccount/a_createAccount.php on line 128
+[31-Oct-2013 18:16:08] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home/camilus/public_html/HUBVersion/admin/manageaccount/handler.php on line 32
+[31-Oct-2013 18:16:34] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home/camilus/public_html/HUBVersion/admin/manageaccount/handler.php on line 32
+[01-Nov-2013 01:16:58] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/admin/manageaccount/handler.php on line 17
+[01-Nov-2013 01:16:58] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/admin/manageaccount/handler.php on line 17
+[01-Nov-2013 01:16:58] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/admin/manageaccount/handler.php on line 18
+[01-Nov-2013 01:16:58] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/admin/manageaccount/handler.php on line 43
+[01-Nov-2013 01:16:58] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/admin/manageaccount/handler.php on line 43
+[01-Nov-2013 01:16:58] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/camilus/public_html/HUBVersion/admin/manageaccount/handler.php:17) in /home/camilus/public_html/HUBVersion/admin/manageaccount/handler.php on line 47

@@ -15,89 +15,106 @@ header('Location: http://www.efxmarket.com/HUBVersion/index.php');
  <?php
  //IF THE FLAG HASN'T BEEN SET YET, SET THE DEFAULT
 if(!isset($_GET['order'])) {
-     $_GET['order'] = 'servicetype_asc';
-	  $order='servicetype_asc';
-	  $orderBy = 'Service_Type_Id ASC';
+     $_GET['order'] = 'buildingcode_asc';
+	  $order='buildingcode_asc';
+	  $orderBy = 'building.Building_Code ASC';
 }
  
 //FIGURE OUT HOW TO SORT THE TABLE
 switch($_GET['order']) {
 		 
 	 case 'name_asc':
-	 $orderBy = "Name ASC";
+	 $orderBy = "building.Name ASC";
 	 $order='name_asc';
 	 break;
 	 
 	 case 'name_desc':
-	 $orderBy = "Name DESC";
+	 $orderBy = "building.Name DESC";
 	 $order='name_desc';
 	 break;
 	 
-
-	 case 'deltime_asc':
-	 $orderBy = " Last_Delivery_Time ASC";
-	 $order='deltime_asc';
+	 case 'phone_asc':
+	 $orderBy = "building.Phone ASC";
+	 $order='phone_asc';
 	 break;
 	 
-	 case 'deltime_desc':
-	 $orderBy = " Last_Delivery_Time DESC";
-	 $order='deltime_desc';
+	 case 'phone_desc':
+	 $orderBy = "building.Phone DESC";
+	 $order='Phone_desc';
 	 break;
 	 
-	 case 'coltime_asc':
-	 $orderBy = "Last_Collection_Time ASC";
-	 $order='coltime_asc';
+	 case 'add1_asc':
+	 $orderBy = "building.Address_Line1 ASC";
+	 $order='add1_asc';
 	 break;
 	 
-	 case 'coltime_desc':
-	 $orderBy = "Last_Collection_Time DESC";
-	 $order='coltime_desc';
+	 case 'add1_desc':
+	 $orderBy = "building.Address_Line1 DESC";
+	 $order='add1_desc';
 	 break;
 	 
-	 case 'starttime_asc':
-	 $orderBy = "Expected_Start_Time ASC";
-	 $order='starttime_asc';
+	 	 case 'add2_asc':
+	 $orderBy = "building.Address_Line2 ASC";
+	 $order='add2_asc';
 	 break;
 	 
-	 case 'starttime_desc':
-	 $orderBy = "Expected_Start_Time DESC";
-	 $order='starttime_desc';
+	 case 'add2_desc':
+	 $orderBy = "building.Address_Line2 DESC";
+	 $order='add2_desc';
 	 break;
 	 
-	 case 'overseasdura_asc':
-	 $orderBy = "Expected_Overseas_Duration ASC";
-	 $order='overseasdura_asc';
+	 	 case 'state_asc':
+	 $orderBy = "building.State ASC";
+	 $order='state_asc';
 	 break;
 	 
-	 case 'overseasdura_desc':
-	 $orderBy = "Expected_Overseas_Duration DESC";
-	 $order='overseasdura_desc';
+	 case 'state_desc':
+	 $orderBy = "building.State DESC";
+	 $order='state_desc';
 	 break;
 	 
-	 case 'localdura_asc':
-	 $orderBy = "Expected_Local_Duration ASC";
-	 $order='localdura_asc';
+	 case 'postal_asc':
+	 $orderBy = "building.Postal_Code ASC";
+	 $order='postal_asc';
 	 break;
 	 
-	 case 'localdura_desc':
-	 $orderBy = "Expected_Local_Duration DESC";
-	 $order='localdura_desc';
+	 case 'postal_desc':
+	 $orderBy = "building.Postal_Code DESC";
+	 $order='postal_desc';
 	 break;
 	 
-
+	 case 'district_asc':
+	 $orderBy = "building.District_Id ASC";
+	 $order='district_asc';
+	 break;
 	 
-	 case 'servicetype_desc':
-     $orderBy = "Service_Type_Id DESC";
-	 $order='servicetype_desc';
+	 case 'district_desc':
+	 $orderBy = "building.District_Id DESC";
+	 $order='district_desc';
+	 break;
+	 
+	 case 'buildtype_asc':
+	 $orderBy = "buildingtype.Name ASC";
+	 $order='name_asc';
+	 break;
+	 
+	 case 'buildtype_desc':
+	 $orderBy = "buildingtype.Name DESC";
+	 $order='buildtype_desc';
+	 break;
+	 
+	 case 'buildingcode_desc':
+     $orderBy = "building.Building_Code DESC";
+	 $order='buildingcode_desc';
      break;
 	 
      default:
-     $_GET['order'] = 'servicetype_asc';
-     $orderBy = 'Service_Type_Id ASC';
-	  $order='servicetype_asc';
+     $_GET['order'] = 'buildingcode_asc';
+     $orderBy = 'building.Building_Code ASC';
+	  $order='buildingcode_asc';
 }
 
-$sql = 'SELECT * FROM servicetype ORDER BY '.$orderBy;
+$sql = 'SELECT `Building_Code`,building.`Name`,`Phone`,`Address_Line1`,`Address_Line2`,`State`,`Postal_Code`,`District_Id`, buildingtype.Name as BuildingName FROM building, buildingtype WHERE building.Building_Type_Id = buildingtype.Building_Type_Id ORDER BY '.$orderBy;
 
 $result= mysql_query($sql);
 $rowcount = mysql_num_rows($result);
@@ -141,7 +158,7 @@ if ($pg == 1) {
 }
 
 $limit = 'LIMIT ' .($pg - 1) * $recordsPerPage .',' .$recordsPerPage; //Setting the limit value in the SQL statement
-$sql2 = 'SELECT * FROM servicetype ORDER BY '.$orderBy.' '.$limit;
+$sql2 = 'SELECT `Building_Code`,building.`Name`,`Phone`,`Address_Line1`,`Address_Line2`,`State`,`Postal_Code`,`District_Id`, buildingtype.Name as BuildingName FROM building, buildingtype WHERE building.Building_Type_Id = buildingtype.Building_Type_Id ORDER BY '.$orderBy.' '.$limit;
 $result2 = mysql_query($sql2); 
 
 $paginationDisplay = ""; // Storing of the html and page number tags.
@@ -259,12 +276,12 @@ echo "<table width='100%' id='dbDataGrid'>";
 
 echo "<tr bgcolor='#CCCCCC' >";
 
-if($_GET['order'] == 'servicetype_asc')
-{ echo "<th scope=\"col\" width=\"9%\"><a href=\"index.php?order=servicetype_desc&pg=$pg\"><label class=\"frmItemName\">Type Id</label><img src=\"../../_images/icon-arrowUp.png\" alt=\"Ascending\" width=\"16\" height=\"19\" /></a>"; }
-elseif($_GET['order'] == 'servicetype_desc')
-{ echo "<th scope=\"col\" width=\"9%\"><a href=\"index.php?order=servicetype_asc&pg=$pg\"><label class=\"frmItemName\">Type Id</label><img src=\"../../_images/icon-arrowDown.png\" alt=\"Descending Order\" width=\"16\" height=\"19\"/></a>"; }
+if($_GET['order'] == 'buildingcode_asc')
+{ echo "<th scope=\"col\" width=\"7%\"><a href=\"index.php?order=buildingtcode_desc&pg=$pg\"><label class=\"frmItemName\">Code</label><img src=\"../../_images/icon-arrowUp.png\" alt=\"Ascending\" width=\"16\" height=\"19\" /></a>"; }
+elseif($_GET['order'] == 'buildingcode_desc')
+{ echo "<th scope=\"col\" width=\"7%\"><a href=\"index.php?order=buildingcode_asc&pg=$pg\"><label class=\"frmItemName\">Code</label><img src=\"../../_images/icon-arrowDown.png\" alt=\"Descending Order\" width=\"16\" height=\"19\"/></a>"; }
 else
-{ echo "<th scope=\"col\" width=\"9%\"><a href=\"index.php?order=servicetype_asc&pg=$pg\"><label class=\"frmItemName\">Type Id</label></a>";  }
+{ echo "<th scope=\"col\" width=\"7%\"><a href=\"index.php?order=buildingcode_asc&pg=$pg\"><label class=\"frmItemName\">Code</label></a>";  }
 echo "</th>";
 
 
@@ -276,51 +293,66 @@ else
 { echo "<th scope=\"col\" width=\"13%\"><a href=\"index.php?order=name_asc&pg=$pg\"><label class=\"frmItemName\">Name</label></a>";  }
 echo "</th>";
 
-echo "<th scope=\"col\" width=\"25%\"><label class=\"frmItemName\">Service Information</label>"; 
-echo "</th>";
 
-if($_GET['order'] == 'localdura_asc')
-{ echo "<th scope=\"col\" width=\"7%\"><a href=\"index.php?order=localdura_desc&pg=$pg\"><label class=\"frmItemName\">Local Duration</label><img src=\"../../_images/icon-arrowUp.png\" alt=\"Ascending\" width=\"16\" height=\"19\" /></a>"; }
-elseif($_GET['order'] == 'localdura_desc')
-{ echo "<th scope=\"col\" width=\"7%\"><a href=\"index.php?order=localdura_asc&pg=$pg\"><label class=\"frmItemName\">Local Duration</label><img src=\"../../_images/icon-arrowDown.png\" alt=\"Descending Order\"  width=\"16\" height=\"19\"/></a>"; }
+if($_GET['order'] == 'phone_asc')
+{ echo "<th scope=\"col\" width=\"7%\"><a href=\"index.php?order=phone_desc&pg=$pg\"><label class=\"frmItemName\">Phone No</label><img src=\"../../_images/icon-arrowUp.png\" alt=\"Ascending\" width=\"16\" height=\"19\" /></a>"; }
+elseif($_GET['order'] == 'phone_desc')
+{ echo "<th scope=\"col\" width=\"7%\"><a href=\"index.php?order=phone_asc&pg=$pg\"><label class=\"frmItemName\">Phone No</label><img src=\"../../_images/icon-arrowDown.png\" alt=\"Descending Order\"  width=\"16\" height=\"19\"/></a>"; }
 else
-{ echo "<th scope=\"col\" width=\"7%\"><a href=\"index.php?order=localdura_asc&pg=$pg\"><label class=\"frmItemName\">Local Duration</label></a>";  }
+{ echo "<th scope=\"col\" width=\"7%\"><a href=\"index.php?order=phone_asc&pg=$pg\"><label class=\"frmItemName\">Phone No</label></a>";  }
 echo "</th>";
 
-
-if($_GET['order'] == 'overseasdura_asc')
-{ echo "<th scope=\"col\" width=\"8%\"><a href=\"index.php?order=overseasdura_desc&pg=$pg\"><label class=\"frmItemName\">Overseas Duration</label><img src=\"../../_images/icon-arrowUp.png\" alt=\"Ascending\" width=\"16\" height=\"19\" /></a>"; }
-elseif($_GET['order'] == 'overseasdura_desc')
-{ echo "<th scope=\"col\" width=\"8%\"><a href=\"index.php?order=overseasdura_asc&pg=$pg\"><label class=\"frmItemName\">Overseas Duration</label><img src=\"../../_images/icon-arrowDown.png\" alt=\"Descending Order\"  width=\"16\" height=\"19\"/></a>"; }
+if($_GET['order'] == 'add1_asc')
+{ echo "<th scope=\"col\" width=\"12%\"><a href=\"index.php?order=add1_desc&pg=$pg\"><label class=\"frmItemName\">Address Line 1</label><img src=\"../../_images/icon-arrowUp.png\" alt=\"Ascending\" width=\"16\" height=\"19\" /></a>"; }
+elseif($_GET['order'] == 'add1_desc')
+{ echo "<th scope=\"col\" width=\"12%\"><a href=\"index.php?order=add1_asc&pg=$pg\"><label class=\"frmItemName\">Address Line 1</label><img src=\"../../_images/icon-arrowDown.png\" alt=\"Descending Order\"  width=\"16\" height=\"19\"/></a>"; }
 else
-{ echo "<th scope=\"col\" width=\"8%\"><a href=\"index.php?order=overseasdura_asc&pg=$pg\"><label class=\"frmItemName\">Overseas Duration</label></a>";  }
+{ echo "<th scope=\"col\" width=\"12%\"><a href=\"index.php?order=add1_asc&pg=$pg\"><label class=\"frmItemName\">Address Line 1</label></a>";  }
 echo "</th>";
 
-if($_GET['order'] == 'starttime_asc')
-{ echo "<th scope=\"col\" width=\"8%\"><a href=\"index.php?order=starttime_desc&pg=$pg\"><label class=\"frmItemName\">Expected Start Time</label><img src=\"../../_images/icon-arrowUp.png\" alt=\"Ascending\" width=\"16\" height=\"19\" /></a>"; }
-elseif($_GET['order'] == 'starttime_desc')
-{ echo "<th scope=\"col\" width=\"8%\"><a href=\"index.php?order=starttime_asc&pg=$pg\"><label class=\"frmItemName\">Expected Start Time</label><img src=\"../../_images/icon-arrowDown.png\" alt=\"Descending Order\"  width=\"16\" height=\"19\"/></a>"; }
+
+if($_GET['order'] == 'add2_asc')
+{ echo "<th scope=\"col\" width=\"12%\"><a href=\"index.php?order=add2_desc&pg=$pg\"><label class=\"frmItemName\">Address Line 2</label><img src=\"../../_images/icon-arrowUp.png\" alt=\"Ascending\" width=\"16\" height=\"19\" /></a>"; }
+elseif($_GET['order'] == 'add2_desc')
+{ echo "<th scope=\"col\" width=\"12%\"><a href=\"index.php?order=add2_asc&pg=$pg\"><label class=\"frmItemName\">Address Line 2</label><img src=\"../../_images/icon-arrowDown.png\" alt=\"Descending Order\"  width=\"16\" height=\"19\"/></a>"; }
 else
-{ echo "<th scope=\"col\" width=\"8%\"><a href=\"index.php?order=starttime_asc&pg=$pg\"><label class=\"frmItemName\">Expected Start Time</label></a>";  }
+{ echo "<th scope=\"col\" width=\"12%\"><a href=\"index.php?order=add2_asc&pg=$pg\"><label class=\"frmItemName\">Address Line 2</label></a>";  }
 echo "</th>";
 
-if($_GET['order'] == 'coltime_asc')
-{ echo "<th scope=\"col\" width=\"8%\"><a href=\"index.php?order=coltime_desc&pg=$pg\"><label class=\"frmItemName\">Last Collection Time</label><img src=\"../../_images/icon-arrowUp.png\" alt=\"Ascending\" width=\"16\" height=\"19\" /></a>"; }
-elseif($_GET['order'] == 'coltime_desc')
-{ echo "<th scope=\"col\" width=\"8%\"><a href=\"index.php?order=coltime_asc&pg=$pg\"><label class=\"frmItemName\">Last Collection Time</label><img src=\"../../_images/icon-arrowDown.png\" alt=\"Descending Order\"  width=\"16\" height=\"19\"/></a>"; }
+if($_GET['order'] == 'state_asc')
+{ echo "<th scope=\"col\" width=\"8%\"><a href=\"index.php?order=state_desc&pg=$pg\"><label class=\"frmItemName\">State</label><img src=\"../../_images/icon-arrowUp.png\" alt=\"Ascending\" width=\"16\" height=\"19\" /></a>"; }
+elseif($_GET['order'] == 'state_desc')
+{ echo "<th scope=\"col\" width=\"8%\"><a href=\"index.php?order=state_asc&pg=$pg\"><label class=\"frmItemName\">State</label><img src=\"../../_images/icon-arrowDown.png\" alt=\"Descending Order\"  width=\"16\" height=\"19\"/></a>"; }
 else
-{ echo "<th scope=\"col\" width=\"8%\"><a href=\"index.php?order=coltime_asc&pg=$pg\"><label class=\"frmItemName\">Last Collection Time</label></a>";  }
+{ echo "<th scope=\"col\" width=\"8%\"><a href=\"index.php?order=state_asc&pg=$pg\"><label class=\"frmItemName\">State</label></a>";  }
 echo "</th>";
 
-if($_GET['order'] == 'deltime_asc')
-{ echo "<th scope=\"col\" width=\"7%\"><a href=\"index.php?order=deltime_desc&pg=$pg\"><label class=\"frmItemName\">Last Delivery Time</label><img src=\"../../_images/icon-arrowUp.png\" alt=\"Ascending\" width=\"16\" height=\"19\" /></a>"; }
-elseif($_GET['order'] == 'deltime_desc')
-{ echo "<th scope=\"col\" width=\"7%\"><a href=\"index.php?order=deltime_asc&pg=$pg\"><label class=\"frmItemName\">Last Delivery Time</label><img src=\"../../_images/icon-arrowDown.png\" alt=\"Descending Order\"  width=\"16\" height=\"19\"/></a>"; }
+if($_GET['order'] == 'postal_asc')
+{ echo "<th scope=\"col\" width=\"6%\"><a href=\"index.php?order=postal_desc&pg=$pg\"><label class=\"frmItemName\">Postal Code</label><img src=\"../../_images/icon-arrowUp.png\" alt=\"Ascending\" width=\"16\" height=\"19\" /></a>"; }
+elseif($_GET['order'] == 'postal_desc')
+{ echo "<th scope=\"col\" width=\"6%\"><a href=\"index.php?order=postal_asc&pg=$pg\"><label class=\"frmItemName\">Postal Code</label><img src=\"../../_images/icon-arrowDown.png\" alt=\"Descending Order\"  width=\"16\" height=\"19\"/></a>"; }
 else
-{ echo "<th scope=\"col\" width=\"7%\"><a href=\"index.php?order=deltime_asc&pg=$pg\"><label class=\"frmItemName\">Last Delivery Time</label></a>";  }
+{ echo "<th scope=\"col\" width=\"6%\"><a href=\"index.php?order=postal_asc&pg=$pg\"><label class=\"frmItemName\">Postal Code</label></a>";  }
 echo "</th>";
 
-echo "<th scope=\"col\" width=\"20%\"><label class=\"frmItemName\">Update</label></th>";
+if($_GET['order'] == 'district_asc')
+{ echo "<th scope=\"col\" width=\"6%\"><a href=\"index.php?order=district_desc&pg=$pg\"><label class=\"frmItemName\">District</label><img src=\"../../_images/icon-arrowUp.png\" alt=\"Ascending\" width=\"16\" height=\"19\" /></a>"; }
+elseif($_GET['order'] == 'district_desc')
+{ echo "<th scope=\"col\" width=\"6%\"><a href=\"index.php?order=district_asc&pg=$pg\"><label class=\"frmItemName\">District</label><img src=\"../../_images/icon-arrowDown.png\" alt=\"Descending Order\"  width=\"16\" height=\"19\"/></a>"; }
+else
+{ echo "<th scope=\"col\" width=\"6%\"><a href=\"index.php?order=district_asc&pg=$pg\"><label class=\"frmItemName\">District</label></a>";  }
+echo "</th>";
+
+if($_GET['order'] == 'buildtype_asc')
+{ echo "<th scope=\"col\" width=\"14%\"><a href=\"index.php?order=buildtype_desc&pg=$pg\"><label class=\"frmItemName\">Building Type</label><img src=\"../../_images/icon-arrowUp.png\" alt=\"Ascending\" width=\"16\" height=\"19\" /></a>"; }
+elseif($_GET['order'] == 'buildtype_desc')
+{ echo "<th scope=\"col\" width=\"14%\"><a href=\"index.php?order=buildtype_asc&pg=$pg\"><label class=\"frmItemName\">Building Type</label><img src=\"../../_images/icon-arrowDown.png\" alt=\"Descending Order\"  width=\"16\" height=\"19\"/></a>"; }
+else
+{ echo "<th scope=\"col\" width=\"14%\"><a href=\"index.php?order=buildtype_asc&pg=$pg\"><label class=\"frmItemName\">Building Type</label></a>";  }
+echo "</th>";
+
+
+echo "<th scope=\"col\" width=\"25%\"><label class=\"frmItemName\">Update</label></th>";
 echo "</tr>";
 echo "<tr><td colspan=\"4\">&nbsp;</td></tr>";
 $row_count=0;
@@ -328,19 +360,18 @@ while($res=mysql_fetch_array($result2)){
 	$row_color = ($row_count % 2) ? $color1 : $color2;
 
 	echo "<tr bgcolor=\"$row_color\">";
-	echo "<td>".$res['Service_Type_Id']."</td>";
+	echo "<td>".$res['Building_Code']."</td>";
 	echo "<td>".$res['Name']."</td>";
-	echo "<td>".$res['Service_Information']."</td>";	
-	echo "<td>".$res['Expected_Local_Duration']."</td>";	
-	echo "<td>".$res['Expected_Overseas_Duration']."</td>";	
-	echo "<td>".$res['Expected_Start_Time']."</td>";	
-	echo "<td>".$res['Last_Collection_Time']."</td>";	
-	echo "<td>".$res['Last_Delivery_Time']."</td>";
-	
-	echo "<td><a href=\"manage.php?id=".$res['Service_Type_Id']."\"><img src=\"../../_images/icon-edit.png\"></img>Edit</a> | <a href=\"handler.php?id=".$res['Service_Type_Id']."\"><img src=\"../../_images/icon-delete.png\"></img>Delete</a></td>";
+		echo "<td>".$res['Phone']."</td>";
+	echo "<td>".$res['Address_Line1']."</td>";
+echo "<td>".$res['Address_Line2']."</td>";
+echo "<td>".$res['State']."</td>";
+echo "<td>".$res['Postal_Code']."</td>";
+echo "<td>".$res['District_Id']."</td>";
+echo "<td>".$res['BuildingName']."</td>";
+	echo "<td><a href=\"manage.php?id=".$res['Building_Code']."\"><img src=\"../../_images/icon-edit.png\"></img>Edit</a> | <a href=\"handler.php?id=".$res['Building_Code']."\"><img src=\"../../_images/icon-delete.png\"></img>Delete</a></td>";
 	
 	$row_count++;
-	
 }
 echo "</table>";
 ?></td>

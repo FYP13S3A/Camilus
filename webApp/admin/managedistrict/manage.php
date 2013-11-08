@@ -77,7 +77,10 @@ Do the following if you're using your customized build of modernizr (http://www.
 <!--[if lt IE 9]>
 <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
-<script src="../zones/_script/respond.min.js"></script>
+<script src="../../_script/respond.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.1.15/jquery.form-validator.min.js"></script>
+<script src="../../_script/jquery.form-validator.js"></script>
 
 </head>
 
@@ -126,19 +129,19 @@ echo '<li class=\"last\"><a href="../managevehtype/manage.php">Add Vehicle Types
 <div>
 <table width="100%" border="0">
   <tr>
-    <td><label class="sectionTitle" id="frmItem">Add District</label></td>
+    <td><label class="sectionTitle" id="frmItem"><?php echo $btnvalue;?></label></td>
     </tr>
   <tr>
     <td></td>
     </tr>
   <tr>
-    <td><form action="handler.php" method="post" name="frmAddZone" id="frmAddZone">
+    <td><form action="handler.php" method="post" name="frmAddZone" id="frmAddZone" >
     <input type="hidden" name="mode" value="<?php echo $mode; ?>"/>
     <input type="hidden" name="id" value="<?php echo $id; ?>"/>
       <table width="57%" border="0">
         <tr>
           <td width="55%"><label class="frmItemName">&nbsp;Zone :</label></td>
-          <td width="45%"><select name="Zone_Id">
+          <td width="45%"><select name="Zone_Id" data-validation="required">
             <?php
 				foreach($result_array AS $row){
 					if($row['Zone_Id']==$Zone_Id){
@@ -153,7 +156,7 @@ echo '<li class=\"last\"><a href="../managevehtype/manage.php">Add Vehicle Types
         </tr>
         <tr>
           <td><label class="frmItemName">&nbsp;Postal Sector : (First Two Digits)</label></td>
-          <td colspan="2"><input type="text" name="Postal_Sector" id="Postal_Sector" size="40" value="<?php echo $Postal_Sector; ?>">          
+          <td colspan="2"><input type="text" name="Postal_Sector" id="Postal_Sector" size="40" value="<?php echo $Postal_Sector; ?>" data-validation="number length" data-validation-length="2-2"  data-validation-error-msg="Please enter the first two digits of the postal code." />          
         </tr>
         <tr>
           <td>&nbsp;</td>
@@ -178,6 +181,33 @@ echo '<li class=\"last\"><a href="../managevehtype/manage.php">Add Vehicle Types
 <?php include("../../footer.php"); ?>
 </div><!---end#contentBox--->
 </div>
+<script>
+(function($) {
 
+    var dev = window.location.hash.indexOf('dev') > -1 ? '.dev' : '';
+
+    $.validate({
+        language : {
+            requiredFields: 'All these fields are required!!'
+        },
+        errorMessagePosition : 'top',
+        scrollToTopOnError : true,
+          decimalSeparator : '.',
+        onValidate : function() {
+            var $callbackInput = $('#callback');
+            if( $callbackInput.val() == 1 ) {
+                return {
+                    element : $callbackInput,
+                    message : 'This validation was made in a callback'
+                };
+            }
+        }
+      
+    });
+
+ 
+
+})(jQuery);
+</script>
 </body>
 </html>
