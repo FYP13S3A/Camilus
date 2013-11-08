@@ -2,6 +2,86 @@
 
 include 'conn.php';
 
+/*
+Allocate vehicle to proceed with appointment collection
+*/
+
+//set timezone to Singapore
+date_default_timezone_set("Asia/Singapore");
+
+
+$sql= "SELECT * from appointment where Collection_Status='pending' AND (Driver_Id IS NULL OR Driver_Id = 0)";
+$result=mysql_query($sql);
+
+while ($row = mysql_fetch_assoc($result)) {
+   $result_array[] = $row;
+}//end while loop
+
+
+foreach($result_array AS $row)
+{
+
+$collection_start_time = $row[Collection_DateTime];
+$appointment_ID = $row[Appointment_Id];
+
+//check if job are suppose to start.
+if (time() >= strtotime($collection_start_time)) 
+{
+
+//allocate PPDC ( building code: 19299 ) driver to go collect
+$sql2 = "SELECT Id from account where Work_Location_Id='19299' AND UserId LIKE 'Driver%' AND Id IN
+(SELECT User_Id
+FROM `vehicle`
+WHERE Vehicle_Type_Id = '2')";
+
+$result2 = mysql_query($sql2);
+
+while ($row2 = mysql_fetch_assoc($result2)) {
+   $result_array2[] = $row2;
+}//while fetch driver of location
+
+//do a compare to get the lowest job on driver
+$driver_counter = "999";
+$driver_selection = "0";
+
+foreach($result_array2 AS $row_da)
+{
+$driverId = $row_da[Id];
+
+$sql_count_leg = "SELECT * from appointment where Driver_Id='$driverId'";
+$result_count_leg = mysql_query($sql_count_leg);
+$totalCount = mysql_num_rows($result_count_leg);
+
+if($driver_counter>$totalCount)
+{
+$driver_selection = $driverId;
+$driver_counter = $totalCount;
+}//end if driver counter
+
+}//end foreach
+
+//update database after select driver
+
+$sql_update_driver = "UPDATE appointment SET Driver_Id='$driver_selection' where Appointment_ID ='".$appointment_ID."'";
+
+$result=mysql_query($sql_update_driver);
+if($result == false)
+{ 
+    die("Didn't Update"); 
+}
+
+
+}//end if job are support to start
+
+
+
+
+}//end foreach appointment
+
+
+//unset result array
+unset($result_array2);
+unset($result_array);
 
 /* 
 Allocate Vehicle to proceed with delivery */
@@ -10,7 +90,6 @@ Allocate Vehicle to proceed with delivery */
 System will do the following
 - Look at mail table
 - Look for mail that is approve, delivery status is still pending
-
 */
 
 
@@ -45,8 +124,6 @@ while ($row_delivery = mysql_fetch_assoc($result_delivery)) {
 $this_delivery_id = $result_delivery_array[0][Delivery_Id];
 $expected_start_date_time = $result_delivery_array[0][Expected_Start_DateTime];
 
-//set timezone to Singapore
-date_default_timezone_set("Asia/Singapore");
 
 //check if job are suppose to start.
 if (time() >= strtotime($expected_start_date_time)) {

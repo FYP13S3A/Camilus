@@ -360,3 +360,33 @@ Stack trace:
 [01-Nov-2013 17:47:52] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 53
 [01-Nov-2013 17:47:52] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/camilus/public_html/HUBVersion/checkjob.php:53) in /home/camilus/public_html/HUBVersion/checkjob.php on line 232
 [01-Nov-2013 17:47:52] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/camilus/public_html/HUBVersion/checkjob.php:53) in /home/camilus/public_html/HUBVersion/checkjob.php on line 233
+[02-Nov-2013 16:20:04] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 16
+[02-Nov-2013 16:20:04] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 21
+[02-Nov-2013 16:20:05] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 189
+[02-Nov-2013 16:20:29] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 189
+[02-Nov-2013 16:21:31] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 39
+[02-Nov-2013 16:21:31] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 47
+[02-Nov-2013 16:21:31] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 190
+[02-Nov-2013 16:21:48] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 190
+[02-Nov-2013 16:22:37] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 21
+[02-Nov-2013 16:22:37] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 190
+[02-Nov-2013 16:22:51] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 21
+[02-Nov-2013 16:22:51] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 190
+[02-Nov-2013 16:23:17] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 190
+[02-Nov-2013 16:26:01] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 190
+[02-Nov-2013 16:26:44] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 21
+[02-Nov-2013 16:26:44] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 190
+[02-Nov-2013 16:27:29] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 190
+[02-Nov-2013 16:28:53] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 190
+[02-Nov-2013 16:29:03] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 190
+[02-Nov-2013 16:29:13] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 190
+[02-Nov-2013 16:48:15] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 215
+[02-Nov-2013 16:48:50] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 215
+[02-Nov-2013 16:53:13] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 215
+[02-Nov-2013 16:54:08] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 215
+[02-Nov-2013 16:54:16] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 215
+[02-Nov-2013 17:02:03] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 21
+[02-Nov-2013 17:02:03] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 215
+[02-Nov-2013 10:24:41] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 47
+[02-Nov-2013 10:24:41] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/camilus/public_html/HUBVersion/checkjob.php:47) in /home/camilus/public_html/HUBVersion/checkjob.php on line 263
+[02-Nov-2013 10:24:41] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/camilus/public_html/HUBVersion/checkjob.php:47) in /home/camilus/public_html/HUBVersion/checkjob.php on line 264

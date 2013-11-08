@@ -181,6 +181,12 @@ else
   </select></td>
 </tr>
 <tr>
+<td>
+Payment Mode: </td>
+<td><b><input type="radio" name="payment" value="cash" checked>Cash on Collection <input type="radio" name="payment" value="paypal"> Online Payment via Paypal</b>
+</td>
+</tr>
+<tr>
 <td>Remarks :</td>
   <td><input type="text" name="s_Remarks" id="s_Remarks" size="50" value="<?php echo $s_Remarks;?>"></td>
 </label></td>

@@ -170,8 +170,8 @@ $to      = $s_Email;
 $subject = 'Camilus - Mail Approve - ' .$trackingID;
 $message = "Hi, your mail is approved. Your tracking id is $trackingID . \n You can track the progress at http://www.efxmarket.com/HUBVersion/tracking.php \n\n Thanks for using Camilus.";
 
-$headers = 'From: support@camilus.com' . "\r\n" .
-    'Reply-To: support@camilus.com' . "\r\n" .
+$headers = 'From: support@camilus.org' . "\r\n" .
+    'Reply-To: support@camilus.org' . "\r\n" .
     'X-Mailer: PHP/' . phpversion();
 
 

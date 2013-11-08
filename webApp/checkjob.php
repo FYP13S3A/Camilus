@@ -1,5 +1,7 @@
 <?php
 
+error_reporting(0);
+
 include 'conn.php';
 
 /* FOR DELIVERYMAN TO FETCH JOBS */
@@ -29,17 +31,47 @@ $line_Delimiter = "**";
 $type_of_job = "";
 $writeLine = "";
 
-//Create Array to Store Data - Transfer
-$transfer[] = "";
+
+//get all appointment related to the driver 
+
+$sql1 = "SELECT a.Name, a.appointment_Id, a.Mail_Reference_No, a.Remarks, b.Address_Line1, b.Postal_Code
+FROM appointment a, address b
+WHERE a.Driver_Id =  '$driverID'
+AND a.Collection_Status =  'pending'
+AND a.Collection_Address_Id = b.Address_Id";
+$result1 = mysql_query($sql1);
 
 
+while ($row1 = mysql_fetch_assoc($result1)) {
+   $result_array1[] = $row1;
+}//while fetch driver of location
 
-//delivery,jobId,parcelID,serviceType,sendername,recipientName,recipientAddress
-//Create Array to Store Data - Delivery
-$delivery[] = "";
+foreach($result_array1 AS $row_list)
+{
+
+$appointment_Id = $row_list[appointment_Id];
+$manifest_id  = $row_list[Mail_Reference_No];
+$appointment_Address = $row_list[Address_Line1];
+$appointment_Postal = $row_list[Postal_Code];
+$appointment_Name = $row_list[Name];
+$remarks = $row_list[Remarks];
 
 
-//echo "<p>Job List for User <b>" . $driverID . "</b></p><hr>";
+//writeLine to text output
+$writeLine .= "appointment". $field_Delimiter;
+$writeLine .= $appointment_Id . $field_Delimiter;
+$writeLine .= $manifest_id . $field_Delimiter;
+$writeLine .= $appointment_Address . $field_Delimiter;
+$writeLine .= $appointment_Postal . $field_Delimiter;
+$writeLine .= $appointment_Name . $field_Delimiter;
+$writeLine .= $remarks;
+$writeLine .= $line_Delimiter;
+}
+
+//unset array1
+unset($result_array1);
+
+
 
 //get all jobs related to the driver
 $sql1 = "SELECT * FROM `deliveryleg` WHERE Driver_Id='".$driverID."' AND Leg_Status='pending'";
@@ -206,10 +238,14 @@ $writeLine .= $recipient_Postal . $field_Delimiter;
 $writeLine .= $senderName . $field_Delimiter;
 $writeLine .= $recipientName. $field_Delimiter;
 $writeLine .= $mail_Contents;
-
 }
 
+
+
 $writeLine .= $line_Delimiter;
+
+
+
 
 
 //echo "Departure > " . $departure_output . "<br>";
@@ -228,6 +264,10 @@ unset($result_manifest_array);
 //print out job & remove last |
 $writeLine = substr($writeLine, 0, -2);
 
+if(trim($writeLine)=="")
+{
+$writeLine = "404";
+}
 
 header('Content-disposition: attachment; filename='.$driver_userID.'.txt');
 header('Content-type: text/plain');

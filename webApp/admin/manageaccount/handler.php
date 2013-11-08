@@ -58,8 +58,8 @@ $to      = 'baokydev@gmail.com';
 $subject = 'Camilus - Password Reset';
 $message = 'Hi, your temporary password is ' . $password . " , please login out platform and change a new password soon.";
 
-$headers = 'From: support@camilus.com' . "\r\n" .
-    'Reply-To: support@camilus.com' . "\r\n" .
+$headers = 'From: support@camilus.org' . "\r\n" .
+    'Reply-To: support@camilus.org' . "\r\n" .
     'X-Mailer: PHP/' . phpversion();
 
 

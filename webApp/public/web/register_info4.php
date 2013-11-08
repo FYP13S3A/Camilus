@@ -49,6 +49,9 @@ $d_Width = $_POST['d_Width'];
 $d_Height = $_POST['d_Height'];
 $d_Content = $_POST['d_Content'];
 
+//Payment Details
+$s_Payment = $_POST['payment'];
+
 
 //SENDER SQL INPUT
 
@@ -97,12 +100,55 @@ $d_Status = "pending";
 $m_catID = 1;
 $approveStatus = "0";
 
+//draw the price base on service type
+
+$sql_getPrice = "SELECT Price_Less500g , Price_Less2000g , Price_5000g 
+FROM servicetype
+WHERE Service_Type_Id = $s_Service";
+
+$result_Price =mysql_query($sql_getPrice);
+
+while ($row = mysql_fetch_assoc($result_Price)) {
+   $result_price[] = $row;
+}
+
+$price1 = $result_price[0][Price_Less500g];
+$price2 = $result_price[0][Price_Less2000g];
+$price3 = $result_price[0][Price_5000g];
+
+
+/*CALCULATE MAIL PRICE */
+if($d_Weight<500)
+{
+//lesser than 500g
+$mail_price = $price1;
+}
+if($d_Weight<2000 && $d_Weight>500)
+{
+//more than 500g, less than 2kg
+$mail_price = $price2;
+}
+if($d_Weight<5000 && $d_Weight>2000)
+{
+//more than 2kg, less than 5kg
+$mail_price = $price3;
+}
+
+//check if its appointment
+//additional $10 for appointment type
+
+if($txtApptDate!="" && $timeSlots !="")
+{
+$mail_price = $mail_price + 10.00;
+}
+
+
 //Insert to Mail Table
 $sql = "INSERT INTO mail";
 
-$sql .= " (Mail_Reference_No,Sender_FullName,Sender_Address_Id,Sender_Contact_No,Sender_Email,Recipient_FullName,Recipient_Address_Id,Recipient_Contact_No,Recipient_Email,Mail_Size,Mail_Weight,Mail_Contents,Delivery_Status,Mail_Category_Id,Service_Type_Id,Approve_Status)";
+$sql .= " (Mail_Reference_No,Sender_FullName,Sender_Address_Id,Sender_Contact_No,Sender_Email,Recipient_FullName,Recipient_Address_Id,Recipient_Contact_No,Recipient_Email,Mail_Size,Mail_Weight,Mail_Contents,Delivery_Status,Mail_Category_Id,Service_Type_Id,Approve_Status,Payment_Mode,Mail_Price)";
 
-$sql .= " VALUES ('$mail_reference_no','$s_Name','$s_addrID','$s_Phone','$s_Email','$r_Name','$r_addrID','$r_Phone','$r_Email','$mailSize','$d_Weight','$d_Content','$d_Status',$m_catID,$s_Service,'$approveStatus')" ;
+$sql .= " VALUES ('$mail_reference_no','$s_Name','$s_addrID','$s_Phone','$s_Email','$r_Name','$r_addrID','$r_Phone','$r_Email','$mailSize','$d_Weight','$d_Content','$d_Status',$m_catID,$s_Service,'$approveStatus','$s_Payment','$mail_price')" ;
 
 
 $retval = mysql_query($sql);
@@ -130,14 +176,14 @@ else
 {
 //get appointment key-ed in data
 
-$a_Name = $_POST['r_Name'];
-$a_Address = $_POST['r_Address'];
-$a_Email = $_POST['r_Email'];
-$a_Phone = $_POST['r_Phone'];
+$a_Name = $_POST['a_Name'];
+$a_Address = $_POST['a_Address'];
+$a_Email = $_POST['a_Email'];
+$a_Phone = $_POST['a_Phone'];
 
-$a_City = $_POST['r_City'];
-$a_Country = $_POST['r_Country'];
-$a_Postal = $_POST['r_Postal'];
+$a_City = $_POST['a_City'];
+$a_Country = $_POST['a_Country'];
+$a_Postal = $_POST['a_Postal'];
 
 //Appointment Address SQL INPUT
 
@@ -160,9 +206,9 @@ $c_AddressID  =  mysql_insert_id();
 
 
 $sql = "INSERT INTO appointment ".
-       "(Collection_DateTime, Collection_Address_Id, Mail_Reference_No, Remarks,Collection_Status) ".
+       "(Name, Collection_DateTime, Collection_Address_Id, Mail_Reference_No, Remarks,Collection_Status) ".
        "VALUES ".
-       "('$collection_DateTime', $c_AddressID,'$mail_reference_no','$s_Remarks','pending')";
+       "('$a_Name','$collection_DateTime', $c_AddressID,'$mail_reference_no','$s_Remarks','pending')";
 
 
 $retval = mysql_query($sql);
@@ -171,6 +217,28 @@ if(! $retval )
 {
   die('System Error, please contact our counter regarding this issue.');
 }
+
+
+//if user select payment mode as paypal
+
+if($s_Payment=="paypal")
+{
+
+//send an email to the sender email
+$to      = $s_Email;
+$subject = 'Camilus - Invoice for Order # ' .$mail_reference_no;
+$message = "Hi, you had choose online payment as your payment mode. \n Total Cost : S\$$mail_price \n To make payment for your order, please visit: \nhttps://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=support@camilus.org&amount=$mail_price&currency_code=SGD&item_name=Camilus%20Payment%20-%20$mail_reference_no \n Thanks for using Camilus.";
+
+$headers = 'From: support@efxmarket.com' . "\r\n" .
+    'Reply-To: support@efxmarket.com' . "\r\n" .
+    'X-Mailer: PHP/' . phpversion();
+
+
+
+mail($to, $subject, $message, $headers);
+
+}//end if payment by paypal
+
 
 
 }
@@ -228,7 +296,7 @@ Do the following if you're using your customized build of modernizr (http://www.
   <div class="wireframemenu">
 <ul>
 <li><a href="">Home</a></li>
-<li><a href="index.php">Register Info</a></li>
+<li><a href="../../web/register_info.php">Register Info</a></li>
 <li><a href="../../kiosk/tracking.php">Track Mail</a></li>
 <li><a href="#">FAQ</a></li>
 <li><a href="#">Contact Us</a></li>
