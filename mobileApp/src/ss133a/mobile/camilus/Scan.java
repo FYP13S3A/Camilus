@@ -15,9 +15,13 @@ public class Scan extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 	        // Inflate the layout for this fragment
 	        View V = inflater.inflate(R.layout.activity_scan, container, false);
-	        /*List<String> childR = Jobs.listDataHeader;
+	        JobsManager jm = Main.jm;
+
+	        /*HashMap<String, List<String>> listJobContainer = Jobs.listJobContainer;
+	        List<String> dataheader = Jobs.listDataHeader;
+	        List<String> childtoremove = listJobContainer.get(dataheader.get(0));
 	        JobsExpandableAdapter jobAdapt = Jobs.jobAdapter;
-	        childR.remove(0);
+	        childtoremove.remove(0);
 	        jobAdapt.notifyDataSetChanged();*/
 	        return V;
 	}

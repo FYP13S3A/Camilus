@@ -10,7 +10,7 @@
     tools:context=".SummaryActivity" >
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/txtTRJobId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/textView2"
@@ -18,19 +18,19 @@
         android:text="Priority Express Mail:" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/txtTRDestination"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView3"
-        android:layout_below="@+id/textView3"
+        android:layout_alignRight="@+id/txtTRJobId"
+        android:layout_below="@+id/txtTRJobId"
         android:text="Priority Mail:" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView4"
-        android:layout_below="@+id/textView4"
+        android:layout_alignRight="@+id/txtTRDestination"
+        android:layout_below="@+id/txtTRDestination"
         android:text="Priority Package:" />
 
     <TextView

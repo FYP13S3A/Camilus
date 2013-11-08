@@ -13,5 +13,10 @@
     <string name="title_activity_jobs">Jobs</string>
     <string name="title_activity_scan">Scan</string>
     <string name="retrieve_job">Retrieve Jobs</string>
-
+    <string name="title_activity_transfer">Transfer</string>
+    <string name="title_activity_delivery">Delivery</string>
+    <string name="transfer">Transfer</string>
+	<string name="delivery">Delivery</string>
+	<string name="confirm_transfer">Confirm Transfer</string>
+	
 </resources>

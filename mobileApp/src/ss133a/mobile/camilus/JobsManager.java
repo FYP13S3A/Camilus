@@ -29,35 +29,46 @@ import android.os.Parcelable;
 import android.view.View;
 
 public class JobsManager{
-	HashMap<String, List<String>> hashmapDataContainer;
+	HashMap<String, List<String>> hashmapExpandableListContainer;
+	HashMap<String, String> hashmapJobsContainer;
 	List<String> listJobHeader, listJobHeader2;
 	List<List<String>> listJobChilds;
 	boolean prepareContainer;
 	Login login;
 	
 	public JobsManager(){
-		hashmapDataContainer = new HashMap<String, List<String>>();
+		hashmapExpandableListContainer = new HashMap<String, List<String>>();
+		hashmapJobsContainer = new HashMap<String, String>();
 		listJobHeader = new ArrayList<String>();
 		listJobHeader2 = new ArrayList<String>();
 		listJobChilds = new ArrayList<List<String>>();
 		prepareContainer= false;
 	}
 	
-	public JobsManager(HashMap<String, List<String>> hashmapDataContainer,List<String> listJobHeader,
+	public JobsManager(HashMap<String, List<String>> hashmapExpandableListContainer, HashMap<String, String> hashmapJobsContainer,List<String> listJobHeader,
 			List<String> listJobHeader2, List<List<String>> listJobChilds, boolean prepareContainer){
-		this.hashmapDataContainer = hashmapDataContainer;
+		this.hashmapExpandableListContainer = hashmapExpandableListContainer;
+		this.hashmapJobsContainer = hashmapJobsContainer;
 		this.listJobHeader = listJobHeader;
 		this.listJobHeader2 = listJobHeader2;
 		this.listJobChilds = listJobChilds;
 		this.prepareContainer = prepareContainer;
 	}
 	
-	public HashMap<String, List<String>> getHashmapDataContainer(){
-		return hashmapDataContainer;
+	public HashMap<String, List<String>> getHashmapExpandableListContainer(){
+		return hashmapExpandableListContainer;
 	}
 	
-	public void setHashmapDataContainer(HashMap<String, List<String>> hashmapDataContainer){
-		this.hashmapDataContainer = hashmapDataContainer;
+	public void setHashmapExpandableListContainer(HashMap<String, List<String>> hashmapExpandableListContainer){
+		this.hashmapExpandableListContainer = hashmapExpandableListContainer;
+	}
+	
+	public HashMap<String, String> getHashmapJobsContainer(){
+		return hashmapJobsContainer;
+	}
+	
+	public void setHashmapJobsContainer(HashMap<String, String> hashmapJobsContainer){
+		this.hashmapJobsContainer = hashmapJobsContainer;
 	}
 	
 	public List<String> getListJobHeader(){
@@ -140,21 +151,33 @@ public class JobsManager{
 		return filedata;
 	}
 	
+	public void addJob(String job){
+		String[] jobData = job.split("\\|");
+		if(jobData[0].equals("transfer")){
+			//key = manifest id, value = jobid|building|postalcode
+			hashmapJobsContainer.put(jobData[2], jobData[1]+"|"+jobData[3]+"|"+jobData[4]);
+		}else if(jobData[0].equals("delivery")){
+			//key = manifest id, value = jobid|ToAddress|ToPostalCode|SenderName|RecipientName
+			hashmapJobsContainer.put(jobData[2], jobData[1]+"|"+jobData[3]+"|"+jobData[4]+"|"+jobData[5]+"|"+jobData[6]);
+		}
+	}
+	
 	public void sortJobs(String file){
 		System.out.println("sq: "+"13. sort file");
 		String[] jobs = file.split("\\*\\*");
 		for(int i=0;i<jobs.length;i++){
+			addJob(jobs[i]);
 			String[] jobdetails = jobs[i].split("\\|");
 			if(jobdetails[0].trim()!=""){
 				switch (jobType.valueOf(jobdetails[0])){
 					case delivery:
-						listJobChilds.get(0).add(jobdetails[5]);
+						listJobChilds.get(0).add(jobdetails[2]+" "+jobdetails[3]);
 						break;
 					case collection:
-						listJobChilds.get(1).add(jobdetails[5]);
+						listJobChilds.get(1).add(jobdetails[2]+" "+jobdetails[3]);
 						break;
 					case transfer:
-						listJobChilds.get(2).add(jobdetails[5]);
+						listJobChilds.get(2).add(jobdetails[2]+" "+jobdetails[3]);
 						break;
 					default:
 						break;
@@ -168,12 +191,22 @@ public class JobsManager{
 		if(prepareContainer==false){
 			for(int i=0;i<listJobHeader.size();i++){
 				if(listJobChilds.get(i).size()>0){
-					hashmapDataContainer.put(listJobHeader.get(i),listJobChilds.get(i));
+					hashmapExpandableListContainer.put(listJobHeader.get(i),listJobChilds.get(i));
 					listJobHeader2.add(listJobHeader.get(i));
 				}
 			}
 			prepareContainer=true;
 		}
+	}
+	
+	public void removeJob(int groupPos, int childPos){
+		JobsExpandableAdapter jobAdapt = Jobs.jobAdapter;
+		List<String> child = getHashmapExpandableListContainer().get(getListJobHeader2().get(groupPos));
+		child.remove(childPos);
+		if(child.size()==0){
+			getListJobHeader2().remove(groupPos);
+		}
+		jobAdapt.notifyDataSetChanged();
 	}
 	
 	public enum jobType{

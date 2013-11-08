@@ -42,6 +42,14 @@
             android:name="ss133a.mobile.camilus.Scan"
             android:label="@string/title_activity_scan" >
         </activity>
+        <activity
+            android:name="ss133a.mobile.camilus.Transfer"
+            android:label="@string/title_activity_transfer" >
+        </activity>
+        <activity
+            android:name="ss133a.mobile.camilus.Delivery"
+            android:label="@string/title_activity_delivery" >
+        </activity>
     </application>
 
 </manifest>
