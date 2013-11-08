@@ -31,6 +31,7 @@ import android.os.AsyncTask;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.View;
+import android.widget.Toast;
 
 public class JobsManager{
 	HashMap<String, List<String>> hashmapExpandableListContainer;
@@ -127,15 +128,16 @@ public class JobsManager{
 	}
 	
 	/*Function to check if job file for deliveryman exist in phone.*/
-	public boolean checkFileExist(){
-		String filePath = File.separator+"storage"+File.separator+"sdcard0"+File.separator+driver+".txt";
+	public boolean checkFileExist(Context c){
+		String filePath = c.getFilesDir()+File.separator+driver+".txt";
 		File file = new File(filePath);
 		return file.exists();
 	}
 	
 	/*Function to call AsynTask to retrieve job file from server.*/
-	public void downloadFile(Login l){
+	public void downloadFile(Login l, Context c){
 		login = l;
+		context = c;
 		new RetrieveJobAsyncTask().execute(driver,"login");
 	}
 	
@@ -146,9 +148,9 @@ public class JobsManager{
 	}
 	
 	/*Function to read contents inside job file and return a String value.*/
-	public String readFile(){
+	public String readFile(Context c){
 		String filedata = "";
-		String filePath = File.separator+"storage"+File.separator+"sdcard0"+File.separator+driver+".txt";
+		String filePath = c.getFilesDir()+File.separator+driver+".txt";
 		File file = new File(filePath);
 		
 		StringBuilder text = new StringBuilder();
@@ -168,8 +170,8 @@ public class JobsManager{
 	}
 	
 	/*Function to remove job file from phone.*/
-	public void removeFile(){
-		String filePath = File.separator+"storage"+File.separator+"sdcard0"+File.separator+driver+".txt";
+	public void removeFile(Context c){
+		String filePath = c.getFilesDir()+File.separator+driver+".txt";
 		//delete file
 		File file = new File(filePath);
 		file.delete();
@@ -228,10 +230,10 @@ public class JobsManager{
 	}
 	
 	/*Function to call various sub-functions to remove job from application as well as job file*/
-	public void removeJob(int groupPos, int childPos, String manifestId){
+	public void removeJob(int groupPos, int childPos, String manifestId, Context c){
 		removeJobFromExpandableList(groupPos, childPos);
 		removeJobFromJobContainer(manifestId);
-		removeJobFromFile();
+		removeJobFromFile(c);
 	}
 	
 	public void removeJobFromExpandableList(int groupPos, int childPos){
@@ -250,8 +252,8 @@ public class JobsManager{
 		hashmapJobsContainer.remove(manifestId);
 	}
 	
-	public void removeJobFromFile(){
-		String filePath = File.separator+"storage"+File.separator+"sdcard0"+File.separator+driver+".txt";
+	public void removeJobFromFile(Context c){
+		String filePath = c.getFilesDir()+File.separator+driver+".txt";
 		if(hashmapJobsContainer.size()==0){
 			//delete file
 			File file = new File(filePath);
@@ -324,7 +326,7 @@ public class JobsManager{
 				try {
 					/*Grab response from server and save file to phone.*/
 					BufferedInputStream bis = new BufferedInputStream(jobEntity.getContent());
-					String filePath = File.separator+"storage"+File.separator+"sdcard0"+File.separator+username+".txt";
+					String filePath = context.getFilesDir()+File.separator+username+".txt";
 					BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(new File(filePath)));
 					int inByte;
 					while((inByte = bis.read()) != -1) bos.write(inByte);
@@ -338,9 +340,9 @@ public class JobsManager{
 					e.printStackTrace();
 				}
 			}
-			String filedata = readFile().trim();
+			String filedata = readFile(context).trim();
 			if(filedata.trim().equals("404")){ /*404 means no job found for deliveryman*/
-				removeFile();
+				removeFile(context);
 			}else{
 				/*sort data to respective containers*/
 				sortJobs(filedata);

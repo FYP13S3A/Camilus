@@ -152,12 +152,12 @@ public class Appointment extends Activity {
 			System.out.println("sqsqsq: "+response);
 			if(response.equals("1")){
 				AlertDialog.Builder builder = new AlertDialog.Builder(context);
-				builder.setTitle("Transfer Confirmation.");
-				builder.setMessage("Transfer confirmation successful!")
+				builder.setTitle("Appointment Confirmation.");
+				builder.setMessage("Appointment confirmation successful!")
 				       .setCancelable(false)
 				       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
-				        	   jm.removeJob(groupPos, childPos, manifestid);
+				        	   jm.removeJob(groupPos, childPos, manifestid, context);
 				        	   setResult(RESULT_OK,intent);
 				        	   finish();
 				           }
@@ -167,8 +167,8 @@ public class Appointment extends Activity {
 			}
 			else{
 				AlertDialog.Builder builder = new AlertDialog.Builder(context);
-				builder.setTitle("Trasnfer Confirmation.");
-				builder.setMessage("Transfer confirmation fail! please try again.")
+				builder.setTitle("Appointment Confirmation.");
+				builder.setMessage("Appointment confirmation fail! please try again.")
 				       .setCancelable(false)
 				       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {

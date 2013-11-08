@@ -111,7 +111,7 @@ public class Transfer extends Activity {
 				       .setCancelable(false)
 				       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
-				        	   jm.removeJob(groupPos, childPos, manifestid);
+				        	   jm.removeJob(groupPos, childPos, manifestid, context);
 				        	   setResult(RESULT_OK,intent);
 				        	   finish();
 				           }

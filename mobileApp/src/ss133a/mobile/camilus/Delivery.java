@@ -134,7 +134,7 @@ public class Delivery extends Activity {
 		if(requestCode == SIGNATURE_REQUEST){
 			//capture signature
 			if(resultCode==RESULT_OK){
-	        	   jm.removeJob(groupPos, childPos, manifestid);
+	        	   jm.removeJob(groupPos, childPos, manifestid, context);
 	        	   setResult(RESULT_OK,intent);
 	        	   finish();
 			}
@@ -171,7 +171,7 @@ public class Delivery extends Activity {
 				       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
 				                /*Call removeJob to remove job data from application and file*/
-				        	   jm.removeJob(groupPos, childPos, manifestid);
+				        	   jm.removeJob(groupPos, childPos, manifestid, context);
 				        	   setResult(RESULT_OK,intent);
 				        	   finish();
 				           }

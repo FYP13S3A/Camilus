@@ -48,7 +48,7 @@ public class Summary extends Fragment {
         
         btnRetrieveJobs.setOnClickListener(new OnClickListener(){
         	public void onClick(View v){
-        		if(jm.checkFileExist()==false){
+        		if(jm.checkFileExist(v.getContext())==false){
     				pdLoading = ProgressDialog.show(v.getContext(), "Please Wait...", "Retrieving latest job...");
         			jm.downloadFileForSummary(Summary.this, v.getContext());
 				}else{

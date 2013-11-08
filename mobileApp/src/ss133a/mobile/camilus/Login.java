@@ -32,7 +32,7 @@ public class Login extends Activity  implements OnClickListener{
 	private EditText txtUser, txtPassword;
 	ProgressDialog pdLoading;
 	public static JobsManager jobsmanager;
-	Context c;
+	Context c = this;
 	String response = "000";
 	
 	public Login(){
@@ -47,8 +47,6 @@ public class Login extends Activity  implements OnClickListener{
 		txtUser = (EditText)findViewById(R.id.txtUser);
 		txtPassword = (EditText)findViewById(R.id.txtPassword);
 		btnLogin.setOnClickListener(this);
-		
-		c = getApplicationContext();
 	}
 
 	@Override
@@ -112,13 +110,13 @@ public class Login extends Activity  implements OnClickListener{
 			if(response.equals("302")){
 				jobsmanager = new JobsManager(username);
 				jobsmanager.addHeaderChildren();
-				if(jobsmanager.checkFileExist()==false){
-					jobsmanager.downloadFile(Login.this);
+				if(jobsmanager.checkFileExist(c)==false){
+					jobsmanager.downloadFile(Login.this, c);
 				}
 				else{
-					String filedata = jobsmanager.readFile().trim();
+					String filedata = jobsmanager.readFile(c).trim();
 					if(filedata.trim().equals("404")){ /*404 means no job found for deliveryman*/
-						jobsmanager.removeFile();
+						jobsmanager.removeFile(c);
 					}else{
 						/*sort data to respective containers*/
 						jobsmanager.sortJobs(filedata);
