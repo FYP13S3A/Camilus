@@ -10,10 +10,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Camilus - Tracking</title>
 
-<link href="_css/boilerplate.css" rel="stylesheet" type="text/css">
-<link href="_css/layout.css" rel="stylesheet" type="text/css">
+<link href="../../_css/boilerplate.css" rel="stylesheet" type="text/css">
+<link href="../../_css/layout.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css" />
-<link rel="stylesheet" href="_css/typography.css" />
+<link rel="stylesheet" href="../../_css/typography.css" />
 
 <!-- 
 To learn more about the conditional comments around the html tags at the top of the file:
@@ -29,16 +29,16 @@ Do the following if you're using your customized build of modernizr (http://www.
 <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
  
-<script src="_script/respond.min.js"></script>
+<script src="../../_script/respond.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.1.15/jquery.form-validator.min.js"></script>
-<script src="jquery.form-validator.js"></script>
+<script src="../../_script/jquery.form-validator.js"></script>
 </head>
 
 <body>
 <div class="gridContainer clearfix">
 <div id="contentBox">
-   <?php include("header.php"); ?>
+   <?php include("../../header.php"); ?>
   <div class="leftSidebar">
   <div  id="navigationBox">
   <div class="wireframemenu">
@@ -69,7 +69,7 @@ Do the following if you're using your customized build of modernizr (http://www.
 
   
   </div>
-  <?php include("footer.php"); ?>
+  <?php include("../../footer.php"); ?>
 </div><!---end#contentBox--->
 </div>
 

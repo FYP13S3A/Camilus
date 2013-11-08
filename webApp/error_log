@@ -390,3 +390,14 @@ Stack trace:
 [02-Nov-2013 10:24:41] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/checkjob.php on line 47
 [02-Nov-2013 10:24:41] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/camilus/public_html/HUBVersion/checkjob.php:47) in /home/camilus/public_html/HUBVersion/checkjob.php on line 263
 [02-Nov-2013 10:24:41] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/camilus/public_html/HUBVersion/checkjob.php:47) in /home/camilus/public_html/HUBVersion/checkjob.php on line 264
+[03-Nov-2013 16:28:00] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/updatestatus.php on line 22
+[03-Nov-2013 16:28:00] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/updatestatus.php on line 22
+[03-Nov-2013 16:28:21] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/updatestatus.php on line 22
+[03-Nov-2013 16:28:21] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/updatestatus.php on line 22
+[03-Nov-2013 18:24:23] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/updatestatus.php on line 125
+[04-Nov-2013 03:04:33] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 188
+[04-Nov-2013 03:04:33] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 188
+[04-Nov-2013 03:04:33] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 188
+[04-Nov-2013 03:04:36] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 188
+[04-Nov-2013 03:04:36] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 188
+[04-Nov-2013 03:04:36] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 188
