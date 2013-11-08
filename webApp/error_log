@@ -401,3 +401,122 @@ Stack trace:
 [04-Nov-2013 03:04:36] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 188
 [04-Nov-2013 03:04:36] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 188
 [04-Nov-2013 03:04:36] PHP Warning:  Invalid argument supplied for foreach() in /home/camilus/public_html/HUBVersion/d_vehicle.php on line 188
+[04-Nov-2013 14:54:47] PHP Parse error:  syntax error, unexpected T_STRING in /home/camilus/public_html/HUBVersion/viewreport.php on line 26
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/viewreport.php on line 29
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/viewreport.php on line 29
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 31
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/viewreport.php on line 52
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/viewreport.php on line 52
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 54
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/viewreport.php on line 75
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/viewreport.php on line 75
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 77
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/viewreport.php on line 98
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/viewreport.php on line 98
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 100
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/viewreport.php on line 122
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/viewreport.php on line 122
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 124
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/viewreport.php on line 146
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/viewreport.php on line 146
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 148
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/viewreport.php on line 169
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/viewreport.php on line 169
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 171
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/viewreport.php on line 197
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/viewreport.php on line 197
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 199
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/viewreport.php on line 226
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/viewreport.php on line 226
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 228
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/viewreport.php on line 256
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/viewreport.php on line 256
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 258
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'camilus'@'localhost' (using password: NO) in /home/camilus/public_html/HUBVersion/viewreport.php on line 286
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/camilus/public_html/HUBVersion/viewreport.php on line 286
+[04-Nov-2013 15:31:40] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 288
+[04-Nov-2013 15:45:23] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 60
+[04-Nov-2013 15:45:23] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 84
+[04-Nov-2013 15:45:23] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 108
+[04-Nov-2013 15:45:23] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 133
+[04-Nov-2013 15:45:23] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 158
+[04-Nov-2013 15:45:23] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 182
+[04-Nov-2013 15:45:23] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 211
+[04-Nov-2013 15:45:23] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 241
+[04-Nov-2013 15:45:23] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 272
+[04-Nov-2013 15:45:23] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 303
+[04-Nov-2013 15:46:01] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 60
+[04-Nov-2013 15:46:01] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 84
+[04-Nov-2013 15:46:01] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 108
+[04-Nov-2013 15:46:01] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 133
+[04-Nov-2013 15:46:01] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 158
+[04-Nov-2013 15:46:01] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 182
+[04-Nov-2013 15:46:01] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 211
+[04-Nov-2013 15:46:01] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 241
+[04-Nov-2013 15:46:01] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 272
+[04-Nov-2013 15:46:01] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 303
+[04-Nov-2013 15:47:49] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 60
+[04-Nov-2013 15:47:49] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 84
+[04-Nov-2013 15:47:49] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 108
+[04-Nov-2013 15:47:49] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 133
+[04-Nov-2013 15:47:49] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 158
+[04-Nov-2013 15:47:49] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 182
+[04-Nov-2013 15:47:49] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 211
+[04-Nov-2013 15:47:49] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 241
+[04-Nov-2013 15:47:49] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 272
+[04-Nov-2013 15:47:49] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 303
+[04-Nov-2013 15:49:19] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 60
+[04-Nov-2013 15:49:19] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 84
+[04-Nov-2013 15:49:19] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 108
+[04-Nov-2013 15:49:19] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 133
+[04-Nov-2013 15:49:19] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 158
+[04-Nov-2013 15:49:19] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 182
+[04-Nov-2013 15:49:19] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 211
+[04-Nov-2013 15:49:19] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 241
+[04-Nov-2013 15:49:19] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 272
+[04-Nov-2013 15:49:19] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 303
+[04-Nov-2013 15:52:33] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 60
+[04-Nov-2013 15:52:33] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 84
+[04-Nov-2013 15:52:33] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 108
+[04-Nov-2013 15:52:33] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 133
+[04-Nov-2013 15:52:33] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 158
+[04-Nov-2013 15:52:33] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 182
+[04-Nov-2013 15:52:33] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 211
+[04-Nov-2013 15:52:33] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 241
+[04-Nov-2013 15:52:33] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 272
+[04-Nov-2013 15:52:33] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 303
+[04-Nov-2013 15:57:20] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 60
+[04-Nov-2013 15:57:20] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 84
+[04-Nov-2013 15:57:20] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 108
+[04-Nov-2013 15:57:20] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 133
+[04-Nov-2013 15:57:20] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 158
+[04-Nov-2013 15:57:20] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 182
+[04-Nov-2013 15:57:20] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 211
+[04-Nov-2013 15:57:20] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 241
+[04-Nov-2013 15:57:20] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 272
+[04-Nov-2013 15:57:20] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 303
+[04-Nov-2013 16:08:41] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 60
+[04-Nov-2013 16:08:41] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 84
+[04-Nov-2013 16:08:41] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 108
+[04-Nov-2013 16:08:41] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 133
+[04-Nov-2013 16:08:41] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 158
+[04-Nov-2013 16:08:41] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 182
+[04-Nov-2013 16:08:41] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 211
+[04-Nov-2013 16:08:41] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 241
+[04-Nov-2013 16:08:41] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 272
+[04-Nov-2013 16:08:41] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 303
+[04-Nov-2013 18:32:41] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home/camilus/public_html/HUBVersion/viewreport.php on line 52
+[04-Nov-2013 18:32:42] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home/camilus/public_html/HUBVersion/viewreport.php on line 52
+[04-Nov-2013 18:37:07] PHP Parse error:  syntax error, unexpected ')', expecting T_PAAMAYIM_NEKUDOTAYIM in /home/camilus/public_html/HUBVersion/viewreport.php on line 47
+[04-Nov-2013 18:37:32] PHP Parse error:  syntax error, unexpected ')', expecting T_PAAMAYIM_NEKUDOTAYIM in /home/camilus/public_html/HUBVersion/viewreport.php on line 47
+[04-Nov-2013 18:37:34] PHP Parse error:  syntax error, unexpected ')', expecting T_PAAMAYIM_NEKUDOTAYIM in /home/camilus/public_html/HUBVersion/viewreport.php on line 47
+[04-Nov-2013 18:37:37] PHP Parse error:  syntax error, unexpected ')', expecting T_PAAMAYIM_NEKUDOTAYIM in /home/camilus/public_html/HUBVersion/viewreport.php on line 47
+[04-Nov-2013 18:37:42] PHP Parse error:  syntax error, unexpected ')', expecting T_PAAMAYIM_NEKUDOTAYIM in /home/camilus/public_html/HUBVersion/viewreport.php on line 47
+[04-Nov-2013 19:47:25] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 411
+[04-Nov-2013 19:47:37] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 413
+[04-Nov-2013 19:47:58] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 412
+[04-Nov-2013 19:48:06] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 413
+[04-Nov-2013 19:48:29] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/camilus/public_html/HUBVersion/viewreport.php on line 413
+[04-Nov-2013 20:20:03] PHP Parse error:  syntax error, unexpected T_STRING in /home/camilus/public_html/HUBVersion/viewreport.php on line 488
+[04-Nov-2013 21:16:53] PHP Parse error:  syntax error, unexpected T_LNUMBER in /home/camilus/public_html/HUBVersion/viewreport.php on line 65
+[04-Nov-2013 21:29:10] PHP Parse error:  syntax error, unexpected T_STRING in /home/camilus/public_html/HUBVersion/viewreport.php on line 227

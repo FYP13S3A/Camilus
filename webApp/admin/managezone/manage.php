@@ -130,11 +130,11 @@ echo '<li class=\"last\"><a href="../managevehtype/manage.php">Add Vehicle Types
       <table width="48%" border="0">
         <tr>
           <td width="45%"><label class="frmItemName">&nbsp;Name :</label></td>
-          <td width="55%"><input type="text" name="Name" id="Name" size="40" value="<?php echo $name; ?>" data-validation="custom" data-validation-regexp="^([a-zA-Z]+)$" data-validation-error-msg="Please enter the zone name." /></td>
+          <td width="55%"><input type="text" name="Name" id="Name" size="40" value="<?php echo $name; ?>" data-validation="custom" data-validation-regexp="^([a-zA-Z- ]+)$" data-validation-error-msg="Please enter the zone name."/></td>
         </tr>
         <tr>
           <td><label class="frmItemName">&nbsp;Possible Locations :</label></td>
-          <td><input type="text" name="Locations" id="Locations" size="40" value="<?php echo $locations; ?>" data-validation="custom length" data-validation-length="max300" data-validation-regexp="^([a-zA-Z]+)$" data-validation-error-msg="Please enter the possible locations."></td>
+          <td><input type="text" name="Locations" id="Locations" size="40" value="<?php echo $locations; ?>" data-validation="custom" data-validation-regexp="^([a-zA-Z- , ]+)$" data-validation-error-msg="Please enter the zone name." ></td>
         </tr>
         <tr>
           <td></td>

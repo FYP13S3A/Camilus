@@ -26,10 +26,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$coltime = modify_input($_POST['coltime']); 
 	$deltime = modify_input($_POST['deltime']); 
 	$mailbag = modify_input($_POST['mailbag']);
+	
+		$L500g = modify_input($_POST['L500g']); 
+	$L2000g = modify_input($_POST['L2000g']); 
+	$L5000g = modify_input($_POST['L5000g']);
 	if($_POST['mode'] =="update"){
-		updateServiceType($id,$name,$serviceInfo,$localdura,$overseasdura,$starttime,$coltime,$deltime,$mailbag);
+		updateServiceType($id,$name,$serviceInfo,$localdura,$overseasdura,$starttime,$coltime,$deltime,$mailbag,$L500g,$L2000g,$L5000g);
 	}else if($_POST['mode']=== "new"){
-		addServiceType($id,$name,$serviceInfo,$localdura,$overseasdura,$starttime,$coltime,$deltime,$mailbag);
+		addServiceType($id,$name,$serviceInfo,$localdura,$overseasdura,$starttime,$coltime,$deltime,$mailbag,$L500g,$L2000g,$L5000g);
 		}
 }
 
@@ -39,12 +43,12 @@ function modify_input($data){
      $data = htmlspecialchars($data);
      return $data;
 }
-function updateServiceType($id,$name,$serviceInfo,$localdura,$overseasdura,$starttime,$coltime,$deltime,$mailbag){
+function updateServiceType($id,$name,$serviceInfo,$localdura,$overseasdura,$starttime,$coltime,$deltime,$mailbag,$L500g,$L2000g,$L5000g){
 
 		$result=mysql_query("SELECT * FROM servicetype WHERE Service_Type_Id=$id");
 		$rowcount=mysql_num_rows($result);
 	if ($rowcount ==1){
-		$result=mysql_query("UPDATE `servicetype` SET `Name` = '$name', `Service_Information` = '$serviceInfo ', `Expected_Local_Duration` = '$localdura', `Expected_Overseas_Duration` = '$overseasdura', `Expected_Start_Time` = '$starttime', `Last_Collection_Time` = '$coltime', `Last_Delivery_Time` = '$deltime', `mailbag_usage` = '$mailbag' WHERE `servicetype`.`Service_Type_Id` = $id");
+		$result=mysql_query("UPDATE `servicetype` SET `Name` = '$name', `Service_Information` = '$serviceInfo ', `Expected_Local_Duration` = '$localdura', `Expected_Overseas_Duration` = '$overseasdura', `Expected_Start_Time` = '$starttime', `Last_Collection_Time` = '$coltime', `Last_Delivery_Time` = '$deltime', `mailbag_usage` = '$mailbag', Price_Less500g = '$L500g',  Price_Less2000g = '$L2000g', Price_Less5000g = '$L5000g' WHERE `servicetype`.`Service_Type_Id` = $id");
 		
 	
 		if ($result >0){
@@ -63,7 +67,7 @@ function updateServiceType($id,$name,$serviceInfo,$localdura,$overseasdura,$star
 }
 
  }
-function addServiceType($id,$name,$serviceInfo,$localdura,$overseasdura,$starttime,$coltime,$deltime,$mailbag){
+function addServiceType($id,$name,$serviceInfo,$localdura,$overseasdura,$starttime,$coltime,$deltime,$mailbag,$L500g,$L2000g,$L5000g){
 
 		$result=mysql_query("SELECT * FROM servicetype WHERE Service_Type_Id=$id");
 		
@@ -73,7 +77,7 @@ if ($result>0){
         </script>";
 }else{
 	
-		$result=mysql_query("INSERT INTO `servicetype` (`Service_Type_Id`, `Name`, `last_update`, `Service_Information`, `Expected_Local_Duration`, `Expected_Overseas_Duration`, `Expected_Start_Time`, `Last_Collection_Time`, `Last_Delivery_Time`, `mailbag_usage`) VALUES (NULL, '$name', CURRENT_TIMESTAMP, '$serviceInfo', '$localdura', '$overseasdura', '$starttime', '$coltime', '$deltime', '$mailbag')");	
+		$result=mysql_query("INSERT INTO `servicetype` (`Service_Type_Id`, `Name`, `last_update`, `Service_Information`, `Expected_Local_Duration`, `Expected_Overseas_Duration`, `Expected_Start_Time`, `Last_Collection_Time`, `Last_Delivery_Time`, `mailbag_usage`, Price_Less500g, Price_Less2000g, Price_Less5000g ) VALUES (NULL, '$name', CURRENT_TIMESTAMP, '$serviceInfo', '$localdura', '$overseasdura', '$starttime', '$coltime', '$deltime', '$mailbag', '$L500g', '$L2000g' ,'$L5000g')");	
 		if($result >0){
 		echo "<script> window.alert(\"$result Record inserted successfully!\");	window.location.replace('index.php');
         </script>";

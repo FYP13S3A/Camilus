@@ -6,13 +6,6 @@ $trackingID = $_GET['id'];
 
 include 'conn.php';
 
-
-
-
-
-echo $trackingID;
-
-
 //get data from tracking id
 
 $sql = "select * from mail where Mail_Reference_No='" . $trackingID ."'";
@@ -32,7 +25,7 @@ $r_Email = $result_mail[0][Recipient_Email];
 $r_Phone = $result_mail[0][Recipient_Contact_No];
 
 $s_Service = $result_mail[0][Service_Type_Id];
-
+$status= $result_mail[0][Delivery_Status];
 //shipment details
 $d_Contents = $result_mail[0][Mail_Contents];
 $d_Weight = $result_mail[0][Mail_Weight];
@@ -127,118 +120,88 @@ Do the following if you're using your customized build of modernizr (http://www.
   </div>
   </div>
   <div id="mainContent">
-<form name="form1" method="post" action="confirm_mail3.php">
+<form name="form1" method="post" action="updatestatus3.php">
 
-<table width="100%" border="0">
+<table width="22%" border="0">
 <tr>
-    <td><label class="sectionTitle">
+    <td width="42%"><label class="sectionTitle">
     <b>&nbsp;Sender Details</b></label></td>
-    <td>&nbsp;</td>
-    <td><label class="sectionTitle">
+    <td width="8%">&nbsp;</td>
+    <td width="50%"><label class="sectionTitle">
     <b>&nbsp;Recipient Details</b></label></td>
   </tr>
   <tr>
-    <td><table class="registerMail_P1">
+    <td>
+    <table class="registerMail_P1">
 <tr>
-<td>Name: </td><td><input type="text" name="s_Name" id="s_Name" size="40" value="<?php echo $s_Name;?>"></td>
+<td>Name: </td><td><input name="s_Name" type="text" id="s_Name" value="<?php echo $s_Name;?>" size="40" readonly></td>
 </tr>
 
 <tr>
 <td><label class="frmItemName">Address :</label>
-<br/><font color=red>Please ensure Your address <br/>Contains Unit No</font>
-</td>
-<td><textarea name="s_Address" cols="40" rows="3" id="s_Address"><?php echo $s_Address;?></textarea>
+<br/></td>
+<td><textarea name="s_Address" cols="40" rows="3" readonly id="s_Address"><?php echo $s_Address;?></textarea>
 </td>
 </tr>
 <tr>
   <td>Email Address: </td>
-  <td><input type="text" name="s_Email" id="s_Email" size="50" value="<?php echo $s_Email;?>"></td>
+  <td><input name="s_Email" type="text" id="s_Email" value="<?php echo $s_Email;?>" size="50" readonly></td>
 </tr>
 <tr>
-<td>Phone : </td><td><input type="text" name="s_Phone" id="s_Phone" size="20" value="<?php echo $s_Phone;?>"></td>
+<td>Phone : </td><td><input name="s_Phone" type="text" id="s_Phone" value="<?php echo $s_Phone;?>" size="20" readonly></td>
 </tr>
 
 </table></td>
     <td>&nbsp;</td>
     <td><table class="registerMail_P1">
-<tr>
-<td>Name: </td><td><input type="text" name="r_Name" id="r_Name" size="40" value="<?php echo $r_Name;?>"></td>
-</tr>
-
-<tr>
-<td><label class="frmItemName">Address :</label>
-<br/><font color=red>Please ensure Your address <br/>Contains Unit No</font>
-</td>
-<td><textarea id="r_Address" name="r_Address" rows="3" cols="40"><?php echo $r_Address;?></textarea>
-</td>
-</tr>
-<tr>
-  <td>Email Address: </td>
-  <td><input type="text" name="r_Email" id="r_Email" size="50" value="<?php echo $r_Email;?>"></td>
-</tr>
-<tr>
-<td>Phone : </td><td><input type="text" name="r_Phone" id="r_Phone" size="20" value="<?php echo $r_Phone;?>"></td>
-</tr>
-
-</table></td>
-  </tr>
-
-  <tr>
-    <td></td>
+      <tr>
+        <td>Name: </td>
+        <td><input name="r_Name" type="text" id="r_Name" value="<?php echo $r_Name;?>" size="40" readonly></td>
+      </tr>
+      <tr>
+        <td><label class="frmItemName">Address :</label></td>
+        <td><textarea name="r_Address" cols="40" rows="3" readonly id="r_Address"><?php echo $r_Address;?></textarea></td>
+      </tr>
+      <tr>
+        <td>Email Address: </td>
+        <td><input name="r_Email" type="text" id="r_Email" value="<?php echo $r_Email;?>" size="50" readonly></td>
+      </tr>
+      <tr>
+        <td>Phone : </td>
+        <td><input name="r_Phone" type="text" id="r_Phone" value="<?php echo $r_Phone;?>" size="20" readonly></td>
+      </tr>
+    </table></td>
   </tr>
   <tr>
     <td colspan="3">&nbsp;</td>
+   
   </tr>
+  <tr>
+    <td><label class="frmItem">Update Status :</label></td>
+    <td colspan="2"><select name="status">
+    <?php 
+    if($status=="onhold"){
+    echo  "<option value=\"onhold\" selected='true'>On Hold</option>";
+	echo " <option value=\"pending\" >Pending</option><option value=\"completed\">Completed</option>";
+    }else{
+		 echo  "<option value=\"onhold\">On Hold</option>";
+	echo " <option value=\"pending\" >Pending</option><option value=\"completed\">Completed</option>";
+	}
+	?>
+     
+    
+    </select></td>
+  </tr>
+  <tr>
+<td colspan="3" align="right"><input type="submit" name="btnSubmit" id="btnSubmit" value="Submit"></td>
+</tr>
 </table>
-
-
-
-  <table width="100%" border="0">
-    <tr>
-      <td><?php
-
-echo "<input type=\"hidden\" name=\"s_TrackingID\" value=\"". $trackingID ."\">\n";
-
-?>
-
-</form>
+      </form>
+      <input type="hidden" name"id" value"<?php echo $$trackingID; ?>" />
 </div>
 <?php include("footer.php"); ?>
 </div><!---end#contentBox--->
 </div>
-<script>
-function start() {
-var inputFields = form1.getElementsByTagName("input"),
-    inputFieldLength = inputFields.length;
 
-for(var i = 0; i < inputFieldLength; i++) {
-           inputFields[i].readOnly = true;
-}
-var textArea = form1.getElementsByTagName("textarea"),
-    textAreaLength = textArea.length;
-	for(var j = 0; j < textAreaLength; j++) {
-           textArea[j].readOnly = true;
-}
-
-}
-onload = start;
-function chgtx() {
-	
-var inputFields = form1.getElementsByTagName("input"),
-    inputFieldLength = inputFields.length;
-
-for(var i = 0; i < inputFieldLength; i++) {
-           inputFields[i].readOnly = !form1.chkChange.checked;
-}
-var textArea = form1.getElementsByTagName("textarea"),
-    textAreaLength = textArea.length;
-	for(var j = 0; j < textAreaLength; j++) {
-           textArea[j].readOnly = !form1.chkChange.checked;
-}
-    
-
-}
-
-</script>
 </body>
 </html>

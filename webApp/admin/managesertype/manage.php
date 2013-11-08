@@ -16,7 +16,7 @@ header('Location: http://www.efxmarket.com/HUBVersion/index.php');
  
  	 if (isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > 0){
 		 $id = $_GET['id'];
- 		 $result = mysql_query("SELECT Name, Service_Information, Expected_Local_Duration, Expected_Overseas_Duration, Expected_Start_Time, Last_Collection_Time, Last_Delivery_Time, mailbag_usage FROM servicetype WHERE Service_Type_Id=$id")
+ 		 $result = mysql_query("SELECT * FROM servicetype WHERE Service_Type_Id=$id")
  		 or die(mysql_error()); 
 		 $rowcount = mysql_num_rows($result);
 		$row = mysql_fetch_array($result);
@@ -32,6 +32,10 @@ header('Location: http://www.efxmarket.com/HUBVersion/index.php');
 			$coltime = $row['Last_Collection_Time']; 
 			$deltime = $row['Last_Delivery_Time']; 
 			$mailbag = $row['mailbag_usage'];
+			
+			$L500g = $row['Price_Less500g']; 
+			$L2000g = $row['Price_Less2000g']; 
+			$L5000g = $row['Price_Less5000g'];
 		 }else{
 			 echo "No results!"; 
 		 }
@@ -144,32 +148,32 @@ echo '<li class=\"last\"><a href="../managevehtype/manage.php">Add Vehicle Types
       <table width="56%" height="343" border="0">
         <tr>
           <td width="52%"><label class="frmItemName">Service Type Name :</label></td>
-          <td width="48%"><input type="text" name="name"  size="40" value="<?php echo $name;?>"  data-validation="custom length" data-validation-length="max30" data-validation-regexp="^([a-zA-Z]+)$" data-validation-error-msg="Please enter service type name."/></td>
+          <td width="48%"><input type="text" name="name"  size="40" value="<?php echo $name;?>"  data-validation="custom length" data-validation-length="max30" data-validation-regexp="^([a-zA-Z- ]+)$" data-validation-error-msg="Please enter service type name."/></td>
         </tr>
         <tr>
           <td><label class="frmItemName">Service Information :</label></td>
           <td>
-            <textarea name="serviceInfo" cols="42" rows="5"  data-validation="custom length" data-validation-length="max100" data-validation-regexp="^([a-zA-Z]+)$" data-validation-error-msg="Please enter the service information."><?php echo $serviceInfo;?> </textarea>          
+            <textarea name="serviceInfo" cols="42" rows="5"  data-validation="required" data-validation-error-msg="Please enter the service information."><?php echo $serviceInfo;?> </textarea>          
             </tr>
         <tr>
           <td><label class="frmItemName">Expected Local Duration :</label></td>
           <td >
-            <input name="localdura" type="text"  value="<?php echo $localdura;?>" size="10" data-validation="number length" data-validation-length="1-2" data-validation-error-msg="Please enter the expected local duration."></tr>
+            <input name="localdura" type="text"  value="<?php echo $localdura;?>" size="15"></tr>
         <tr>
           <td><label class="frmItemName">Expected Overseas Duration :</label></td>
-          <td><input name="overseasdura" type="text"  value="<?php echo $overseasdura;?>" size="10" data-validation="number length" data-validation-length="1-2" data-validation-error-msg="Please enter the expected oversea duration." /></td>
+          <td><input name="overseasdura" type="text"  value="<?php echo $overseasdura;?>" size="15"  /></td>
         </tr>
         <tr>
           <td><label class="frmItemName">Expected Start Time : (HH:MM:SS)</label></td>
-          <td><input name="starttime" type="text"  value="<?php echo $starttime;?>" size="10" data-validation="required" data-validation-error-msg="Please enter in the following format HH:MM:SS."></td>
+          <td><input name="starttime" type="text"  value="<?php echo $starttime;?>" size="15" data-validation="required" data-validation-error-msg="Please enter in the following format HH:MM:SS."></td>
         </tr>
         <tr>
           <td><label class="frmItemName">Last Collection Time : (HH:MM:SS)</label></td>
-          <td><input name="coltime" type="text"  value="<?php echo $coltime;?>" size="10" data-validation="required" data-validation-error-msg="Please enter in the following format HH:MM:SS."></td>
+          <td><input name="coltime" type="text"  value="<?php echo $coltime;?>" size="15" data-validation="required" data-validation-error-msg="Please enter in the following format HH:MM:SS."></td>
         </tr>
              <tr>
           <td><label class="frmItemName">Last Delivery Time : (HH:MM:SS)</label></td>
-          <td><input name="deltime" type="text"  value="<?php echo $deltime;?>" size="10" data-validation="required" data-validation-error-msg="Please enter in the following format HH:MM:SS."></td>
+          <td><input name="deltime" type="text"  value="<?php echo $deltime;?>" size="15" data-validation="required" data-validation-error-msg="Please enter in the following format HH:MM:SS."></td>
         </tr>
                 <tr>
           <td><label class="frmItemName">Mail Bag Needed :</label></td>
@@ -189,6 +193,18 @@ echo '<li class=\"last\"><a href="../managevehtype/manage.php">Add Vehicle Types
           </select></td>
         </tr>
         <tr>
+        <tr>
+          <td><label class="frmItemName">Price For &lt; 500g : (00.00)</label></td>
+          <td><input name="L500g" type="text" id="L500g"  value="<?php echo $L500g;?>" size="15" data-validation="number" data-validation-allowing="float"  data-validation-decimal-separator="." data-validation-error-msg="Please enter the price for mails lesser than 500g."></td>
+        </tr>
+        <tr>
+          <td><label class="frmItemName">Price For &lt; 2000g : (00.00)</label></td>
+          <td><input name="L2000g" type="text" id="L2000g"  value="<?php echo $L2000g;?>" size="15" data-validation="number" data-validation-allowing="float"  data-validation-decimal-separator="." data-validation-error-msg="Please enter the price for mails lesser than 2000g." ></td>
+        </tr>
+        <tr>
+          <td><label class="frmItemName">Price For &lt; 5000g : (00.00)</label></td>
+          <td><input name="L5000g" type="text" id="L5000g"  value="<?php echo $L5000g;?>" size="15" data-validation="number" data-validation-allowing="float"  data-validation-decimal-separator="." data-validation-error-msg="Please enter the price for mails lesser than 5000g." ></td>
+        </tr>
         <tr>
           <td>&nbsp;</td>
           <td>&nbsp;</td>

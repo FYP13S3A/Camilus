@@ -16,24 +16,24 @@ header('Location: http://www.efxmarket.com/HUBVersion/index.php');
  
  	 if (isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > 0){
 		 $id = $_GET['id'];
- 		 $result = mysql_query("SELECT * FROM vehicletype WHERE `Vehicle_Type_Id` = $id")
+ 		 $result = mysql_query("SELECT * FROM accounttype WHERE Type_Id=$id")
  		 or die(mysql_error()); 
 		 $rowcount = mysql_num_rows($result);
 		$row = mysql_fetch_array($result);
 		$mode ="update";
-		$btnvalue="Update Vehicle Type";
+		$btnvalue="Update Account Type";
 	
 		 if($rowcount>0){
 			$name = $row['Name'];
-			$description = $row['Description'];  
-			$threshold = $row['Mail_Threshold']; 
+			$prefix = $row['Prefix'];  
+			$description = $row['Description']; 
 		 }else{
 			 echo "No results!"; 
 		 }
 	 }//GET CHECK END
 	 else{
 		 $mode = "new";
-		 $btnvalue="Add Vehicle Type";
+		 $btnvalue="Add Account Type";
 	 }
  
  ?>
@@ -48,7 +48,7 @@ header('Location: http://www.efxmarket.com/HUBVersion/index.php');
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Camilus - Vehicle Type Management</title>
+<title>Camilus - Service Type Management</title>
 
 <link href="../../_css/boilerplate.css" rel="stylesheet" type="text/css">
 <link href="../../_css/layout.css" rel="stylesheet" type="text/css">
@@ -120,39 +120,44 @@ echo '<li class=\"last\"><a href="../managevehtype/manage.php">Add Vehicle Types
 <div>
 <table width="100%" border="0">
   <tr>
-    <td><label class="sectionTitle" id="frmItem"><?php echo $btnvalue;?></label></td>
+    <td><label class="sectionTitle" id="frmItem"><?php 
+	if($mode=="new"){
+		echo $btnvalue;
+	}else if ($mode=="update"){
+		echo $btnvalue;
+	}
+	?>
+	</label></td>
     </tr>
   <tr>
     <td></td>
     </tr>
   <tr>
-    <td><form action="handler.php" method="post" name="frmAddZone" id="frmAddZone">
-      <p>
-        <input type="hidden" name="mode" value="<?php echo $mode; ?>"/>
-        <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-      </p>
-      <table width="46%" border="0">
+    <td><form action="handler.php" method="post" name="frmAddAccType" id="frmAddAccType">
+    <input type="hidden" name="mode" value="<?php echo $mode; ?>"/>
+    <input type="hidden" name="id" value="<?php echo $id; ?>"/>
+      <table width="56%" height="189" border="0">
         <tr>
-          <td width="37%"><label class="frmItemName">Name :</label></td>
-          <td width="63%"><input type="text" name="name" id="name" size="40" value="<?php echo $name;?>" data-validation="custom length" data-validation-length="5-100" data-validation-regexp="^([a-zA-Z- ]+)$"  data-validation-error-msg="Please enter the vehicle type name." /></td>
+          <td width="52%" height="24"><label class="frmItemName">Account Type Name :</label></td>
+          <td width="48%"><input type="text" name="name"  size="40" value="<?php echo $name;?>"  data-validation="custom length" data-validation-length="max30" data-validation-regexp="^([a-z A-Z]+)$" data-validation-error-msg="Please enter account type name."/></td>
         </tr>
         <tr>
-          <td><label class="frmItemName">Description :</label></td>
-          <td><textarea name="description" cols="38" rows="5" id="description"  data-validation="required"   data-validation-error-msg="Please enter the vehicle description." ><?php echo $description;?></textarea></td>
-        </tr>
+          <td height="24"><label class="frmItemName">Prefix :</label></td>
+          <td><input name="prefix" type="text" value="<?php echo $prefix;?> " size="40" data-validation="custom length" data-validation-length="max3" data-validation-regexp="^([a-zA-Z]+)$" data-validation-error-msg="Please enter the prefix.">          
+            </tr>
         <tr>
-          <td><label class="frmItemName">Mail Threshold :</label></td>
-          <td><input type="text" name="threshold" id="threshold" value="<?php echo $threshold;?>" data-validation="number length" data-validation-length="1-3"  data-validation-error-msg="Please enter a valid number." /></td>
-        </tr>
+          <td height="80"><label class="frmItemName">Description :</label></td>
+          <td ><textarea name="description" cols="42" rows="5" data-validation="required" ><?php echo $description;?></textarea>          
+            </tr>
         <tr>
-          <td>&nbsp;</td>
+          <td height="24">&nbsp;</td>
           <td>&nbsp;</td>
         </tr>
         <tr>
-          <td>&nbsp;</td>
+          <td height="25">&nbsp;</td>
           <td><input type="submit" name="btnAdd" id="btnAdd" value="<?php echo $btnvalue;?>"></td>
         </tr>
-    </table>
+      </table>
     </form></td>
   </tr>
   </table>
