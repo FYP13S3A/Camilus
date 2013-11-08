@@ -106,6 +106,8 @@ public class Appointment extends Activity {
     			    					           public void onClick(DialogInterface dialog, int id) {
     			    					        	   jm.addJobToTempFile("appointment"+"|"+jobId+"|"+driverId+"|"+"complete"+"|"+DateFormat.format("yyyy-MM-dd  kk:mm:ss", System.currentTimeMillis()).toString(), context);
     			    					        	   jm.setupJobUpdateAlarm(5, context);
+    			    					        	   jm.removeJob(groupPos, childPos, manifestid, context);
+    			    					        	   finish();
     			    					           }
     			    					       });
     			    					AlertDialog alert = builder.create();
@@ -137,7 +139,10 @@ public class Appointment extends Activity {
     			    					       .setCancelable(false)
     			    					       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
     			    					           public void onClick(DialogInterface dialog, int id) {
-    			    					        	   
+    			    					        	   jm.addJobToTempFile("appointment"+"|"+jobId+"|"+driverId+"|"+"onhold"+"|"+DateFormat.format("yyyy-MM-dd  kk:mm:ss", System.currentTimeMillis()).toString(), context);
+    			    					        	   jm.setupJobUpdateAlarm(5, context);
+    			    					        	   jm.removeJob(groupPos, childPos, manifestid, context);
+    			    					        	   finish();
     			    					           }
     			    					       });
     			    					AlertDialog alert = builder.create();
@@ -193,7 +198,7 @@ public class Appointment extends Activity {
 				       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
 				        	   jm.removeJob(groupPos, childPos, manifestid, context);
-				        	   setResult(RESULT_OK,intent);
+				        	   //setResult(RESULT_OK,intent);
 				        	   finish();
 				           }
 				       });
@@ -219,12 +224,15 @@ public class Appointment extends Activity {
 		protected void onCancelled (){
 			pdLoading.dismiss();
 			AlertDialog.Builder builder = new AlertDialog.Builder(context);
-			builder.setTitle("Appointment Notice");
-			builder.setMessage("Server is currently busy. Appointment will be updated automatically to the server later.")
+			builder.setTitle("Notice");
+			builder.setMessage("Server is currently busy. Job will be updated automatically to the server later.")
 			       .setCancelable(false)
 			       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 			           public void onClick(DialogInterface dialog, int id) {
-			        	   
+			        	   jm.addJobToTempFile(param, context);
+			        	   jm.setupJobUpdateAlarm(5, context);
+			        	   jm.removeJob(groupPos, childPos, manifestid, context);
+			        	   finish();
 			           }
 			       });
 			AlertDialog alert = builder.create();
@@ -253,7 +261,7 @@ public class Appointment extends Activity {
 				ResponseHandler<String> responseHandler = new BasicResponseHandler();
 				response = httpclient.execute(httppost, responseHandler);
 				
-			}catch (ConnectTimeoutException e){
+			} catch (ConnectTimeoutException e){
                 cancel(true);
 			} catch (SocketTimeoutException e){
                 cancel(true);

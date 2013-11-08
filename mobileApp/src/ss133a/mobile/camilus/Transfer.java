@@ -1,6 +1,7 @@
 package ss133a.mobile.camilus;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,9 +11,13 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -71,7 +76,24 @@ public class Transfer extends Activity {
     				.setCancelable(false)
     				.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
     					public void onClick(DialogInterface dialog,int id) {
-    						sendConfirmation("transfer",jobId, driverId,"complete", DateFormat.format("yyyy-MM-dd  kk:mm:ss", System.currentTimeMillis()).toString());
+    						if(jm.isConnectingToInternet(context)){
+    							sendConfirmation("transfer",jobId, driverId,"complete", DateFormat.format("yyyy-MM-dd  kk:mm:ss", System.currentTimeMillis()).toString());
+    						}else{
+		        				AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		    					builder.setTitle("Connection Error");
+		    					builder.setMessage("Unable to connect to Internet. Job will be updated automatically to the server later.")
+		    					       .setCancelable(false)
+		    					       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+		    					           public void onClick(DialogInterface dialog, int id) {
+		    					        	   jm.addJobToTempFile("transfer"+"|"+jobId+"|"+driverId+"|"+"complete"+"|"+DateFormat.format("yyyy-MM-dd  kk:mm:ss", System.currentTimeMillis()).toString(), context);
+		    					        	   jm.setupJobUpdateAlarm(5, context);
+		    					        	   jm.removeJob(groupPos, childPos, manifestid, context);
+		    					        	   finish();
+		    					           }
+		    					       });
+		    					AlertDialog alert = builder.create();
+		    					alert.show();
+		        			}
     					}
     				  })
     				.setNegativeButton("No",new DialogInterface.OnClickListener() {
@@ -95,10 +117,12 @@ public class Transfer extends Activity {
 	
 	private class TransferAsyncTask extends AsyncTask<String, Integer, Double>{
 		String response = "";
+		String param = "";
 		@Override
 		protected Double doInBackground(String... params) {
 			// TODO Auto-generated method stub
 			postData(params[0],params[1],params[2],params[3],params[4]);
+			param = params[0]+"|"+params[1]+"|"+params[2]+"|"+params[3]+"|"+params[4];
 			return null;
 		}
  
@@ -112,7 +136,6 @@ public class Transfer extends Activity {
 				       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
 				        	   jm.removeJob(groupPos, childPos, manifestid, context);
-				        	   setResult(RESULT_OK,intent);
 				        	   finish();
 				           }
 				       });
@@ -133,11 +156,32 @@ public class Transfer extends Activity {
 				alert.show();
 			}
 		}
-		protected void onProgressUpdate(Integer... progress){
+
+
+		protected void onCancelled (){
+			pdLoading.dismiss();
+			AlertDialog.Builder builder = new AlertDialog.Builder(context);
+			builder.setTitle("Notice");
+			builder.setMessage("Server is currently busy. Job will be updated automatically to the server later.")
+			       .setCancelable(false)
+			       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			           public void onClick(DialogInterface dialog, int id) {
+			        	   jm.addJobToTempFile(param, context);
+			        	   jm.setupJobUpdateAlarm(5, context);
+			        	   jm.removeJob(groupPos, childPos, manifestid, context);
+			        	   finish();
+			           }
+			       });
+			AlertDialog alert = builder.create();
+			alert.show();
 		}
  
 		public void postData(String jobType, String jobId, String driverId, String status, String time) {
-			HttpClient httpclient = new DefaultHttpClient();
+			HttpParams httpParams = new BasicHttpParams();
+			HttpConnectionParams.setConnectionTimeout(httpParams, 5000);
+			HttpConnectionParams.setSoTimeout(httpParams, 5000);
+			
+			HttpClient httpclient = new DefaultHttpClient(httpParams);
             HttpPost httppost = new HttpPost("http://www.efxmarket.com/mobile/update_job.php");
             
 			try {
@@ -154,6 +198,10 @@ public class Transfer extends Activity {
 				ResponseHandler<String> responseHandler = new BasicResponseHandler();
 				response = httpclient.execute(httppost, responseHandler);
 				
+			} catch (ConnectTimeoutException e){
+                cancel(true);
+			} catch (SocketTimeoutException e){
+                cancel(true);
 			} catch (ClientProtocolException e) {
 				// TODO Auto-generated catch block
 			} catch (IOException e) {

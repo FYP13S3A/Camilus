@@ -1,5 +1,8 @@
 package ss133a.mobile.camilus;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
@@ -38,45 +41,85 @@ import android.support.v4.app.NotificationCompat;
 
 public class OnAlarmReceive extends BroadcastReceiver {
 	Context context;
-	
+	String driver;
 	 
 	@Override
 	public void onReceive(Context context, Intent intent) {
+		System.out.println("sqsq: receive alarm.");
 		this.context = context;
 		Intent i = intent;
-		String data = i.getStringExtra("data");
-		System.out.println("sqsqsq: "+data);
+		driver = i.getStringExtra("driver");
 		if(isConnectingToInternet(context)){
-			
-			Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-			NotificationCompat.Builder mBuilder =
-			        new NotificationCompat.Builder(context)
-			        .setSmallIcon(R.drawable.ic_launcher)
-			        .setContentTitle("Update Notice")
-			        .setContentText("starting.")
-			        .setAutoCancel(true)
-			        .setSound(alarmSound);
-			NotificationManager mNotificationManager =
-				    (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-				// mId allows you to update the notification later on.				
-			mNotificationManager.notify(1, mBuilder.build());
-			
-			new UpdateJobAsyncTask().execute(data);
+			System.out.println("sqsq: internet connection check success");
+			/*Starts to perform job update if there is Internet connectivity*/
+			if(checkFileExist(context, driver)){
+				System.out.println("sqsq: file found. Proceed");
+				/*Only read job data if the file exist. To prevent IOException*/
+				String data = readJobFromTempFile(context, driver).trim();
+				if(!data.isEmpty()){
+					System.out.println("sqsq: execute async task");
+					/*Only perform job update if temp_file has jobs inside*/
+					data = data.substring(0,data.length()-2);		
+					new UpdateJobAsyncTask().execute(data);
+				}else{
+					System.out.println("sqsq: no job found");
+				}
+			}else{
+				System.out.println("sqsq: no file found");
+			}
 		}else{
-			setupJobUpdateAlarm(10, context, data);
+			System.out.println("sqsq: internet connection check fail, reassigning alarm");
+			/*Reassign an AlarmManager to perform job update at a later time if there is no Internet connectivity*/
+			setupJobUpdateAlarm(10, context, driver);
 		}
 	}
 	
-	public void setupJobUpdateAlarm(int seconds, Context context, String data) {
+	public boolean checkFileExist(Context c, String driver){
+
+		String filePath = c.getFilesDir()+File.separator+driver+"_temp.txt";
+		File file = new File(filePath);
+		return file.exists();
+	}
+	
+	public String readJobFromTempFile(Context c, String driver){
+		String filedata = "";
+		String filePath = c.getFilesDir()+File.separator+driver+"_temp.txt";
+		File file = new File(filePath);
+		
+		StringBuilder text = new StringBuilder();
+		try {
+		    BufferedReader br = new BufferedReader(new FileReader(file));
+		    String line;
+		    while ((line = br.readLine()) != null) {
+		        text.append(line);
+		        text.append('\n');
+		    }
+		}
+		catch (IOException e) {
+		   
+		}
+		filedata = text.toString();
+		return filedata;
+	}
+	
+	public void removeFile(Context c, String driver){
+		String filePath = c.getFilesDir()+File.separator+driver+"_temp.txt";
+		//delete file
+		File file = new File(filePath);
+		file.delete();
+	}
+	
+	/*Function to setup an AlarmManager to perform job status update independently from application*/
+	public void setupJobUpdateAlarm(int seconds, Context context, String driver) {
+		// Creates an AlarmManager which calls OnAlarmReceive.class to handle job update
 		AlarmManager alarmManager = (AlarmManager) context.getSystemService(android.content.Context.ALARM_SERVICE);
 		Intent intent = new Intent(context, OnAlarmReceive.class);
-		intent.putExtra("data", data);
+		intent.putExtra("driver", driver);
 		PendingIntent pendingIntent = PendingIntent.getBroadcast(
-		   context, 0, intent,
-		   PendingIntent.FLAG_UPDATE_CURRENT);
+		   context, 168, intent,
+		   PendingIntent.FLAG_CANCEL_CURRENT);
 		 
-		 
-		// Getting current time and add the seconds in it
+		// Sets elapsed time for alarm to trigger
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.SECOND, seconds);
 		 
@@ -101,18 +144,17 @@ public class OnAlarmReceive extends BroadcastReceiver {
 	
 	private class UpdateJobAsyncTask extends AsyncTask<String, Integer, Double>{
 		String response = "";
-		String param = "";
 		@Override
 		protected Double doInBackground(String... params) {
 			// TODO Auto-generated method stub
 			postData(params[0]);
-			param = params[0];
 			return null;
 		}
  
 		protected void onPostExecute(Double result){
 			
 			if(response.equals("1")){
+				System.out.println("sqsq: job update success");
 				Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 				NotificationCompat.Builder mBuilder =
 				        new NotificationCompat.Builder(context)
@@ -125,14 +167,16 @@ public class OnAlarmReceive extends BroadcastReceiver {
 					    (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 					// mId allows you to update the notification later on.				
 				mNotificationManager.notify(1, mBuilder.build());
+				removeFile(context, driver);
 			}
 			else{
+				System.out.println("sqsq: job update fail");
 				Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 				NotificationCompat.Builder mBuilder =
 				        new NotificationCompat.Builder(context)
 				        .setSmallIcon(R.drawable.ic_launcher)
 				        .setContentTitle("Update Notice")
-				        .setContentText("error. "+response)
+				        .setContentText("Update fail. Please contact IT dept for assistance.")
 				        .setAutoCancel(true)
 				        .setSound(alarmSound);
 				NotificationManager mNotificationManager =
@@ -144,7 +188,7 @@ public class OnAlarmReceive extends BroadcastReceiver {
 
 
 		protected void onCancelled (){
-			setupJobUpdateAlarm(10, context, param);
+			setupJobUpdateAlarm(10, context, driver);
 		}
  
 		public void postData(String data) {

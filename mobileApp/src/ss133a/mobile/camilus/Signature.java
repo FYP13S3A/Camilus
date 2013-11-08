@@ -2,6 +2,7 @@ package ss133a.mobile.camilus;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,9 +12,13 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -39,6 +44,7 @@ public class Signature extends Activity {
 	private Context context = this;
 	String manifestid, jobid, driverid;
 	Intent intent;
+	JobsManager jm;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +55,7 @@ public class Signature extends Activity {
 		btnConfirm = (Button)findViewById(R.id.btnConfirm);
 		btnClear = (Button)findViewById(R.id.btnClear);
 		intent = getIntent();
+		jm = Main.jm;
 		
 		jobid = intent.getStringExtra(Delivery.DELIVERY_JOBID);
 		manifestid = intent.getStringExtra(Delivery.DELIVERY_MANIFESTID);
@@ -72,8 +79,25 @@ public class Signature extends Activity {
     				.setCancelable(false)
     				.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
     					public void onClick(DialogInterface dialog,int id) {
-    						String image = getImageBase64();
-    						sendConfirmation("delivery", jobid, driverid,manifestid, image, "complete", DateFormat.format("yyyy-MM-dd  kk:mm:ss", System.currentTimeMillis()).toString());
+    						final String image = getImageBase64();
+    						if(jm.isConnectingToInternet(context)){
+    							sendConfirmation("delivery", jobid, driverid,manifestid, image, "complete", DateFormat.format("yyyy-MM-dd  kk:mm:ss", System.currentTimeMillis()).toString());
+    						}else{
+		        				AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		    					builder.setTitle("Connection Error");
+		    					builder.setMessage("Unable to connect to Internet. Job will be updated automatically to the server later.")
+		    					       .setCancelable(false)
+		    					       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+		    					           public void onClick(DialogInterface dialog, int id) {
+		    					        	   jm.addJobToTempFile("delivery"+"|"+jobid+"|"+driverid+"|"+"complete"+"|"+DateFormat.format("yyyy-MM-dd  kk:mm:ss", System.currentTimeMillis()).toString()+"|"+manifestid+"|"+image, context);
+		    					        	   jm.setupJobUpdateAlarm(5, context);
+		    					        	   setResult(RESULT_OK,intent);
+		    					        	   finish();
+		    					           }
+		    					       });
+		    					AlertDialog alert = builder.create();
+		    					alert.show();
+		        			}
     					}
     				  })
     				.setNegativeButton("No",new DialogInterface.OnClickListener() {
@@ -112,10 +136,12 @@ public class Signature extends Activity {
 	
 	private class DeliveryAsyncTask extends AsyncTask<String, Integer, Double>{
 		String response = "";
+		String param = "";
 		@Override
 		protected Double doInBackground(String... params) {
 			// TODO Auto-generated method stub
 			postData(params[0],params[1],params[2],params[3],params[4],params[5],params[6]);
+			param = params[0]+"|"+params[1]+"|"+params[2]+"|"+params[5]+"|"+params[6]+"|"+params[3]+"|"+params[4];
 			return null;
 		}
  
@@ -149,11 +175,32 @@ public class Signature extends Activity {
 				alert.show();
 			}
 		}
-		protected void onProgressUpdate(Integer... progress){
+
+
+		protected void onCancelled (){
+			pdLoading.dismiss();
+			AlertDialog.Builder builder = new AlertDialog.Builder(context);
+			builder.setTitle("Notice");
+			builder.setMessage("Server is currently busy. Job will be updated automatically to the server later.")
+			       .setCancelable(false)
+			       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			           public void onClick(DialogInterface dialog, int id) {
+			        	   jm.addJobToTempFile(param, context);
+			        	   jm.setupJobUpdateAlarm(5, context);
+			        	   setResult(RESULT_OK,intent);
+			        	   finish();
+			           }
+			       });
+			AlertDialog alert = builder.create();
+			alert.show();
 		}
  
 		public void postData(String jobType, String jobId, String driverId, String manifestId, String imageString, String status, String time) {
-			HttpClient httpclient = new DefaultHttpClient();
+			HttpParams httpParams = new BasicHttpParams();
+			HttpConnectionParams.setConnectionTimeout(httpParams, 5000);
+			HttpConnectionParams.setSoTimeout(httpParams, 5000);
+			
+			HttpClient httpclient = new DefaultHttpClient(httpParams);
             HttpPost httppost = new HttpPost("http://www.efxmarket.com/mobile/update_job.php");
             
 			try {
@@ -172,6 +219,10 @@ public class Signature extends Activity {
 				ResponseHandler<String> responseHandler = new BasicResponseHandler();
 				response = httpclient.execute(httppost, responseHandler);
 				
+			} catch (ConnectTimeoutException e){
+                cancel(true);
+			} catch (SocketTimeoutException e){
+                cancel(true);
 			} catch (ClientProtocolException e) {
 				// TODO Auto-generated catch block
 			} catch (IOException e) {

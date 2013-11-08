@@ -324,18 +324,17 @@ public class JobsManager{
           return false;
     }
 	
+	/*Function to setup an AlarmManager to perform job status update independently from application*/
 	public void setupJobUpdateAlarm(int seconds, Context context) {
-		String data = readJobFromTempFile(context);
-		data = data.substring(0, data.length()-2);
+		// Creates an AlarmManager which calls OnAlarmReceive.class to handle job update
 		AlarmManager alarmManager = (AlarmManager) context.getSystemService(android.content.Context.ALARM_SERVICE);
 		Intent intent = new Intent(context, OnAlarmReceive.class);
-		intent.putExtra("data", data);
+		intent.putExtra("driver", driver);
 		PendingIntent pendingIntent = PendingIntent.getBroadcast(
-		   context, 0, intent,
-		   PendingIntent.FLAG_UPDATE_CURRENT);
+		   context, 168, intent,
+		   PendingIntent.FLAG_CANCEL_CURRENT);
 		 
-		 
-		// Getting current time and add the seconds in it
+		// Sets elapsed time for alarm to trigger
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.SECOND, seconds);
 		 
@@ -343,8 +342,7 @@ public class JobsManager{
 	}
 	
 	public void addJobToTempFile(String data, Context c){
-		//String filePath = c.getFilesDir()+File.separator+driver+"_temp.txt";
-		String filePath = File.separator+"storage"+File.separator+"sdcard0"+File.separator+driver+"_temp.txt";
+		String filePath = c.getFilesDir()+File.separator+driver+"_temp.txt";
 		try {
 		    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(filePath, true)));
 		    out.print(data+"**");
@@ -353,26 +351,7 @@ public class JobsManager{
 		}
 	}
 	
-	public String readJobFromTempFile(Context c){
-		String filedata = "";
-		String filePath = File.separator+"storage"+File.separator+"sdcard0"+File.separator+driver+"_temp.txt";
-		File file = new File(filePath);
-		
-		StringBuilder text = new StringBuilder();
-		try {
-		    BufferedReader br = new BufferedReader(new FileReader(file));
-		    String line;
-		    while ((line = br.readLine()) != null) {
-		        text.append(line);
-		        text.append('\n');
-		    }
-		}
-		catch (IOException e) {
-		   
-		}
-		filedata = text.toString();
-		return filedata;
-	}
+	
 	
 	/*class to handle asynchronous download of job file from server
 	 *Takes in 1 variable: driverId
